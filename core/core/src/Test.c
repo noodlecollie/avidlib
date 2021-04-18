@@ -8,7 +8,7 @@ ALQM_Scalar ALC_Test()
 	ALQM_Vec3_Zero(&v0);
 	v0.v[1] = 12;
 
-	const ALQM_Vec3 v1 = { 1, 2, 3 };
+	const ALQM_Vec3 v1 = {{ 1, 2, 3 }};
 
 	return ALQM_Vec3_DotProduct(&v0, &v1);
 }

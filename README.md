@@ -34,7 +34,7 @@ AVID will follow a layered architecture, described below. The most basic layers 
 
 | Layer | Provides | Produces | Users |
 |-------|----------|----------|-------|
-| **Core**  | Mathematical entities (vectors, matrices, etc.) and common utility functions | Single library of mathematical types | AVID asset containers; applications that use AVID libraries |
+| **Core**  | Mathematical entities (vectors, matrices, etc.), abstractions, and common utility functions | Libraries of mathematical types and platform abstractions | AVID asset containers; applications that use AVID libraries |
 | **Asset Containers** | Structures for individual asset formats, for const and non-const access | One library per supported asset format | AVID I/O and tools; applications that use AVID libraries  |
 | **Asset I/O** | Routines for reading and writing different asset formats | One library per supported asset format | AVID tools; applications that use AVID libraries |
 | **Asset Tools** | Utilities for compiling, decompiling and viewing assets | Applications which can support manipulations of multiple asset formats, depending on libraries available at runtime | AVID end-user developers |

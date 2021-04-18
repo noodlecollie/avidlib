@@ -24,7 +24,7 @@ jobs:
       run: |
         mkdir build
 
-    - name: Configure (config = ${{config}}, shared libs = ${{shared-libs}})
+    - name: Configure (config = ${{matrix.config}}, shared libs = ${{matrix.shared-libs}})
       run: |
         cd build
         cmake ..
@@ -32,4 +32,4 @@ jobs:
     - name: Build
       run: |
         cd build
-        cmake --build . --config ${{config}}
+        cmake --build . --config ${{matrix.config}}

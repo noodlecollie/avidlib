@@ -9,8 +9,14 @@ on:
 
 jobs:
   build-linux:
-    name: Default build on Ubuntu Latest
+    name: Build on Ubuntu Latest
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        config: [ "Debug", "Release" ]
+        shared-libs: [ "YES", "NO" ]
+
     steps:
     - uses: actions/checkout@v2
 
@@ -18,7 +24,7 @@ jobs:
       run: |
         mkdir build
 
-    - name: Configure
+    - name: Configure (config = ${{config}}, shared libs = ${{shared-libs}})
       run: |
         cd build
         cmake ..
@@ -26,4 +32,4 @@ jobs:
     - name: Build
       run: |
         cd build
-        cmake --build .
+        cmake --build . --config ${{config}}

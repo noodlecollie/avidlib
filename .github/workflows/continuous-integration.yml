@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        config: [ "Debug", "Release" ]
+        config: [ "Debug", "Release", "MinSizeRel", "RelWithDebInfo" ]
         shared-libs: [ "YES", "NO" ]
 
     steps:

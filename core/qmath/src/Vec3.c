@@ -3,7 +3,7 @@
 #include "AVIDLib_CLib/Ptr.h"
 #include "AVIDLib_CLib/Check.h"
 
-const ALQM_Vec3 ALQM_Vec3_Origin = { 0, 0, 0 };
+const ALQM_Vec3 ALQM_Vec3_Origin = {{ 0, 0, 0 }};
 
 float* ALQM_Vec3_Data(ALQM_Vec3* v)
 {
@@ -129,18 +129,18 @@ ALQM_Scalar ALQM_Vec3_DotProduct(const ALQM_Vec3* v0, const ALQM_Vec3* v1)
 ALC_Bool ALQM_Vec3_ExactlyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS)
 {
 	return ALC_TSANITY_VALID(vLHS && vRHS,
-							 vLHS->v[0] == vRHS->v[0] &&
-							 vLHS->v[1] == vRHS->v[1] &&
-							 vLHS->v[2] == vRHS->v[2],
+							 ALQM_ScalarsExactlyEqual(vLHS->v[0], vRHS->v[0]) &&
+							 ALQM_ScalarsExactlyEqual(vLHS->v[1], vRHS->v[1]) &&
+							 ALQM_ScalarsExactlyEqual(vLHS->v[2], vRHS->v[2]),
 							 ALC_FALSE);
 }
 
 ALC_Bool ALQM_Vec3_ApproximatelyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS)
 {
 	return ALC_TSANITY_VALID(vLHS && vRHS,
-							 ALQM_ApproxEqual(vLHS->v[0], vRHS->v[0]) &&
-							 ALQM_ApproxEqual(vLHS->v[1], vRHS->v[1]) &&
-							 ALQM_ApproxEqual(vLHS->v[2], vRHS->v[2]),
+							 ALQM_ScalarsApproximatelyEqual(vLHS->v[0], vRHS->v[0]) &&
+							 ALQM_ScalarsApproximatelyEqual(vLHS->v[1], vRHS->v[1]) &&
+							 ALQM_ScalarsApproximatelyEqual(vLHS->v[2], vRHS->v[2]),
 							 ALC_FALSE);
 }
 
@@ -173,7 +173,7 @@ ALQM_Scalar ALQM_Vec3_NormaliseAndGetLength(const ALQM_Vec3* vIn, ALQM_Vec3* vOu
 	{
 		length = ALQM_Vec3_Length(vIn);
 
-		if ( length != 0.0f )
+		if ( !ALQM_ScalarApproximatelyZero(length) )
 		{
 			const ALQM_Scalar invLength = 1.0f / length;
 

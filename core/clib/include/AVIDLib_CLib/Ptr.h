@@ -4,6 +4,7 @@
 // For now, we just use platform headers.
 // If we get to a point in future where we need to swap this out
 // depending on our target platform, we can add ifdefs.
+#include <stdint.h>
 #include <stddef.h>
 
 #ifdef __cplusplus

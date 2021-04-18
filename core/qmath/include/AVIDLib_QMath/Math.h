@@ -12,7 +12,12 @@ extern "C" {
 API_AVIDLIB_QMATH ALQM_Scalar ALQM_Abs(ALQM_Scalar val);
 API_AVIDLIB_QMATH ALQM_Scalar ALQM_Sqrt(ALQM_Scalar val);
 
-API_AVIDLIB_QMATH ALC_Bool ALQM_ApproxEqual(ALQM_Scalar val0, ALQM_Scalar val1);
+// If you want to check if two scalars are *exactly* equal, use this function.
+// Note, however, that most of the time you should be doing an approximate comparison.
+API_AVIDLIB_QMATH ALC_Bool ALQM_ScalarsExactlyEqual(ALQM_Scalar val0, ALQM_Scalar val1);
+
+API_AVIDLIB_QMATH ALC_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar val0, ALQM_Scalar val1);
+API_AVIDLIB_QMATH ALC_Bool ALQM_ScalarApproximatelyZero(ALQM_Scalar val);
 
 #ifdef __cplusplus
 } // extern "C"

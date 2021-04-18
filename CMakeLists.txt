@@ -46,9 +46,10 @@ endif()
 # Correct code should be warning-free at all times, no exceptions.
 if(MSVC)
 	add_compile_options(/W4 /WX)
+	add_link_options(/WX)
 else()
 	add_compile_options(-Wall -Wextra -pedantic -Werror -Wfloat-equal)
-	add_link_options(--fatal-warnings)
+	add_link_options(-Wl,--fatal-warnings)
 endif()
 
 add_subdirectory(core)

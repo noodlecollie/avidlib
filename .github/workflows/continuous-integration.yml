@@ -1,0 +1,27 @@
+name: continuous-integration
+
+on:
+  # TODO: Change this to master when finished testing
+  push:
+    branches: [ foundations ]
+  pull_request:
+    branches: [ foundations ]
+
+jobs:
+  build-linux:
+    name: Default build on Ubuntu Latest
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Create build dir
+      run: |
+        mkdir build
+        cd build
+
+    - name: Configure
+        cmake ..
+
+    - name: Build
+      run: |
+        cmake --build .

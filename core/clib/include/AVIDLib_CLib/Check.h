@@ -66,12 +66,17 @@ static inline int ALC_AssertWithFeedback(int expression, const char* expressionS
 // This checks the condition and returns "expected" if the condition is true,
 // or "fallback" if it is false. An assertion is failed if the condition is false,
 // but only if AVIDLIB_VALIDITY_CHECKS is turned on.
-#define ALC_TERNARY_VALID(expr, expected, fallback) (ALC_ASSERT_ALWAYS(expr) ? (expected) : (fallback))
+#define ALC_TCHECK_VALID(expr, expected, fallback) (ALC_ASSERT_ALWAYS(expr) ? (expected) : (fallback))
+
+// Same as above, but if AVIDLIB_VALIDITY_CHECKS is not turned on, no check
+// is performed and "expected" is always returned.
+#define ALC_TSANITY_VALID(expr, expected, fallback) (ALC_ASSERT_ALWAYS(expr) ? (expected) : (fallback))
 #else
 #define ALC_ASSERT_VALID(expr)
 #define ALC_CHECK_VALID(expr) (!!(expr))
 #define ALC_SANITY_VALID(expr) (!0)
-#define ALC_TERNARY_VALID(expr, expected, fallback) ((!!(expr)) ? (expected) : (fallback))
+#define ALC_TCHECK_VALID(expr, expected, fallback) ((!!(expr)) ? (expected) : (fallback))
+#define ALC_TSANITY_VALID(expr, expected, fallback) (expected)
 #endif // AVIDLIB_VALIDITY_CHECKS
 
 #ifdef __cplusplus

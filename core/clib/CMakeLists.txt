@@ -5,6 +5,7 @@ set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_CLIB}/Check.h
 	include/${TARGETNAME_CLIB}/Int.h
 	include/${TARGETNAME_CLIB}/Ptr.h
+	include/${TARGETNAME_CLIB}/Util.h
 )
 
 set(PUBLIC_HEADERS_ALL

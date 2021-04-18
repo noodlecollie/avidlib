@@ -17,12 +17,13 @@ jobs:
     - name: Create build dir
       run: |
         mkdir build
-        cd build
 
     - name: Configure
       run: |
+        cd build
         cmake ..
 
     - name: Build
       run: |
+        cd build
         cmake --build .

@@ -3,7 +3,8 @@ create_export_header(${TARGETNAME_QMATH})
 
 set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_QMATH}/LibExport.h
-	include/${TARGETNAME_QMATH}/Test.h
+	include/${TARGETNAME_QMATH}/Types.h
+	include/${TARGETNAME_QMATH}/Vec3.h
 )
 
 set(PUBLIC_HEADERS_ALL
@@ -11,7 +12,7 @@ set(PUBLIC_HEADERS_ALL
 )
 
 set(SOURCES_ALL
-	src/Test.c
+	src/Vec3.c
 )
 
 if(BUILD_SHARED_LIBS)
@@ -19,6 +20,8 @@ if(BUILD_SHARED_LIBS)
 else()
 	add_library(${TARGETNAME_QMATH} STATIC ${PUBLIC_HEADERS_ALL} ${SOURCES_ALL})
 endif()
+
+target_link_libraries(${TARGETNAME_QMATH} PUBLIC ${TARGETNAME_CLIB})
 
 target_include_directories(${TARGETNAME_QMATH} PUBLIC
 	include

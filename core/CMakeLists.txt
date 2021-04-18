@@ -1,2 +1,3 @@
 add_subdirectory(core)
 add_subdirectory(qmath)
+add_subdirectory(clib)

@@ -1,8 +1,10 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
+set (CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 PROJECT(avidlib)
 
 # Target names are defined here, so that targets can refer to one another easily.
+set(TARGETNAME_QMATH AVIDLib_QMath)
 set(TARGETNAME_CORE AVIDLib_Core)
 
 set(CMAKE_C_STANDARD 99)
@@ -28,34 +30,10 @@ set_property(GLOBAL APPEND
 	"${CMAKE_SOURCE_DIR}/.git/index"
 )
 
-set(WIN32_EXPORT_HEADER_CONTENT "")
-
-if(WIN32)
-	if(BUILD_SHARED_LIBS)
-		# Add a preprocessor definition to say that we're building shared libraries.
-		# This has to go in a physical header file, because it needs to be packaged
-		# with the rest of the files so that users of the library can use it.
-		set(WIN32_EXPORT_HEADER_CONTENT
-"#ifndef WIN32_EXPORTS_H\n\
-#define WIN32_EXPORTS_H\n\
-// Libraries build in shared configuration. __declspec is required on Windows.
-#define AVIDLIB_IS_SHARED_BUILD
-#endif // WIN32_EXPORTS_H\n"
-		)
-	else()
-		# No need to add any definition in static lib mode.
-		set(WIN32_EXPORT_HEADER_CONTENT
-"#ifndef WIN32_EXPORTS_H\n\
-#define WIN32_EXPORTS_H\n\
-// Libraries build in static configuration. No __declspec is required on Windows.
-#endif // WIN32_EXPORTS_H\n"
-		)
-	endif()
-endif()
-
 # This is defined when building the libraries, and should not be defined when using them.
 # This will allow switching between __declspec(import) and __declspec(export) on Windows.
 add_definitions(-D__AVIDLIB_PRODUCER)
+add_definitions("-DGIT_COMMIT_HASH=\"${VCS_COMMIT_ID}\"")
 
 # Turn up warning levels as high as is feasible, and treat warnings as errors.
 # Correct code should be warning-free at all times, no exceptions.

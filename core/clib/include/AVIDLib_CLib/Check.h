@@ -13,6 +13,8 @@
 #include <assert.h>
 #include <stdio.h>
 
+#include "AVIDLib_CLib/Debug.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

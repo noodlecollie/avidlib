@@ -3,6 +3,7 @@ set(PERFORM_VALIDITY_CHECKS "YES" CACHE BOOL "If set, validity checks are includ
 set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_CLIB}/Bool.h
 	include/${TARGETNAME_CLIB}/Check.h
+	include/${TARGETNAME_CLIB}/Debug.h
 	include/${TARGETNAME_CLIB}/Int.h
 	include/${TARGETNAME_CLIB}/Ptr.h
 	include/${TARGETNAME_CLIB}/Util.h

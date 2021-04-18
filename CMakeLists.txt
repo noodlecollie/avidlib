@@ -1,7 +1,15 @@
 cmake_minimum_required(VERSION 3.12)
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-PROJECT(avidlib)
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+	message(STATUS "Setting build type to 'Release' as none was specified.")
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
+
+	# Set the possible values of build type for cmake-gui
+	set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
+project(AVIDLib)
 
 # Target names are defined here, so that targets can refer to one another easily.
 set(TARGETNAME_CLIB AVIDLib_CLib)
@@ -36,11 +44,6 @@ set_property(GLOBAL APPEND
 add_compile_definitions(__AVIDLIB_PRODUCER)
 add_compile_definitions("GIT_COMMIT_HASH=\"${VCS_COMMIT_ID}\"")
 
-if(CMAKE_BUILD_TYPE MATCHES DEBUG)
-	add_compile_definitions(AVIDLIB_DEBUG)
-else()
-	add_compile_definitions(NDEBUG)
-endif()
 
 # Turn up warning levels as high as is feasible, and treat warnings as errors.
 # Correct code should be warning-free at all times, no exceptions.

@@ -1,7 +1,9 @@
 # AVIDlib
 Library for interacting with assets from Valve and iD Tech games.
 
-This repo doesn't currently have anything in it, but while the overall design goals are still in my head, I'm writing them down here. I'm hoping I can add bits and pieces to this project as time goes on, when I have the need for them in my own projects.
+![CI Status](https://github.com/x6herbius/avidlib/actions/workflows/continuous-integration.yml/badge.svg)
+
+This repo doesn't currently have anything substantial in it, but while the overall design goals are still in my head, I'm writing them down here. I'm hoping I can add bits and pieces to this project as time goes on, when I have the need for them in my own projects.
 
 ## What is AVID?
 

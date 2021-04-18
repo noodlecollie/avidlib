@@ -22,6 +22,13 @@ ALQM_Scalar ALQM_Sqrt(ALQM_Scalar val)
 // This is built from the information on https://embeddeduse.com/2019/08/26/qt-compare-two-floats/
 ALC_Bool ALQM_ApproxEqual(ALQM_Scalar val0, ALQM_Scalar val1)
 {
+	// We allow comparisons with zero here because there's not really any other way to do this...
+	// If you know better than me on this, do get in touch.
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wfloat-equal"
+#endif // __GNUC__
+
 	// Comparison goes whack if either value is zero, so make sure they're not.
 	if ( val0 == 0.0f )
 	{
@@ -35,6 +42,10 @@ ALC_Bool ALQM_ApproxEqual(ALQM_Scalar val0, ALQM_Scalar val1)
 		val0 += 1.0f;
 		val1 += 1.0f;
 	}
+
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif // __GNUC__
 
 	const ALQM_Scalar absDiff = ALQM_Abs(val1 - val0);
 

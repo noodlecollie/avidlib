@@ -42,7 +42,7 @@ API_AVIDLIB_QMATH const float* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m);
 API_AVIDLIB_QMATH float* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALC_Size column);
 API_AVIDLIB_QMATH const float* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALC_Size column);
 
-// Chainable functions, where vOut is returned:
+// Chainable functions, where mOut is returned:
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Set(const float* values, ALC_Size count, ALQM_Mat3x4* mOut);

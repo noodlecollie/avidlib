@@ -3,6 +3,8 @@ create_export_header(${TARGETNAME_QMATH})
 
 set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_QMATH}/Constants.h
+	include/${TARGETNAME_QMATH}/Conversions.h
+	include/${TARGETNAME_QMATH}/EulerAngle.h
 	include/${TARGETNAME_QMATH}/LibExport.h
 	include/${TARGETNAME_QMATH}/Mat3x4.h
 	include/${TARGETNAME_QMATH}/Math.h
@@ -15,6 +17,8 @@ set(PUBLIC_HEADERS_ALL
 )
 
 set(SOURCES_ALL
+	src/Conversions.c
+	src/EulerAngle.c
 	src/Mat3x4.c
 	src/Math.c
 	src/Vec3.c

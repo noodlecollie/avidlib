@@ -19,6 +19,51 @@ ALQM_Scalar ALQM_Sqrt(ALQM_Scalar val)
 	return sqrtf(val);
 }
 
+ALQM_Scalar ALQM_FMod(ALQM_Scalar val, ALQM_Scalar denom)
+{
+	return fmodf(val, denom);
+}
+
+ALQM_Scalar ALQM_DegToRad(ALQM_Scalar deg)
+{
+	return (deg * ALQM_PI) / 180.0f;
+}
+
+ALQM_Scalar ALQM_RadToDeg(ALQM_Scalar rad)
+{
+	return (rad * 180.0f) / ALQM_PI;
+}
+
+ALQM_Scalar ALQM_SinRad(ALQM_Scalar rad)
+{
+	return sinf(rad);
+}
+
+ALQM_Scalar ALQM_CosRad(ALQM_Scalar rad)
+{
+	return cosf(rad);
+}
+
+ALQM_Scalar ALQM_ATan2Rad(ALQM_Scalar y, ALQM_Scalar x)
+{
+	return atan2f(y, x);
+}
+
+ALQM_Scalar ALQM_SinDeg(ALQM_Scalar deg)
+{
+	return sinf(ALQM_DegToRad(deg));
+}
+
+ALQM_Scalar ALQM_CosDeg(ALQM_Scalar deg)
+{
+	return cosf(ALQM_DegToRad(deg));
+}
+
+ALQM_Scalar ALQM_ATan2Deg(ALQM_Scalar y, ALQM_Scalar x)
+{
+	return ALQM_RadToDeg(atan2f(y, x));
+}
+
 // The only place we're allowed to do this:
 #ifdef __GNUC__
 #pragma GCC diagnostic push

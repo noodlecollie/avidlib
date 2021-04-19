@@ -10,6 +10,13 @@
 extern "C" {
 #endif
 
+typedef enum _ALQM_Vec3Axis
+{
+	ALQM_XAXIS = 0,
+	ALQM_YAXIS = 1,
+	ALQM_ZAXIS = 2
+} ALQM_Vec3Axis;
+
 typedef struct _ALQM_Vec3
 {
 	ALQM_Scalar v[3];

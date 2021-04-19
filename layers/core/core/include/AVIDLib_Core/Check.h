@@ -1,5 +1,5 @@
-#ifndef AVIDLIB_CLIB_CHECK_H
-#define AVIDLIB_CLIB_CHECK_H
+#ifndef AVIDLIB_CORE_CHECK_H
+#define AVIDLIB_CORE_CHECK_H
 
 // Always make sure that assertions defined in this file actually take effect.
 #ifdef NDEBUG
@@ -13,7 +13,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "AVIDLib_CLib/Debug.h"
+#include "AVIDLib_Core/Debug.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -91,4 +91,4 @@ static inline int ALC_AssertWithFeedback(int expression, const char* expressionS
 #undef NDEBUG_WAS_SET
 #endif
 
-#endif // AVIDLIB_CLIB_CHECK_H
+#endif // AVIDLIB_CORE_CHECK_H

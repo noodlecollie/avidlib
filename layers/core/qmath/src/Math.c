@@ -1,6 +1,6 @@
 #include "AVIDLib_QMath/Math.h"
 #include "AVIDLib_QMath/Constants.h"
-#include "AVIDLib_CLib/Util.h"
+#include "AVIDLib_Core/Util.h"
 
 // For now, we just use platform headers.
 // If we get to a point in future where we need to swap this out

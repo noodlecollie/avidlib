@@ -1,5 +1,5 @@
-#ifndef AVIDLIB_CLIB_UTIL_H
-#define AVIDLIB_CLIB_UTIL_H
+#ifndef AVIDLIB_CORE_UTIL_H
+#define AVIDLIB_CORE_UTIL_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,4 +14,4 @@ extern "C" {
 } // extern "C"
 #endif
 
-#endif // AVIDLIB_CLIB_BOOL_H
+#endif // AVIDLIB_CORE_UTIL_H

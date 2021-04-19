@@ -1,11 +1,10 @@
 name: continuous-integration
 
 on:
-  # TODO: Change this to master when finished testing
   push:
-    branches: [ foundations ]
+    branches: [ master ]
   pull_request:
-    branches: [ foundations ]
+    branches: [ master ]
 
 jobs:
   build-linux:

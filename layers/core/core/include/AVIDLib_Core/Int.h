@@ -1,5 +1,5 @@
-#ifndef AVIDLIB_CLIB_INT_H
-#define AVIDLIB_CLIB_INT_H
+#ifndef AVIDLIB_CORE_INT_H
+#define AVIDLIB_CORE_INT_H
 
 // For now, we just use platform headers.
 // If we get to a point in future where we need to swap this out
@@ -47,4 +47,4 @@ typedef size_t ALC_Size;
 } // extern "C"
 #endif
 
-#endif // AVIDLIB_CLIB_INT_H
+#endif // AVIDLIB_CORE_INT_H

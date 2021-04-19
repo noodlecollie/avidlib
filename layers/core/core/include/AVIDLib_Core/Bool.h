@@ -1,5 +1,5 @@
-#ifndef AVIDLIB_CLIB_BOOL_H
-#define AVIDLIB_CLIB_BOOL_H
+#ifndef AVIDLIB_CORE_BOOL_H
+#define AVIDLIB_CORE_BOOL_H
 
 // Bool comes as part of C++, so don't mess with anything if this header
 // has been imported into a C++ application.
@@ -17,4 +17,4 @@ typedef bool ALC_Bool;
 #define ALC_TRUE true
 #define ALC_FALSE false
 
-#endif // AVIDLIB_CLIB_BOOL_H
+#endif // AVIDLIB_CORE_BOOL_H

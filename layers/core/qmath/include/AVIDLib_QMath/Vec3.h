@@ -1,7 +1,7 @@
 #ifndef AVIDLIB_QMATH_VEC3_H
 #define AVIDLIB_QMATH_VEC3_H
 
-#include "AVIDLib_CLib/Bool.h"
+#include "AVIDLib_Core/Bool.h"
 #include "AVIDLib_QMath/LibExport.h"
 #include "AVIDLib_QMath/Types.h"
 

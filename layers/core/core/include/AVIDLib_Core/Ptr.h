@@ -1,5 +1,5 @@
-#ifndef AVIDLIB_CLIB_PTR_H
-#define AVIDLIB_CLIB_PTR_H
+#ifndef AVIDLIB_CORE_PTR_H
+#define AVIDLIB_CORE_PTR_H
 
 // For now, we just use platform headers.
 // If we get to a point in future where we need to swap this out
@@ -27,4 +27,4 @@ typedef ptrdiff_t ALC_PtrDiff;
 } // extern "C"
 #endif
 
-#endif // AVIDLIB_CLIB_PTR_H
+#endif // AVIDLIB_CORE_PTR_H

@@ -3,7 +3,7 @@
 
 #include "AVIDLib_QMath/LibExport.h"
 #include "AVIDLib_QMath/Types.h"
-#include "AVIDLib_CLib/Bool.h"
+#include "AVIDLib_Core/Bool.h"
 
 #ifdef __cplusplus
 extern "C" {

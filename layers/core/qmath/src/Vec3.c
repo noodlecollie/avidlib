@@ -1,7 +1,7 @@
 #include "AVIDLib_QMath/Vec3.h"
 #include "AVIDLib_QMath/Math.h"
-#include "AVIDLib_CLib/Ptr.h"
-#include "AVIDLib_CLib/Check.h"
+#include "AVIDLib_Core/Ptr.h"
+#include "AVIDLib_Core/Check.h"
 
 const ALQM_Vec3 ALQM_Vec3_Origin = {{ 0, 0, 0 }};
 

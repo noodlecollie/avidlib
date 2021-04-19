@@ -2,6 +2,7 @@
 #include "AVIDLib_QMath/Math.h"
 #include "AVIDLib_Core/Ptr.h"
 #include "AVIDLib_Core/Check.h"
+#include "AVIDLib_Core/Util.h"
 
 const ALQM_Vec3 ALQM_Vec3_Origin = {{ 0, 0, 0 }};
 
@@ -10,7 +11,7 @@ float* ALQM_Vec3_Data(ALQM_Vec3* v)
 	return ALC_TSANITY_VALID(v, &v->v[0], ALC_NULL);
 }
 
-const float* ALQM_Vec3_CData(ALQM_Vec3* v)
+const float* ALQM_Vec3_CData(const ALQM_Vec3* v)
 {
 	return ALC_TSANITY_VALID(v, &v->v[0], ALC_NULL);
 }
@@ -29,11 +30,23 @@ ALQM_Vec3* ALQM_Vec3_Zero(ALQM_Vec3* vOut)
 
 ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOut)
 {
-	if ( ALC_SANITY_VALID(vIn && vOut) )
+	if ( ALC_SANITY_VALID(vIn && vOut) && vIn != vOut )
 	{
 		vOut->v[0] = vIn->v[0];
 		vOut->v[1] = vIn->v[1];
 		vOut->v[2] = vIn->v[2];
+	}
+
+	return vOut;
+}
+
+ALQM_Vec3* ALQM_Vec3_Set(const float* values, ALC_Size count, ALQM_Vec3* vOut)
+{
+	if ( ALC_SANITY_VALID(values && count >= 3 && vOut) )
+	{
+		vOut->v[0] = values[0];
+		vOut->v[1] = values[1];
+		vOut->v[2] = values[2];
 	}
 
 	return vOut;

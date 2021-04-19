@@ -4,6 +4,7 @@
 #include "AVIDLib_Core/Bool.h"
 #include "AVIDLib_QMath/LibExport.h"
 #include "AVIDLib_QMath/Types.h"
+#include "AVIDLib_Core/Int.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,11 +24,12 @@ API_AVIDLIB_QMATH extern const ALQM_Vec3 ALQM_Vec3_Origin;
 
 // Returns the raw float values of the vector.
 API_AVIDLIB_QMATH float* ALQM_Vec3_Data(ALQM_Vec3* v);
-API_AVIDLIB_QMATH const float* ALQM_Vec3_CData(ALQM_Vec3* v);
+API_AVIDLIB_QMATH const float* ALQM_Vec3_CData(const ALQM_Vec3* v);
 
 // Chainable functions, where vOut is returned:
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Zero(ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Set(const float* values, ALC_Size count, ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Add(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Subtract(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_CrossProduct(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);

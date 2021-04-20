@@ -3,7 +3,7 @@
 
 #include "AVIDLib_QMath/LibExport.h"
 #include "AVIDLib_QMath/Types.h"
-#include "AVIDLib_Core/Int.h"
+#include "AVIDLib_Plat/Int.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,13 +39,13 @@ API_AVIDLIB_QMATH float* ALQM_Mat3x4_Data(ALQM_Mat3x4* m);
 API_AVIDLIB_QMATH const float* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m);
 
 // Returns data for the given column. There are ALQM_MAT3X4_ROWS values.
-API_AVIDLIB_QMATH float* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALC_Size column);
-API_AVIDLIB_QMATH const float* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALC_Size column);
+API_AVIDLIB_QMATH float* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALP_Size column);
+API_AVIDLIB_QMATH const float* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALP_Size column);
 
 // Chainable functions, where mOut is returned:
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut);
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Set(const float* values, ALC_Size count, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Set(const float* values, ALP_Size count, ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_ConcatRot(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut);
 

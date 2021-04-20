@@ -3,7 +3,7 @@
 
 #include "AVIDLib_QMath/LibExport.h"
 #include "AVIDLib_QMath/Types.h"
-#include "AVIDLib_Core/Bool.h"
+#include "AVIDLib_Plat/Bool.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,10 +26,10 @@ API_AVIDLIB_QMATH ALQM_Scalar ALQM_ATan2Deg(ALQM_Scalar y, ALQM_Scalar x);
 
 // If you want to check if two scalars are *exactly* equal, use this function.
 // Note, however, that most of the time you should be doing an approximate comparison.
-API_AVIDLIB_QMATH ALC_Bool ALQM_ScalarsExactlyEqual(ALQM_Scalar val0, ALQM_Scalar val1);
+API_AVIDLIB_QMATH ALP_Bool ALQM_ScalarsExactlyEqual(ALQM_Scalar val0, ALQM_Scalar val1);
 
-API_AVIDLIB_QMATH ALC_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar val0, ALQM_Scalar val1);
-API_AVIDLIB_QMATH ALC_Bool ALQM_ScalarApproximatelyZero(ALQM_Scalar val);
+API_AVIDLIB_QMATH ALP_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar val0, ALQM_Scalar val1);
+API_AVIDLIB_QMATH ALP_Bool ALQM_ScalarApproximatelyZero(ALQM_Scalar val);
 
 #ifdef __cplusplus
 } // extern "C"

@@ -15,8 +15,8 @@ extern "C" {
 typedef enum _ALQM_EulerAxis
 {
 	ALQM_PITCH = 0,
-	ALQM_YAW,
-	ALQM_ROLL
+	ALQM_YAW = 1,
+	ALQM_ROLL = 2
 } ALQM_EulerAxis;
 
 // Pitch, yaw and roll, specified in degrees.

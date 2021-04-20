@@ -1,7 +1,7 @@
 #include "AVIDLib_QMath/Mat3x4.h"
-#include "AVIDLib_Core/Ptr.h"
-#include "AVIDLib_Core/Check.h"
-#include "AVIDLib_Core/Util.h"
+#include "AVIDLib_Plat/Ptr.h"
+#include "AVIDLib_Plat/Check.h"
+#include "AVIDLib_Plat/Util.h"
 
 const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
 {
@@ -14,27 +14,27 @@ const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
 
 float* ALQM_Mat3x4_Data(ALQM_Mat3x4* m)
 {
-	return ALC_TSANITY_VALID(m, (float*)m->v, ALC_NULL);
+	return ALP_TSANITY_VALID(m, (float*)m->v, ALP_NULL);
 }
 
 const float* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m)
 {
-	return ALC_TSANITY_VALID(m, (const float*)m->v, ALC_NULL);
+	return ALP_TSANITY_VALID(m, (const float*)m->v, ALP_NULL);
 }
 
-float* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALC_Size column)
+float* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALP_Size column)
 {
-	return ALC_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (float*)&m->v[column], ALC_NULL);
+	return ALP_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (float*)&m->v[column], ALP_NULL);
 }
 
-const float* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALC_Size column)
+const float* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALP_Size column)
 {
-	return ALC_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (const float*)&m->v[column], ALC_NULL);
+	return ALP_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (const float*)&m->v[column], ALP_NULL);
 }
 
 ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut)
 {
-	if ( ALC_SANITY_VALID(mOut) )
+	if ( ALP_SANITY_VALID(mOut) )
 	{
 		mOut->v[0][0] = 1;
 		mOut->v[0][1] = 0;
@@ -57,17 +57,17 @@ ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut)
 
 ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 {
-	if ( ALC_SANITY_VALID(mIn && mOut) && mIn != mOut )
+	if ( ALP_SANITY_VALID(mIn && mOut) && mIn != mOut )
 	{
-		ALC_MemCpy(mOut->v, mIn->v, sizeof(mOut->v));
+		ALP_MemCpy(mOut->v, mIn->v, sizeof(mOut->v));
 	}
 
 	return mOut;
 }
 
-ALQM_Mat3x4* ALQM_Mat3x4_Set(const float* values, ALC_Size count, ALQM_Mat3x4* mOut)
+ALQM_Mat3x4* ALQM_Mat3x4_Set(const float* values, ALP_Size count, ALQM_Mat3x4* mOut)
 {
-	if ( ALC_SANITY_VALID(values && count >= ALQM_MAT3X4_CELLS && mOut) )
+	if ( ALP_SANITY_VALID(values && count >= ALQM_MAT3X4_CELLS && mOut) )
 	{
 		mOut->v[0][0] = values[0];
 		mOut->v[0][1] = values[1];
@@ -90,7 +90,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_Set(const float* values, ALC_Size count, ALQM_Mat3x4* m
 
 ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut)
 {
-	if ( ALC_SANITY_VALID(m0 && m1 && mOut) )
+	if ( ALP_SANITY_VALID(m0 && m1 && mOut) )
 	{
 		mOut->v[0][0] = (m0->v[0][0] * m1->v[0][0]) + (m0->v[0][1] * m1->v[1][0]) + (m0->v[0][2] * m1->v[2][0]);
 		mOut->v[0][1] = (m0->v[0][0] * m1->v[0][1]) + (m0->v[0][1] * m1->v[1][1]) + (m0->v[0][2] * m1->v[2][1]);
@@ -113,7 +113,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, AL
 
 ALQM_Mat3x4* ALQM_Mat3x4_ConcatRot(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut)
 {
-	if ( ALC_SANITY_VALID(m0 && m1 && mOut) )
+	if ( ALP_SANITY_VALID(m0 && m1 && mOut) )
 	{
 		mOut->v[0][0] = (m0->v[0][0] * m1->v[0][0]) + (m0->v[0][1] * m1->v[1][0]) + (m0->v[0][2] * m1->v[2][0]);
 		mOut->v[0][1] = (m0->v[0][0] * m1->v[0][1]) + (m0->v[0][1] * m1->v[1][1]) + (m0->v[0][2] * m1->v[2][1]);

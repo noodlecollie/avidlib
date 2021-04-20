@@ -12,7 +12,7 @@ endif()
 project(AVIDLib)
 
 # Target names are defined here, so that targets can refer to one another easily.
-set(TARGETNAME_CORE AVIDLib_Core)
+set(TARGETNAME_CORE AVIDLib_Plat)
 set(TARGETNAME_QMATH AVIDLib_QMath)
 
 set(CMAKE_C_STANDARD 99)

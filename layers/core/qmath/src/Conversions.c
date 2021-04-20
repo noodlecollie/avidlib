@@ -1,10 +1,10 @@
 #include "AVIDLib_QMath/Conversions.h"
-#include "AVIDLib_Core/Check.h"
+#include "AVIDLib_Plat/Check.h"
 #include "AVIDLib_QMath/Math.h"
 
 void EulerAngleToVec3(const ALQM_EulerAngle* angle, ALQM_Vec3* vecFwd, ALQM_Vec3* vecRight, ALQM_Vec3* vecUp)
 {
-	if ( ALC_SANITY_VALID(angle) && ALC_CHECK_VALID(vecFwd || vecRight || vecUp) )
+	if ( ALP_SANITY_VALID(angle) && ALP_CHECK_VALID(vecFwd || vecRight || vecUp) )
 	{
 		float sinPitch = 0;
 		float cosPitch = 0;
@@ -33,50 +33,50 @@ void EulerAngleToVec3(const ALQM_EulerAngle* angle, ALQM_Vec3* vecFwd, ALQM_Vec3
 
 		if ( vecFwd )
 		{
-			vecFwd->v[ALQM_XAXIS] = cosPitch * cosYaw;
-			vecFwd->v[ALQM_YAXIS] = cosPitch * sinYaw;
-			vecFwd->v[ALQM_ZAXIS] = -sinPitch;
+			vecFwd->v[ALQM_VECX] = cosPitch * cosYaw;
+			vecFwd->v[ALQM_VECY] = cosPitch * sinYaw;
+			vecFwd->v[ALQM_VECZ] = -sinPitch;
 		}
 
 		if ( vecRight )
 		{
-			vecRight->v[ALQM_XAXIS] = (-1 * sinRoll * sinPitch * cosYaw) + (-1 * cosRoll * -sinYaw);
-			vecRight->v[ALQM_YAXIS] = (-1 * sinRoll * sinPitch * sinYaw) + (-1 * cosRoll * cosYaw);
-			vecRight->v[ALQM_ZAXIS] = -1 * sinRoll * cosPitch;
+			vecRight->v[ALQM_VECX] = (-1 * sinRoll * sinPitch * cosYaw) + (-1 * cosRoll * -sinYaw);
+			vecRight->v[ALQM_VECY] = (-1 * sinRoll * sinPitch * sinYaw) + (-1 * cosRoll * cosYaw);
+			vecRight->v[ALQM_VECZ] = -1 * sinRoll * cosPitch;
 		}
 
 		if ( vecUp )
 		{
-			vecUp->v[ALQM_XAXIS] = (cosRoll * sinPitch * cosYaw) + (-sinRoll * -sinYaw);
-			vecUp->v[ALQM_YAXIS] = (cosRoll * sinPitch * sinYaw) + (-sinRoll * cosYaw);
-			vecUp->v[ALQM_ZAXIS] = cosRoll * cosPitch;
+			vecUp->v[ALQM_VECX] = (cosRoll * sinPitch * cosYaw) + (-sinRoll * -sinYaw);
+			vecUp->v[ALQM_VECY] = (cosRoll * sinPitch * sinYaw) + (-sinRoll * cosYaw);
+			vecUp->v[ALQM_VECZ] = cosRoll * cosPitch;
 		}
 	}
 }
 
 void Vec3ToEulerAngle(const ALQM_Vec3* vecFwd, ALQM_EulerAngle* angle)
 {
-	if ( ALC_SANITY_VALID(vecFwd && angle) )
+	if ( ALP_SANITY_VALID(vecFwd && angle) )
 	{
 		float pitch = 0;
 		float yaw = 0;
 
-		if ( ALQM_ScalarApproximatelyZero(vecFwd->v[ALQM_YAXIS]) && ALQM_ScalarApproximatelyZero(vecFwd->v[ALQM_XAXIS]) )
+		if ( ALQM_ScalarApproximatelyZero(vecFwd->v[ALQM_VECY]) && ALQM_ScalarApproximatelyZero(vecFwd->v[ALQM_VECX]) )
 		{
 			yaw = 0;
-			pitch = vecFwd->v[ALQM_ZAXIS] > 0 ? 270.0f : 90.0f;
+			pitch = vecFwd->v[ALQM_VECZ] > 0 ? 270.0f : 90.0f;
 		}
 		else
 		{
-			yaw = ALQM_ATan2Deg(vecFwd->v[ALQM_YAXIS], vecFwd->v[ALQM_XAXIS]);
+			yaw = ALQM_ATan2Deg(vecFwd->v[ALQM_VECY], vecFwd->v[ALQM_VECX]);
 
 			if ( yaw < 0 )
 			{
 				yaw += 360;
 			}
 
-			const float tmp = ALQM_Sqrt((vecFwd->v[ALQM_XAXIS] * vecFwd->v[ALQM_XAXIS]) + (vecFwd->v[ALQM_YAXIS] * vecFwd->v[ALQM_YAXIS]));
-			pitch = ALQM_ATan2Deg(-vecFwd->v[ALQM_ZAXIS], tmp);
+			const float tmp = ALQM_Sqrt((vecFwd->v[ALQM_VECX] * vecFwd->v[ALQM_VECX]) + (vecFwd->v[ALQM_VECY] * vecFwd->v[ALQM_VECY]));
+			pitch = ALQM_ATan2Deg(-vecFwd->v[ALQM_VECZ], tmp);
 
 			if ( pitch < 0 )
 			{

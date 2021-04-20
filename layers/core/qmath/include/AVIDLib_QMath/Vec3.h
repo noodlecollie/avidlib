@@ -1,10 +1,10 @@
 #ifndef AVIDLIB_QMATH_VEC3_H
 #define AVIDLIB_QMATH_VEC3_H
 
-#include "AVIDLib_Core/Bool.h"
+#include "AVIDLib_Plat/Bool.h"
 #include "AVIDLib_QMath/LibExport.h"
 #include "AVIDLib_QMath/Types.h"
-#include "AVIDLib_Core/Int.h"
+#include "AVIDLib_Plat/Int.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,9 +12,9 @@ extern "C" {
 
 typedef enum _ALQM_Vec3Axis
 {
-	ALQM_XAXIS = 0,
-	ALQM_YAXIS = 1,
-	ALQM_ZAXIS = 2
+	ALQM_VECX = 0,
+	ALQM_VECY = 1,
+	ALQM_VECZ = 2
 } ALQM_Vec3Axis;
 
 typedef struct _ALQM_Vec3
@@ -36,7 +36,7 @@ API_AVIDLIB_QMATH const float* ALQM_Vec3_CData(const ALQM_Vec3* v);
 // Chainable functions, where vOut is returned:
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Zero(ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOut);
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Set(const float* values, ALC_Size count, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Set(const float* values, ALP_Size count, ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Add(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Subtract(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_CrossProduct(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
@@ -47,10 +47,10 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Scale(const ALQM_Vec3* vIn, ALQM_Scalar s
 
 // These functions do not modify the vector
 API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_DotProduct(const ALQM_Vec3* v0, const ALQM_Vec3* v1);
-API_AVIDLIB_QMATH ALC_Bool ALQM_Vec3_ExactlyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS);
-API_AVIDLIB_QMATH ALC_Bool ALQM_Vec3_ApproximatelyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS);
-API_AVIDLIB_QMATH ALC_Bool ALQM_Vec3_ExactlyZero(const ALQM_Vec3* v);
-API_AVIDLIB_QMATH ALC_Bool ALQM_Vec3_ApproximatelyZero(const ALQM_Vec3* v);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ExactlyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ApproximatelyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ExactlyZero(const ALQM_Vec3* v);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ApproximatelyZero(const ALQM_Vec3* v);
 API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_Length(const ALQM_Vec3* v);
 
 // These functions modify the vector.

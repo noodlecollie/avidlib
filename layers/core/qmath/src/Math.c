@@ -1,6 +1,6 @@
 #include "AVIDLib_QMath/Math.h"
 #include "AVIDLib_QMath/Constants.h"
-#include "AVIDLib_Core/Util.h"
+#include "AVIDLib_Plat/Util.h"
 
 // For now, we just use platform headers.
 // If we get to a point in future where we need to swap this out
@@ -70,13 +70,13 @@ ALQM_Scalar ALQM_ATan2Deg(ALQM_Scalar y, ALQM_Scalar x)
 #pragma GCC diagnostic ignored "-Wfloat-equal"
 #endif // __GNUC__
 
-ALC_Bool ALQM_ScalarsExactlyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
+ALP_Bool ALQM_ScalarsExactlyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
 {
 	return val0 == val1;
 }
 
 // This is built from the information on https://embeddeduse.com/2019/08/26/qt-compare-two-floats/
-ALC_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
+ALP_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
 {
 	// Comparison goes whack if either value is zero, so make sure they're not.
 
@@ -110,16 +110,16 @@ ALC_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
 
 	if ( absDiff <= FLOAT_APPROX_EPSILON )
 	{
-		return ALC_TRUE;
+		return ALP_TRUE;
 	}
 
 	const float absV0 = ALQM_Abs(val0);
 	const float absV1 = ALQM_Abs(val1);
 
-	return absDiff <= FLOAT_APPROX_EPSILON * ALC_MAX(absV0, absV1);
+	return absDiff <= FLOAT_APPROX_EPSILON * ALP_MAX(absV0, absV1);
 }
 
-ALC_Bool ALQM_ScalarApproximatelyZero(ALQM_Scalar val)
+ALP_Bool ALQM_ScalarApproximatelyZero(ALQM_Scalar val)
 {
 	return ALQM_ScalarsApproximatelyEqual(val, 0);
 }

@@ -1,8 +1,8 @@
 #include "AVIDLib_QMath/EulerAngle.h"
 #include "AVIDLib_QMath/Math.h"
-#include "AVIDLib_Core/Ptr.h"
-#include "AVIDLib_Core/Check.h"
-#include "AVIDLib_Core/Util.h"
+#include "AVIDLib_Plat/Ptr.h"
+#include "AVIDLib_Plat/Check.h"
+#include "AVIDLib_Plat/Util.h"
 
 static inline ALQM_Scalar ReflectPitch(ALQM_Scalar in, ALQM_Scalar limit)
 {
@@ -11,17 +11,17 @@ static inline ALQM_Scalar ReflectPitch(ALQM_Scalar in, ALQM_Scalar limit)
 
 float* ALQM_EulerAngle_Data(ALQM_EulerAngle* a)
 {
-	return ALC_TSANITY_VALID(a, &a->v[0], ALC_NULL);
+	return ALP_TSANITY_VALID(a, &a->v[0], ALP_NULL);
 }
 
 const float* ALQM_EulerAngle_CData(const ALQM_EulerAngle* a)
 {
-	return ALC_TSANITY_VALID(a, &a->v[0], ALC_NULL);
+	return ALP_TSANITY_VALID(a, &a->v[0], ALP_NULL);
 }
 
 ALQM_EulerAngle* ALQM_EulerAngle_Zero(ALQM_EulerAngle* aOut)
 {
-	if ( ALC_SANITY_VALID(aOut) )
+	if ( ALP_SANITY_VALID(aOut) )
 	{
 		aOut->v[ALQM_PITCH] = 0;
 		aOut->v[ALQM_YAW] = 0;
@@ -33,7 +33,7 @@ ALQM_EulerAngle* ALQM_EulerAngle_Zero(ALQM_EulerAngle* aOut)
 
 ALQM_EulerAngle* ALQM_EulerAngle_Copy(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut)
 {
-	if ( ALC_SANITY_VALID(aIn && aOut) && aIn != aOut )
+	if ( ALP_SANITY_VALID(aIn && aOut) && aIn != aOut )
 	{
 		aOut->v[ALQM_PITCH] = aIn->v[ALQM_PITCH];
 		aOut->v[ALQM_YAW] = aIn->v[ALQM_YAW];
@@ -45,7 +45,7 @@ ALQM_EulerAngle* ALQM_EulerAngle_Copy(const ALQM_EulerAngle* aIn, ALQM_EulerAngl
 
 ALQM_EulerAngle* ALQM_EulerAngle_Normalise(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut)
 {
-	if ( ALC_SANITY_VALID(aIn && aOut) )
+	if ( ALP_SANITY_VALID(aIn && aOut) )
 	{
 		aOut->v[ALQM_PITCH] = aIn->v[ALQM_PITCH];
 		aOut->v[ALQM_YAW] = aIn->v[ALQM_YAW];

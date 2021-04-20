@@ -6,12 +6,12 @@
 
 const ALQM_Vec3 ALQM_Vec3_Origin = {{ 0, 0, 0 }};
 
-float* ALQM_Vec3_Data(ALQM_Vec3* v)
+ALQM_Scalar* ALQM_Vec3_Data(ALQM_Vec3* v)
 {
 	return ALP_TSANITY_VALID(v, &v->v[0], ALP_NULL);
 }
 
-const float* ALQM_Vec3_CData(const ALQM_Vec3* v)
+const ALQM_Scalar* ALQM_Vec3_CData(const ALQM_Vec3* v)
 {
 	return ALP_TSANITY_VALID(v, &v->v[0], ALP_NULL);
 }
@@ -40,7 +40,7 @@ ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOut)
 	return vOut;
 }
 
-ALQM_Vec3* ALQM_Vec3_Set(const float* values, ALP_Size count, ALQM_Vec3* vOut)
+ALQM_Vec3* ALQM_Vec3_Set(const ALQM_Scalar* values, ALP_Size count, ALQM_Vec3* vOut)
 {
 	if ( ALP_SANITY_VALID(values && count >= 3 && vOut) )
 	{
@@ -174,7 +174,14 @@ ALP_Bool ALQM_Vec3_ApproximatelyZero(const ALQM_Vec3* v)
 ALQM_Scalar ALQM_Vec3_Length(const ALQM_Vec3* v)
 {
 	return ALP_TSANITY_VALID(v,
-							 ALQM_Sqrt(ALQM_Vec3_DotProduct(v, v)),
+							 ALQM_Sqrt(ALQM_Vec3_LengthSquared(v)),
+							 0.0f);
+}
+
+ALQM_Scalar ALQM_Vec3_LengthSquared(const ALQM_Vec3* v)
+{
+	return ALP_TSANITY_VALID(v,
+							 ALQM_Vec3_DotProduct(v, v),
 							 0.0f);
 }
 
@@ -193,6 +200,12 @@ ALQM_Scalar ALQM_Vec3_NormaliseAndGetLength(const ALQM_Vec3* vIn, ALQM_Vec3* vOu
 			vOut->v[ALQM_VECX] = vIn->v[ALQM_VECX] * invLength;
 			vOut->v[ALQM_VECY] = vIn->v[ALQM_VECY] * invLength;
 			vOut->v[ALQM_VECZ] = vIn->v[ALQM_VECZ] * invLength;
+		}
+		else
+		{
+			vOut->v[ALQM_VECX] = 0;
+			vOut->v[ALQM_VECY] = 0;
+			vOut->v[ALQM_VECZ] = 0;
 		}
 	}
 

@@ -2,6 +2,7 @@
 #include "AVIDLib_Plat/Ptr.h"
 #include "AVIDLib_Plat/Check.h"
 #include "AVIDLib_Plat/Util.h"
+#include "AVIDLib_QMath/Math.h"
 
 const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
 {
@@ -12,24 +13,24 @@ const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
 	}
 };
 
-float* ALQM_Mat3x4_Data(ALQM_Mat3x4* m)
+ALQM_Scalar* ALQM_Mat3x4_Data(ALQM_Mat3x4* m)
 {
-	return ALP_TSANITY_VALID(m, (float*)m->v, ALP_NULL);
+	return ALP_TSANITY_VALID(m, (ALQM_Scalar*)m->v, ALP_NULL);
 }
 
-const float* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m)
+const ALQM_Scalar* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m)
 {
-	return ALP_TSANITY_VALID(m, (const float*)m->v, ALP_NULL);
+	return ALP_TSANITY_VALID(m, (const ALQM_Scalar*)m->v, ALP_NULL);
 }
 
-float* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALP_Size column)
+ALQM_Scalar* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALP_Size column)
 {
-	return ALP_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (float*)&m->v[column], ALP_NULL);
+	return ALP_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (ALQM_Scalar*)&m->v[column], ALP_NULL);
 }
 
-const float* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALP_Size column)
+const ALQM_Scalar* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALP_Size column)
 {
-	return ALP_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (const float*)&m->v[column], ALP_NULL);
+	return ALP_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (const ALQM_Scalar*)&m->v[column], ALP_NULL);
 }
 
 ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut)
@@ -55,6 +56,16 @@ ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut)
 	return mOut;
 }
 
+ALQM_Mat3x4* ALQM_Mat3x4_Zero(ALQM_Mat3x4* mOut)
+{
+	if ( ALP_SANITY_VALID(mOut) )
+	{
+		ALP_MemSet(mOut->v, 0, sizeof(mOut->v));
+	}
+
+	return mOut;
+}
+
 ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 {
 	if ( ALP_SANITY_VALID(mIn && mOut) && mIn != mOut )
@@ -65,7 +76,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 	return mOut;
 }
 
-ALQM_Mat3x4* ALQM_Mat3x4_Set(const float* values, ALP_Size count, ALQM_Mat3x4* mOut)
+ALQM_Mat3x4* ALQM_Mat3x4_Set(const ALQM_Scalar* values, ALP_Size count, ALQM_Mat3x4* mOut)
 {
 	if ( ALP_SANITY_VALID(values && count >= ALQM_MAT3X4_CELLS && mOut) )
 	{
@@ -132,4 +143,106 @@ ALQM_Mat3x4* ALQM_Mat3x4_ConcatRot(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1,
 	}
 
 	return mOut;
+}
+
+ALP_Bool ALQM_Mat3x4_ExactlyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS)
+{
+	if ( ALP_SANITY_VALID(mLHS && mRHS) )
+	{
+		const ALQM_Scalar* lhs = (const ALQM_Scalar*)mLHS->v;
+		const ALQM_Scalar* rhs = (const ALQM_Scalar*)mRHS->v;
+
+		for ( ALP_Size index = 0; index < ALQM_MAT3X4_CELLS; ++index )
+		{
+			if ( !ALQM_ScalarsExactlyEqual(*(lhs++), *(rhs++)) )
+			{
+				return ALP_FALSE;
+			}
+		}
+
+		return ALP_TRUE;
+	}
+
+	return ALP_FALSE;
+}
+
+ALP_Bool ALQM_Mat3x4_ApproximatelyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS)
+{
+	if ( ALP_SANITY_VALID(mLHS && mRHS) )
+	{
+		const ALQM_Scalar* lhs = (const ALQM_Scalar*)mLHS->v;
+		const ALQM_Scalar* rhs = (const ALQM_Scalar*)mRHS->v;
+
+		for ( ALP_Size index = 0; index < ALQM_MAT3X4_CELLS; ++index )
+		{
+			if ( !ALQM_ScalarsApproximatelyEqual(*(lhs++), *(rhs++)) )
+			{
+				return ALP_FALSE;
+			}
+		}
+
+		return ALP_TRUE;
+	}
+
+	return ALP_FALSE;
+}
+
+ALP_Bool ALQM_Mat3x4_ExactlyZero(const ALQM_Mat3x4* m)
+{
+	if ( ALP_SANITY_VALID(m) )
+	{
+		const ALQM_Scalar* data = (const ALQM_Scalar*)m->v;
+
+		for ( ALP_Size index = 0; index < ALQM_MAT3X4_CELLS; ++index )
+		{
+			if ( !ALQM_ScalarExactlyZero(*(data++)) )
+			{
+				return ALP_FALSE;
+			}
+		}
+
+		return ALP_TRUE;
+	}
+
+	return ALP_FALSE;
+}
+
+ALP_Bool ALQM_Mat3x4_ApproximatelyZero(const ALQM_Mat3x4* m)
+{
+	if ( ALP_SANITY_VALID(m) )
+	{
+		const ALQM_Scalar* data = (const ALQM_Scalar*)m->v;
+
+		for ( ALP_Size index = 0; index < ALQM_MAT3X4_CELLS; ++index )
+		{
+			if ( !ALQM_ScalarApproximatelyZero(*(data++)) )
+			{
+				return ALP_FALSE;
+			}
+		}
+
+		return ALP_TRUE;
+	}
+
+	return ALP_FALSE;
+}
+
+ALP_Bool ALQM_Mat3x4_ExactlyIdentity(const ALQM_Mat3x4* m)
+{
+	if ( ALP_SANITY_VALID(m) )
+	{
+		return ALQM_Mat3x4_ExactlyEqual(m, &ALQM_Mat3x4_Identity);
+	}
+
+	return ALP_FALSE;
+}
+
+ALP_Bool ALQM_Mat3x4_ApproximatelyIdentity(const ALQM_Mat3x4* m)
+{
+	if ( ALP_SANITY_VALID(m) )
+	{
+		return ALQM_Mat3x4_ApproximatelyEqual(m, &ALQM_Mat3x4_Identity);
+	}
+
+	return ALP_FALSE;
 }

@@ -1,6 +1,7 @@
 #include "AVIDLib_QMath/Math.h"
 #include "AVIDLib_QMath/Constants.h"
 #include "AVIDLib_Plat/Util.h"
+#include "AVIDLib_Plat/Check.h"
 
 // For now, we just use platform headers.
 // If we get to a point in future where we need to swap this out
@@ -44,6 +45,37 @@ ALQM_Scalar ALQM_CosRad(ALQM_Scalar rad)
 	return cosf(rad);
 }
 
+void ALQM_SinCosRad(ALQM_Scalar rad, ALQM_Scalar* outSin, ALQM_Scalar* outCos)
+{
+	if ( ALP_CHECK_VALID(outSin || outCos) )
+	{
+		if ( outSin )
+		{
+			*outSin = ALQM_SinRad(rad);
+		}
+
+		if ( outCos )
+		{
+			*outCos = ALQM_CosRad(rad);
+		}
+	}
+}
+
+ALQM_Scalar ALQM_TanRad(ALQM_Scalar rad)
+{
+	return tanf(rad);
+}
+
+ALQM_Scalar ALQM_ASinRad(ALQM_Scalar val)
+{
+	return asinf(val);
+}
+
+ALQM_Scalar ALQM_ACosRad(ALQM_Scalar val)
+{
+	return acosf(val);
+}
+
 ALQM_Scalar ALQM_ATan2Rad(ALQM_Scalar y, ALQM_Scalar x)
 {
 	return atan2f(y, x);
@@ -57,6 +89,29 @@ ALQM_Scalar ALQM_SinDeg(ALQM_Scalar deg)
 ALQM_Scalar ALQM_CosDeg(ALQM_Scalar deg)
 {
 	return cosf(ALQM_DegToRad(deg));
+}
+
+void ALQM_SinCosDeg(ALQM_Scalar deg, ALQM_Scalar* outSin, ALQM_Scalar* outCos)
+{
+	if ( ALP_CHECK_VALID(outSin || outCos) )
+	{
+		ALQM_SinCosRad(ALQM_DegToRad(deg), outSin, outCos);
+	}
+}
+
+ALQM_Scalar ALQM_TanDeg(ALQM_Scalar deg)
+{
+	return tanf(ALQM_DegToRad(deg));
+}
+
+ALQM_Scalar ALQM_ASinDeg(ALQM_Scalar val)
+{
+	return ALQM_RadToDeg(ALQM_ASinRad(val));
+}
+
+ALQM_Scalar ALQM_ACosDeg(ALQM_Scalar val)
+{
+	return ALQM_RadToDeg(ALQM_ACosRad(val));
 }
 
 ALQM_Scalar ALQM_ATan2Deg(ALQM_Scalar y, ALQM_Scalar x)
@@ -73,6 +128,11 @@ ALQM_Scalar ALQM_ATan2Deg(ALQM_Scalar y, ALQM_Scalar x)
 ALP_Bool ALQM_ScalarsExactlyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
 {
 	return val0 == val1;
+}
+
+ALP_Bool ALQM_ScalarExactlyZero(ALQM_Scalar val)
+{
+	return ALQM_ScalarsExactlyEqual(val, 0);
 }
 
 // This is built from the information on https://embeddeduse.com/2019/08/26/qt-compare-two-floats/
@@ -113,8 +173,8 @@ ALP_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
 		return ALP_TRUE;
 	}
 
-	const float absV0 = ALQM_Abs(val0);
-	const float absV1 = ALQM_Abs(val1);
+	const ALQM_Scalar absV0 = ALQM_Abs(val0);
+	const ALQM_Scalar absV1 = ALQM_Abs(val1);
 
 	return absDiff <= FLOAT_APPROX_EPSILON * ALP_MAX(absV0, absV1);
 }

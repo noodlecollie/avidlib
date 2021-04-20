@@ -22,6 +22,11 @@ static inline void* ALP_MemCpy(void* restrict dest, const void* restrict src, AL
 	return memcpy(dest, src, count);
 }
 
+static inline void* ALP_MemSet(void* ptr, ALP_UInt8 value, ALP_Size num)
+{
+	return memset(ptr, value, num);
+}
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

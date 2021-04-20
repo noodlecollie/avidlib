@@ -3,6 +3,7 @@
 
 #include "AVIDLib_QMath/LibExport.h"
 #include "AVIDLib_QMath/Types.h"
+#include "AVIDLib_Plat/Bool.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,19 +26,26 @@ typedef struct _ALQM_EulerAngle
 	ALQM_Scalar v[3];
 } ALQM_EulerAngle;
 
-// Returns the raw float values of the angle.
-API_AVIDLIB_QMATH float* ALQM_EulerAngle_Data(ALQM_EulerAngle* a);
-API_AVIDLIB_QMATH const float* ALQM_EulerAngle_CData(const ALQM_EulerAngle* a);
+// Returns the raw scalar values of the angle.
+API_AVIDLIB_QMATH ALQM_Scalar* ALQM_EulerAngle_Data(ALQM_EulerAngle* a);
+API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_EulerAngle_CData(const ALQM_EulerAngle* a);
 
 // Chainable functions, where aOut is returned:
 API_AVIDLIB_QMATH ALQM_EulerAngle* ALQM_EulerAngle_Zero(ALQM_EulerAngle* aOut);
 API_AVIDLIB_QMATH ALQM_EulerAngle* ALQM_EulerAngle_Copy(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut);
+API_AVIDLIB_QMATH ALQM_EulerAngle* ALQM_EulerAngle_DegToRad(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut);
+API_AVIDLIB_QMATH ALQM_EulerAngle* ALQM_EulerAngle_RadToDeg(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut);
 
 // Normalised angles are in the form:
 // - Pitch: (-90 90)
 // - Yaw: [0 360)
 // - Roll: [-180 180)
 API_AVIDLIB_QMATH ALQM_EulerAngle* ALQM_EulerAngle_Normalise(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut);
+
+API_AVIDLIB_QMATH ALP_Bool ALQM_EulerAngle_ExactlyEqual(const ALQM_EulerAngle* aLHS, const ALQM_EulerAngle* aRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_EulerAngle_ApproximatelyEqual(const ALQM_EulerAngle* aLHS, const ALQM_EulerAngle* aRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_EulerAngle_ExactlyZero(const ALQM_EulerAngle* a);
+API_AVIDLIB_QMATH ALP_Bool ALQM_EulerAngle_ApproximatelyZero(const ALQM_EulerAngle* a);
 
 #ifdef __cplusplus
 } // extern "C"

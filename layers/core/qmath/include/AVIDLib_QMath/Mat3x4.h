@@ -4,6 +4,7 @@
 #include "AVIDLib_QMath/LibExport.h"
 #include "AVIDLib_QMath/Types.h"
 #include "AVIDLib_Plat/Int.h"
+#include "AVIDLib_Plat/Bool.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,21 +34,29 @@ API_AVIDLIB_QMATH extern const ALQM_Mat3x4 ALQM_Mat3x4_Identity;
 // If this is not the case, undefined behaviour will result.
 // Checking can be turned on using AVIDLIB_VALIDITY_CHECKS.
 
-// Returns the raw float values of the matrix.
+// Returns the raw scalar values of the matrix.
 // There are ALQM_MAT3X4_CELLS values, in column-major order.
-API_AVIDLIB_QMATH float* ALQM_Mat3x4_Data(ALQM_Mat3x4* m);
-API_AVIDLIB_QMATH const float* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Mat3x4_Data(ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m);
 
 // Returns data for the given column. There are ALQM_MAT3X4_ROWS values.
-API_AVIDLIB_QMATH float* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALP_Size column);
-API_AVIDLIB_QMATH const float* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALP_Size column);
+API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALP_Size column);
+API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALP_Size column);
 
 // Chainable functions, where mOut is returned:
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Zero(ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut);
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Set(const float* values, ALP_Size count, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Set(const ALQM_Scalar* values, ALP_Size count, ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_ConcatRot(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut);
+
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyZero(const ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyZero(const ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyIdentity(const ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyIdentity(const ALQM_Mat3x4* m);
 
 #ifdef __cplusplus
 } // extern "C"

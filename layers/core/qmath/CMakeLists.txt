@@ -8,6 +8,7 @@ set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_QMATH}/LibExport.h
 	include/${TARGETNAME_QMATH}/Mat3x4.h
 	include/${TARGETNAME_QMATH}/Math.h
+	include/${TARGETNAME_QMATH}/Quat.h
 	include/${TARGETNAME_QMATH}/Types.h
 	include/${TARGETNAME_QMATH}/Vec3.h
 )
@@ -21,6 +22,7 @@ set(SOURCES_ALL
 	src/EulerAngle.c
 	src/Mat3x4.c
 	src/Math.c
+	src/Quat.c
 	src/Vec3.c
 )
 

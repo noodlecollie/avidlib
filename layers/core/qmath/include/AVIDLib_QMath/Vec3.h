@@ -29,14 +29,14 @@ API_AVIDLIB_QMATH extern const ALQM_Vec3 ALQM_Vec3_Origin;
 // If this is not the case, undefined behaviour will result.
 // Checking can be turned on using AVIDLIB_VALIDITY_CHECKS.
 
-// Returns the raw float values of the vector.
-API_AVIDLIB_QMATH float* ALQM_Vec3_Data(ALQM_Vec3* v);
-API_AVIDLIB_QMATH const float* ALQM_Vec3_CData(const ALQM_Vec3* v);
+// Returns the raw scalar values of the vector.
+API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Vec3_Data(ALQM_Vec3* v);
+API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Vec3_CData(const ALQM_Vec3* v);
 
 // Chainable functions, where vOut is returned:
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Zero(ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOut);
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Set(const float* values, ALP_Size count, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Set(const ALQM_Scalar* values, ALP_Size count, ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Add(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Subtract(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_CrossProduct(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
@@ -52,6 +52,7 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ApproximatelyEqual(const ALQM_Vec3* vLHS, c
 API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ExactlyZero(const ALQM_Vec3* v);
 API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ApproximatelyZero(const ALQM_Vec3* v);
 API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_Length(const ALQM_Vec3* v);
+API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_LengthSquared(const ALQM_Vec3* v);
 
 // These functions modify the vector.
 API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_NormaliseAndGetLength(const ALQM_Vec3* vIn, ALQM_Vec3* vOut);

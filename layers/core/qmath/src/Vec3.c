@@ -40,7 +40,7 @@ ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOut)
 	return vOut;
 }
 
-ALQM_Vec3* ALQM_Vec3_Set(const ALQM_Scalar* values, ALP_Size count, ALQM_Vec3* vOut)
+ALQM_Vec3* ALQM_Vec3_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Vec3* vOut)
 {
 	if ( ALP_SANITY_VALID(values && count >= 3 && vOut) )
 	{

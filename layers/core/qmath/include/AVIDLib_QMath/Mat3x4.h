@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+typedef struct _ALQM_Vec3 ALQM_Vec3;
+
 #define ALQM_MAT3X4_ROWS 4
 #define ALQM_MAT3X4_COLS 3
 #define ALQM_MAT3X4_CELLS (ALQM_MAT3X4_ROWS * ALQM_MAT3X4_COLS)
@@ -47,9 +49,14 @@ API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, A
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Zero(ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut);
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Set(const ALQM_Scalar* values, ALP_Size count, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut);
 API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_ConcatRot(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_TransposeRot(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_InvertSimple(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut);
+
+API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Mat3x4_GetOrigin(const ALQM_Mat3x4* mIn, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetOrigin(const ALQM_Mat3x4* mIn, const ALQM_Vec3* vOrigin, ALQM_Mat3x4* mOut);
 
 API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS);
 API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS);

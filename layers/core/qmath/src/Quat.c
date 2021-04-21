@@ -54,7 +54,7 @@ ALQM_Quat* ALQM_Quat_Copy(const ALQM_Quat* qIn, ALQM_Quat* qOut)
 	return qOut;
 }
 
-ALQM_Quat* ALQM_Quat_Set(const ALQM_Scalar* values, ALP_Size count, ALQM_Quat* qOut)
+ALQM_Quat* ALQM_Quat_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Quat* qOut)
 {
 	if ( ALP_SANITY_VALID(values && count >= 4 && qOut) )
 	{

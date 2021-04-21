@@ -1,11 +1,23 @@
 #include "AVIDLib_QMath/Conversions.h"
 #include "AVIDLib_Plat/Check.h"
+#include "AVIDLib_Plat/Ptr.h"
 #include "AVIDLib_QMath/Math.h"
 #include "AVIDLib_QMath/Vec3.h"
 #include "AVIDLib_QMath/EulerAngle.h"
 #include "AVIDLib_QMath/Quat.h"
+#include "AVIDLib_QMath/Mat3x4.h"
 
-void ALQM_EulerAngleRadToVec3(const ALQM_EulerAngle* inAngleRad, ALQM_Vec3* outVecFwd, ALQM_Vec3* outVecRight, ALQM_Vec3* outVecUp)
+ALQM_Vec3* ALQM_EulerAngleRadToVec3Fwd(const ALQM_EulerAngle* inAngleRad, ALQM_Vec3* outVecFwd)
+{
+	if ( ALP_SANITY_VALID(inAngleRad && outVecFwd) )
+	{
+		ALQM_EulerAngleRadToVec3Basis(inAngleRad, outVecFwd, ALP_NULL, ALP_NULL);
+	}
+
+	return outVecFwd;
+}
+
+void ALQM_EulerAngleRadToVec3Basis(const ALQM_EulerAngle* inAngleRad, ALQM_Vec3* outVecFwd, ALQM_Vec3* outVecRight, ALQM_Vec3* outVecUp)
 {
 	if ( ALP_SANITY_VALID(inAngleRad) && ALP_CHECK_VALID(outVecFwd || outVecRight || outVecUp) )
 	{
@@ -81,6 +93,69 @@ ALQM_EulerAngle* ALQM_Vec3ToEulerAngleRad(const ALQM_Vec3* inVecFwd, ALQM_EulerA
 	return outAngleRad;
 }
 
+ALQM_EulerAngle* ALQM_QuatToEulerAngleRad(const ALQM_Quat* inQuat, ALQM_EulerAngle* outAngleRad)
+{
+	if ( ALP_SANITY_VALID(inQuat && outAngleRad) )
+	{
+		// TODO: This isn't ideal because it seems like a lot of effort to construct
+		// a matrix just to do this. However, Xash3D uses this method and I know that
+		// it works, so I guess we'll use it too for now.
+		ALQM_Mat3x4 matrix;
+		ALQM_Vec3AndQuatToMat3x4(&ALQM_Vec3_Origin, inQuat, &matrix);
+		ALQM_Mat3x4ToEulerAngleRad(&matrix, outAngleRad);
+	}
+
+	return outAngleRad;
+}
+
+ALQM_EulerAngle* ALQM_Mat3x4ToEulerAngleRad(const ALQM_Mat3x4* inMat, ALQM_EulerAngle* outAngleRad)
+{
+	if ( ALP_SANITY_VALID(inMat && outAngleRad) )
+	{
+		const ALQM_Scalar xyDist = ALQM_Sqrt((inMat->v[0][0] * inMat->v[0][0]) + (inMat->v[1][0] * inMat->v[1][0]));
+
+		if ( !ALQM_ScalarApproximatelyZero(xyDist) )
+		{
+			outAngleRad->v[ALQM_PITCH] = ALQM_ATan2Rad(-inMat->v[2][0], xyDist);
+			outAngleRad->v[ALQM_YAW] = ALQM_ATan2Rad(inMat->v[1][0], inMat->v[0][0]);
+			outAngleRad->v[ALQM_ROLL] = ALQM_ATan2Rad(inMat->v[2][1], inMat->v[2][2]);
+		}
+		else
+		{
+			// Forward is mostly Z, gimbal lock.
+			outAngleRad->v[ALQM_PITCH] = ALQM_ATan2Rad(-inMat->v[2][0], xyDist);
+			outAngleRad->v[ALQM_YAW] = ALQM_ATan2Rad(-inMat->v[0][1], inMat->v[1][1]);
+			outAngleRad->v[ALQM_ROLL] = 0;
+		}
+	}
+
+	return outAngleRad;
+}
+
+ALQM_Mat3x4* ALQM_Vec3AndQuatToMat3x4(const ALQM_Vec3* inOrigin, const ALQM_Quat* inQuat, ALQM_Mat3x4* outMat)
+{
+	if ( ALP_SANITY_VALID(inOrigin && inQuat && outMat) )
+	{
+		outMat->v[0][0] = 1 - (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATY]) - (2 * inQuat->v[ALQM_QUATZ] * inQuat->v[ALQM_QUATZ]);
+		outMat->v[1][0] = (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATY]) + (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATZ]);
+		outMat->v[2][0] = (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATZ]) - (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATY]);
+
+		outMat->v[0][1] = (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATY]) - (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATZ]);
+		outMat->v[1][1] = 1 - (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATX]) - (2 * inQuat->v[ALQM_QUATZ] * inQuat->v[ALQM_QUATZ]);
+		outMat->v[2][1] = (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATZ]) + (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATX]);
+
+		outMat->v[0][2] = (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATZ]) + (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATY]);
+		outMat->v[1][2] = (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATZ]) - (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATX]);
+		outMat->v[2][2] = 1 - (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATX]) - (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATY]);
+
+		outMat->v[0][3] = inOrigin->v[ALQM_VECX];
+		outMat->v[1][3] = inOrigin->v[ALQM_VECY];
+		outMat->v[2][3] = inOrigin->v[ALQM_VECZ];
+	}
+
+	return outMat;
+}
+
 ALQM_Quat* ALQM_EulerAngleRadToQuat(const ALQM_EulerAngle* inAngleRad, ALQM_Quat* outQuat)
 {
 	if ( ALP_SANITY_VALID(inAngleRad && outQuat) )
@@ -103,26 +178,4 @@ ALQM_Quat* ALQM_EulerAngleRadToQuat(const ALQM_EulerAngle* inAngleRad, ALQM_Quat
 	}
 
 	return outQuat;
-}
-
-ALQM_EulerAngle* ALQM_QuatToEulerAngleRad(const ALQM_Quat* inQuat, ALQM_EulerAngle* outAngleRad)
-{
-	if ( ALP_SANITY_VALID(inQuat && outAngleRad) )
-	{
-		outAngleRad->v[ALQM_PITCH] = ALQM_ATan2Rad(2 * ((inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATZ]) + (inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATX])),
-												   (inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATW]) -
-												   (inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATX]) -
-												   (inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATY]) +
-												   (inQuat->v[ALQM_QUATZ] * inQuat->v[ALQM_QUATZ]));
-
-		outAngleRad->v[ALQM_YAW] = ALQM_ASinRad(-2 * ((inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATZ]) - (inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATY])));
-
-		outAngleRad->v[ALQM_ROLL] = ALQM_ATan2Rad(2 * ((inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATY]) + (inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATZ])),
-												  (inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATW]) +
-												  (inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATX]) -
-												  (inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATY]) -
-												  (inQuat->v[ALQM_QUATZ] * inQuat->v[ALQM_QUATZ]));
-	}
-
-	return outAngleRad;
 }

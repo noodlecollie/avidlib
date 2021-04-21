@@ -34,7 +34,7 @@ API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Quat_CData(const ALQM_Quat* q);
 API_AVIDLIB_QMATH ALQM_Quat* ALQM_Quat_SetIdentity(ALQM_Quat* qOut);
 API_AVIDLIB_QMATH ALQM_Quat* ALQM_Quat_Zero(ALQM_Quat* qOut);
 API_AVIDLIB_QMATH ALQM_Quat* ALQM_Quat_Copy(const ALQM_Quat* qIn, ALQM_Quat* qOut);
-API_AVIDLIB_QMATH ALQM_Quat* ALQM_Quat_Set(const ALQM_Scalar* values, ALP_Size count, ALQM_Quat* qOut);
+API_AVIDLIB_QMATH ALQM_Quat* ALQM_Quat_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Quat* qOut);
 API_AVIDLIB_QMATH ALQM_Quat* ALQM_Quat_Multiply(const ALQM_Quat* qLHS, const ALQM_Quat* qRHS, ALQM_Quat* qOut);
 API_AVIDLIB_QMATH ALQM_Quat* ALQM_Quat_Normalise(const ALQM_Quat* qIn, ALQM_Quat* qOut);
 API_AVIDLIB_QMATH ALQM_Quat* ALQM_Quat_Add(const ALQM_Quat* qLHS, const ALQM_Quat* qRHS, ALQM_Quat* qOut);

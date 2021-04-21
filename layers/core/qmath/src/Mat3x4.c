@@ -3,6 +3,7 @@
 #include "AVIDLib_Plat/Check.h"
 #include "AVIDLib_Plat/Util.h"
 #include "AVIDLib_QMath/Math.h"
+#include "AVIDLib_QMath/Vec3.h"
 
 const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
 {
@@ -76,7 +77,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 	return mOut;
 }
 
-ALQM_Mat3x4* ALQM_Mat3x4_Set(const ALQM_Scalar* values, ALP_Size count, ALQM_Mat3x4* mOut)
+ALQM_Mat3x4* ALQM_Mat3x4_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Mat3x4* mOut)
 {
 	if ( ALP_SANITY_VALID(values && count >= ALQM_MAT3X4_CELLS && mOut) )
 	{
@@ -143,6 +144,88 @@ ALQM_Mat3x4* ALQM_Mat3x4_ConcatRot(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1,
 	}
 
 	return mOut;
+}
+
+ALQM_Mat3x4* ALQM_Mat3x4_TransposeRot(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
+{
+	if ( ALP_SANITY_VALID(mIn && mOut) )
+	{
+		mOut->v[0][0] = mIn->v[0][0];
+		mOut->v[0][1] = mIn->v[1][0];
+		mOut->v[0][2] = mIn->v[2][0];
+
+		mOut->v[1][0] = mIn->v[0][1];
+		mOut->v[1][1] = mIn->v[1][1];
+		mOut->v[1][2] = mIn->v[2][1];
+
+		mOut->v[2][0] = mIn->v[0][2];
+		mOut->v[2][1] = mIn->v[1][2];
+		mOut->v[2][2] = mIn->v[2][2];
+
+		mOut->v[0][3] = mIn->v[0][3];
+		mOut->v[1][3] = mIn->v[1][3];
+		mOut->v[2][3] = mIn->v[2][3];
+	}
+
+	return mOut;
+}
+
+// Comments and implementation here are adapted from Xash3D.
+ALQM_Mat3x4* ALQM_Mat3x4_InvertSimple(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
+{
+	if ( ALP_SANITY_VALID(mIn && mOut) )
+	{
+		// We only support uniform scaling, so assume the first row's scaling
+		// is representative of all scaling.
+		// Note the lack of sqrt here, because we're trying to undo the scaling,
+		// this means multiplying by the inverse scale twice - squaring it, which
+		// makes the sqrt a waste of time.
+
+		const ALQM_Scalar scale = 1 / ((mIn->v[0][0] * mIn->v[0][0]) + (mIn->v[0][1] * mIn->v[0][1]) + (mIn->v[0][2] * mIn->v[0][2]));
+
+		// Invert the rotation by transposing and multiplying by the squared
+		// reciprocal of the input matrix scale as described above.
+		mOut->v[0][0] = mIn->v[0][0] * scale;
+		mOut->v[0][1] = mIn->v[1][0] * scale;
+		mOut->v[0][2] = mIn->v[2][0] * scale;
+		mOut->v[1][0] = mIn->v[0][1] * scale;
+		mOut->v[1][1] = mIn->v[1][1] * scale;
+		mOut->v[1][2] = mIn->v[2][1] * scale;
+		mOut->v[2][0] = mIn->v[0][2] * scale;
+		mOut->v[2][1] = mIn->v[1][2] * scale;
+		mOut->v[2][2] = mIn->v[2][2] * scale;
+
+		// Invert the translation.
+		mOut->v[0][3] = -((mIn->v[0][3] * mOut->v[0][0]) + (mIn->v[1][3] * mOut->v[0][1]) + (mIn->v[2][3] * mOut->v[0][2]));
+		mOut->v[1][3] = -((mIn->v[0][3] * mOut->v[1][0]) + (mIn->v[1][3] * mOut->v[1][1]) + (mIn->v[2][3] * mOut->v[1][2]));
+		mOut->v[2][3] = -((mIn->v[0][3] * mOut->v[2][0]) + (mIn->v[1][3] * mOut->v[2][1]) + (mIn->v[2][3] * mOut->v[2][2]));
+	}
+
+	return mOut;
+}
+
+ALQM_Mat3x4* ALQM_Mat3x4_SetOrigin(const ALQM_Mat3x4* mIn, const ALQM_Vec3* vOrigin, ALQM_Mat3x4* mOut)
+{
+	if ( ALP_SANITY_VALID(mIn && vOrigin && mOut) )
+	{
+		mOut->v[0][3] = vOrigin->v[ALQM_VECX];
+		mOut->v[1][3] = vOrigin->v[ALQM_VECY];
+		mOut->v[2][3] = vOrigin->v[ALQM_VECZ];
+	}
+
+	return mOut;
+}
+
+ALQM_Vec3* ALQM_Mat3x4_GetOrigin(const ALQM_Mat3x4* mIn, ALQM_Vec3* vOut)
+{
+	if ( ALP_SANITY_VALID(mIn && vOut) )
+	{
+		vOut->v[ALQM_VECX] = mIn->v[0][3];
+		vOut->v[ALQM_VECY] = mIn->v[1][3];
+		vOut->v[ALQM_VECZ] = mIn->v[2][3];
+	}
+
+	return vOut;
 }
 
 ALP_Bool ALQM_Mat3x4_ExactlyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS)

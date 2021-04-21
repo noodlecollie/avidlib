@@ -1,5 +1,10 @@
-This code is adapted from iD Software's Quake engine, available at https://github.com/id-Software/Quake.
-The Quake engine readme, and the GNU General Public License, are reproduced below.
+This code is adapted from iD Software's Quake engine, available at https://github.com/id-Software/Quake,
+and from the Xash3D engine, available at https://github.com/FWGS/xash3d-fwgs.
+
+The Quake engine readme, and the GNU General Public License V2, are reproduced below.
+However, Xash3D is licensed under GPL V3 (or later), so this repo operates under GPL V3.
+I hope this is permissible for the Quake code too - it follows the philosophy of the
+terms set out below.
 
 -----------------------------------------------------------------------------
 

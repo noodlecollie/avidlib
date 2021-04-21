@@ -2,10 +2,6 @@
 #include "AVIDLib_Plat/Check.h"
 #include "AVIDLib_Plat/Ptr.h"
 #include "AVIDLib_QMath/Math.h"
-#include "AVIDLib_QMath/Vec3.h"
-#include "AVIDLib_QMath/EulerAngle.h"
-#include "AVIDLib_QMath/Quat.h"
-#include "AVIDLib_QMath/Mat3x4.h"
 
 ALQM_Vec3* ALQM_EulerAngleRadToVec3Fwd(const ALQM_EulerAngle* inAngleRad, ALQM_Vec3* outVecFwd)
 {

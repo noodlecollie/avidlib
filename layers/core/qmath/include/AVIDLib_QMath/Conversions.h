@@ -2,11 +2,10 @@
 #define AVIDLIB_QMATH_CONVERSIONS_H
 
 #include "AVIDLib_QMath/LibExport.h"
-
-typedef struct _ALQM_EulerAngle ALQM_EulerAngle;
-typedef struct _ALQM_Vec3 ALQM_Vec3;
-typedef struct _ALQM_Quat ALQM_Quat;
-typedef struct _ALQM_Mat3x4 ALQM_Mat3x4;
+#include "AVIDLib_QMath/Vec3.h"
+#include "AVIDLib_QMath/EulerAngle.h"
+#include "AVIDLib_QMath/Quat.h"
+#include "AVIDLib_QMath/Mat3x4.h"
 
 // For producing vectors:
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_EulerAngleRadToVec3Fwd(const ALQM_EulerAngle* inAngleRad, ALQM_Vec3* outVecFwd);

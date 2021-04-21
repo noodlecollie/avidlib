@@ -3,7 +3,6 @@
 #include "AVIDLib_Plat/Check.h"
 #include "AVIDLib_Plat/Util.h"
 #include "AVIDLib_QMath/Math.h"
-#include "AVIDLib_QMath/Vec3.h"
 
 const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
 {

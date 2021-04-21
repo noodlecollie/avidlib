@@ -5,12 +5,11 @@
 #include "AVIDLib_QMath/Types.h"
 #include "AVIDLib_Plat/Int.h"
 #include "AVIDLib_Plat/Bool.h"
+#include "AVIDLib_QMath/Vec3.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef struct _ALQM_Vec3 ALQM_Vec3;
 
 #define ALQM_MAT3X4_ROWS 4
 #define ALQM_MAT3X4_COLS 3

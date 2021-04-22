@@ -1,7 +1,7 @@
 #include "AVIDLib_QMath/Math.h"
 #include "AVIDLib_QMath/Constants.h"
-#include "AVIDLib_Plat/Util.h"
-#include "AVIDLib_Plat/Check.h"
+#include "AVIDLib_Internal_Util/Util.h"
+#include "AVIDLib_Internal_Util/Check.h"
 
 // For now, we just use platform headers.
 // If we get to a point in future where we need to swap this out
@@ -47,7 +47,7 @@ ALQM_Scalar ALQM_CosRad(ALQM_Scalar rad)
 
 void ALQM_SinCosRad(ALQM_Scalar rad, ALQM_Scalar* outSin, ALQM_Scalar* outCos)
 {
-	if ( ALP_CHECK_VALID(outSin || outCos) )
+	if ( ALU_CHECK_VALID(outSin || outCos) )
 	{
 		if ( outSin )
 		{
@@ -93,7 +93,7 @@ ALQM_Scalar ALQM_CosDeg(ALQM_Scalar deg)
 
 void ALQM_SinCosDeg(ALQM_Scalar deg, ALQM_Scalar* outSin, ALQM_Scalar* outCos)
 {
-	if ( ALP_CHECK_VALID(outSin || outCos) )
+	if ( ALU_CHECK_VALID(outSin || outCos) )
 	{
 		ALQM_SinCosRad(ALQM_DegToRad(deg), outSin, outCos);
 	}
@@ -176,7 +176,7 @@ ALP_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
 	const ALQM_Scalar absV0 = ALQM_Abs(val0);
 	const ALQM_Scalar absV1 = ALQM_Abs(val1);
 
-	return absDiff <= FLOAT_APPROX_EPSILON * ALP_MAX(absV0, absV1);
+	return absDiff <= FLOAT_APPROX_EPSILON * ALU_MAX(absV0, absV1);
 }
 
 ALP_Bool ALQM_ScalarApproximatelyZero(ALQM_Scalar val)

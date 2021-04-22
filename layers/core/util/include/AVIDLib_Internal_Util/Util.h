@@ -1,5 +1,5 @@
-#ifndef AVIDLIB_PLAT_UTIL_H
-#define AVIDLIB_PLAT_UTIL_H
+#ifndef AVIDLIB_UTIL_UTIL_H
+#define AVIDLIB_UTIL_UTIL_H
 
 // For now, we just use platform headers.
 // If we get to a point in future where we need to swap this out
@@ -14,15 +14,15 @@ extern "C" {
 
 // #define min and #define max are evil. We define macros that aren't as likely
 // to collide catastrophically with other names in the global namespace.
-#define ALP_MIN(a, b) ((a) < (b) ? (a) : (b))
-#define ALP_MAX(a, b) ((a) > (b) ? (a) : (b))
+#define ALU_MIN(a, b) ((a) < (b) ? (a) : (b))
+#define ALU_MAX(a, b) ((a) > (b) ? (a) : (b))
 
-static inline void* ALP_MemCpy(void* restrict dest, const void* restrict src, ALP_Size count)
+static inline void* ALU_MemCpy(void* restrict dest, const void* restrict src, ALP_Size count)
 {
 	return memcpy(dest, src, count);
 }
 
-static inline void* ALP_MemSet(void* ptr, ALP_UInt8 value, ALP_Size num)
+static inline void* ALU_MemSet(void* ptr, ALP_UInt8 value, ALP_Size num)
 {
 	return memset(ptr, value, num);
 }
@@ -31,4 +31,4 @@ static inline void* ALP_MemSet(void* ptr, ALP_UInt8 value, ALP_Size num)
 } // extern "C"
 #endif
 
-#endif // AVIDLIB_PLAT_UTIL_H
+#endif // AVIDLIB_UTIL_UTIL_H

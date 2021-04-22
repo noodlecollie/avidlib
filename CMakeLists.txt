@@ -13,6 +13,7 @@ project(AVIDLib)
 
 # Target names are defined here, so that targets can refer to one another easily.
 set(TARGETNAME_PLAT AVIDLib_Plat)
+set(TARGETNAME_UTIL AVIDLib_Internal_Util)
 set(TARGETNAME_QMATH AVIDLib_QMath)
 set(TARGETNAME_CONTAINERS AVIDLib_Containers)
 

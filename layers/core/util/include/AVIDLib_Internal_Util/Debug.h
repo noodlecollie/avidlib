@@ -1,5 +1,5 @@
-#ifndef AVIDLIB_PLAT_DEBUG_H
-#define AVIDLIB_PLAT_DEBUG_H
+#ifndef AVIDLIB_UTIL_DEBUG_H
+#define AVIDLIB_UTIL_DEBUG_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,4 +16,4 @@ extern "C" {
 } // extern "C"
 #endif
 
-#endif // AVIDLIB_PLAT_DEBUG_H
+#endif // AVIDLIB_UTIL_DEBUG_H

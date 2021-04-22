@@ -1,11 +1,11 @@
 #include "AVIDLib_QMath/Conversions.h"
-#include "AVIDLib_Plat/Check.h"
+#include "AVIDLib_Internal_Util/Check.h"
 #include "AVIDLib_Plat/Ptr.h"
 #include "AVIDLib_QMath/Math.h"
 
 ALQM_Vec3* ALQM_EulerAngleRadToVec3Fwd(const ALQM_EulerAngle* inAngleRad, ALQM_Vec3* outVecFwd)
 {
-	if ( ALP_SANITY_VALID(inAngleRad && outVecFwd) )
+	if ( ALU_SANITY_VALID(inAngleRad && outVecFwd) )
 	{
 		ALQM_EulerAngleRadToVec3Basis(inAngleRad, outVecFwd, ALP_NULL, ALP_NULL);
 	}
@@ -15,7 +15,7 @@ ALQM_Vec3* ALQM_EulerAngleRadToVec3Fwd(const ALQM_EulerAngle* inAngleRad, ALQM_V
 
 void ALQM_EulerAngleRadToVec3Basis(const ALQM_EulerAngle* inAngleRad, ALQM_Vec3* outVecFwd, ALQM_Vec3* outVecRight, ALQM_Vec3* outVecUp)
 {
-	if ( ALP_SANITY_VALID(inAngleRad) && ALP_CHECK_VALID(outVecFwd || outVecRight || outVecUp) )
+	if ( ALU_SANITY_VALID(inAngleRad) && ALU_CHECK_VALID(outVecFwd || outVecRight || outVecUp) )
 	{
 		ALQM_Scalar sinPitch = 0;
 		ALQM_Scalar cosPitch = 0;
@@ -53,7 +53,7 @@ void ALQM_EulerAngleRadToVec3Basis(const ALQM_EulerAngle* inAngleRad, ALQM_Vec3*
 
 ALQM_EulerAngle* ALQM_Vec3ToEulerAngleRad(const ALQM_Vec3* inVecFwd, ALQM_EulerAngle* outAngleRad)
 {
-	if ( ALP_SANITY_VALID(inVecFwd && outAngleRad) )
+	if ( ALU_SANITY_VALID(inVecFwd && outAngleRad) )
 	{
 		ALQM_Scalar pitch = 0;
 		ALQM_Scalar yaw = 0;
@@ -91,7 +91,7 @@ ALQM_EulerAngle* ALQM_Vec3ToEulerAngleRad(const ALQM_Vec3* inVecFwd, ALQM_EulerA
 
 ALQM_EulerAngle* ALQM_QuatToEulerAngleRad(const ALQM_Quat* inQuat, ALQM_EulerAngle* outAngleRad)
 {
-	if ( ALP_SANITY_VALID(inQuat && outAngleRad) )
+	if ( ALU_SANITY_VALID(inQuat && outAngleRad) )
 	{
 		// TODO: This isn't ideal because it seems like a lot of effort to construct
 		// a matrix just to do this. However, Xash3D uses this method and I know that
@@ -106,7 +106,7 @@ ALQM_EulerAngle* ALQM_QuatToEulerAngleRad(const ALQM_Quat* inQuat, ALQM_EulerAng
 
 ALQM_EulerAngle* ALQM_Mat3x4ToEulerAngleRad(const ALQM_Mat3x4* inMat, ALQM_EulerAngle* outAngleRad)
 {
-	if ( ALP_SANITY_VALID(inMat && outAngleRad) )
+	if ( ALU_SANITY_VALID(inMat && outAngleRad) )
 	{
 		const ALQM_Scalar xyDist = ALQM_Sqrt((inMat->v[0][0] * inMat->v[0][0]) + (inMat->v[1][0] * inMat->v[1][0]));
 
@@ -130,7 +130,7 @@ ALQM_EulerAngle* ALQM_Mat3x4ToEulerAngleRad(const ALQM_Mat3x4* inMat, ALQM_Euler
 
 ALQM_Mat3x4* ALQM_Vec3AndQuatToMat3x4(const ALQM_Vec3* inOrigin, const ALQM_Quat* inQuat, ALQM_Mat3x4* outMat)
 {
-	if ( ALP_SANITY_VALID(inOrigin && inQuat && outMat) )
+	if ( ALU_SANITY_VALID(inOrigin && inQuat && outMat) )
 	{
 		outMat->v[0][0] = 1 - (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATY]) - (2 * inQuat->v[ALQM_QUATZ] * inQuat->v[ALQM_QUATZ]);
 		outMat->v[1][0] = (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATY]) + (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATZ]);
@@ -154,7 +154,7 @@ ALQM_Mat3x4* ALQM_Vec3AndQuatToMat3x4(const ALQM_Vec3* inOrigin, const ALQM_Quat
 
 ALQM_Quat* ALQM_EulerAngleRadToQuat(const ALQM_EulerAngle* inAngleRad, ALQM_Quat* outQuat)
 {
-	if ( ALP_SANITY_VALID(inAngleRad && outQuat) )
+	if ( ALU_SANITY_VALID(inAngleRad && outQuat) )
 	{
 		ALQM_Scalar sinPitch = 0;
 		ALQM_Scalar cosPitch = 0;

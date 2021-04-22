@@ -1,7 +1,7 @@
 #include "AVIDLib_QMath/Mat3x4.h"
 #include "AVIDLib_Plat/Ptr.h"
-#include "AVIDLib_Plat/Check.h"
-#include "AVIDLib_Plat/Util.h"
+#include "AVIDLib_Internal_Util/Check.h"
+#include "AVIDLib_Internal_Util/Util.h"
 #include "AVIDLib_QMath/Math.h"
 
 const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
@@ -15,27 +15,27 @@ const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
 
 ALQM_Scalar* ALQM_Mat3x4_Data(ALQM_Mat3x4* m)
 {
-	return ALP_TSANITY_VALID(m, (ALQM_Scalar*)m->v, ALP_NULL);
+	return ALU_TSANITY_VALID(m, (ALQM_Scalar*)m->v, ALP_NULL);
 }
 
 const ALQM_Scalar* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m)
 {
-	return ALP_TSANITY_VALID(m, (const ALQM_Scalar*)m->v, ALP_NULL);
+	return ALU_TSANITY_VALID(m, (const ALQM_Scalar*)m->v, ALP_NULL);
 }
 
 ALQM_Scalar* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALP_Size column)
 {
-	return ALP_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (ALQM_Scalar*)&m->v[column], ALP_NULL);
+	return ALU_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (ALQM_Scalar*)&m->v[column], ALP_NULL);
 }
 
 const ALQM_Scalar* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALP_Size column)
 {
-	return ALP_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (const ALQM_Scalar*)&m->v[column], ALP_NULL);
+	return ALU_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (const ALQM_Scalar*)&m->v[column], ALP_NULL);
 }
 
 ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut)
 {
-	if ( ALP_SANITY_VALID(mOut) )
+	if ( ALU_SANITY_VALID(mOut) )
 	{
 		mOut->v[0][0] = 1;
 		mOut->v[0][1] = 0;
@@ -58,9 +58,9 @@ ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut)
 
 ALQM_Mat3x4* ALQM_Mat3x4_Zero(ALQM_Mat3x4* mOut)
 {
-	if ( ALP_SANITY_VALID(mOut) )
+	if ( ALU_SANITY_VALID(mOut) )
 	{
-		ALP_MemSet(mOut->v, 0, sizeof(mOut->v));
+		ALU_MemSet(mOut->v, 0, sizeof(mOut->v));
 	}
 
 	return mOut;
@@ -68,9 +68,9 @@ ALQM_Mat3x4* ALQM_Mat3x4_Zero(ALQM_Mat3x4* mOut)
 
 ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 {
-	if ( ALP_SANITY_VALID(mIn && mOut) && mIn != mOut )
+	if ( ALU_SANITY_VALID(mIn && mOut) && mIn != mOut )
 	{
-		ALP_MemCpy(mOut->v, mIn->v, sizeof(mOut->v));
+		ALU_MemCpy(mOut->v, mIn->v, sizeof(mOut->v));
 	}
 
 	return mOut;
@@ -78,7 +78,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 
 ALQM_Mat3x4* ALQM_Mat3x4_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Mat3x4* mOut)
 {
-	if ( ALP_SANITY_VALID(values && count >= ALQM_MAT3X4_CELLS && mOut) )
+	if ( ALU_SANITY_VALID(values && count >= ALQM_MAT3X4_CELLS && mOut) )
 	{
 		mOut->v[0][0] = values[0];
 		mOut->v[0][1] = values[1];
@@ -101,7 +101,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_SetValuesArray(const ALQM_Scalar* values, ALP_Size coun
 
 ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut)
 {
-	if ( ALP_SANITY_VALID(m0 && m1 && mOut) )
+	if ( ALU_SANITY_VALID(m0 && m1 && mOut) )
 	{
 		mOut->v[0][0] = (m0->v[0][0] * m1->v[0][0]) + (m0->v[0][1] * m1->v[1][0]) + (m0->v[0][2] * m1->v[2][0]);
 		mOut->v[0][1] = (m0->v[0][0] * m1->v[0][1]) + (m0->v[0][1] * m1->v[1][1]) + (m0->v[0][2] * m1->v[2][1]);
@@ -124,7 +124,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, AL
 
 ALQM_Mat3x4* ALQM_Mat3x4_ConcatRot(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut)
 {
-	if ( ALP_SANITY_VALID(m0 && m1 && mOut) )
+	if ( ALU_SANITY_VALID(m0 && m1 && mOut) )
 	{
 		mOut->v[0][0] = (m0->v[0][0] * m1->v[0][0]) + (m0->v[0][1] * m1->v[1][0]) + (m0->v[0][2] * m1->v[2][0]);
 		mOut->v[0][1] = (m0->v[0][0] * m1->v[0][1]) + (m0->v[0][1] * m1->v[1][1]) + (m0->v[0][2] * m1->v[2][1]);
@@ -147,7 +147,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_ConcatRot(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1,
 
 ALQM_Mat3x4* ALQM_Mat3x4_TransposeRot(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 {
-	if ( ALP_SANITY_VALID(mIn && mOut) )
+	if ( ALU_SANITY_VALID(mIn && mOut) )
 	{
 		mOut->v[0][0] = mIn->v[0][0];
 		mOut->v[0][1] = mIn->v[1][0];
@@ -172,7 +172,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_TransposeRot(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 // Comments and implementation here are adapted from Xash3D.
 ALQM_Mat3x4* ALQM_Mat3x4_InvertSimple(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 {
-	if ( ALP_SANITY_VALID(mIn && mOut) )
+	if ( ALU_SANITY_VALID(mIn && mOut) )
 	{
 		// We only support uniform scaling, so assume the first row's scaling
 		// is representative of all scaling.
@@ -205,7 +205,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_InvertSimple(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 
 ALQM_Mat3x4* ALQM_Mat3x4_SetOrigin(const ALQM_Mat3x4* mIn, const ALQM_Vec3* vOrigin, ALQM_Mat3x4* mOut)
 {
-	if ( ALP_SANITY_VALID(mIn && vOrigin && mOut) )
+	if ( ALU_SANITY_VALID(mIn && vOrigin && mOut) )
 	{
 		mOut->v[0][3] = vOrigin->v[ALQM_VECX];
 		mOut->v[1][3] = vOrigin->v[ALQM_VECY];
@@ -217,7 +217,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_SetOrigin(const ALQM_Mat3x4* mIn, const ALQM_Vec3* vOri
 
 ALQM_Vec3* ALQM_Mat3x4_GetOrigin(const ALQM_Mat3x4* mIn, ALQM_Vec3* vOut)
 {
-	if ( ALP_SANITY_VALID(mIn && vOut) )
+	if ( ALU_SANITY_VALID(mIn && vOut) )
 	{
 		vOut->v[ALQM_VECX] = mIn->v[0][3];
 		vOut->v[ALQM_VECY] = mIn->v[1][3];
@@ -229,7 +229,7 @@ ALQM_Vec3* ALQM_Mat3x4_GetOrigin(const ALQM_Mat3x4* mIn, ALQM_Vec3* vOut)
 
 ALP_Bool ALQM_Mat3x4_ExactlyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS)
 {
-	if ( ALP_SANITY_VALID(mLHS && mRHS) )
+	if ( ALU_SANITY_VALID(mLHS && mRHS) )
 	{
 		const ALQM_Scalar* lhs = (const ALQM_Scalar*)mLHS->v;
 		const ALQM_Scalar* rhs = (const ALQM_Scalar*)mRHS->v;
@@ -250,7 +250,7 @@ ALP_Bool ALQM_Mat3x4_ExactlyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mR
 
 ALP_Bool ALQM_Mat3x4_ApproximatelyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS)
 {
-	if ( ALP_SANITY_VALID(mLHS && mRHS) )
+	if ( ALU_SANITY_VALID(mLHS && mRHS) )
 	{
 		const ALQM_Scalar* lhs = (const ALQM_Scalar*)mLHS->v;
 		const ALQM_Scalar* rhs = (const ALQM_Scalar*)mRHS->v;
@@ -271,7 +271,7 @@ ALP_Bool ALQM_Mat3x4_ApproximatelyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3
 
 ALP_Bool ALQM_Mat3x4_ExactlyZero(const ALQM_Mat3x4* m)
 {
-	if ( ALP_SANITY_VALID(m) )
+	if ( ALU_SANITY_VALID(m) )
 	{
 		const ALQM_Scalar* data = (const ALQM_Scalar*)m->v;
 
@@ -291,7 +291,7 @@ ALP_Bool ALQM_Mat3x4_ExactlyZero(const ALQM_Mat3x4* m)
 
 ALP_Bool ALQM_Mat3x4_ApproximatelyZero(const ALQM_Mat3x4* m)
 {
-	if ( ALP_SANITY_VALID(m) )
+	if ( ALU_SANITY_VALID(m) )
 	{
 		const ALQM_Scalar* data = (const ALQM_Scalar*)m->v;
 
@@ -311,7 +311,7 @@ ALP_Bool ALQM_Mat3x4_ApproximatelyZero(const ALQM_Mat3x4* m)
 
 ALP_Bool ALQM_Mat3x4_ExactlyIdentity(const ALQM_Mat3x4* m)
 {
-	if ( ALP_SANITY_VALID(m) )
+	if ( ALU_SANITY_VALID(m) )
 	{
 		return ALQM_Mat3x4_ExactlyEqual(m, &ALQM_Mat3x4_Identity);
 	}
@@ -321,7 +321,7 @@ ALP_Bool ALQM_Mat3x4_ExactlyIdentity(const ALQM_Mat3x4* m)
 
 ALP_Bool ALQM_Mat3x4_ApproximatelyIdentity(const ALQM_Mat3x4* m)
 {
-	if ( ALP_SANITY_VALID(m) )
+	if ( ALU_SANITY_VALID(m) )
 	{
 		return ALQM_Mat3x4_ApproximatelyEqual(m, &ALQM_Mat3x4_Identity);
 	}

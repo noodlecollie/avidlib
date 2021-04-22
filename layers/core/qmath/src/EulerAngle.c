@@ -1,8 +1,8 @@
 #include "AVIDLib_QMath/EulerAngle.h"
 #include "AVIDLib_QMath/Math.h"
 #include "AVIDLib_Plat/Ptr.h"
-#include "AVIDLib_Plat/Check.h"
-#include "AVIDLib_Plat/Util.h"
+#include "AVIDLib_Internal_Util/Check.h"
+#include "AVIDLib_Internal_Util/Util.h"
 
 static inline ALQM_Scalar ReflectPitch(ALQM_Scalar in, ALQM_Scalar limit)
 {
@@ -11,17 +11,17 @@ static inline ALQM_Scalar ReflectPitch(ALQM_Scalar in, ALQM_Scalar limit)
 
 ALQM_Scalar* ALQM_EulerAngle_Data(ALQM_EulerAngle* a)
 {
-	return ALP_TSANITY_VALID(a, &a->v[0], ALP_NULL);
+	return ALU_TSANITY_VALID(a, &a->v[0], ALP_NULL);
 }
 
 const ALQM_Scalar* ALQM_EulerAngle_CData(const ALQM_EulerAngle* a)
 {
-	return ALP_TSANITY_VALID(a, &a->v[0], ALP_NULL);
+	return ALU_TSANITY_VALID(a, &a->v[0], ALP_NULL);
 }
 
 ALQM_EulerAngle* ALQM_EulerAngle_Zero(ALQM_EulerAngle* aOut)
 {
-	if ( ALP_SANITY_VALID(aOut) )
+	if ( ALU_SANITY_VALID(aOut) )
 	{
 		aOut->v[ALQM_PITCH] = 0;
 		aOut->v[ALQM_YAW] = 0;
@@ -33,7 +33,7 @@ ALQM_EulerAngle* ALQM_EulerAngle_Zero(ALQM_EulerAngle* aOut)
 
 ALQM_EulerAngle* ALQM_EulerAngle_Copy(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut)
 {
-	if ( ALP_SANITY_VALID(aIn && aOut) && aIn != aOut )
+	if ( ALU_SANITY_VALID(aIn && aOut) && aIn != aOut )
 	{
 		aOut->v[ALQM_PITCH] = aIn->v[ALQM_PITCH];
 		aOut->v[ALQM_YAW] = aIn->v[ALQM_YAW];
@@ -45,7 +45,7 @@ ALQM_EulerAngle* ALQM_EulerAngle_Copy(const ALQM_EulerAngle* aIn, ALQM_EulerAngl
 
 ALQM_EulerAngle* ALQM_EulerAngle_DegToRad(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut)
 {
-	if ( ALP_SANITY_VALID(aIn && aOut) )
+	if ( ALU_SANITY_VALID(aIn && aOut) )
 	{
 		aOut->v[ALQM_PITCH] = ALQM_DegToRad(aIn->v[ALQM_PITCH]);
 		aOut->v[ALQM_YAW] = ALQM_DegToRad(aIn->v[ALQM_YAW]);
@@ -57,7 +57,7 @@ ALQM_EulerAngle* ALQM_EulerAngle_DegToRad(const ALQM_EulerAngle* aIn, ALQM_Euler
 
 ALQM_EulerAngle* ALQM_EulerAngle_RadToDeg(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut)
 {
-	if ( ALP_SANITY_VALID(aIn && aOut) )
+	if ( ALU_SANITY_VALID(aIn && aOut) )
 	{
 		aOut->v[ALQM_PITCH] = ALQM_RadToDeg(aIn->v[ALQM_PITCH]);
 		aOut->v[ALQM_YAW] = ALQM_RadToDeg(aIn->v[ALQM_YAW]);
@@ -69,7 +69,7 @@ ALQM_EulerAngle* ALQM_EulerAngle_RadToDeg(const ALQM_EulerAngle* aIn, ALQM_Euler
 
 ALQM_EulerAngle* ALQM_EulerAngle_Normalise(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut)
 {
-	if ( ALP_SANITY_VALID(aIn && aOut) )
+	if ( ALU_SANITY_VALID(aIn && aOut) )
 	{
 		aOut->v[ALQM_PITCH] = aIn->v[ALQM_PITCH];
 		aOut->v[ALQM_YAW] = aIn->v[ALQM_YAW];
@@ -112,7 +112,7 @@ ALQM_EulerAngle* ALQM_EulerAngle_Normalise(const ALQM_EulerAngle* aIn, ALQM_Eule
 
 ALP_Bool ALQM_EulerAngle_ExactlyEqual(const ALQM_EulerAngle* aLHS, const ALQM_EulerAngle* aRHS)
 {
-	return ALP_TSANITY_VALID(aLHS && aRHS,
+	return ALU_TSANITY_VALID(aLHS && aRHS,
 							 ALQM_ScalarsExactlyEqual(aLHS->v[ALQM_PITCH], aRHS->v[ALQM_PITCH]) &&
 							 ALQM_ScalarsExactlyEqual(aLHS->v[ALQM_YAW], aRHS->v[ALQM_YAW]) &&
 							 ALQM_ScalarsExactlyEqual(aLHS->v[ALQM_ROLL], aRHS->v[ALQM_ROLL]),
@@ -121,7 +121,7 @@ ALP_Bool ALQM_EulerAngle_ExactlyEqual(const ALQM_EulerAngle* aLHS, const ALQM_Eu
 
 ALP_Bool ALQM_EulerAngle_ApproximatelyEqual(const ALQM_EulerAngle* aLHS, const ALQM_EulerAngle* aRHS)
 {
-	return ALP_TSANITY_VALID(aLHS && aRHS,
+	return ALU_TSANITY_VALID(aLHS && aRHS,
 							 ALQM_ScalarsApproximatelyEqual(aLHS->v[ALQM_PITCH], aRHS->v[ALQM_PITCH]) &&
 							 ALQM_ScalarsApproximatelyEqual(aLHS->v[ALQM_YAW], aRHS->v[ALQM_YAW]) &&
 							 ALQM_ScalarsApproximatelyEqual(aLHS->v[ALQM_ROLL], aRHS->v[ALQM_ROLL]),
@@ -130,7 +130,7 @@ ALP_Bool ALQM_EulerAngle_ApproximatelyEqual(const ALQM_EulerAngle* aLHS, const A
 
 ALP_Bool ALQM_EulerAngle_ExactlyZero(const ALQM_EulerAngle* a)
 {
-	return ALP_TSANITY_VALID(a,
+	return ALU_TSANITY_VALID(a,
 							 ALQM_ScalarExactlyZero(a->v[ALQM_PITCH]) &&
 							 ALQM_ScalarExactlyZero(a->v[ALQM_YAW]) &&
 							 ALQM_ScalarExactlyZero(a->v[ALQM_ROLL]),
@@ -139,7 +139,7 @@ ALP_Bool ALQM_EulerAngle_ExactlyZero(const ALQM_EulerAngle* a)
 
 ALP_Bool ALQM_EulerAngle_ApproximatelyZero(const ALQM_EulerAngle* a)
 {
-	return ALP_TSANITY_VALID(a,
+	return ALU_TSANITY_VALID(a,
 							 ALQM_ScalarApproximatelyZero(a->v[ALQM_PITCH]) &&
 							 ALQM_ScalarApproximatelyZero(a->v[ALQM_YAW]) &&
 							 ALQM_ScalarApproximatelyZero(a->v[ALQM_ROLL]),

@@ -32,7 +32,7 @@ else()
 	add_library(${TARGETNAME_QMATH} STATIC ${PUBLIC_HEADERS_ALL} ${SOURCES_ALL})
 endif()
 
-target_link_libraries(${TARGETNAME_QMATH} PUBLIC ${TARGETNAME_CORE})
+target_link_libraries(${TARGETNAME_QMATH} PUBLIC ${TARGETNAME_PLAT})
 
 target_include_directories(${TARGETNAME_QMATH} PUBLIC
 	include

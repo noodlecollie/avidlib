@@ -1,3 +1,8 @@
+/*
+	About: Constants.h
+	This file provides mathematical types for use with other mathematical objects.
+*/
+
 #ifndef AVIDLIB_QMATH_TYPES_H
 #define AVIDLIB_QMATH_TYPES_H
 
@@ -5,7 +10,10 @@
 extern "C" {
 #endif
 
-// Scalar value. Multiple scalars can be used to form vectors.
+/*
+	Type: ALQM_Scalar
+	Scalar value. Multiple scalars can be used to form vectors.
+*/
 typedef float ALQM_Scalar;
 
 #ifdef __cplusplus

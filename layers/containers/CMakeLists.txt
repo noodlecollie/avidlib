@@ -18,7 +18,8 @@ set(PUBLIC_HEADERS_SELECTED
 set(PUBLIC_HEADERS_SELECTED "")
 set(SOURCES_SELECTED "")
 
-init_unit_mdlv10(PUBLIC_HEADERS_SELECTED SOURCES_SELECTED)
+set(CONTAINERS_ALL "NO" CACHE BOOL "Includes all different container types in containers library. Useful for validating that these all compile (eg. in CI).")
+init_unit_mdlv10(PUBLIC_HEADERS_SELECTED SOURCES_SELECTED CONTAINERS_ALL)
 
 set(numSources 0)
 list(LENGTH SOURCES_SELECTED numSources)
@@ -34,6 +35,7 @@ else()
 endif()
 
 target_link_libraries(${TARGETNAME_CONTAINERS} PUBLIC ${TARGETNAME_PLAT})
+target_link_libraries(${TARGETNAME_CONTAINERS} PUBLIC ${TARGETNAME_QMATH})
 
 target_include_directories(${TARGETNAME_CONTAINERS} PUBLIC
 	include

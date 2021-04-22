@@ -1,4 +1,4 @@
-function(init_unit_mdlv10 headers sources)
+function(init_unit_mdlv10 headers sources forceUse)
 	set(CONTAINERS_MDLV10 "NO" CACHE BOOL "Includes MDLv10 code in containers library.")
 
 	set(HEADERS_MDLV10
@@ -10,7 +10,7 @@ function(init_unit_mdlv10 headers sources)
 		src/MDLv10/MDLFile.c
 	)
 
-	if(CONTAINERS_MDLV10)
+	if(CONTAINERS_MDLV10 OR ${forceUse})
 		set(${headers}
 			${${headers}}
 			${HEADERS_MDLV10}

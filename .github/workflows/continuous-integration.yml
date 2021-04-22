@@ -7,8 +7,10 @@ on:
     branches: [ master ]
 
 jobs:
-  build-linux:
-    name: Build on Ubuntu Latest
+  # This job builds all content in a handful of configurations,
+  # and leaves the more specific build options at their defaults.
+  build-linux-nonspecific:
+    name: Nonspeific build on Ubuntu Latest
     runs-on: ubuntu-latest
 
     strategy:

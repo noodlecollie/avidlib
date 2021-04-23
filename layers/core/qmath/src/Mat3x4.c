@@ -23,14 +23,14 @@ const ALQM_Scalar* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m)
 	return ALU_TSANITY_VALID(m, (const ALQM_Scalar*)m->v, ALP_NULL);
 }
 
-ALQM_Scalar* ALQM_Mat3x4_Column(ALQM_Mat3x4* m, ALP_Size column)
+ALQM_Scalar* ALQM_Mat3x4_Row(ALQM_Mat3x4* m, ALP_Size row)
 {
-	return ALU_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (ALQM_Scalar*)&m->v[column], ALP_NULL);
+	return ALU_TSANITY_VALID(m && row < ALQM_MAT3X4_ROWS, (ALQM_Scalar*)&m->v[row], ALP_NULL);
 }
 
-const ALQM_Scalar* ALQM_Mat3x4_CColumn(const ALQM_Mat3x4* m, ALP_Size column)
+const ALQM_Scalar* ALQM_Mat3x4_CRow(const ALQM_Mat3x4* m, ALP_Size row)
 {
-	return ALU_TSANITY_VALID(m && column < ALQM_MAT3X4_COLS, (const ALQM_Scalar*)&m->v[column], ALP_NULL);
+	return ALU_TSANITY_VALID(m && row < ALQM_MAT3X4_ROWS, (const ALQM_Scalar*)&m->v[row], ALP_NULL);
 }
 
 ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut)
@@ -99,47 +99,24 @@ ALQM_Mat3x4* ALQM_Mat3x4_SetValuesArray(const ALQM_Scalar* values, ALP_Size coun
 	return mOut;
 }
 
-ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut)
+ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS, ALQM_Mat3x4* mOut)
 {
-	if ( ALU_SANITY_VALID(m0 && m1 && mOut) )
+	if ( ALU_SANITY_VALID(mLHS && mRHS && mOut) )
 	{
-		mOut->v[0][0] = (m0->v[0][0] * m1->v[0][0]) + (m0->v[0][1] * m1->v[1][0]) + (m0->v[0][2] * m1->v[2][0]);
-		mOut->v[0][1] = (m0->v[0][0] * m1->v[0][1]) + (m0->v[0][1] * m1->v[1][1]) + (m0->v[0][2] * m1->v[2][1]);
-		mOut->v[0][2] = (m0->v[0][0] * m1->v[0][2]) + (m0->v[0][1] * m1->v[1][2]) + (m0->v[0][2] * m1->v[2][2]);
-		mOut->v[0][3] = (m0->v[0][0] * m1->v[0][3]) + (m0->v[0][1] * m1->v[1][3]) + (m0->v[0][2] * m1->v[2][3]) + m0->v[0][3];
+		mOut->v[0][0] = (mLHS->v[0][0] * mRHS->v[0][0]) + (mLHS->v[0][1] * mRHS->v[1][0]) + (mLHS->v[0][2] * mRHS->v[2][0]);
+		mOut->v[0][1] = (mLHS->v[0][0] * mRHS->v[0][1]) + (mLHS->v[0][1] * mRHS->v[1][1]) + (mLHS->v[0][2] * mRHS->v[2][1]);
+		mOut->v[0][2] = (mLHS->v[0][0] * mRHS->v[0][2]) + (mLHS->v[0][1] * mRHS->v[1][2]) + (mLHS->v[0][2] * mRHS->v[2][2]);
+		mOut->v[0][3] = (mLHS->v[0][0] * mRHS->v[0][3]) + (mLHS->v[0][1] * mRHS->v[1][3]) + (mLHS->v[0][2] * mRHS->v[2][3]) + mLHS->v[0][3];
 
-		mOut->v[1][0] = (m0->v[1][0] * m1->v[0][0]) + (m0->v[1][1] * m1->v[1][0]) + (m0->v[1][2] * m1->v[2][0]);
-		mOut->v[1][1] = (m0->v[1][0] * m1->v[0][1]) + (m0->v[1][1] * m1->v[1][1]) + (m0->v[1][2] * m1->v[2][1]);
-		mOut->v[1][2] = (m0->v[1][0] * m1->v[0][2]) + (m0->v[1][1] * m1->v[1][2]) + (m0->v[1][2] * m1->v[2][2]);
-		mOut->v[1][3] = (m0->v[1][0] * m1->v[0][3]) + (m0->v[1][1] * m1->v[1][3]) + (m0->v[1][2] * m1->v[2][3]) + m0->v[1][3];
+		mOut->v[1][0] = (mLHS->v[1][0] * mRHS->v[0][0]) + (mLHS->v[1][1] * mRHS->v[1][0]) + (mLHS->v[1][2] * mRHS->v[2][0]);
+		mOut->v[1][1] = (mLHS->v[1][0] * mRHS->v[0][1]) + (mLHS->v[1][1] * mRHS->v[1][1]) + (mLHS->v[1][2] * mRHS->v[2][1]);
+		mOut->v[1][2] = (mLHS->v[1][0] * mRHS->v[0][2]) + (mLHS->v[1][1] * mRHS->v[1][2]) + (mLHS->v[1][2] * mRHS->v[2][2]);
+		mOut->v[1][3] = (mLHS->v[1][0] * mRHS->v[0][3]) + (mLHS->v[1][1] * mRHS->v[1][3]) + (mLHS->v[1][2] * mRHS->v[2][3]) + mLHS->v[1][3];
 
-		mOut->v[2][0] = (m0->v[2][0] * m1->v[0][0]) + (m0->v[2][1] * m1->v[1][0]) + (m0->v[2][2] * m1->v[2][0]);
-		mOut->v[2][1] = (m0->v[2][0] * m1->v[0][1]) + (m0->v[2][1] * m1->v[1][1]) + (m0->v[2][2] * m1->v[2][1]);
-		mOut->v[2][2] = (m0->v[2][0] * m1->v[0][2]) + (m0->v[2][1] * m1->v[1][2]) + (m0->v[2][2] * m1->v[2][2]);
-		mOut->v[2][3] = (m0->v[2][0] * m1->v[0][3]) + (m0->v[2][1] * m1->v[1][3]) + (m0->v[2][2] * m1->v[2][3]) + m0->v[2][3];
-	}
-
-	return mOut;
-}
-
-ALQM_Mat3x4* ALQM_Mat3x4_ConcatRot(const ALQM_Mat3x4* m0, const ALQM_Mat3x4* m1, ALQM_Mat3x4* mOut)
-{
-	if ( ALU_SANITY_VALID(m0 && m1 && mOut) )
-	{
-		mOut->v[0][0] = (m0->v[0][0] * m1->v[0][0]) + (m0->v[0][1] * m1->v[1][0]) + (m0->v[0][2] * m1->v[2][0]);
-		mOut->v[0][1] = (m0->v[0][0] * m1->v[0][1]) + (m0->v[0][1] * m1->v[1][1]) + (m0->v[0][2] * m1->v[2][1]);
-		mOut->v[0][2] = (m0->v[0][0] * m1->v[0][2]) + (m0->v[0][1] * m1->v[1][2]) + (m0->v[0][2] * m1->v[2][2]);
-		mOut->v[0][3] = (m0->v[0][0] * m1->v[0][3]) + (m0->v[0][1] * m1->v[1][3]) + (m0->v[0][2] * m1->v[2][3]);
-
-		mOut->v[1][0] = (m0->v[1][0] * m1->v[0][0]) + (m0->v[1][1] * m1->v[1][0]) + (m0->v[1][2] * m1->v[2][0]);
-		mOut->v[1][1] = (m0->v[1][0] * m1->v[0][1]) + (m0->v[1][1] * m1->v[1][1]) + (m0->v[1][2] * m1->v[2][1]);
-		mOut->v[1][2] = (m0->v[1][0] * m1->v[0][2]) + (m0->v[1][1] * m1->v[1][2]) + (m0->v[1][2] * m1->v[2][2]);
-		mOut->v[1][3] = (m0->v[1][0] * m1->v[0][3]) + (m0->v[1][1] * m1->v[1][3]) + (m0->v[1][2] * m1->v[2][3]);
-
-		mOut->v[2][0] = (m0->v[2][0] * m1->v[0][0]) + (m0->v[2][1] * m1->v[1][0]) + (m0->v[2][2] * m1->v[2][0]);
-		mOut->v[2][1] = (m0->v[2][0] * m1->v[0][1]) + (m0->v[2][1] * m1->v[1][1]) + (m0->v[2][2] * m1->v[2][1]);
-		mOut->v[2][2] = (m0->v[2][0] * m1->v[0][2]) + (m0->v[2][1] * m1->v[1][2]) + (m0->v[2][2] * m1->v[2][2]);
-		mOut->v[2][3] = (m0->v[2][0] * m1->v[0][3]) + (m0->v[2][1] * m1->v[1][3]) + (m0->v[2][2] * m1->v[2][3]);
+		mOut->v[2][0] = (mLHS->v[2][0] * mRHS->v[0][0]) + (mLHS->v[2][1] * mRHS->v[1][0]) + (mLHS->v[2][2] * mRHS->v[2][0]);
+		mOut->v[2][1] = (mLHS->v[2][0] * mRHS->v[0][1]) + (mLHS->v[2][1] * mRHS->v[1][1]) + (mLHS->v[2][2] * mRHS->v[2][1]);
+		mOut->v[2][2] = (mLHS->v[2][0] * mRHS->v[0][2]) + (mLHS->v[2][1] * mRHS->v[1][2]) + (mLHS->v[2][2] * mRHS->v[2][2]);
+		mOut->v[2][3] = (mLHS->v[2][0] * mRHS->v[0][3]) + (mLHS->v[2][1] * mRHS->v[1][3]) + (mLHS->v[2][2] * mRHS->v[2][3]) + mLHS->v[2][3];
 	}
 
 	return mOut;
@@ -203,19 +180,19 @@ ALQM_Mat3x4* ALQM_Mat3x4_InvertSimple(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 	return mOut;
 }
 
-ALQM_Mat3x4* ALQM_Mat3x4_SetOrigin(const ALQM_Mat3x4* mIn, const ALQM_Vec3* vOrigin, ALQM_Mat3x4* mOut)
+ALQM_Mat3x4* ALQM_Mat3x4_SetTranslation(const ALQM_Mat3x4* mIn, const ALQM_Vec3* vTranslation, ALQM_Mat3x4* mOut)
 {
-	if ( ALU_SANITY_VALID(mIn && vOrigin && mOut) )
+	if ( ALU_SANITY_VALID(mIn && vTranslation && mOut) )
 	{
-		mOut->v[0][3] = vOrigin->v[ALQM_VECX];
-		mOut->v[1][3] = vOrigin->v[ALQM_VECY];
-		mOut->v[2][3] = vOrigin->v[ALQM_VECZ];
+		mOut->v[0][3] = vTranslation->v[ALQM_VECX];
+		mOut->v[1][3] = vTranslation->v[ALQM_VECY];
+		mOut->v[2][3] = vTranslation->v[ALQM_VECZ];
 	}
 
 	return mOut;
 }
 
-ALQM_Vec3* ALQM_Mat3x4_GetOrigin(const ALQM_Mat3x4* mIn, ALQM_Vec3* vOut)
+ALQM_Vec3* ALQM_Mat3x4_GetTranslation(const ALQM_Mat3x4* mIn, ALQM_Vec3* vOut)
 {
 	if ( ALU_SANITY_VALID(mIn && vOut) )
 	{

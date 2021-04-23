@@ -68,7 +68,7 @@ typedef enum _ALQM_Vec3Axis
 /**
  * Group: Data Accessors
  * The following functions allow direct data access to the vector.
- * They should be preferred when passing a raw ALQM_Scalar array is required.
+ * They should be preferred when passing a raw <ALQM_Scalar> array is required.
  */
 
 /**

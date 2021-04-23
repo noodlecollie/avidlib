@@ -132,10 +132,12 @@ ALQM_Vec3* ALQM_Vec3_Scale(const ALQM_Vec3* vIn, ALQM_Scalar scale, ALQM_Vec3* v
 	return vOut;
 }
 
-ALQM_Scalar ALQM_Vec3_DotProduct(const ALQM_Vec3* v0, const ALQM_Vec3* v1)
+ALQM_Scalar ALQM_Vec3_DotProduct(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS)
 {
-	return ALU_TSANITY_VALID(v0 && v1,
-							 (v0->v[ALQM_VECX] * v1->v[ALQM_VECX]) + (v0->v[ALQM_VECY] * v1->v[ALQM_VECY]) + (v0->v[ALQM_VECZ] * v1->v[ALQM_VECZ]),
+	return ALU_TSANITY_VALID(vLHS && vRHS,
+							 (vLHS->v[ALQM_VECX] * vRHS->v[ALQM_VECX]) +
+							 (vLHS->v[ALQM_VECY] * vRHS->v[ALQM_VECY]) +
+							 (vLHS->v[ALQM_VECZ] * vRHS->v[ALQM_VECZ]),
 							 0);
 }
 

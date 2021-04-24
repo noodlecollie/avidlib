@@ -28,7 +28,7 @@ ALC_MDLv10_Bone* ALC_MDLv10_Model_AllocateBones(ALC_MDLv10_Model* model, ALP_Siz
 	return ALU_TSANITY_VALID(
 		model,
 		(ALC_MDLv10_Bone*)ALU_SetArrayOfItems(
-			&model->bones,
+			(void**)&model->bones,
 			&model->numBones,
 			numBones,
 			sizeof(*model->bones),

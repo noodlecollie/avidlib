@@ -9,11 +9,13 @@ create_export_header(${TARGETNAME_IO})
 
 set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_IO}/LibExport.h
-	include/${TARGETNAME_IO}/ParseErrors.h
+	include/${TARGETNAME_IO}/ReaderErrors.h
+	include/${TARGETNAME_IO}/ReadResult.h
 )
 
 set(SOURCES_GENERAL
-	src/ParseErrors.c
+	src/ReaderErrors.c
+	src/ReadResult.c
 )
 
 set(PUBLIC_HEADERS_SELECTED
@@ -41,6 +43,7 @@ endif()
 
 target_link_libraries(${TARGETNAME_IO} PUBLIC ${TARGETNAME_PLAT})
 target_link_libraries(${TARGETNAME_IO} PUBLIC ${TARGETNAME_CONTAINERS})
+target_link_libraries(${TARGETNAME_IO} PRIVATE ${TARGETNAME_INTERNAL_UTIL})
 
 target_include_directories(${TARGETNAME_IO} PUBLIC
 	include

@@ -52,6 +52,9 @@ Source Folder 2: ..\layers\core\qmath\include\AVIDLib_QMath
 Source Folder 3: ..\layers\containers\include\AVIDLib_Containers
    Name: Asset Container Library
 
+Source Folder 4: ..\layers\io\include\AVIDLib_IO
+   Name: Asset I/O Library
+
 
 # This is where you specify what files and folders Natural Docs should be
 # scanning.  If you use any of these options on the command line, this entire

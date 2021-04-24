@@ -2,7 +2,7 @@ function(init_unit_mdlv10 headers sources forceUse)
 	set(IO_MDLV10 "NO" CACHE BOOL "Includes MDLv10 code in IO library.")
 
 	set(HEADERS_MDLV10
-		include/${TARGETNAME_CONTAINERS}/MDLv10/Reader.h
+		include/${TARGETNAME_IO}/MDLv10/Reader.h
 		PARENT_SCOPE
 	)
 
@@ -27,6 +27,6 @@ endfunction()
 
 macro(install_unit_mdlv10)
 	if(CONTAINERS_MDLV10)
-		install(FILES ${HEADERS_MDLV10} DESTINATION ${TARGETNAME_CONTAINERS}/include/${TARGETNAME_CONTAINERS}/MDLv10)
+		install(FILES ${HEADERS_MDLV10} DESTINATION ${TARGETNAME_IO}/include/${TARGETNAME_IO}/MDLv10)
 	endif()
 endmacro()

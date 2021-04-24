@@ -15,6 +15,9 @@ extern "C" {
 #define ALU_MIN(a, b) ((a) < (b) ? (a) : (b))
 #define ALU_MAX(a, b) ((a) > (b) ? (a) : (b))
 
+// Convenience macro to mark an input argument as being unused.
+#define ALU_UNUSED(arg) (void)(arg)
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

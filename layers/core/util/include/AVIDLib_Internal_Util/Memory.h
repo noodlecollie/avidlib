@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 #include "AVIDLib_Internal_Util/Check.h"
+#include "AVIDLib_Internal_Util/Util.h"
 #include "AVIDLib_Plat/Memory.h"
 
 #ifdef __cplusplus
@@ -25,9 +26,8 @@ static inline void* ALU_MallocFrom(ALP_Size size, const char* file, int line)
 // Records the file and line at which the free call was made, for debugging purposes.
 static inline void ALU_FreeFrom(void* ptr, const char* file, int line)
 {
-	// File and line are not currently used.
-	(void)file;
-	(void)line;
+	ALU_UNUSED(file);
+	ALU_UNUSED(line);
 
 	ALP_Free(ptr);
 }

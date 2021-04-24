@@ -69,4 +69,44 @@ typedef struct _ALC_MDLv10_Bone
 	ALQM_Vec3 rotationScale;
 } ALC_MDLv10_Bone;
 
+/**
+ * Function: ALC_MDLv10_Bone_Init
+ *
+ * Initialises a bone from uninitialised memory.
+ *
+ * This function should always be paired with a later call to <ALC_MDLv10_Bone_Deinit>,
+ * to clean up any internal data held by the bone.
+ *
+ * *Do not* call this function on a bone which has already been initialised,
+ * or undefined behaviour will result.
+ *
+ * Parameters:
+ *
+ * bone - Bone to initialise.
+ *
+ * Returns:
+ *
+ * Input bone.
+ */
+API_AVIDLIB_CONTAINERS ALC_MDLv10_Bone* ALC_MDLv10_Bone_Init(ALC_MDLv10_Bone* bone);
+
+/**
+ * Function: ALC_MDLv10_Bone_Deinit
+ *
+ * Deinitialises a previously initialised bone.
+ *
+ * This function should *always* be paired with a previous call to <ALC_MDLv10_Bone_Init>,
+ * to clean up any internal data held by the bone.
+ *
+ * After the call, the bone should not be reused without being initialised again.
+ *
+ * If the passed bone was not previously initialised using <ALC_MDLv10_Bone_Init>,
+ * undefined behaviour will result.
+ *
+ * Parameters:
+ *
+ * bone - Bone to deinitialise.
+ */
+API_AVIDLIB_CONTAINERS void ALC_MDLv10_Bone_Deinit(ALC_MDLv10_Bone* bone);
+
 #endif // AVIDLIB_CONTAINERS_MDLV10_BONE_H

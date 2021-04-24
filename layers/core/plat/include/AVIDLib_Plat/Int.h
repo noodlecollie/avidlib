@@ -23,10 +23,12 @@ extern "C" {
  * ALP_UInt8 - AVIDLib unsigned 8-bit integer type.
  * ALP_Int8  - AVIDLib signed 8-bit integer type.
  * ALP_Char  - AVIDLib character type.
+ * ALP_Byte  - AVIDLib byte type, used for referring to raw data.
  */
 typedef uint8_t ALP_UInt8;
 typedef int8_t ALP_Int8;
 typedef char ALP_Char;
+typedef unsigned char ALP_Byte;
 
 /**
  * Types: 16-bit Integers

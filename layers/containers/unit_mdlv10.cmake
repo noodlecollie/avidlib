@@ -2,12 +2,15 @@ function(init_unit_mdlv10 headers sources forceUse)
 	set(CONTAINERS_MDLV10 "NO" CACHE BOOL "Includes MDLv10 code in containers library.")
 
 	set(HEADERS_MDLV10
-		include/${TARGETNAME_CONTAINERS}/MDLv10/ModelFile.h
+		include/${TARGETNAME_CONTAINERS}/MDLv10/Bone.h
+		include/${TARGETNAME_CONTAINERS}/MDLv10/Definitions.h
+		include/${TARGETNAME_CONTAINERS}/MDLv10/Model.h
 		PARENT_SCOPE
 	)
 
 	set(SOURCES_MDLV10
-		src/MDLv10/ModelFile.c
+		src/MDLv10/Bone.c
+		src/MDLv10/Model.c
 	)
 
 	if(CONTAINERS_MDLV10 OR ${forceUse})

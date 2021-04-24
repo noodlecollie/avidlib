@@ -4,6 +4,8 @@ set(PERFORM_MALLOC_CHECKS "YES" CACHE BOOL "If set, calls to malloc are checked 
 set(PUBLIC_HEADERS_GENERAL
 include/${TARGETNAME_INTERNAL_UTIL}/Check.h
 include/${TARGETNAME_INTERNAL_UTIL}/Debug.h
+include/${TARGETNAME_INTERNAL_UTIL}/ItemInitialisation.h
+include/${TARGETNAME_INTERNAL_UTIL}/Memory.h
 include/${TARGETNAME_INTERNAL_UTIL}/Util.h
 )
 
@@ -13,6 +15,7 @@ set(PUBLIC_HEADERS_ALL
 
 set(SOURCES_ALL
 	src/Check.c
+	src/ItemInitialisation.c
 )
 
 # This library is intended only to be used internally,

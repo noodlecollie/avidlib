@@ -36,7 +36,7 @@ endif()
 
 target_link_libraries(${TARGETNAME_CONTAINERS} PUBLIC ${TARGETNAME_PLAT})
 target_link_libraries(${TARGETNAME_CONTAINERS} PUBLIC ${TARGETNAME_QMATH})
-target_link_libraries(${TARGETNAME_CONTAINERS} PRIVATE ${TARGETNAME_UTIL})
+target_link_libraries(${TARGETNAME_CONTAINERS} PRIVATE ${TARGETNAME_INTERNAL_UTIL})
 
 target_include_directories(${TARGETNAME_CONTAINERS} PUBLIC
 	include

@@ -3,7 +3,7 @@
 #include "AVIDLib_Internal_Util/Memory.h"
 #include "AVIDLib_Internal_Util/ItemInitialisation.h"
 #include "AVIDLib_Plat/Ptr.h"
-#include "Internal/Bone_Internal.h"
+#include "MDLv10/Internal/Bone_Internal.h"
 
 ALC_MDLv10_Model* ALC_MDLv10_Model_Init(ALC_MDLv10_Model* model)
 {

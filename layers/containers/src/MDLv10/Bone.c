@@ -4,7 +4,7 @@
 #include "AVIDLib_Internal_Util/ItemInitialisation.h"
 #include "AVIDLib_Internal_Util/Check.h"
 #include "AVIDLib_Internal_Util/Memory.h"
-#include "Internal/Bone_Internal.h"
+#include "MDLv10/Internal/Bone_Internal.h"
 
 ALC_MDLv10_Bone* ALC_MDLv10_Bone_Init(ALC_MDLv10_Bone* bone)
 {

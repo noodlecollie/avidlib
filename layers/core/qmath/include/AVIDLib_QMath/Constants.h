@@ -28,6 +28,13 @@ extern "C" {
  */
 #define ALQM_ISNAN(x) (((*(int *)&(x)) & ALQM_NAN) == ALQM_NAN)
 
+/**
+ * Constant: ALQM_SCALAR_EPSILON
+ * If the difference of two scalars is not greater than this value,
+ * the scalars are considered approximately equal.
+ */
+#define ALQM_SCALAR_EPSILON (1.0e-5f)
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

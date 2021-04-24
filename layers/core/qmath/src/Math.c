@@ -8,8 +8,6 @@
 // depending on our target platform, we can add ifdefs.
 #include <math.h>
 
-#define FLOAT_APPROX_EPSILON (1.0e-5f)
-
 ALQM_Scalar ALQM_Abs(ALQM_Scalar val)
 {
 	return fabsf(val);
@@ -125,9 +123,9 @@ ALQM_Scalar ALQM_ATan2Deg(ALQM_Scalar y, ALQM_Scalar x)
 #pragma GCC diagnostic ignored "-Wfloat-equal"
 #endif // __GNUC__
 
-ALP_Bool ALQM_ScalarsExactlyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
+ALP_Bool ALQM_ScalarsExactlyEqual(ALQM_Scalar lhs, ALQM_Scalar rhs)
 {
-	return val0 == val1;
+	return lhs == rhs;
 }
 
 ALP_Bool ALQM_ScalarExactlyZero(ALQM_Scalar val)
@@ -136,47 +134,47 @@ ALP_Bool ALQM_ScalarExactlyZero(ALQM_Scalar val)
 }
 
 // This is built from the information on https://embeddeduse.com/2019/08/26/qt-compare-two-floats/
-ALP_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar val0, ALQM_Scalar val1)
+ALP_Bool ALQM_ScalarsApproximatelyEqual(ALQM_Scalar lhs, ALQM_Scalar rhs)
 {
 	// Comparison goes whack if either value is zero, so make sure they're not.
 
-	if ( val0 == 0.0f )
+	if ( lhs == 0.0f )
 	{
-		val0 += 1.0f;
-		val1 += 1.0f;
+		lhs += 1.0f;
+		rhs += 1.0f;
 
-		// This may have caused val1 to be zero - check.
-		if ( val1 == 0.0f )
+		// This may have caused rhs to be zero - check.
+		if ( rhs == 0.0f )
 		{
-			val0 += 1.0f;
-			val1 += 1.0f;
+			lhs += 1.0f;
+			rhs += 1.0f;
 		}
 	}
 
-	if ( val1 == 0.0f )
+	if ( rhs == 0.0f )
 	{
-		val0 += 1.0f;
-		val1 += 1.0f;
+		lhs += 1.0f;
+		rhs += 1.0f;
 
-		// This may have caused val0 to be zero - check.
-		if ( val0 == 0.0f )
+		// This may have caused lhs to be zero - check.
+		if ( lhs == 0.0f )
 		{
-			val0 += 1.0f;
-			val1 += 1.0f;
+			lhs += 1.0f;
+			rhs += 1.0f;
 		}
 	}
 
-	const ALQM_Scalar absDiff = ALQM_Abs(val1 - val0);
+	const ALQM_Scalar absDiff = ALQM_Abs(rhs - lhs);
 
-	if ( absDiff <= FLOAT_APPROX_EPSILON )
+	if ( absDiff <= ALQM_SCALAR_EPSILON )
 	{
 		return ALP_TRUE;
 	}
 
-	const ALQM_Scalar absV0 = ALQM_Abs(val0);
-	const ALQM_Scalar absV1 = ALQM_Abs(val1);
+	const ALQM_Scalar absV0 = ALQM_Abs(rhs);
+	const ALQM_Scalar absV1 = ALQM_Abs(rhs);
 
-	return absDiff <= FLOAT_APPROX_EPSILON * ALU_MAX(absV0, absV1);
+	return absDiff <= ALQM_SCALAR_EPSILON * ALU_MAX(absV0, absV1);
 }
 
 ALP_Bool ALQM_ScalarApproximatelyZero(ALQM_Scalar val)

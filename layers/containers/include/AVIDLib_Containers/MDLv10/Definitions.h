@@ -3,6 +3,10 @@
  * Defines relevant constants for the MDLv10 format.
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef AVIDLIB_CONTAINERS_MDLV10_DEFINITIONS_H
 #define AVIDLIB_CONTAINERS_MDLV10_DEFINITIONS_H
 
@@ -23,5 +27,9 @@
  * Number of types of motion supported (XYZ translation and XYZ rotation).
  */
 #define ALC_MDLV10_NUM_MOTION_TYPES 6
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // AVIDLIB_CONTAINERS_MDLV10_DEFINITIONS_H

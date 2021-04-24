@@ -13,6 +13,10 @@
 #include "AVIDLib_QMath/BBox.h"
 #include "AVIDLib_Containers/MDLv10/Bone.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Struct: ALC_MDLv10_Model
  * Represents an overall MDLv10 model, and contains all its relevant components.
@@ -156,5 +160,9 @@ API_AVIDLIB_CONTAINERS ALC_MDLv10_Bone* ALC_MDLv10_Model_AllocateBones(ALC_MDLv1
  * model - Model containing the list of bones.
  */
 API_AVIDLIB_CONTAINERS void ALC_MDLv10_Model_FreeBones(ALC_MDLv10_Model* model);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // AVIDLIB_CONTAINERS_MDLV10_MODEL_H

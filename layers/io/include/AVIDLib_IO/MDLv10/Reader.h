@@ -11,6 +11,10 @@
 #include "AVIDLib_Containers/MDLv10/Model.h"
 #include "AVIDLib_IO/ReadResult.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Function: ALIO_MDLv10_Read
  *
@@ -33,5 +37,9 @@
  * the input data was read successfully; other values represent errors.
  */
 API_AVIDLIB_IO ALIO_ReaderError ALIO_MDLv10_Read(const ALP_Byte* inData, ALP_Size inSize, ALIO_ReadResult* outResult, ALC_MDLv10_Model* outModel);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // AVIDLIB_IO_MDLV10_READER_H

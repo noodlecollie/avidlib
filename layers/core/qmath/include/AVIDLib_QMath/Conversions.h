@@ -12,6 +12,10 @@
 #include "AVIDLib_QMath/Quat.h"
 #include "AVIDLib_QMath/Mat3x4.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Group: Conversions Producing Vectors
  */
@@ -146,5 +150,9 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Vec3AndQuatToMat3x4(const ALQM_Vec3* inTrans
  * outQuat.
  */
 API_AVIDLIB_QMATH ALQM_Quat* ALQM_EulerAngleRadToQuat(const ALQM_EulerAngle* inAngleRad, ALQM_Quat* outQuat);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // AVIDLIB_QMATH_CONVERSIONS_H

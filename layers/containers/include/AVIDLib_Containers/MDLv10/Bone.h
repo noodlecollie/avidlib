@@ -12,6 +12,10 @@
 #include "AVIDLib_QMath/Types.h"
 #include "AVIDLib_QMath/Vec3.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct _ALC_MDLv10_BoneController;
 
 /**
@@ -108,5 +112,9 @@ API_AVIDLIB_CONTAINERS ALC_MDLv10_Bone* ALC_MDLv10_Bone_Init(ALC_MDLv10_Bone* bo
  * bone - Bone to deinitialise.
  */
 API_AVIDLIB_CONTAINERS void ALC_MDLv10_Bone_Deinit(ALC_MDLv10_Bone* bone);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // AVIDLIB_CONTAINERS_MDLV10_BONE_H

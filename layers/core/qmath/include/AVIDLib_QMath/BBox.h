@@ -8,6 +8,10 @@
 
 #include "AVIDLib_QMath/Vec3.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Struct: ALQM_BBox
  * A 3D axis-aligned bounding box, specified by min and max vectors.
@@ -28,5 +32,9 @@ typedef struct _ALQM_BBox
 	 */
 	ALQM_Vec3 max;
 } ALQM_BBox;
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // AVIDLIB_QMATH_BBOX_H

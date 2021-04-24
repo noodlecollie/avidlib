@@ -9,6 +9,10 @@
 #include "AVIDLib_IO/LibExport.h"
 #include "AVIDLib_IO/ReaderErrors.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Struct: ALIO_ReadResult
  *
@@ -42,5 +46,9 @@ typedef struct _ALIO_ReadResult
  * result - Result object to reset.
  */
 API_AVIDLIB_IO void ALIO_ReadResult_Reset(ALIO_ReadResult* result);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // AVIDLIB_IO_READRESULT_H

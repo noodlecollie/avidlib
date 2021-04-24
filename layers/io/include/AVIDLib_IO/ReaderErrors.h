@@ -8,6 +8,10 @@
 
 #include "AVIDLib_IO/LibExport.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Macro: ALIO_READER_ERROR_LIST
  * "XMACRO" list typing error values to their readable descriptions.
@@ -47,5 +51,9 @@ typedef enum _ALIO_ReaderError
  * Descriptive string for the error.
  */
 API_AVIDLIB_IO const char* ALIO_ReaderError_Description(ALIO_ReaderError error);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // AVIDLIB_IO_READERERRORS_H

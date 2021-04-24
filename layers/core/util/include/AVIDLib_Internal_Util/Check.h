@@ -1,5 +1,5 @@
-#ifndef AVIDLIB_UTIL_CHECK_H
-#define AVIDLIB_UTIL_CHECK_H
+#ifndef AVIDLIB_INTERNAL_UTIL_CHECK_H
+#define AVIDLIB_INTERNAL_UTIL_CHECK_H
 
 // Always make sure that assertions defined in this file actually take effect.
 #ifdef NDEBUG
@@ -14,21 +14,14 @@
 #include <stdio.h>
 
 #include "AVIDLib_Internal_Util/Debug.h"
+#include "AVIDLib_Plat/Int.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-static inline int ALU_AssertWithFeedback(int expression, const char* expressionStr, const char* file, int line)
-{
-	if ( !expression )
-	{
-		fprintf(stderr, "Assertion failed @ %s:%d \"%s\"\n", file, line, expressionStr);
-		assert(0 && "Assertion failed - see stderr for information.");
-	}
-
-	return expression;
-}
+int ALU_AssertWithFeedback(int expression, const char* expressionStr, const char* file, int line);
+void ALU_AssertMallocSucceeded(const void* ptr, ALP_Size size, const char* file, int line);
 
 // This maps to an assertion which will always be checked
 #define ALU_ASSERT_ALWAYS(expr) (ALU_AssertWithFeedback((!!(expr)), #expr, __FILE__, __LINE__))
@@ -81,6 +74,12 @@ static inline int ALU_AssertWithFeedback(int expression, const char* expressionS
 #define ALU_TSANITY_VALID(expr, expected, fallback) (expected)
 #endif // AVIDLIB_VALIDITY_CHECKS
 
+#ifdef AVIDLIB_MALLOC_CHECKS
+#define ALU_CHECK_MALLOC_RESULT(ptr, size, file, line) ALU_AssertMallocSucceeded(ptr, size, file, line)
+#else
+#define ALU_CHECK_MALLOC_RESULT(ptr, size, file, line)
+#endif // AVIDLIB_MALLOC_CHECKS
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
@@ -91,4 +90,4 @@ static inline int ALU_AssertWithFeedback(int expression, const char* expressionS
 #undef NDEBUG_WAS_SET
 #endif
 
-#endif // AVIDLIB_UTIL_CHECK_H
+#endif // AVIDLIB_INTERNAL_UTIL_CHECK_H

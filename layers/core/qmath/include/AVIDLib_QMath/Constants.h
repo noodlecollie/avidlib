@@ -24,7 +24,16 @@ extern "C" {
 
 /**
  * Macro: ALQM_ISNAN
+ *
  * Expands to an expression which is true if the argument is "not a number", or false otherwise.
+ *
+ * Parameters:
+ *
+ * x - Argument to check against <ALQM_NAN>.
+ *
+ * Returns:
+ *
+ * Expression evaluating to true if the argument matches <ALQM_NAN>, or false otherwise.
  */
 #define ALQM_ISNAN(x) (((*(int *)&(x)) & ALQM_NAN) == ALQM_NAN)
 

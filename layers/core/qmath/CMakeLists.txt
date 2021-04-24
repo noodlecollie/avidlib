@@ -33,7 +33,7 @@ else()
 endif()
 
 target_link_libraries(${TARGETNAME_QMATH} PUBLIC ${TARGETNAME_PLAT})
-target_link_libraries(${TARGETNAME_QMATH} PRIVATE ${TARGETNAME_UTIL})
+target_link_libraries(${TARGETNAME_QMATH} PRIVATE ${TARGETNAME_INTERNAL_UTIL})
 
 target_include_directories(${TARGETNAME_QMATH} PUBLIC
 	include

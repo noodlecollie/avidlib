@@ -1,7 +1,7 @@
 #include "AVIDLib_QMath/Mat3x4.h"
 #include "AVIDLib_Plat/Ptr.h"
 #include "AVIDLib_Internal_Util/Check.h"
-#include "AVIDLib_Internal_Util/Util.h"
+#include "AVIDLib_Plat/Memory.h"
 #include "AVIDLib_QMath/Math.h"
 
 const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
@@ -60,7 +60,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_Zero(ALQM_Mat3x4* mOut)
 {
 	if ( ALU_SANITY_VALID(mOut) )
 	{
-		ALU_MemSet(mOut->v, 0, sizeof(mOut->v));
+		ALP_MemSet(mOut->v, 0, sizeof(mOut->v));
 	}
 
 	return mOut;
@@ -70,7 +70,7 @@ ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut)
 {
 	if ( ALU_SANITY_VALID(mIn && mOut) && mIn != mOut )
 	{
-		ALU_MemCpy(mOut->v, mIn->v, sizeof(mOut->v));
+		ALP_MemCpy(mOut->v, mIn->v, sizeof(mOut->v));
 	}
 
 	return mOut;

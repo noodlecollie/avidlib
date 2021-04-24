@@ -1,6 +1,7 @@
 set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_PLAT}/Bool.h
 	include/${TARGETNAME_PLAT}/Int.h
+	include/${TARGETNAME_PLAT}/Memory.h
 	include/${TARGETNAME_PLAT}/Ptr.h
 )
 

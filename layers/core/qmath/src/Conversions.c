@@ -128,9 +128,9 @@ ALQM_EulerAngle* ALQM_Mat3x4ToEulerAngleRad(const ALQM_Mat3x4* inMat, ALQM_Euler
 	return outAngleRad;
 }
 
-ALQM_Mat3x4* ALQM_Vec3AndQuatToMat3x4(const ALQM_Vec3* inOrigin, const ALQM_Quat* inQuat, ALQM_Mat3x4* outMat)
+ALQM_Mat3x4* ALQM_Vec3AndQuatToMat3x4(const ALQM_Vec3* inTranslation, const ALQM_Quat* inQuat, ALQM_Mat3x4* outMat)
 {
-	if ( ALU_SANITY_VALID(inOrigin && inQuat && outMat) )
+	if ( ALU_SANITY_VALID(inTranslation && inQuat && outMat) )
 	{
 		outMat->v[0][0] = 1 - (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATY]) - (2 * inQuat->v[ALQM_QUATZ] * inQuat->v[ALQM_QUATZ]);
 		outMat->v[1][0] = (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATY]) + (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATZ]);
@@ -144,9 +144,9 @@ ALQM_Mat3x4* ALQM_Vec3AndQuatToMat3x4(const ALQM_Vec3* inOrigin, const ALQM_Quat
 		outMat->v[1][2] = (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATZ]) - (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATX]);
 		outMat->v[2][2] = 1 - (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATX]) - (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATY]);
 
-		outMat->v[0][3] = inOrigin->v[ALQM_VECX];
-		outMat->v[1][3] = inOrigin->v[ALQM_VECY];
-		outMat->v[2][3] = inOrigin->v[ALQM_VECZ];
+		outMat->v[0][3] = inTranslation->v[ALQM_VECX];
+		outMat->v[1][3] = inTranslation->v[ALQM_VECY];
+		outMat->v[2][3] = inTranslation->v[ALQM_VECZ];
 	}
 
 	return outMat;

@@ -49,6 +49,9 @@ Source Folder: ..\layers\core\plat\include\AVIDLib_Plat
 Source Folder 2: ..\layers\core\qmath\include\AVIDLib_QMath
    Name: Quake Math Library
 
+Source Folder 3: ..\layers\containers\include\AVIDLib_Containers
+   Name: Asset Container Library
+
 
 # This is where you specify what files and folders Natural Docs should be
 # scanning.  If you use any of these options on the command line, this entire

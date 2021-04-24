@@ -67,7 +67,7 @@ ALQM_EulerAngle* ALQM_EulerAngle_RadToDeg(const ALQM_EulerAngle* aIn, ALQM_Euler
 	return aOut;
 }
 
-ALQM_EulerAngle* ALQM_EulerAngle_Normalise(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut)
+ALQM_EulerAngle* ALQM_EulerAngle_NormaliseDeg(const ALQM_EulerAngle* aIn, ALQM_EulerAngle* aOut)
 {
 	if ( ALU_SANITY_VALID(aIn && aOut) )
 	{

@@ -16,6 +16,7 @@ set(TARGETNAME_PLAT AVIDLib_Plat)
 set(TARGETNAME_INTERNAL_UTIL AVIDLib_Internal_Util)
 set(TARGETNAME_QMATH AVIDLib_QMath)
 set(TARGETNAME_CONTAINERS AVIDLib_Containers)
+set(TARGETNAME_IO AVIDLib_IO)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -52,8 +53,11 @@ if(MSVC)
 	add_compile_options(/W4 /WX)
 	add_link_options(/WX)
 else()
-	add_compile_options(-Wall -Wextra -pedantic -Werror -Wfloat-equal)
+	add_compile_options(-Wall -Wextra -pedantic -Werror)
 	add_link_options(-Wl,--fatal-warnings)
+
+	# Extra things we want to know about:
+	add_compile_options(-Wfloat-equal)	# Comparing floats for equality
 endif()
 
 add_subdirectory(layers)

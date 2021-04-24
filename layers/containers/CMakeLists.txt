@@ -11,12 +11,14 @@ set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_CONTAINERS}/LibExport.h
 )
 
-set(PUBLIC_HEADERS_SELECTED
-	${PUBLIC_HEADERS_GENERAL}
+set(SOURCES_GENERAL
 )
 
-set(PUBLIC_HEADERS_SELECTED "")
-set(SOURCES_SELECTED "")
+set(PUBLIC_HEADERS_SELECTED
+)
+
+set(SOURCES_SELECTED
+)
 
 set(CONTAINERS_ALL "NO" CACHE BOOL "Includes all different container types in containers library. Useful for validating that these all compile (eg. in CI).")
 init_unit_mdlv10(PUBLIC_HEADERS_SELECTED SOURCES_SELECTED CONTAINERS_ALL)
@@ -25,13 +27,14 @@ set(numSources 0)
 list(LENGTH SOURCES_SELECTED numSources)
 
 if(numSources EQUAL 0)
-	message(FATAL_ERROR "No container units selected for compilation.")
+	message(STATUS "No container units selected for compilation, skipping container library.")
+	return()
 endif()
 
 if(BUILD_SHARED_LIBS)
-	add_library(${TARGETNAME_CONTAINERS} SHARED ${PUBLIC_HEADERS_SELECTED} ${SOURCES_SELECTED})
+	add_library(${TARGETNAME_CONTAINERS} SHARED ${PUBLIC_HEADERS_GENERAL} ${PUBLIC_HEADERS_SELECTED} ${SOURCES_GENERAL} ${SOURCES_SELECTED})
 else()
-	add_library(${TARGETNAME_CONTAINERS} STATIC ${PUBLIC_HEADERS_SELECTED} ${SOURCES_SELECTED})
+	add_library(${TARGETNAME_CONTAINERS} STATIC ${PUBLIC_HEADERS_GENERAL} ${PUBLIC_HEADERS_SELECTED} ${SOURCES_GENERAL} ${SOURCES_SELECTED})
 endif()
 
 target_link_libraries(${TARGETNAME_CONTAINERS} PUBLIC ${TARGETNAME_PLAT})

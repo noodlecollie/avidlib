@@ -62,6 +62,8 @@ extern "C" {
  *
  * Cells (0,0) to (2,2) contain rotation values, and cells
  * (0,3) to (2,3) contain translation values.
+ *
+ * See <Mat3x4.h> for documentation on functions.
  */
 typedef struct _ALQM_Mat3x4
 {
@@ -79,6 +81,9 @@ typedef struct _ALQM_Mat3x4
 /**
  * Variable: ALQM_Mat3x4_Identity
  * Matrix representing an identity transformation.
+ * This transformation is defined such that transforming any
+ * vector or matrix by the identity leaves the vector or matrix
+ * unchanged.
  */
 API_AVIDLIB_QMATH extern const ALQM_Mat3x4 ALQM_Mat3x4_Identity;
 
@@ -228,7 +233,8 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat
  * Function: ALQM_Mat3x4_SetValuesArray
  *
  * Sets values in the matrix using a raw ALQM_Scalar array.
- * The count must be at least <ALQM_MAT3X4_CELLS>.
+ * The count must be at least <ALQM_MAT3X4_CELLS>. Data is
+ * expected to be laid out in row-major order.
  *
  * Parameters:
  *

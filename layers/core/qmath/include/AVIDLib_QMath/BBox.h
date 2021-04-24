@@ -11,6 +11,8 @@
 /**
  * Struct: ALQM_BBox
  * A 3D axis-aligned bounding box, specified by min and max vectors.
+ *
+ * See <BBox.h> for documentation on functions.
  */
 typedef struct _ALQM_BBox
 {

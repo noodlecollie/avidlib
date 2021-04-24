@@ -18,6 +18,8 @@ extern "C" {
 /**
  * Struct: ALQM_Vec3
  * Defines a geometric point in 3D space.
+ *
+ * See <Vec3.h> for documentation on functions.
  */
 typedef struct _ALQM_Vec3
 {
@@ -145,7 +147,8 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOu
  * Function: ALQM_Vec3_SetValuesArray
  *
  * Sets values in the vector using a raw ALQM_Scalar array.
- * The count must be at least 3.
+ * The count must be at least 3. Data is expected to be specified
+ * in XYZ order.
  *
  * Parameters:
  *

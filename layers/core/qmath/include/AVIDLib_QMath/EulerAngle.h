@@ -21,6 +21,8 @@ extern "C" {
  * Euler angles are usually in degrees, but can also be in radians.
  * See the conversion functions <ALQM_EulerAngle_DegToRad> and
  * <ALQM_EulerAngle_RadToDeg>.
+ *
+ * See <EulerAngle.h> for documentation on functions.
  */
 typedef struct _ALQM_EulerAngle
 {

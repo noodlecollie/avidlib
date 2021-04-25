@@ -3,6 +3,7 @@
 
 #include "AVIDLib_Plat/Bool.h"
 #include "AVIDLib_Plat/Int.h"
+#include "AVIDLib_Plat/VariadicArgs.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,9 +45,9 @@ void ALU_StringBuilder_UpdateCursor(ALU_StringBuilder* builder);
 ALP_Bool ALU_StringBuilder_StrCat(ALU_StringBuilder* builder, const ALP_Char* string);
 ALP_Bool ALU_StringBuilder_StrCpy(ALU_StringBuilder* builder, const ALP_Char* string);
 ALP_Bool ALU_StringBuilder_SPrintF(ALU_StringBuilder* builder, const ALP_Char* format, ...);
-ALP_Bool ALU_StringBuilder_VSPrintF(ALU_StringBuilder* builder, const ALP_Char* format, va_list args);
+ALP_Bool ALU_StringBuilder_VSPrintF(ALU_StringBuilder* builder, const ALP_Char* format, ALP_VAList args);
 ALP_Bool ALU_StringBuilder_AppendFormat(ALU_StringBuilder* builder, const ALP_Char* format, ...);
-ALP_Bool ALU_StringBuilder_AppendVFormat(ALU_StringBuilder* builder, const ALP_Char* format, va_list args);
+ALP_Bool ALU_StringBuilder_AppendVFormat(ALU_StringBuilder* builder, const ALP_Char* format, ALP_VAList args);
 ALP_Bool ALU_StringBuilder_AppendChar(ALU_StringBuilder* builder, ALP_Char ch);
 ALP_Bool ALU_StringBuilder_AppendRepeatedChar(ALU_StringBuilder* builder, ALP_Char ch, size_t count);
 

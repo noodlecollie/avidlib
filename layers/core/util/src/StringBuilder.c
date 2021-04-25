@@ -24,7 +24,7 @@ static inline void SetCursorIndex(ALU_StringBuilder* builder, ALP_Size index)
 	*builder->cursor = '\0';
 }
 
-static inline ALP_Bool VFormatInternal(ALU_StringBuilder* builder, ALP_Char* restrict cursor, const ALP_Char* restrict format, va_list args)
+static inline ALP_Bool VFormatInternal(ALU_StringBuilder* builder, ALP_Char* restrict cursor, const ALP_Char* restrict format, ALP_VAList args)
 {
 	const ALP_Size remainingSpace = builder->size - (cursor - builder->buffer);
 	ALP_Int32 result = ALP_VSPrintF(cursor, remainingSpace, format, args);
@@ -200,11 +200,11 @@ ALP_Bool ALU_StringBuilder_SPrintF(ALU_StringBuilder* builder, const ALP_Char* f
 {
 	if ( ALU_SANITY_VALID(builder) && IsValid(builder) && format )
 	{
-		va_list args;
+		ALP_VAList args;
 
-		va_start(args, format);
+		ALP_VA_START(args, format);
 		const ALP_Bool result = ALU_StringBuilder_VSPrintF(builder, format, args);
-		va_end(args);
+		ALP_VA_END(args);
 
 		return result;
 	}
@@ -212,7 +212,7 @@ ALP_Bool ALU_StringBuilder_SPrintF(ALU_StringBuilder* builder, const ALP_Char* f
 	return ALP_FALSE;
 }
 
-ALP_Bool ALU_StringBuilder_VSPrintF(ALU_StringBuilder* builder, const ALP_Char* format, va_list args)
+ALP_Bool ALU_StringBuilder_VSPrintF(ALU_StringBuilder* builder, const ALP_Char* format, ALP_VAList args)
 {
 	if ( ALU_SANITY_VALID(builder) && IsValid(builder) && format )
 	{
@@ -226,11 +226,11 @@ ALP_Bool ALU_StringBuilder_AppendFormat(ALU_StringBuilder* builder, const ALP_Ch
 {
 	if ( ALU_SANITY_VALID(builder) && IsValid(builder) && format )
 	{
-		va_list args;
+		ALP_VAList args;
 
-		va_start(args, format);
+		ALP_VA_START(args, format);
 		const ALP_Bool result = ALU_StringBuilder_AppendVFormat(builder, format, args);
-		va_end(args);
+		ALP_VA_END(args);
 
 		return result;
 	}
@@ -238,7 +238,7 @@ ALP_Bool ALU_StringBuilder_AppendFormat(ALU_StringBuilder* builder, const ALP_Ch
 	return ALP_FALSE;
 }
 
-ALP_Bool ALU_StringBuilder_AppendVFormat(ALU_StringBuilder* builder, const ALP_Char* format, va_list args)
+ALP_Bool ALU_StringBuilder_AppendVFormat(ALU_StringBuilder* builder, const ALP_Char* format, ALP_VAList args)
 {
 	if ( ALU_SANITY_VALID(builder) && IsValid(builder) && format )
 	{

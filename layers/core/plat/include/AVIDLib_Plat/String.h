@@ -16,11 +16,11 @@ extern "C" {
  * depending on our target platform, we can add ifdefs.
  */
 #include <stdio.h>
-#include <stdarg.h>
 #include <string.h>
 
 #include "AVIDLib_Plat/Int.h"
 #include "AVIDLib_Plat/Bool.h"
+#include "AVIDLib_Plat/VariadicArgs.h"
 
 /**
  * Function: ALP_VSPrintF
@@ -40,7 +40,7 @@ extern "C" {
  * does not include the additional null-character automatically appended at
  * the end of the string. On failure, a negative number is returned.
  */
-static inline ALP_Int32 ALP_VSPrintF(ALP_Char* restrict buffer, ALP_Size bufferSize, const ALP_Char* restrict format, va_list arg)
+static inline ALP_Int32 ALP_VSPrintF(ALP_Char* restrict buffer, ALP_Size bufferSize, const ALP_Char* restrict format, ALP_VAList arg)
 {
 	const ALP_Int32 result = vsnprintf(buffer, bufferSize, format, arg);
 
@@ -81,10 +81,10 @@ static inline ALP_Int32 ALP_VSPrintF(ALP_Char* restrict buffer, ALP_Size bufferS
  */
 static inline ALP_Int32 ALP_SPrintF(ALP_Char* restrict buffer, ALP_Size bufferSize, const ALP_Char* restrict format, ...)
 {
-	va_list args;
-	va_start(args, format);
+	ALP_VAList args;
+	ALP_VA_START(args, format);
 	const ALP_Int32 result = ALP_VSPrintF(buffer, bufferSize, format, args);
-	va_end(args);
+	ALP_VA_END(args);
 
 	return result;
 }

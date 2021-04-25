@@ -46,7 +46,6 @@ set_property(GLOBAL APPEND
 add_compile_definitions(__AVIDLIB_PRODUCER)
 add_compile_definitions("GIT_COMMIT_HASH=\"${VCS_COMMIT_ID}\"")
 
-
 # Turn up warning levels as high as is feasible, and treat warnings as errors.
 # Correct code should be warning-free at all times, no exceptions.
 if(MSVC)

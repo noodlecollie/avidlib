@@ -106,7 +106,7 @@ static inline ALP_Int32 ALP_SPrintF(ALP_Char* restrict buffer, ALP_Size bufferSi
  */
 static inline ALP_Char* ALP_StrCpy(ALP_Char* restrict dest, ALP_Size destSize, const ALP_Char* restrict src)
 {
-	strcpy_s(dest, destSize, src);
+	strncpy(dest, src, destSize);
 
 	// No real easy way to determine how many characters were copied,
 	// so use a simple safety terminator.

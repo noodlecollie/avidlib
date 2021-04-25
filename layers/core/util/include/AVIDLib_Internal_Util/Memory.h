@@ -16,7 +16,7 @@ extern "C" {
 #endif
 
 // Records the file and line at which the allocation call was made, for debugging purposes.
-static inline void* ALU_MallocFrom(ALP_Size size, const char* file, int line)
+static inline void* ALU_MallocFrom(ALP_Size size, const ALP_Char* file, int line)
 {
 	void* const ptr = ALP_Malloc(size);
 	ALU_CHECK_MALLOC_RESULT(ptr, size, file, line);
@@ -24,7 +24,7 @@ static inline void* ALU_MallocFrom(ALP_Size size, const char* file, int line)
 }
 
 // Records the file and line at which the free call was made, for debugging purposes.
-static inline void ALU_FreeFrom(void* ptr, const char* file, int line)
+static inline void ALU_FreeFrom(void* ptr, const ALP_Char* file, int line)
 {
 	ALU_UNUSED(file);
 	ALU_UNUSED(line);

@@ -8,6 +8,7 @@
 
 #include "AVIDLib_IO/LibExport.h"
 #include "AVIDLib_IO/ReaderErrors.h"
+#include "AVIDLib_Plat/Int.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,7 +34,7 @@ typedef struct _ALIO_ReadResult
 	 * Further information about the specifics of the error that occurred.
 	 * Useful as feedback for the user.
 	 */
-	char errorDetails[64];
+	ALP_Char errorDetails[64];
 } ALIO_ReadResult;
 
 /**

@@ -7,6 +7,7 @@
 #define AVIDLIB_IO_READERERRORS_H
 
 #include "AVIDLib_IO/LibExport.h"
+#include "AVIDLib_Plat/Int.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -50,7 +51,7 @@ typedef enum _ALIO_ReaderError
  *
  * Descriptive string for the error.
  */
-API_AVIDLIB_IO const char* ALIO_ReaderError_Description(ALIO_ReaderError error);
+API_AVIDLIB_IO const ALP_Char* ALIO_ReaderError_Description(ALIO_ReaderError error);
 
 #ifdef __cplusplus
 } // extern "C"

@@ -20,8 +20,8 @@
 extern "C" {
 #endif
 
-int ALU_AssertWithFeedback(int expression, const char* expressionStr, const char* file, int line);
-void ALU_AssertMallocSucceeded(const void* ptr, ALP_Size size, const char* file, int line);
+int ALU_AssertWithFeedback(int expression, const ALP_Char* expressionStr, const ALP_Char* file, int line);
+void ALU_AssertMallocSucceeded(const void* ptr, ALP_Size size, const ALP_Char* file, int line);
 
 // This maps to an assertion which will always be checked
 #define ALU_ASSERT_ALWAYS(expr) (ALU_AssertWithFeedback((!!(expr)), #expr, __FILE__, __LINE__))

@@ -1,6 +1,6 @@
 #include "AVIDLib_Internal_Util/Check.h"
 
-int ALU_AssertWithFeedback(int expression, const char* expressionStr, const char* file, int line)
+int ALU_AssertWithFeedback(int expression, const ALP_Char* expressionStr, const ALP_Char* file, int line)
 {
 	if ( !expression )
 	{
@@ -11,7 +11,7 @@ int ALU_AssertWithFeedback(int expression, const char* expressionStr, const char
 	return expression;
 }
 
-void ALU_AssertMallocSucceeded(const void* ptr, ALP_Size size, const char* file, int line)
+void ALU_AssertMallocSucceeded(const void* ptr, ALP_Size size, const ALP_Char* file, int line)
 {
 	if ( !ptr )
 	{

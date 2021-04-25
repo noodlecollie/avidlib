@@ -3,8 +3,8 @@
  * This file defines functions for reading MDLv10 model files.
  */
 
-#ifndef AVIDLIB_IO_MDLV10_READER_H
-#define AVIDLIB_IO_MDLV10_READER_H
+#ifndef AVIDLIB_IO_MDLV10_READER_READER_H
+#define AVIDLIB_IO_MDLV10_READER_READER_H
 
 #include "AVIDLib_IO/LibExport.h"
 #include "AVIDLib_Plat/Int.h"
@@ -18,13 +18,14 @@ extern "C" {
 /**
  * Function: ALIO_MDLv10_Read
  *
- * Given read context, interprets the input data as a v10 MDL file and
+ * Given a read context, interprets the input data as a v10 MDL file and
  * populates the provided MDLv10 model object.
  *
  * Parameters:
  *
  * readContext - Contextual data for this read operation.
  * outModel    - Model to populate based on the input data.
+ *               *This is assumed to already have been initialised.*
  *
  * Returns:
  *
@@ -38,4 +39,4 @@ API_AVIDLIB_IO ALP_Bool ALIO_MDLv10_Read(ALIO_ReadContext* context, ALC_MDLv10_M
 } // extern "C"
 #endif
 
-#endif // AVIDLIB_IO_MDLV10_READER_H
+#endif // AVIDLIB_IO_MDLV10_READER_READER_H

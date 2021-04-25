@@ -14,6 +14,7 @@ set(PUBLIC_HEADERS_GENERAL
 )
 
 set(SOURCES_GENERAL
+	src/FormatCommon/FileElementHelpers.h
 	src/ReadContext.c
 	src/ReaderErrors.c
 )

@@ -6,6 +6,8 @@
 #ifndef AVIDLIB_QMATH_TYPES_H
 #define AVIDLIB_QMATH_TYPES_H
 
+#include "AVIDLib_Plat/Float.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -14,7 +16,7 @@ extern "C" {
  * Type: ALQM_Scalar
  * Scalar value. Multiple scalars can be used to form vectors.
  */
-typedef float ALQM_Scalar;
+typedef ALP_Float32 ALQM_Scalar;
 
 #ifdef __cplusplus
 } // extern "C"

@@ -15,20 +15,29 @@ extern "C" {
 
 /**
  * Macro: ALIO_READER_ERROR_LIST
- * "XMACRO" list typing error values to their readable descriptions.
+ * "XMACRO" list tying error values to their readable descriptions.
  * See <ALIO_ReaderError> and <ALIO_ReaderError_Description>.
  */
 #define ALIO_READER_ERROR_LIST \
-	ALIO_LIST_ITEM(ALIO_READER_ERROR_NONE = 0, "No reader error.") \
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_NONE = 0, "Reading was successful.") \
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_UNIMPLEMENTED, "The requested operation was not implemented.") \
-	ALIO_LIST_ITEM(ALIO_READER_ERROR_INTERNAL, "An unexpected internal error occurred.")
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_INTERNAL, "An unexpected internal error occurred when reading.") \
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_EMPTY_INPUT, "No input data was provided.") \
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_EMPTY_OUTPUT, "No output container was provided.") \
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_UNKNOWN_MAGIC, "The type of the input file could not be determined.") \
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_INVALID_STRUCTURE, "The internal structure of the input file was not valid.")
 
 #define ALIO_LIST_ITEM(value, description) value,
 
 /**
  * Enum: ALIO_ReaderError
- * ALIO_READER_ERROR_NONE          - No errors were encountered when reading the model file.
- * ALIO_READER_ERROR_UNIMPLEMENTED - The requested operation was not implemented.
+ * ALIO_READER_ERROR_NONE              - Reading was successful.
+ * ALIO_READER_ERROR_UNIMPLEMENTED     - The requested operation was not implemented.
+ * ALIO_READER_ERROR_INTERNAL          - An unexpected internal error occurred when reading.
+ * ALIO_READER_ERROR_EMPTY_INPUT       - No input data was provided.
+ * ALIO_READER_ERROR_EMPTY_OUTPUT      - No output container was provided.
+ * ALIO_READER_ERROR_UNKNOWN_MAGIC     - The type of the input file could not be determined.
+ * ALIO_READER_ERROR_INVALID_STRUCTURE - The internal structure of the input file was not valid.
  */
 typedef enum _ALIO_ReaderError
 {

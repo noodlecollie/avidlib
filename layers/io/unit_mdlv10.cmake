@@ -2,12 +2,14 @@ function(init_unit_mdlv10 headers sources forceUse)
 	set(IO_MDLV10 "NO" CACHE BOOL "Includes MDLv10 code in IO library.")
 
 	set(HEADERS_MDLV10
-		include/${TARGETNAME_IO}/MDLv10/Reader.h
+		include/${TARGETNAME_IO}/MDLv10/Reader/Reader.h
 		PARENT_SCOPE
 	)
 
 	set(SOURCES_MDLV10
-		src/MDLv10/Reader.c
+		src/MDLv10/Reader/Reader.c
+		src/MDLv10/Definitions.h
+		src/MDLv10/FileElements.h
 	)
 
 	if(CONTAINERS_MDLV10 OR ${forceUse})

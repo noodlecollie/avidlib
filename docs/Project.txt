@@ -55,6 +55,12 @@ Source Folder 3: ..\layers\containers\include\AVIDLib_Containers
 Source Folder 4: ..\layers\io\include\AVIDLib_IO
    Name: Asset I/O Library
 
+Source Folder 5: ..\layers\io\src\FormatCommon
+   Name: Common Format Types
+
+Source Folder 6: ..\layers\io\src\MDLv10
+   Name: MDLv10 Format Description
+
 
 # This is where you specify what files and folders Natural Docs should be
 # scanning.  If you use any of these options on the command line, this entire
@@ -142,11 +148,11 @@ HTML Output Folder: ..\build\docs
 # Global Settings
 # ------------------------------------------------------------------------
 
+Tab Width: 4
+
+
 # Other settings that apply to your entire project.  Settings specified on the
 # command line override the settings here.
-#
-# Tab Width: [width]
-#    The number of spaces tabs should be expanded to.
 #
 # Documented Only: [yes|no]
 #    Whether only documented code elements should appear in the output.

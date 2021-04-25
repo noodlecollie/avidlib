@@ -3,12 +3,12 @@
  * Defines relevant constants for the MDLv10 format.
  */
 
+#ifndef AVIDLIB_CONTAINERS_MDLV10_DEFINITIONS_H
+#define AVIDLIB_CONTAINERS_MDLV10_DEFINITIONS_H
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#ifndef AVIDLIB_CONTAINERS_MDLV10_DEFINITIONS_H
-#define AVIDLIB_CONTAINERS_MDLV10_DEFINITIONS_H
 
 /**
  * Constant: ALC_MDLV10_MODEL_NAME_LENGTH

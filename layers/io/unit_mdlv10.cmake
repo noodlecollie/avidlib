@@ -8,7 +8,7 @@ function(init_unit_mdlv10 headers sources forceUse)
 
 	set(SOURCES_MDLV10
 		src/MDLv10/Reader/Reader.c
-		src/MDLv10/Definitions.h
+		src/MDLv10/IODefinitions.h
 		src/MDLv10/FileElements.h
 	)
 

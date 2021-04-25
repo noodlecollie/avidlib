@@ -3,7 +3,7 @@ function(init_unit_mdlv10 headers sources forceUse)
 
 	set(HEADERS_MDLV10
 		include/${TARGETNAME_CONTAINERS}/MDLv10/Bone.h
-		include/${TARGETNAME_CONTAINERS}/MDLv10/Definitions.h
+		include/${TARGETNAME_CONTAINERS}/MDLv10/ContainerDefinitions.h
 		include/${TARGETNAME_CONTAINERS}/MDLv10/Model.h
 		PARENT_SCOPE
 	)

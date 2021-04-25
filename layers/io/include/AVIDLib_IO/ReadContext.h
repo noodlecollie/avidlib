@@ -20,7 +20,7 @@ extern "C" {
  * Defines the maximum length for an error detail string,
  * including the null terminator.
  */
-#define ALIO_READCONTEXT_MAX_ERROR_DETAIL_LENGTH 64
+#define ALIO_READCONTEXT_MAX_ERROR_DETAIL_LENGTH 128
 
 /**
  * Struct: ALIO_ReadContext
@@ -151,6 +151,21 @@ API_AVIDLIB_IO const ALP_Char* ALIO_ReadContext_GetErrorDetails(const ALIO_ReadC
  * errorString - Description of the error, to be set as the error detail string.
  */
 API_AVIDLIB_IO void ALIO_ReadContext_SetError(ALIO_ReadContext* context, ALIO_ReaderError error, const ALP_Char* errorString);
+
+/**
+ * Function: ALIO_ReadContext_SetErrorFormat
+ *
+ * Sets the provided error code on the context, and sets
+ * the error detail string according to the provided format.
+ *
+ * Parameters:
+ *
+ * context - Context on which to set the error information.
+ * error   - Error code to set.
+ * format  - Printf-style format string.
+ * ...     - Variadic arguments alongside the format string.
+ */
+API_AVIDLIB_IO void ALIO_ReadContext_SetErrorFormat(ALIO_ReadContext* context, ALIO_ReaderError error, const ALP_Char* format, ...);
 
 #ifdef __cplusplus
 } // extern "C"

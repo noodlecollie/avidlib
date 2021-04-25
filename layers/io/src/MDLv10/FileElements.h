@@ -9,7 +9,7 @@
 #include "AVIDLib_Plat/Int.h"
 #include "AVIDLib_QMath/Types.h"
 #include "FormatCommon/FileElementHelpers.h"
-#include "MDLv10/Definitions.h"
+#include "MDLv10/IODefinitions.h"
 
 #pragma pack(push, 1)
 

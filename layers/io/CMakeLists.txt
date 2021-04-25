@@ -17,6 +17,8 @@ set(SOURCES_GENERAL
 	src/FormatCommon/FileElementHelpers.h
 	src/ReadContext.c
 	src/ReaderErrors.c
+	src/Validation.h
+	src/Validation.c
 )
 
 set(PUBLIC_HEADERS_SELECTED

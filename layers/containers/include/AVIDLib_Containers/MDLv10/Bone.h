@@ -8,7 +8,7 @@
 
 #include "AVIDLib_Containers/LibExport.h"
 #include "AVIDLib_Plat/Int.h"
-#include "AVIDLib_Containers/MDLv10/Definitions.h"
+#include "AVIDLib_Containers/MDLv10/ContainerDefinitions.h"
 #include "AVIDLib_QMath/Types.h"
 #include "AVIDLib_QMath/Vec3.h"
 

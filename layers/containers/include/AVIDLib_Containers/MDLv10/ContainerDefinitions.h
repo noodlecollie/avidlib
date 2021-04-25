@@ -1,5 +1,5 @@
 /**
- * About: Definitions.h
+ * About: ContainerDefinitions.h
  * Defines relevant constants for the MDLv10 format.
  */
 

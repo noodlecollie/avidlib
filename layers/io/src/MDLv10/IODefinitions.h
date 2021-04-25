@@ -1,5 +1,5 @@
 /**
- * About: Definitions.h
+ * About: MDLv10Definitions.h
  * Provides definitions relating to the MDLv10 model file format.
  */
 

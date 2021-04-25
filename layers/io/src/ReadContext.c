@@ -64,3 +64,23 @@ void ALIO_ReadContext_SetError(ALIO_ReadContext* context, ALIO_ReaderError error
 		}
 	}
 }
+
+void ALIO_ReadContext_SetErrorFormat(ALIO_ReadContext* context, ALIO_ReaderError error, const ALP_Char* format, ...)
+{
+	if ( ALU_SANITY_VALID(context) )
+	{
+		context->readError = error;
+
+		if ( format )
+		{
+			ALP_VAList args;
+			ALP_VA_START(args, format);
+			ALP_VSPrintF(context->errorDetails, sizeof(context->errorDetails), format, args);
+			ALP_VA_END(args);
+		}
+		else
+		{
+			context->errorDetails[0] = '0';
+		}
+	}
+}

@@ -1,25 +1,20 @@
 #include "AVIDLib_IO/MDLv10/Reader.h"
 #include "AVIDLib_Internal_Util/Util.h"
+#include "AVIDLib_Internal_Util/Check.h"
+#include "AVIDLib_Plat/Bool.h"
+#include "AVIDLib_Plat/Ptr.h"
 
-ALIO_ReaderError ALIO_MDLv10_Read(const ALP_Byte* inData, ALP_Size inSize, ALIO_ReadResult* outResult, ALC_MDLv10_Model* outModel)
+ALP_Bool ALIO_MDLv10_Read(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel)
 {
-	// Set up default result.
-	if ( outResult )
+	if ( ALU_SANITY_VALID(context && outModel) )
 	{
-		ALIO_ReadResult_Reset(outResult);
+		// TODO: Implement properly.
+		// Return an unimplemented error for now.
+		ALU_UNUSED(outModel);
+
+		ALIO_ReadContext_SetError(context, ALIO_READER_ERROR_UNIMPLEMENTED, ALP_NULL);
+		return ALP_FALSE;
 	}
 
-	// TODO: Implement properly.
-	// Return an unimplemented error for now.
-	ALU_UNUSED(inData);
-	ALU_UNUSED(inSize);
-	ALU_UNUSED(outModel);
-	const ALIO_ReaderError error = ALIO_READER_ERROR_UNIMPLEMENTED;
-
-	if ( outResult )
-	{
-		outResult->readError = error;
-	}
-
-	return error;
+	return ALP_FALSE;
 }

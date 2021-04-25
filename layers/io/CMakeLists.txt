@@ -9,13 +9,13 @@ create_export_header(${TARGETNAME_IO})
 
 set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_IO}/LibExport.h
+	include/${TARGETNAME_IO}/ReadContext.h
 	include/${TARGETNAME_IO}/ReaderErrors.h
-	include/${TARGETNAME_IO}/ReadResult.h
 )
 
 set(SOURCES_GENERAL
+	src/ReadContext.c
 	src/ReaderErrors.c
-	src/ReadResult.c
 )
 
 set(PUBLIC_HEADERS_SELECTED

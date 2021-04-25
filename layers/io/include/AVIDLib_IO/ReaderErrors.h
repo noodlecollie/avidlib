@@ -20,13 +20,14 @@ extern "C" {
  */
 #define ALIO_READER_ERROR_LIST \
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_NONE = 0, "No reader error.") \
-	ALIO_LIST_ITEM(ALIO_READER_ERROR_UNIMPLEMENTED, "The requested operation was not implemented.")
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_UNIMPLEMENTED, "The requested operation was not implemented.") \
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_INTERNAL, "An unexpected internal error occurred.")
 
 #define ALIO_LIST_ITEM(value, description) value,
 
 /**
  * Enum: ALIO_ReaderError
- * ALIO_READER_ERROR_NONE            - No errors were encountered when reading the model file.
+ * ALIO_READER_ERROR_NONE          - No errors were encountered when reading the model file.
  * ALIO_READER_ERROR_UNIMPLEMENTED - The requested operation was not implemented.
  */
 typedef enum _ALIO_ReaderError

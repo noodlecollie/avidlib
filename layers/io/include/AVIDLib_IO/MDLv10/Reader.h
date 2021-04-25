@@ -9,7 +9,7 @@
 #include "AVIDLib_IO/LibExport.h"
 #include "AVIDLib_Plat/Int.h"
 #include "AVIDLib_Containers/MDLv10/Model.h"
-#include "AVIDLib_IO/ReadResult.h"
+#include "AVIDLib_IO/ReadContext.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,25 +18,21 @@ extern "C" {
 /**
  * Function: ALIO_MDLv10_Read
  *
- * Given an array of raw data, interprets the data as a v10 MDL file and
+ * Given read context, interprets the input data as a v10 MDL file and
  * populates the provided MDLv10 model object.
  *
  * Parameters:
  *
- * inData    - Binary data to read.
- * inSize    - Size of the input data.
- * outResult - Struct filled out with the result of the read.
- * outModel  - Model to populate based on the input data.
+ * readContext - Contextual data for this read operation.
+ * outModel    - Model to populate based on the input data.
  *
  * Returns:
  *
- * ALIO_ReaderError representing the result of the operation.
- * The value that is returned reflects the <ALIO_ReadResult.readError>
- * in outResult, for convenience.
- * A value of ALIO_READER_ERROR_NONE indicates that
- * the input data was read successfully; other values represent errors.
+ * True if the result of the read was ALIO_READER_ERROR_NONE,
+ * or false if some read error occurred. The actual error code,
+ * along with any other error details, is set on the context.
  */
-API_AVIDLIB_IO ALIO_ReaderError ALIO_MDLv10_Read(const ALP_Byte* inData, ALP_Size inSize, ALIO_ReadResult* outResult, ALC_MDLv10_Model* outModel);
+API_AVIDLIB_IO ALP_Bool ALIO_MDLv10_Read(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel);
 
 #ifdef __cplusplus
 } // extern "C"

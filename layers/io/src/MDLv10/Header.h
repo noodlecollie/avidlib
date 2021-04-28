@@ -1,6 +1,6 @@
 /**
- * About: FileElements.h
- * Defines structural elements used to read data from, and write data to, MDLv10 model files.
+ * About: Header.h
+ * Defines an MDLv10 file header.
  */
 
 #ifndef AVIDLIB_IO_MDLV10_FILEELEMENTS_H
@@ -215,67 +215,6 @@ typedef struct _ALIO_MDLv10_Header
 	 */
 	ALIO_CountOffsetPair transitions;
 } ALIO_MDLv10_Header;
-
-/**
- * Struct: ALIO_MDLv10_Bone
- * Defines the representation of a bone with an MDLv10 model file.
- */
-typedef struct _ALIO_MDLv10_Bone
-{
-	/**
-	 * Variable: name
-	 * Name of the bone. Should be unique within the model.
-	 */
-	ALP_Char name[ALIO_MDLV10_ELEMENT_NAME_LENGTH];
-
-	/**
-	 * Variable: parentBoneIndex
-	 * Index of the parent bone in the bones chunk,
-	 * or -1 if this bone has no parent.
-	 */
-	ALP_Int32 parentBoneIndex;
-
-	/**
-	 * Variable: unused
-	 * This was "flags" in the original MDL bone struct,
-	 * but appears to be unused.
-	 */
-	ALP_UInt32 unused;
-
-	/**
-	 * Variable: boneControllerIndices
-	 * Indices of controllers for this bone's motion types.
-	 * -1 indicates that there is no bone controller assigned.
-	 */
-	ALP_Int32 boneController[ALIO_MDLV10_NUM_MOTION_TYPES];
-
-	/**
-	 * Variable: values
-	 * Default position and rotation values for this bone, in the following order:
-	 *
-	 * - X position
-	 * - Y position
-	 * - Z position
-	 * - X rotation
-	 * - Y rotation
-	 * - Z rotation
-	 */
-	ALP_Float32 values[ALIO_MDLV10_NUM_MOTION_TYPES];
-
-	/**
-	 * Variable: scales
-	 * Scale factors for motion that is applied to this bone via animations.
-	 * Values are in the following order:
-	 *
-	 * - X position scale
-	 * - Y position scale
-	 * - Z position scale
-	 * - X rotation scale
-	 * - Y rotation scale
-	 * - Z rotation scale
-	 */
-	ALP_Float32 scales[ALIO_MDLV10_NUM_MOTION_TYPES];
-} ALIO_MDLv10_Bone;
 
 #pragma pack(pop)
 

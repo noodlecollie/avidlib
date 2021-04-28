@@ -5,6 +5,7 @@
 // If we get to a point in future where we need to swap this out
 // depending on our target platform, we can add ifdefs.
 #include <string.h>
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,6 +18,12 @@ extern "C" {
 
 // Convenience macro to mark an input argument as being unused.
 #define ALU_UNUSED(arg) (void)(arg)
+
+// Convenience macro for determining the length of an array.
+#define ALU_ARRAY_LENGTH(arr) (sizeof(arr) / sizeof((arr)[0]))
+
+// Alias for offsetof
+#define ALP_OFFSETOF(struct, member) offsetof(struct, member)
 
 #ifdef __cplusplus
 } // extern "C"

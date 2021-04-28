@@ -1,12 +1,14 @@
 #include "AVIDLib_IO/MDLv10/Reader/Reader.h"
 #include "MDLv10/IODefinitions.h"
-#include "MDLv10/FileElements.h"
+#include "MDLv10/Header.h"
+#include "MDLv10/Bone.h"
 #include "AVIDLib_Internal_Util/Util.h"
 #include "AVIDLib_Internal_Util/Check.h"
 #include "AVIDLib_Plat/Bool.h"
 #include "AVIDLib_Plat/Ptr.h"
 #include "Validation.h"
 #include "AVIDLib_Plat/String.h"
+#include "MDLv10/ValidationHelpers.h"
 
 static ALIO_MDLv10_FileType DetermineFileType(ALIO_ReadContext* context)
 {
@@ -31,63 +33,17 @@ static ALIO_MDLv10_FileType DetermineFileType(ALIO_ReadContext* context)
 	}
 }
 
-static ALP_Bool ValidateChunk(ALIO_ReadContext* context, const ALIO_CountOffsetPair* chunk, const ALP_Char* chunkName, ALP_Size itemSize)
+static void PopulateBones(const ALIO_MDLv10_Bone* inBones, ALC_MDLv10_Model* outModel)
 {
-	const ALIO_ValidationResult result = ALIO_Validation_ValidateFileChunk(context->inputLength, chunk, itemSize);
-
-	if ( result != ALIO_VALIDATION_VALID )
+	for ( ALP_Size index = 0; index < outModel->numBones; ++index )
 	{
-		ALIO_ReadContext_SetErrorFormat(context,
-										ALIO_READER_ERROR_INVALID_STRUCTURE,
-										"%s: %s",
-										chunkName,
-										ALIO_ValidationResult_Description(result));
-	}
-
-	return ALIO_ReadContext_GetReaderError(context) == ALIO_READER_ERROR_NONE;
-}
-
-static void PopulateBones(ALP_Size numBones, const ALIO_MDLv10_Bone* inBones, ALC_MDLv10_Bone* outBones)
-{
-	for ( ALP_Size index = 0; index < numBones; ++index )
-	{
-		// TODO: Move this to a function within the bone class.
-		const ALIO_MDLv10_Bone* inBone = &inBones[index];
-		ALC_MDLv10_Bone* outBone = &outBones[index];
-
-		ALP_StrCpy(outBone->name, sizeof(outBone->name), inBone->name);
-
-		outBone->refParentBone = inBone->parentBoneIndex >= 0
-			? &outBones[inBone->parentBoneIndex]
-			: ALP_NULL;
-
-		// TODO: Add bone controller links once we set them up.
-
-		outBone->defaultPosition.v[ALQM_VECX] = inBone->values[0];
-		outBone->defaultPosition.v[ALQM_VECY] = inBone->values[1];
-		outBone->defaultPosition.v[ALQM_VECZ] = inBone->values[2];
-
-		outBone->defaultRotation.v[ALQM_VECX] = inBone->values[3];
-		outBone->defaultRotation.v[ALQM_VECY] = inBone->values[4];
-		outBone->defaultRotation.v[ALQM_VECZ] = inBone->values[5];
-
-		outBone->positionScale.v[ALQM_VECX] = inBone->scales[0];
-		outBone->positionScale.v[ALQM_VECY] = inBone->scales[1];
-		outBone->positionScale.v[ALQM_VECZ] = inBone->scales[2];
-
-		outBone->rotationScale.v[ALQM_VECX] = inBone->scales[3];
-		outBone->rotationScale.v[ALQM_VECY] = inBone->scales[4];
-		outBone->rotationScale.v[ALQM_VECZ] = inBone->scales[5];
+		ALIO_MDLv10_Bone_ToContainerElement(&inBones[index], &outModel->bones[index], outModel);
 	}
 }
 
-static ALP_Bool ValidateGeneralFile(ALIO_ReadContext* context, const ALIO_MDLv10_Header* header)
+static ALP_Bool ValidateGeneralFile(ALIO_ReadContext* context)
 {
-	// TODO: Make this data-driven?
-	// TODO: Add more chunks as we code them up.
-	return ValidateChunk(context, &header->bones, "Bones", sizeof(ALIO_MDLv10_Bone));
-
-	// TODO: Validate individual elements
+	return ALIO_MDLv10_ValidateAllChunks(context) && ALIO_MDLv10_ValidateAllItems(context);
 }
 
 static void AllocateFileElements(const ALIO_MDLv10_Header* header, ALC_MDLv10_Model* outModel)
@@ -101,16 +57,14 @@ static void PopulateFileElements(const ALIO_MDLv10_Header* header, ALC_MDLv10_Mo
 {
 	// TODO: Make this data-driven?
 	// TODO: Add more chunks as we code them up.
-	PopulateBones(header->bones.count,
-				  (const ALIO_MDLv10_Bone*)(((const ALP_Byte*)header) + header->bones.offset),
-				  outModel->bones);
+	PopulateBones((const ALIO_MDLv10_Bone*)(((const ALP_Byte*)header) + header->bones.offset), outModel);
 }
 
 static void ReadGeneralFile(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel)
 {
 	const ALIO_MDLv10_Header* header = (const ALIO_MDLv10_Header*)context->inputData;
 
-	if ( !ValidateGeneralFile(context, header) )
+	if ( !ValidateGeneralFile(context) )
 	{
 		return;
 	}

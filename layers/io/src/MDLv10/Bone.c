@@ -30,6 +30,11 @@ ALP_Bool ALIO_MDLv10_Bone_Validate(const struct _ALIO_MDLv10_Header* header, con
 	return ALP_FALSE;
 }
 
+ALP_Bool ALIO_MDLv10_Bone_ValidateGeneric(const struct _ALIO_MDLv10_Header* header, const void* bone, ALP_Char* errorString, ALP_Size errorStringSize)
+{
+	return ALIO_MDLv10_Bone_Validate(header, (const ALIO_MDLv10_Bone*)bone, errorString, errorStringSize);
+}
+
 void ALIO_MDLv10_Bone_ToContainerElement(const ALIO_MDLv10_Bone* inBone, ALC_MDLv10_Bone* outBone, ALC_MDLv10_Model* outModel)
 {
 	if ( ALU_SANITY_VALID(inBone && outBone && outModel) )

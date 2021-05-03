@@ -3,6 +3,7 @@ function(init_unit_mdlv10 headers sources forceUse)
 
 	set(HEADERS_MDLV10
 		include/${TARGETNAME_CONTAINERS}/MDLv10/Bone.h
+		include/${TARGETNAME_CONTAINERS}/MDLv10/BoneController.h
 		include/${TARGETNAME_CONTAINERS}/MDLv10/ContainerDefinitions.h
 		include/${TARGETNAME_CONTAINERS}/MDLv10/Model.h
 		PARENT_SCOPE
@@ -11,7 +12,10 @@ function(init_unit_mdlv10 headers sources forceUse)
 	set(SOURCES_MDLV10
 		src/MDLv10/Internal/Bone_Internal.h
 		src/MDLv10/Internal/Bone_Internal.c
+		src/MDLv10/Internal/BoneController_Internal.h
+		src/MDLv10/Internal/BoneController_Internal.c
 		src/MDLv10/Bone.c
+		src/MDLv10/BoneController.c
 		src/MDLv10/Model.c
 	)
 

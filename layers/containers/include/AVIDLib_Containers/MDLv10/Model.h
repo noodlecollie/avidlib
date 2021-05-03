@@ -12,6 +12,7 @@
 #include "AVIDLib_QMath/Vec3.h"
 #include "AVIDLib_QMath/BBox.h"
 #include "AVIDLib_Containers/MDLv10/Bone.h"
+#include "AVIDLib_Containers/MDLv10/BoneController.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -65,6 +66,18 @@ typedef struct _ALC_MDLv10_Model
 	 * Array of bones for this model.
 	 */
 	ALC_MDLv10_Bone* bones;
+
+	/**
+	 * Variable: numBoneControllers
+	 * Number of bone controllers in this model.
+	 */
+	ALP_Size numBoneControllers;
+
+	/**
+	 * Variable: boneControllers
+	 * Array of bone controllers for this model.
+	 */
+	ALC_MDLv10_BoneController* boneControllers;
 } ALC_MDLv10_Model;
 
 /**
@@ -160,6 +173,46 @@ API_AVIDLIB_CONTAINERS ALC_MDLv10_Bone* ALC_MDLv10_Model_AllocateBones(ALC_MDLv1
  * model - Model containing the list of bones.
  */
 API_AVIDLIB_CONTAINERS void ALC_MDLv10_Model_FreeBones(ALC_MDLv10_Model* model);
+
+/**
+ * Group: Bone Controllers
+ */
+
+/**
+ * Function: ALC_MDLv10_Model_AllocateBoneControllers
+ *
+ * Allocates and default-initialises a list of <ALC_MDLv10_BoneController> items in the model.
+ * If any list of bone controllers already exists, all bone controllers are deinitialised, and the list
+ * is deallocated, before a new list is allocated.
+ *
+ * If numBoneControllers is zero, any existing list is deallocated as above, but no new list
+ * is allocated. The bone controllers list within the model will be set to null, and null will
+ * be returned.
+ *
+ * Parameters:
+ *
+ * model              - Model within which to allocate the list of bone controllers.
+ * numBoneControllers - Number of bone controllers to allocate space for in the list.
+ *
+ * Returns:
+ *
+ * A pointer to the newly allocated list, or null if numBoneControllers was zero.
+ */
+API_AVIDLIB_CONTAINERS ALC_MDLv10_BoneController* ALC_MDLv10_Model_AllocateBoneControllers(ALC_MDLv10_Model* model, ALP_Size numBoneControllers);
+
+/**
+ * Function: ALC_MDLv10_Model_FreeBoneControllers
+ *
+ * Frees any existing allocated bone controller list in the model. As part of the process,
+ * all bone controllers are deinitialised.
+ *
+ * If no bone controller list exists in the model, this function does nothing.
+ *
+ * Parameters:
+ *
+ * model - Model containing the list of bone controllers.
+ */
+API_AVIDLIB_CONTAINERS void ALC_MDLv10_Model_FreeBoneControllers(ALC_MDLv10_Model* model);
 
 #ifdef __cplusplus
 } // extern "C"

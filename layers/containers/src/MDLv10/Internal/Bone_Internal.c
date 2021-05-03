@@ -1,5 +1,6 @@
 #include "MDLv10/Internal/Bone_Internal.h"
 #include "AVIDLib_Internal_Util/Util.h"
+#include "AVIDLib_Containers/MDLv10/Bone.h"
 
 void BoneInternal_GenericInit(void* bone, void* data)
 {

@@ -86,6 +86,62 @@
 #define ALIO_MDLV10_FLAG_HAS_BONEINFO (1U<<30)
 #define ALIO_MDLV10_FLAG_HAS_BONEWEIGHTS (1U<<31)
 
+/**
+ * Constants: Motion Flags
+ * These constants are taken from the Xash3D Engine.
+ *
+ * ALIO_MDLV10_MVFLAG_X         - Bone controller motion on the X axis.
+ * ALIO_MDLV10_MVFLAG_Y         - Bone controller motion on the Y axis.
+ * ALIO_MDLV10_MVFLAG_Z         - Bone controller motion on the Z axis.
+ * ALIO_MDLV10_MVFLAG_XR        - Bone controller rotation on the X axis.
+ * ALIO_MDLV10_MVFLAG_YR        - Bone controller rotation on the Y axis.
+ * ALIO_MDLV10_MVFLAG_ZR        - Bone controller rotation on the Z axis.
+ * ALIO_MDLV10_MVFLAG_LX        - Linear animation sequence motion on the X axis.
+ * ALIO_MDLV10_MVFLAG_LY        - Linear animation sequence motion on the Y axis.
+ * ALIO_MDLV10_MVFLAG_LZ        - Linear animation sequence motion on the Z axis.
+ * ALIO_MDLV10_MVFLAG_LXR       - Appears to be unused in engine.
+ * ALIO_MDLV10_MVFLAG_LYR       - Appears to be unused in engine.
+ * ALIO_MDLV10_MVFLAG_LZR       - Appears to be unused in engine.
+ * ALIO_MDLV10_MVFLAG_LINEAR    - Appears to be unused in engine.
+ * ALIO_MDLV10_MVFLAG_QUADRATIC - Appears to be unused in engine.
+ * ALIO_MDLV10_MVFLAGO_RESERVED - Appears to be unused in engine.
+ * ALIO_MDLV10_MVFLAG_TYPES     - Mask value for all allowed motion flags.
+ * ALIO_MDLV10_MVFLAG_RLOOP     - Specifies that controller motion wraps around to beginning.
+ */
+#define ALIO_MDLV10_MVFLAG_X (1U << 0)
+#define ALIO_MDLV10_MVFLAG_Y (1U << 1)
+#define ALIO_MDLV10_MVFLAG_Z (1U << 2)
+#define ALIO_MDLV10_MVFLAG_XR (1U << 3)
+#define ALIO_MDLV10_MVFLAG_YR (1U << 4)
+#define ALIO_MDLV10_MVFLAG_ZR (1U << 5)
+#define ALIO_MDLV10_MVFLAG_LX (1U << 6)
+#define ALIO_MDLV10_MVFLAG_LY (1U << 7)
+#define ALIO_MDLV10_MVFLAG_LZ (1U << 8)
+#define ALIO_MDLV10_MVFLAG_LXR (1U << 9)
+#define ALIO_MDLV10_MVFLAG_LYR (1U << 10)
+#define ALIO_MDLV10_MVFLAG_LZR (1U << 11)
+#define ALIO_MDLV10_MVFLAG_LINEAR (1U << 12)
+#define ALIO_MDLV10_MVFLAG_QUADRATIC (1U << 13)
+#define ALIO_MDLV10_MVFLAGO_RESERVED (1U << 14)
+#define ALIO_MDLV10_MVFLAG_TYPES 0x7FFF
+#define ALIO_MDLV10_MVFLAG_RLOOP (1U << 15)
+
+/**
+ * Constant: ALIO_MDLV10_NUM_CONTROLLER_CHANNELS
+ * Defines the number of controller channels that bone controllers
+ * are allowed to refer to. A bone controller's channel index
+ * must be less than this value.
+ */
+#define ALIO_MDLV10_NUM_CONTROLLER_CHANNELS 5
+
+/**
+ * Constant: ALIO_MDLV10_MOUTH_CONTROLLER
+ * Hard-coded engine index for the controller channel
+ * on an entity which corresponds to the mouth of
+ * a character.
+ */
+#define ALIO_MDLV10_MOUTH_CONTROLLER_CHANNEL 4
+
 typedef enum _ALIO_MDLv10_FileType
 {
 	ALIO_MDLV10_FILE_INVALID = 0,

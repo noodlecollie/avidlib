@@ -28,6 +28,22 @@ extern "C" {
  */
 #define ALC_MDLV10_NUM_MOTION_TYPES 6
 
+/**
+ * Constant: ALC_MDLV10_NUM_CONTROLLER_CHANNELS
+ * Defines the number of controller channels that bone controllers
+ * are allowed to refer to. A bone controller's channel index
+ * must be less than this value.
+ */
+#define ALC_MDLV10_NUM_CONTROLLER_CHANNELS 5
+
+/**
+ * Constant: ALC_MDLV10_MOUTH_CONTROLLER
+ * Hard-coded engine index for the controller channel
+ * on an entity which corresponds to the mouth of
+ * a character.
+ */
+#define ALC_MDLV10_MOUTH_CONTROLLER_CHANNEL 4
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

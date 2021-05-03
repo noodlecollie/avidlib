@@ -7,12 +7,13 @@
 #define AVIDLIB_IO_MDLV10_BONE_H
 
 #include "AVIDLib_Plat/Int.h"
+#include "AVIDLib_Plat/Bool.h"
 #include "AVIDLib_QMath/Types.h"
 #include "MDLv10/IODefinitions.h"
-#include "AVIDLib_Containers/MDLv10/Bone.h"
-#include "AVIDLib_Containers/MDLv10/Model.h"
 
 struct _ALIO_MDLv10_Header;
+struct _ALC_MDLv10_Model;
+struct _ALC_MDLv10_Bone;
 
 #pragma pack(push, 1)
 
@@ -79,8 +80,18 @@ typedef struct _ALIO_MDLv10_Bone
 
 #pragma pack(pop)
 
-ALP_Bool ALIO_MDLv10_Bone_Validate(const struct _ALIO_MDLv10_Header* header, const ALIO_MDLv10_Bone* bone, ALP_Char* errorString, ALP_Size errorStringSize);
-ALP_Bool ALIO_MDLv10_Bone_ValidateGeneric(const struct _ALIO_MDLv10_Header* header, const void* bone, ALP_Char* errorString, ALP_Size errorStringSize);
-void ALIO_MDLv10_Bone_ToContainerElement(const ALIO_MDLv10_Bone* inBone, ALC_MDLv10_Bone* outBone, ALC_MDLv10_Model* outModel);
+ALP_Bool ALIO_MDLv10_Bone_Validate(const struct _ALIO_MDLv10_Header* header,
+								   const ALIO_MDLv10_Bone* bone,
+								   ALP_Char* errorString,
+								   ALP_Size errorStringSize);
+
+ALP_Bool ALIO_MDLv10_Bone_ValidateGeneric(const struct _ALIO_MDLv10_Header* header,
+										  const void* bone,
+										  ALP_Char* errorString,
+										  ALP_Size errorStringSize);
+
+void ALIO_MDLv10_Bone_ToContainerElement(const ALIO_MDLv10_Bone* inBone,
+										 struct _ALC_MDLv10_Bone* outBone,
+										 struct _ALC_MDLv10_Model* outModel);
 
 #endif // AVIDLIB_IO_MDLV10_BONE_H

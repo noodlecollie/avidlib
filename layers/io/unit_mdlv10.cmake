@@ -10,6 +10,8 @@ function(init_unit_mdlv10 headers sources forceUse)
 		src/MDLv10/Reader/Reader.c
 		src/MDLv10/Bone.h
 		src/MDLv10/Bone.c
+		src/MDLv10/BoneController.h
+		src/MDLv10/BoneController.c
 		src/MDLv10/Header.h
 		src/MDLv10/IODefinitions.h
 		src/MDLv10/ValidationHelpers.h

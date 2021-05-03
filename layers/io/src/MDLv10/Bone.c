@@ -2,10 +2,16 @@
 #include "AVIDLib_Internal_Util/Check.h"
 #include "AVIDLib_Plat/String.h"
 #include "AVIDLib_Plat/Ptr.h"
+#include "AVIDLib_Plat/Memory.h"
 #include "AVIDLib_IO/ReadContext.h"
+#include "AVIDLib_Containers/MDLv10/Bone.h"
+#include "AVIDLib_Containers/MDLv10/Model.h"
 #include "MDLv10/Header.h"
 
-ALP_Bool ALIO_MDLv10_Bone_Validate(const struct _ALIO_MDLv10_Header* header, const ALIO_MDLv10_Bone* bone, ALP_Char* errorString, ALP_Size errorStringSize)
+ALP_Bool ALIO_MDLv10_Bone_Validate(const struct _ALIO_MDLv10_Header* header,
+								   const ALIO_MDLv10_Bone* bone,
+								   ALP_Char* errorString,
+								   ALP_Size errorStringSize)
 {
 	if ( ALU_SANITY_VALID(header && bone && errorString && errorStringSize > 0) )
 	{
@@ -30,22 +36,46 @@ ALP_Bool ALIO_MDLv10_Bone_Validate(const struct _ALIO_MDLv10_Header* header, con
 	return ALP_FALSE;
 }
 
-ALP_Bool ALIO_MDLv10_Bone_ValidateGeneric(const struct _ALIO_MDLv10_Header* header, const void* bone, ALP_Char* errorString, ALP_Size errorStringSize)
+ALP_Bool ALIO_MDLv10_Bone_ValidateGeneric(const struct _ALIO_MDLv10_Header* header,
+										  const void* bone,
+										  ALP_Char* errorString,
+										  ALP_Size errorStringSize)
 {
-	return ALIO_MDLv10_Bone_Validate(header, (const ALIO_MDLv10_Bone*)bone, errorString, errorStringSize);
+	return ALIO_MDLv10_Bone_Validate(header,
+									 (const ALIO_MDLv10_Bone*)bone,
+									 errorString,
+									 errorStringSize);
 }
 
-void ALIO_MDLv10_Bone_ToContainerElement(const ALIO_MDLv10_Bone* inBone, ALC_MDLv10_Bone* outBone, ALC_MDLv10_Model* outModel)
+void ALIO_MDLv10_Bone_ToContainerElement(const ALIO_MDLv10_Bone* inBone,
+										 struct _ALC_MDLv10_Bone* outBone,
+										 struct _ALC_MDLv10_Model* outModel)
 {
 	if ( ALU_SANITY_VALID(inBone && outBone && outModel) )
 	{
 		ALP_StrCpy(outBone->name, sizeof(outBone->name), inBone->name);
 
-		outBone->refParentBone = inBone->parentBoneIndex >= 0
+		outBone->refParentBone = (inBone->parentBoneIndex >= 0 && inBone->parentBoneIndex < (ALP_Int32)outModel->numBones)
 			? &outModel->bones[inBone->parentBoneIndex]
 			: ALP_NULL;
 
-		// TODO: Add bone controller links once we set them up.
+		ALP_MemSet(outBone->refControllers, 0, sizeof(outBone->refControllers));
+
+		for ( ALP_Size index = 0; index < ALIO_MDLV10_NUM_MOTION_TYPES; ++index )
+		{
+			// In case these constants ever get out of sync:
+			if ( index >= ALC_MDLV10_NUM_MOTION_TYPES )
+			{
+				break;
+			}
+
+			const ALP_Int32 controllerIndex = inBone->boneController[index];
+
+			if ( controllerIndex >= 0 && controllerIndex < (ALP_Int32)outModel->numBoneControllers )
+			{
+				outBone->refControllers[index] = &outModel->boneControllers[controllerIndex];
+			}
+		}
 
 		outBone->defaultPosition.v[ALQM_VECX] = inBone->values[0];
 		outBone->defaultPosition.v[ALQM_VECY] = inBone->values[1];

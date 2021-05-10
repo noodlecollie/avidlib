@@ -12,6 +12,7 @@ endif()
 project(AVIDLib)
 
 # Target names are defined here, so that targets can refer to one another easily.
+set(TARGETNAME_THIRDPARTY_IMGUI ThirdParty_ImGui)
 set(TARGETNAME_PLAT AVIDLib_Plat)
 set(TARGETNAME_INTERNAL_UTIL AVIDLib_Internal_Util)
 set(TARGETNAME_QMATH AVIDLib_QMath)
@@ -59,4 +60,5 @@ else()
 	add_compile_options(-Wfloat-equal)	# Comparing floats for equality
 endif()
 
+add_subdirectory(thirdparty)
 add_subdirectory(layers)

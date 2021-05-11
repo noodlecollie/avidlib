@@ -17,3 +17,9 @@ set(SOURCES
 
 add_library(${TARGETNAME_THIRDPARTY_IMGUI} STATIC ${PUBLIC_HEADERS} ${SOURCES})
 target_include_directories(${TARGETNAME_THIRDPARTY_IMGUI} PUBLIC imgui)
+
+if(NOT MSVC)
+	target_compile_options(${TARGETNAME_THIRDPARTY_IMGUI} PRIVATE
+		"-Wno-float-equal"
+	)
+endif()

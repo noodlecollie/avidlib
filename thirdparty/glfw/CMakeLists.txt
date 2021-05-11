@@ -5,6 +5,16 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
+if(NOT MSVC)
+	add_compile_options(
+		"-Wno-pedantic"
+		"-Wno-float-equal"
+		"-Wno-missing-field-initializers"
+		"-Wno-sign-compare"
+		"-Wno-unused-parameter"
+	)
+endif()
+
 set(OLD_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
 set(BUILD_SHARED_LIBS OFF)
 add_subdirectory(glfw)

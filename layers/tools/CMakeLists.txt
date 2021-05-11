@@ -6,4 +6,6 @@ if(BUILD_TOOLS)
 	add_subdirectory(thirdparty)
 endif()
 
+set(RESOURCES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resources)
+
 add_subdirectory(mdlviewer)

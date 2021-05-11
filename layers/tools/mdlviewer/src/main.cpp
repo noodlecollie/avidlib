@@ -139,8 +139,7 @@ int main(int, char**)
 	// ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
 	// IM_ASSERT(font != NULL);
 
-	// For Ubuntu (we might want something more cross-platform in general):
-	// io.Fonts->AddFontFromFileTTF("/usr/share/fonts/truetype/ubuntu/UbuntuMono-R.ttf", yScale * 14.0f);
+	io.Fonts->AddFontFromFileTTF("resources/fonts/UbuntuMono-R.ttf", yScale * 14.0f);
 
 	// Our state
 	bool show_demo_window = true;

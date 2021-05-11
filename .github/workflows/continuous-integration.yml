@@ -10,7 +10,7 @@ jobs:
   # This job builds all content in a handful of configurations,
   # and leaves the more specific build options at their defaults.
   build-linux-nonspecific:
-    name: Nonspeific build on Ubuntu Latest
+    name: Nonspecific build on Ubuntu Latest
     runs-on: ubuntu-latest
 
     strategy:
@@ -22,6 +22,11 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: "recursive"
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install libx11-dev
 
     - name: Create build dir
       run: |

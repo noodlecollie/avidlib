@@ -5,7 +5,7 @@ set(SOURCES
 	src/main.cpp
 )
 
-if(TOOLS_MDLVIEWER)
+if(TOOLS_ALL OR TOOLS_MDLVIEWER)
 	add_executable(${TARGETNAME_MDLVIEWER} ${SOURCES})
 	target_include_directories(${TARGETNAME_MDLVIEWER} PRIVATE src)
 	target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE ${TARGETNAME_THIRDPARTY_IMGUI})

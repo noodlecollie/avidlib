@@ -2,10 +2,6 @@ set(TARGETNAME_MDLVIEWER MDLViewer)
 set(TOOLS_MDLVIEWER "NO" CACHE BOOL "If set, builds the MDLViewer tool.")
 
 set(SOURCES
-	src/imgui_backends/imgui_impl_glfw.h
-	src/imgui_backends/imgui_impl_glfw.cpp
-	src/imgui_backends/imgui_impl_opengl3.h
-	src/imgui_backends/imgui_impl_opengl3.cpp
 	src/main.cpp
 )
 

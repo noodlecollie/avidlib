@@ -1,8 +1,12 @@
 set(PUBLIC_HEADERS
 	imgui/imgui.h
+	imgui/backends/imgui_impl_glfw.h
+	imgui/backends/imgui_impl_opengl3.h
 )
 
 set(SOURCES
+	imgui/backends/imgui_impl_glfw.cpp
+	imgui/backends/imgui_impl_opengl3.cpp
 	imgui/imconfig.h
 	imgui/imgui_demo.cpp
 	imgui/imgui_draw.cpp
@@ -16,7 +20,13 @@ set(SOURCES
 )
 
 add_library(${TARGETNAME_THIRDPARTY_IMGUI} STATIC ${PUBLIC_HEADERS} ${SOURCES})
-target_include_directories(${TARGETNAME_THIRDPARTY_IMGUI} PUBLIC imgui)
+target_link_libraries(${TARGETNAME_THIRDPARTY_IMGUI} PRIVATE glfw)
+target_link_libraries(${TARGETNAME_THIRDPARTY_IMGUI} PRIVATE ${TARGETNAME_THIRDPARTY_GL3W})
+
+target_include_directories(${TARGETNAME_THIRDPARTY_IMGUI} PUBLIC
+	imgui
+	imgui/backends
+)
 
 if(NOT MSVC)
 	target_compile_options(${TARGETNAME_THIRDPARTY_IMGUI} PRIVATE

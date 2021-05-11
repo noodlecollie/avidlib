@@ -39,8 +39,8 @@ jobs:
           -DCMAKE_BUILD_TYPE=${{matrix.config}} \
           -DBUILD_SHARED_LIBS=${{matrix.shared-libs}} \
           -DCONTAINERS_ALL=YES \
-          -DBUILD_TOOLS=YES
-          -DTOOLS_ALL=YES
+          -DBUILD_TOOLS=YES \
+          -DTOOLS_ALL=YES \
           ..
 
     - name: Build

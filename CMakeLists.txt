@@ -61,5 +61,4 @@ else()
 	add_compile_options(-Wfloat-equal)	# Comparing floats for equality
 endif()
 
-add_subdirectory(thirdparty)
 add_subdirectory(layers)

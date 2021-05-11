@@ -1,0 +1,6 @@
+[submodule "layers/tools/thirdparty/glfw/glfw"]
+	path = layers/tools/thirdparty/glfw/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "layers/tools/thirdparty/imgui/imgui"]
+	path = layers/tools/thirdparty/imgui/imgui
+	url = https://github.com/ocornut/imgui

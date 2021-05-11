@@ -16,5 +16,4 @@ set(SOURCES
 )
 
 add_library(${TARGETNAME_THIRDPARTY_IMGUI} STATIC ${PUBLIC_HEADERS} ${SOURCES})
-
 target_include_directories(${TARGETNAME_THIRDPARTY_IMGUI} PUBLIC imgui)

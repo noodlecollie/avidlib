@@ -2,6 +2,10 @@ set(TARGETNAME_MDLVIEWER MDLViewer)
 set(TOOLS_MDLVIEWER "NO" CACHE BOOL "If set, builds the MDLViewer tool.")
 
 set(SOURCES
+	src/imgui_backends/imgui_impl_glfw.h
+	src/imgui_backends/imgui_impl_glfw.cpp
+	src/imgui_backends/imgui_impl_opengl3.h
+	src/imgui_backends/imgui_impl_opengl3.cpp
 	src/main.cpp
 )
 
@@ -9,6 +13,8 @@ if(TOOLS_MDLVIEWER)
 	add_executable(${TARGETNAME_MDLVIEWER} ${SOURCES})
 	target_include_directories(${TARGETNAME_MDLVIEWER} PRIVATE src)
 	target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE ${TARGETNAME_THIRDPARTY_IMGUI})
+	target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE glfw)
+	target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE ${TARGETNAME_THIRDPARTY_GL3W})
 
 	install(TARGETS ${TARGETNAME_MDLVIEWER}
 		ARCHIVE DESTINATION ${TARGETNAME_MDLVIEWER}/lib

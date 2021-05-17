@@ -19,7 +19,9 @@ set(SOURCES
 	imgui/imstb_truetype.h
 )
 
+# This is only ever used internally, so is built statically:
 add_library(${TARGETNAME_THIRDPARTY_IMGUI} STATIC ${PUBLIC_HEADERS} ${SOURCES})
+
 target_link_libraries(${TARGETNAME_THIRDPARTY_IMGUI} PRIVATE glfw)
 target_link_libraries(${TARGETNAME_THIRDPARTY_IMGUI} PRIVATE ${TARGETNAME_THIRDPARTY_GL3W})
 

@@ -8,6 +8,7 @@ set(SOURCES
 	src/gl3w.c
 )
 
+# This is only ever used internally, so is built statically:
 add_library(${TARGETNAME_THIRDPARTY_GL3W} STATIC ${PUBLIC_HEADERS} ${SOURCES})
 
 target_include_directories(${TARGETNAME_THIRDPARTY_GL3W} PUBLIC

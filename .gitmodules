@@ -4,3 +4,6 @@
 [submodule "layers/tools/thirdparty/imgui/imgui"]
 	path = layers/tools/thirdparty/imgui/imgui
 	url = https://github.com/ocornut/imgui
+[submodule "layers/tools/thirdparty/bgfx/bgfx.cmake"]
+	path = layers/tools/thirdparty/bgfx/bgfx.cmake
+	url = https://github.com/bkaradzic/bgfx.cmake.git

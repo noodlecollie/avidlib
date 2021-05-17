@@ -15,6 +15,7 @@ if(NOT MSVC)
 	)
 endif()
 
+# This is only ever used internally, so is built statically:
 set(OLD_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
 set(BUILD_SHARED_LIBS OFF)
 add_subdirectory(glfw)

@@ -2,7 +2,7 @@ set(TARGETNAME_MDLVIEWER MDLViewer)
 set(TOOLS_MDLVIEWER "NO" CACHE BOOL "If set, builds the MDLViewer tool.")
 
 set(SOURCES
-	src/bgfx_main.cpp
+	src/main.cpp
 )
 
 set(FONTS

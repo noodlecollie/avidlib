@@ -2,12 +2,12 @@ set(PERFORM_VALIDITY_CHECKS "YES" CACHE BOOL "If set, validity checks are includ
 set(PERFORM_MALLOC_CHECKS "YES" CACHE BOOL "If set, calls to malloc are checked to have succeeded before the call returns; otherwise, this check is removed for speed.")
 
 set(PUBLIC_HEADERS_GENERAL
-include/${TARGETNAME_INTERNAL_UTIL}/Check.h
-include/${TARGETNAME_INTERNAL_UTIL}/Debug.h
-include/${TARGETNAME_INTERNAL_UTIL}/ItemInitialisation.h
-include/${TARGETNAME_INTERNAL_UTIL}/Memory.h
-include/${TARGETNAME_INTERNAL_UTIL}/StringBuilder.h
-include/${TARGETNAME_INTERNAL_UTIL}/Util.h
+	include/${TARGETNAME_INTERNAL_UTIL}/Check.h
+	include/${TARGETNAME_INTERNAL_UTIL}/Debug.h
+	include/${TARGETNAME_INTERNAL_UTIL}/ItemInitialisation.h
+	include/${TARGETNAME_INTERNAL_UTIL}/Memory.h
+	include/${TARGETNAME_INTERNAL_UTIL}/StringBuilder.h
+	include/${TARGETNAME_INTERNAL_UTIL}/Util.h
 )
 
 set(PUBLIC_HEADERS_ALL

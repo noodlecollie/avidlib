@@ -2,7 +2,7 @@ set(TARGETNAME_MDLVIEWER MDLViewer)
 set(TOOLS_MDLVIEWER "NO" CACHE BOOL "If set, builds the MDLViewer tool.")
 
 set(SOURCES
-	src/main.cpp
+	src/bgfx_main.cpp
 )
 
 set(FONTS
@@ -17,6 +17,7 @@ if(TOOLS_ALL OR TOOLS_MDLVIEWER)
 		target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE glfw)
 		target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE ${TARGETNAME_THIRDPARTY_GL3W})
 		target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE bgfx)
+		target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE ${TARGETNAME_TOOLS_COMMON})
 
 		install(TARGETS ${TARGETNAME_MDLVIEWER}
 			ARCHIVE DESTINATION ${TARGETNAME_MDLVIEWER}

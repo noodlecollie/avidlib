@@ -1,72 +1,27 @@
-#include <iostream>
+#include "AVIDLib_ToolsCommon/SimpleApplication.h"
 
-#define GLFW_EXPOSE_NATIVE_X11
-#include <GLFW/glfw3.h>
-#include <GLFW/glfw3native.h>
-
-#include "bgfx/bgfx.h"
-#include "AVIDLib_ToolsCommon/WinSysHelpers.h"
-
-static void glfw_error_callback(int error, const char* description)
+class App : public ALT_Common::SimpleApplication
 {
-	std::cerr << "GLFW Error " << error << ": " << description << std::endl;
-}
+public:
+	virtual ~App() = default;
 
-int main(int, char**)
-{
-	glfwSetErrorCallback(glfw_error_callback);
-
-	if ( !glfwInit() )
+protected:
+	void OnCreated() override
 	{
-		std::cerr << "Unable to initialise GLFW!" << std::endl;
-		return 1;
+		bgfx::setDebug(BGFX_DEBUG_TEXT /*| BGFX_DEBUG_STATS*/);
 	}
 
-	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-
-	float yScale = 1.0f;
-	glfwGetMonitorContentScale(monitor, nullptr, &yScale);
-
-	// Create window with graphics context
-	const int winWidth = static_cast<int>(1280 * yScale);
-	const int winHeight = static_cast<int>(720 * yScale);
-	GLFWwindow* window = glfwCreateWindow(winWidth, winHeight, "GLFW Window", NULL, NULL);
-
-	if ( !window )
-	{
-		std::cerr << "Unable to create GLFW window!" << std::endl;
-		return 1;
-	}
-
-	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1); // Enable vsync
-
-	bgfx::Init bgfxInit;
-	bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
-	bgfxInit.resolution.width = winWidth;
-	bgfxInit.resolution.height = winHeight;
-	bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
-
-	ALT_Common::GetBGFXPlatformData(window, bgfxInit.platformData);
-
-	bgfx::init(bgfxInit);
-	bgfx::reset(winWidth, winHeight, BGFX_RESET_VSYNC);
-
-	// Enable debug text.
-	bgfx::setDebug(BGFX_DEBUG_TEXT /*| BGFX_DEBUG_STATS*/);
-
-	// Set view rectangle for 0th view
-	int display_w = 0;
-	int display_h = 0;
-	glfwGetFramebufferSize(window, &display_w, &display_h);
-
-	while (!glfwWindowShouldClose(window))
+	bool OnPoll() override
 	{
 		static size_t counter = 0;
 
 		glfwPollEvents();
 
-		bgfx::setViewRect(0, 0, 0, static_cast<uint16_t>(display_w), static_cast<uint16_t>(display_h));
+		size_t width = 0;
+		size_t height = 0;
+		FrameBufferDimensions(width, height);
+
+		bgfx::setViewRect(0, 0, 0, static_cast<uint16_t>(width), static_cast<uint16_t>(height));
 
 		// Clear the view rect
 		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
@@ -78,11 +33,35 @@ int main(int, char**)
 		bgfx::dbgTextPrintf(0, 1, 0x0f, "Frame: %lu", counter++);
 
 		bgfx::frame();
+
+		return true;
+	}
+};
+
+int main(int argc, char** argv)
+{
+	using namespace ALT_Common;
+
+	SimpleApplication::InitArgs args;
+
+	args.argc = argc;
+	args.argv = argv;
+	args.windowWidth = 1280;
+	args.windowHeight = 720;
+	args.windowTitle = "GLFW + BGFX";
+
+	App app;
+
+	if ( !app.Create(args) )
+	{
+		return 1;
 	}
 
-	bgfx::shutdown();
-	glfwDestroyWindow(window);
-	glfwTerminate();
+	while ( app.Poll() )
+	{
+		// Don't quit yet.
+	}
 
+	app.Destroy();
 	return 0;
 }

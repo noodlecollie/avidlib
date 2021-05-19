@@ -1,9 +1,10 @@
 set(PUBLIC_HEADERS_ALL
 	include/${TARGETNAME_TOOLS_COMMON}/WinSysHelpers.h
+	include/${TARGETNAME_TOOLS_COMMON}/SimpleApplication.h
 )
 
-# TODO: Add general sources here.
 set(SOURCES_GENERAL
+	src/SimpleApplication.cpp
 )
 
 set(SOURCES_X11

@@ -3,6 +3,7 @@
 #include "AVIDLib_Internal_Util/Check.h"
 #include "AVIDLib_Plat/Memory.h"
 #include "AVIDLib_QMath/Math.h"
+#include "AVIDLib_Internal_Util/Util.h"
 
 const ALQM_Mat3x4 ALQM_Mat3x4_Identity =
 {
@@ -21,6 +22,63 @@ ALQM_Scalar* ALQM_Mat3x4_Data(ALQM_Mat3x4* m)
 const ALQM_Scalar* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m)
 {
 	return ALU_TSANITY_VALID(m, (const ALQM_Scalar*)m->v, ALP_NULL);
+}
+
+void ALQM_Mat3x4_To4x4ColMajor(const ALQM_Mat3x4* m, ALQM_Scalar* outData, ALP_Size outLength)
+{
+	if ( ALU_SANITY_VALID(m && outData && outLength > 0) )
+	{
+		if ( outLength > 16 )
+		{
+			outLength = 16;
+		}
+
+		while ( outLength-- > 0 )
+		{
+			// After the line above, outLength will have been decremented,
+			// making it a 0-based index.
+
+			const ALP_Size rowIndex = outLength % 4;
+
+			if ( rowIndex == 3 )
+			{
+				// We're indexing an element in the final row.
+				outData[outLength] = outLength == 15 ? 1 : 0;
+			}
+			else
+			{
+				const ALP_Size colIndex = outLength / 4;
+				outData[outLength] = m->v[rowIndex][colIndex];
+			}
+		}
+	}
+}
+
+void ALQM_Mat3x4_To4x4RowMajor(const ALQM_Mat3x4* m, ALQM_Scalar* outData, ALP_Size outLength)
+{
+	if ( ALU_SANITY_VALID(m && outData && outLength > 0) )
+	{
+		const ALP_Size elementsToCopy = ALU_MIN(outLength, ALQM_MAT3X4_CELLS);
+		memcpy(outData, m->v, elementsToCopy * sizeof(ALQM_Scalar));
+
+		if ( outLength > ALQM_MAT3X4_CELLS )
+		{
+			// We can copy out at least some of the last row.
+
+			if ( outLength > 4 )
+			{
+				outLength = 4;
+			}
+
+			while ( outLength-- > 0 )
+			{
+				// After the line above, outLength will have been decremented,
+				// making it a 0-based index.
+
+				outData[ALQM_MAT3X4_CELLS + outLength] = outLength == 3 ? 1 : 0;
+			}
+		}
+	}
 }
 
 ALQM_Scalar* ALQM_Mat3x4_Row(ALQM_Mat3x4* m, ALP_Size row)

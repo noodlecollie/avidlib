@@ -142,6 +142,56 @@ API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Mat3x4_Data(ALQM_Mat3x4* m);
 API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m);
 
 /**
+ * Function: ALQM_Mat3x4_To4x4ColMajor
+ *
+ * Given an array of scalar values, copies the values of the specified
+ * matrix to this array. The output array is assumed to represent a
+ * 4x4 matrix in column-major order.
+ *
+ * This function is intended to be useful for external applications
+ * which use 4x4 matrices, rather than 3x4 matrices. The final row
+ * of the 4x4 matrix will be set to [0, 0, 0, 1].
+ *
+ * If the length of the output array is less than the required number
+ * of elements (16), as many elements as will fit will be copied to
+ * the output array. If the length of the output array is greate than
+ * required, any other elements in the output array will be left
+ * undefined.
+ *
+ * Parameters:
+ *
+ * m         - Matrix whose data should be copied.
+ * outData   - Array to hold the copied values.
+ * outLength - Size of the array in elements (not in bytes).
+ */
+API_AVIDLIB_QMATH void ALQM_Mat3x4_To4x4ColMajor(const ALQM_Mat3x4* m, ALQM_Scalar* outData, ALP_Size outLength);
+
+/**
+ * Function: ALQM_Mat3x4_To4x4RowMajor
+ *
+ * Given an array of scalar values, copies the values of the specified
+ * matrix to this array. The output array is assumed to represent a
+ * 4x4 matrix in row-major order.
+ *
+ * This function is intended to be useful for external applications
+ * which use 4x4 matrices, rather than 3x4 matrices. The final row
+ * of the 4x4 matrix will be set to [0, 0, 0, 1].
+ *
+ * If the length of the output array is less than the required number
+ * of elements (16), as many elements as will fit will be copied to
+ * the output array. If the length of the output array is greate than
+ * required, any other elements in the output array will be left
+ * undefined.
+ *
+ * Parameters:
+ *
+ * m         - Matrix whose data should be copied.
+ * outData   - Array to hold the copied values.
+ * outLength - Size of the array in elements (not in bytes).
+ */
+API_AVIDLIB_QMATH void ALQM_Mat3x4_To4x4RowMajor(const ALQM_Mat3x4* m, ALQM_Scalar* outData, ALP_Size outLength);
+
+/**
  * Function: ALQM_Mat3x4_Row
  *
  * Returns a mutable pointer to the beginning of the specified row of the matrix.

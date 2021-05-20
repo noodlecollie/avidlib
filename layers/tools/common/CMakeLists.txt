@@ -27,6 +27,4 @@ if(BUILD_TOOLS)
 
 	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE glfw)
 	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE bgfx)
-else()
-	message(WARNING "Not building MDL Viewer as BUILD_TOOLS was not set.")
 endif()

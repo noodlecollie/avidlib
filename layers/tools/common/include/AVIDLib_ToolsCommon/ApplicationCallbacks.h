@@ -4,14 +4,19 @@
 #include <cstddef>
 #include <string>
 
-#include "GLFW/glfw3.h"
-#include "bgfx/bgfx.h"
+typedef struct GLFWwindow GLFWwindow;
 
 namespace ALT_Common
 {
 	class ApplicationCallbacks
 	{
 	public:
+		enum class InitResult
+		{
+			Successful = 0,
+			Error
+		};
+
 		enum class FrameResult
 		{
 			NoAction = 0,
@@ -30,10 +35,11 @@ namespace ALT_Common
 		// To be implemented by subclasses:
 		virtual void OnArguments(int argc, char** argv);
 		virtual void OnGetInitialState(InitialState& state);
-		virtual void OnWindowCreated(GLFWwindow* window);
+		virtual InitResult OnWindowCreated(GLFWwindow* window, const char* glslVersion);
 		virtual FrameResult OnWindowNewFrame(GLFWwindow* window);
 		virtual void OnWindowResized(GLFWwindow* window, size_t width, size_t height);
 		virtual void OnWindowAboutToBeDestroyed(GLFWwindow* window);
+		virtual int OnGetExitCode();
 	};
 }
 

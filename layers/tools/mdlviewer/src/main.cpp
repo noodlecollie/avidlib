@@ -13,9 +13,10 @@ public:
 		initState.windowTitle = "GLFW + BGFX";
 	}
 
-	void OnWindowCreated(GLFWwindow*) override
+	InitResult OnWindowCreated(GLFWwindow*, const char*) override
 	{
 		bgfx::setDebug(BGFX_DEBUG_TEXT);
+		return InitResult::Successful;
 	}
 
 	void OnWindowResized(GLFWwindow*, size_t width, size_t height)

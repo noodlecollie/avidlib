@@ -10,8 +10,9 @@ namespace ALT_Common
 	{
 	}
 
-	void ApplicationCallbacks::OnWindowCreated(GLFWwindow*)
+	ApplicationCallbacks::InitResult ApplicationCallbacks::OnWindowCreated(GLFWwindow*, const char*)
 	{
+		return InitResult::Successful;
 	}
 
 	ApplicationCallbacks::FrameResult ApplicationCallbacks::OnWindowNewFrame(GLFWwindow*)
@@ -25,5 +26,10 @@ namespace ALT_Common
 
 	void ApplicationCallbacks::OnWindowAboutToBeDestroyed(GLFWwindow*)
 	{
+	}
+
+	int ApplicationCallbacks::OnGetExitCode()
+	{
+		return 0;
 	}
 }

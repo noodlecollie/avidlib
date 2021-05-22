@@ -47,6 +47,26 @@ namespace ALT_Common
 		return yScale;
 	}
 
+	static const char* SetUpOpenGL()
+	{
+		// Taken from ImGUI examples
+#ifdef __APPLE__
+		// GL 3.2 + GLSL 150
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // Required on Mac
+
+		return "#version 150"
+#else
+		// GL 3.0 + GLSL 130
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
+		return "#version 130";
+#endif
+	}
+
 	static GLFWwindow* InitialiseApplicationWindow()
 	{
 		ApplicationCallbacks::InitialState initState;
@@ -112,26 +132,36 @@ namespace ALT_Common
 		});
 
 		GLFWwindow* window = nullptr;
-		int returnVal = -1;
+		int exit = ExitSuccess;
 
 		do
 		{
 			if ( !glfwInit() )
 			{
 				std::cerr << "Unable to initialise GLFW!" << std::endl;
+				exit = ExitUnableToInitGLFW;
 				break;
 			}
 
+			const char* glslVersion = SetUpOpenGL();
 			window = InitialiseApplicationWindow();
 
 			if ( !window )
 			{
 				std::cerr << "Unable to create GLFW window!" << std::endl;
+				exit = ExitUnableToCreateGLFWWindow;
 				break;
 			}
 
 			AttachWindowCallbacks(window);
-			Application->OnWindowCreated(window);
+
+			if ( Application->OnWindowCreated(window, glslVersion) != ApplicationCallbacks::InitResult::Successful )
+			{
+				std::cerr << "Failed to perform custom initialisation after window creation!" << std::endl;
+				exit = ExitCustomInitStateFailed;
+				break;
+			}
+
 			WindowResizeTouch(window);
 
 			while ( !glfwWindowShouldClose(window) )
@@ -143,19 +173,35 @@ namespace ALT_Common
 					break;
 				}
 			}
+		}
+		while ( false );
 
+		if ( window )
+		{
 			Application->OnWindowAboutToBeDestroyed(window);
 			DetachWindowCallbacks(window);
 			DestroyApplicationWindow(window);
-
-			returnVal = 0;
 		}
-		while ( false );
+
+		if ( exit == ExitSuccess )
+		{
+			// Exit code was not set by an error condition in this function.
+			// Get the desired code from the application.
+			exit = Application->OnGetExitCode();
+
+			if ( exit < 0 )
+			{
+				// Not supposed to happen - positive error codes are supposed
+				// to be used for the application. As a fallback, just use
+				// a generic error code if they haven't kept to that convention.
+				exit = ExitGenericError;
+			}
+		}
 
 		glfwTerminate();
 		glfwSetErrorCallback(nullptr);
 
-		return returnVal;
+		return exit;
 	}
 
 	int RunApplication(int argc, char** argv, ApplicationCallbacks* application)

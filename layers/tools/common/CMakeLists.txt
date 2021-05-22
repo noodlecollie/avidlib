@@ -29,4 +29,5 @@ if(BUILD_TOOLS)
 
 	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE glfw)
 	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE bgfx)
+	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE ${TARGETNAME_THIRDPARTY_IMGUI})
 endif()

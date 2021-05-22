@@ -12,7 +12,6 @@
 #include "imgui_internal.h"
 
 #include "bgfx_imgui/bgfx_imgui.h"
-// #include "../bgfx_utils.h"
 
 #include "vs_ocornut_imgui.bin.h"
 #include "fs_ocornut_imgui.bin.h"
@@ -247,7 +246,6 @@ struct OcornutImguiContext
 			ImFontConfig config;
 			config.FontDataOwnedByAtlas = false;
 			config.MergeMode = false;
-//			config.MergeGlyphCenterV = true;
 
 			const ImWchar* ranges = io.Fonts->GetGlyphRangesCyrillic();
 			m_font[FontID::Regular] = io.Fonts->AddFontFromMemoryTTF( (void*)s_robotoRegularTtf,     sizeof(s_robotoRegularTtf),     _fontSize,      &config, ranges);
@@ -280,13 +278,10 @@ struct OcornutImguiContext
 			, 0
 			, bgfx::copy(data, width*height*4)
 			);
-
-		// ImGui::InitDockContext();
 	}
 
 	void destroy()
 	{
-		// ImGui::ShutdownDockContext();
 		ImGui::DestroyContext(m_imgui);
 
 		bgfx::destroy(s_tex);
@@ -321,7 +316,7 @@ struct OcornutImguiContext
 		  int32_t _mx
 		, int32_t _my
 		, uint8_t _button
-		, int32_t _scroll
+		, float _scrollDelta
 		, int _width
 		, int _height
 		, int _inputChar
@@ -345,11 +340,10 @@ struct OcornutImguiContext
 		io.DeltaTime = float(frameTime/freq);
 
 		io.MousePos = ImVec2( (float)_mx, (float)_my);
-		io.MouseDown[0] = 0 != (_button & IMGUI_MBUT_LEFT);
-		io.MouseDown[1] = 0 != (_button & IMGUI_MBUT_RIGHT);
-		io.MouseDown[2] = 0 != (_button & IMGUI_MBUT_MIDDLE);
-		io.MouseWheel = (float)(_scroll - m_lastScroll);
-		m_lastScroll = _scroll;
+		io.MouseDown[0] = 0 != (_button & (1 << ImGuiMouseButton_Left));
+		io.MouseDown[1] = 0 != (_button & (1 << ImGuiMouseButton_Right));
+		io.MouseDown[2] = 0 != (_button & (1 << ImGuiMouseButton_Middle));
+		io.MouseWheel = _scrollDelta;
 
 		ImGui::NewFrame();
 	}
@@ -370,7 +364,7 @@ struct OcornutImguiContext
 	bgfx::UniformHandle u_imageLodEnabled;
 	ImFont* m_font[FontID::Count];
 	int64_t m_last;
-	int32_t m_lastScroll;
+	float m_lastScroll;
 	bgfx::ViewId m_viewId;
 };
 
@@ -400,9 +394,9 @@ namespace BGFX_ImGui
 		s_ctx.destroy();
 	}
 
-	void imguiBeginFrame(int32_t _mx, int32_t _my, uint8_t _button, int32_t _scroll, uint16_t _width, uint16_t _height, int _inputChar, bgfx::ViewId _viewId)
+	void imguiBeginFrame(int32_t _mx, int32_t _my, uint8_t _button, float _scrollDelta, uint16_t _width, uint16_t _height, int _inputChar, bgfx::ViewId _viewId)
 	{
-		s_ctx.beginFrame(_mx, _my, _button, _scroll, _width, _height, _inputChar, _viewId);
+		s_ctx.beginFrame(_mx, _my, _button, _scrollDelta, _width, _height, _inputChar, _viewId);
 	}
 
 	void imguiEndFrame()
@@ -432,17 +426,4 @@ namespace ImGui
 		PopStyleVar();
 	}
 
-} // namespace ImGui
-
-// BX_PRAGMA_DIAGNOSTIC_IGNORED_MSVC(4505); // error C4505: '' : unreferenced local function has been removed
-// BX_PRAGMA_DIAGNOSTIC_IGNORED_CLANG_GCC("-Wunused-function"); // warning: 'int rect_width_compare(const void*, const void*)' defined but not used
-// BX_PRAGMA_DIAGNOSTIC_PUSH();
-// BX_PRAGMA_DIAGNOSTIC_IGNORED_CLANG("-Wunknown-pragmas")
-// BX_PRAGMA_DIAGNOSTIC_IGNORED_CLANG_GCC("-Wtype-limits"); // warning: comparison is always true due to limited range of data type
-// #define STBTT_malloc(_size, _userData) memAlloc(_size, _userData)
-// #define STBTT_free(_ptr, _userData) memFree(_ptr, _userData)
-// #define STB_RECT_PACK_IMPLEMENTATION
-// #include <stb/stb_rect_pack.h>
-// #define STB_TRUETYPE_IMPLEMENTATION
-// #include <stb/stb_truetype.h>
-// BX_PRAGMA_DIAGNOSTIC_POP();
+}

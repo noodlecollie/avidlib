@@ -10,7 +10,7 @@ namespace ALT_Common
 	{
 	}
 
-	ApplicationCallbacks::InitResult ApplicationCallbacks::OnWindowCreated(GLFWwindow*, const char*)
+	ApplicationCallbacks::InitResult ApplicationCallbacks::OnWindowCreated(GLFWwindow*, const WindowCreationState&)
 	{
 		return InitResult::Successful;
 	}
@@ -21,6 +21,18 @@ namespace ALT_Common
 	}
 
 	void ApplicationCallbacks::OnWindowResized(GLFWwindow*, size_t, size_t)
+	{
+	}
+
+	void ApplicationCallbacks::OnCursorMoved(GLFWwindow*, int32_t, int32_t)
+	{
+	}
+
+	void ApplicationCallbacks::OnMouseButtons(GLFWwindow*, uint32_t)
+	{
+	}
+
+	void ApplicationCallbacks::OnMouseScroll(GLFWwindow*, float)
 	{
 	}
 

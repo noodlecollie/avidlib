@@ -2,6 +2,7 @@
 #include <iostream>
 #include "GLFW/glfw3.h"
 #include "bgfx/bgfx.h"
+#include "imgui.h"
 #include "AVIDLib_ToolsCommon/ApplicationLauncher.h"
 #include "AVIDLib_ToolsCommon/WinSysHelpers.h"
 
@@ -67,12 +68,10 @@ namespace ALT_Common
 #endif
 	}
 
-	static GLFWwindow* InitialiseApplicationWindow()
+	static GLFWwindow* InitialiseApplicationWindow(float contentScale)
 	{
 		ApplicationCallbacks::InitialState initState;
 		Application->OnGetInitialState(initState);
-
-		const float contentScale = ContentScaleForMonitor(glfwGetPrimaryMonitor());
 
 		const int32_t winWidth = static_cast<int32_t>(initState.windowWidth * contentScale);
 		const int32_t winHeight = static_cast<int32_t>(initState.windowHeight * contentScale);
@@ -115,6 +114,38 @@ namespace ALT_Common
 	static void AttachWindowCallbacks(GLFWwindow* window)
 	{
 		glfwSetWindowSizeCallback(window, &OnWindowResized);
+
+		glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xPos, double yPos)
+		{
+			int32_t x = static_cast<int32_t>(xPos);
+			int32_t y = static_cast<int32_t>(yPos);
+
+			Application->OnCursorMoved(window, x, y);
+		});
+
+		glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int)
+		{
+			uint32_t mouseButtons = 0;
+
+			if ( button == GLFW_MOUSE_BUTTON_LEFT )
+			{
+				if ( action == GLFW_PRESS )
+				{
+					mouseButtons |= (1 << ImGuiMouseButton_Left);
+				}
+				else
+				{
+					mouseButtons &= ~(1 << ImGuiMouseButton_Left);
+				}
+			}
+
+			Application->OnMouseButtons(window, mouseButtons);
+		});
+
+		glfwSetScrollCallback(window, [](GLFWwindow* window, double, double yDelta)
+		{
+			Application->OnMouseScroll(window, static_cast<float>(yDelta));
+		});
 	}
 
 	static void DetachWindowCallbacks(GLFWwindow* window)
@@ -143,8 +174,11 @@ namespace ALT_Common
 				break;
 			}
 
-			const char* glslVersion = SetUpOpenGL();
-			window = InitialiseApplicationWindow();
+			ApplicationCallbacks::WindowCreationState createState;
+			createState.contentScale = ContentScaleForMonitor(glfwGetPrimaryMonitor());
+			createState.glslVersion = SetUpOpenGL();
+
+			window = InitialiseApplicationWindow(createState.contentScale);
 
 			if ( !window )
 			{
@@ -155,7 +189,7 @@ namespace ALT_Common
 
 			AttachWindowCallbacks(window);
 
-			if ( Application->OnWindowCreated(window, glslVersion) != ApplicationCallbacks::InitResult::Successful )
+			if ( Application->OnWindowCreated(window, createState) != ApplicationCallbacks::InitResult::Successful )
 			{
 				std::cerr << "Failed to perform custom initialisation after window creation!" << std::endl;
 				exit = ExitCustomInitStateFailed;

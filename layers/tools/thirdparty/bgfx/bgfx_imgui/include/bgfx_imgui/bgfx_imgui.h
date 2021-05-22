@@ -9,10 +9,6 @@
 #include "bgfx/bgfx.h"
 #include "imgui.h"
 
-#define IMGUI_MBUT_LEFT   0x01
-#define IMGUI_MBUT_RIGHT  0x02
-#define IMGUI_MBUT_MIDDLE 0x04
-
 inline uint32_t imguiRGBA(uint8_t _r, uint8_t _g, uint8_t _b, uint8_t _a = 255)
 {
 	return 0
@@ -23,14 +19,17 @@ inline uint32_t imguiRGBA(uint8_t _r, uint8_t _g, uint8_t _b, uint8_t _a = 255)
 		;
 }
 
-namespace bx { struct AllocatorI; }
+namespace bx
+{
+	struct AllocatorI;
+}
 
 namespace BGFX_ImGui
 {
 	void imguiCreate(float _fontSize = 18.0f, bx::AllocatorI* _allocator = NULL);
 	void imguiDestroy();
 
-	void imguiBeginFrame(int32_t _mx, int32_t _my, uint8_t _button, int32_t _scroll, uint16_t _width, uint16_t _height, int _inputChar = -1, bgfx::ViewId _view = 255);
+	void imguiBeginFrame(int32_t _mx, int32_t _my, uint8_t _button, float _scroll, uint16_t _width, uint16_t _height, int _inputChar = -1, bgfx::ViewId _view = 255);
 	void imguiEndFrame();
 }
 
@@ -39,7 +38,6 @@ namespace ImGui
 #define IMGUI_FLAGS_NONE        UINT8_C(0x00)
 #define IMGUI_FLAGS_ALPHA_BLEND UINT8_C(0x01)
 
-	///
 	inline ImTextureID toId(bgfx::TextureHandle _handle, uint8_t _flags, uint8_t _mip)
 	{
 		union { struct { bgfx::TextureHandle handle; uint8_t flags; uint8_t mip; } s; ImTextureID id; } tex;

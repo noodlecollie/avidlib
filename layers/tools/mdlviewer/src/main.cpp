@@ -1,6 +1,8 @@
 #include "AVIDLib_ToolsCommon/ApplicationLauncher.h"
 #include "AVIDLib_ToolsCommon/ApplicationCallbacks.h"
 
+#include "bgfx/bgfx.h"
+
 class App : public ALT_Common::ApplicationCallbacks
 {
 public:

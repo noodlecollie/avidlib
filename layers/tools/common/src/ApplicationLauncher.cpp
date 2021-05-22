@@ -49,7 +49,7 @@ namespace ALT_Common
 
 	static const char* SetUpOpenGL()
 	{
-		// Taken from ImGUI examples
+		// Taken from ImGui examples
 #ifdef __APPLE__
 		// GL 3.2 + GLSL 150
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

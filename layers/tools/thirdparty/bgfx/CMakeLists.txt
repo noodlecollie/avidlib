@@ -22,6 +22,6 @@ endif()
 
 add_subdirectory(bgfx.cmake)
 
-# This is an adaptation of the bgfx example ImGUI integration,
+# This is an adaptation of the bgfx example ImGui integration,
 # cleaned up and isolated a little so that it works in this repo.
 add_subdirectory(bgfx_imgui)

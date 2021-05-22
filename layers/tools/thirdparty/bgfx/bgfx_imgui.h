@@ -1,7 +1,7 @@
 #ifndef CUSTOM_HELPER_BGFX_IMGUI_H
 #define CUSTOM_HELPER_BGFX_IMGUI_H
 
-// This file wraps the internal BGFX ImGUI helper files, which are something of a mess IMO.
+// This file wraps the internal BGFX ImGui helper files, which are something of a mess IMO.
 // The helper file itself is just called imgui.h, so we can't include it directlt in other
 // projects in this repo because it would clash with the *actual* imgui.h...
 

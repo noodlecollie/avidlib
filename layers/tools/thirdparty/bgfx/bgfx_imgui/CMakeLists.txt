@@ -1,4 +1,4 @@
-add_library(${TARGETNAME_THIRDPARTY_BGFX_IMGUI}
+add_library(${TARGETNAME_THIRDPARTY_BGFX_IMGUI} STATIC
 	include/bgfx_imgui/bgfx_imgui.h
 	src/bgfx_imgui.cpp
 )

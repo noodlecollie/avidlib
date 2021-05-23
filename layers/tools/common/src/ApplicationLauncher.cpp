@@ -28,7 +28,11 @@ namespace ALT_Common
 
 		MakeSafeSize(width);
 		MakeSafeSize(height);
-		Application->OnWindowResized(window, static_cast<size_t>(width), static_cast<size_t>(height));
+		Application->OnWindowResized(window,
+									 static_cast<size_t>(width),
+									 static_cast<size_t>(height),
+									 static_cast<size_t>(bufferWidth),
+									 static_cast<size_t>(bufferHeight));
 	}
 
 	static void WindowResizeTouch(GLFWwindow* window)
@@ -36,7 +40,6 @@ namespace ALT_Common
 		int width = 0;
 		int height = 0;
 		glfwGetWindowSize(window, &width, &height);
-
 		OnWindowResized(window, width, height);
 	}
 
@@ -136,6 +139,30 @@ namespace ALT_Common
 				else
 				{
 					mouseButtons &= ~(1 << ImGuiMouseButton_Left);
+				}
+			}
+
+			if ( button == GLFW_MOUSE_BUTTON_MIDDLE )
+			{
+				if ( action == GLFW_PRESS )
+				{
+					mouseButtons |= (1 << ImGuiMouseButton_Middle);
+				}
+				else
+				{
+					mouseButtons &= ~(1 << ImGuiMouseButton_Middle);
+				}
+			}
+
+			if ( button == GLFW_MOUSE_BUTTON_RIGHT )
+			{
+				if ( action == GLFW_PRESS )
+				{
+					mouseButtons |= (1 << ImGuiMouseButton_Right);
+				}
+				else
+				{
+					mouseButtons &= ~(1 << ImGuiMouseButton_Right);
 				}
 			}
 

@@ -1,6 +1,6 @@
 add_library(${TARGETNAME_THIRDPARTY_BGFX_IMGUI} STATIC
-	include/bgfx_imgui/bgfx_imgui.h
-	src/bgfx_imgui.cpp
+	include/bgfx_imgui/BGFXImGuiAdapter.h
+	src/BGFXImGuiAdapter.cpp
 )
 
 target_include_directories(${TARGETNAME_THIRDPARTY_BGFX_IMGUI} PUBLIC

@@ -42,7 +42,7 @@ namespace ALT_Common
 		virtual void OnGetInitialState(InitialState& state) = 0;
 		virtual InitResult OnWindowCreated(GLFWwindow* window, const WindowCreationState& state) = 0;
 		virtual FrameResult OnWindowNewFrame(GLFWwindow* window) = 0;
-		virtual void OnWindowResized(GLFWwindow* window, size_t width, size_t height) = 0;
+		virtual void OnWindowResized(GLFWwindow* window, size_t width, size_t height, size_t fbWidth, size_t fbHeight) = 0;
 		virtual void OnCursorMoved(GLFWwindow* window, int32_t mouseX, int32_t mouseY) = 0;
 		virtual void OnMouseButtons(GLFWwindow* window, uint32_t buttons) = 0;
 		virtual void OnMouseScroll(GLFWwindow* window, float yDelta) = 0;

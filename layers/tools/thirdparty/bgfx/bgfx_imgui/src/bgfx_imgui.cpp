@@ -56,6 +56,7 @@ static FontRangeMerge s_fontRangeMerge[] =
 	{ s_iconsFontAwesomeTtf, sizeof(s_iconsFontAwesomeTtf), { ICON_MIN_FA, ICON_MAX_FA, 0 } },
 };
 
+static bx::DefaultAllocator s_allocator;
 static void* memAlloc(size_t _size, void* _userData);
 static void memFree(void* _ptr, void* _userData);
 
@@ -190,16 +191,8 @@ struct OcornutImguiContext
 		}
 	}
 
-	void create(float _fontSize, bx::AllocatorI* _allocator)
+	void create(float _fontSize)
 	{
-		m_allocator = _allocator;
-
-		if (NULL == _allocator)
-		{
-			static bx::DefaultAllocator allocator;
-			m_allocator = &allocator;
-		}
-
 		m_viewId = 255;
 		m_lastScroll = 0;
 		m_last = bx::getHPCounter();
@@ -290,8 +283,6 @@ struct OcornutImguiContext
 		bgfx::destroy(u_imageLodEnabled);
 		bgfx::destroy(m_imageProgram);
 		bgfx::destroy(m_program);
-
-		m_allocator = NULL;
 	}
 
 	void setupStyle(bool _dark)
@@ -355,7 +346,6 @@ struct OcornutImguiContext
 	}
 
 	ImGuiContext*       m_imgui;
-	bx::AllocatorI*     m_allocator;
 	bgfx::VertexLayout  m_layout;
 	bgfx::ProgramHandle m_program;
 	bgfx::ProgramHandle m_imageProgram;
@@ -373,20 +363,20 @@ static OcornutImguiContext s_ctx;
 static void* memAlloc(size_t _size, void* _userData)
 {
 	BX_UNUSED(_userData);
-	return BX_ALLOC(s_ctx.m_allocator, _size);
+	return BX_ALLOC(&s_allocator, _size);
 }
 
 static void memFree(void* _ptr, void* _userData)
 {
 	BX_UNUSED(_userData);
-	BX_FREE(s_ctx.m_allocator, _ptr);
+	BX_FREE(&s_allocator, _ptr);
 }
 
 namespace BGFX_ImGui
 {
-	void imguiCreate(float _fontSize, bx::AllocatorI* _allocator)
+	void imguiCreate(float _fontSize)
 	{
-		s_ctx.create(_fontSize, _allocator);
+		s_ctx.create(_fontSize);
 	}
 
 	void imguiDestroy()

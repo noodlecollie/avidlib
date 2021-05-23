@@ -1,11 +1,11 @@
 #include "AVIDLib_ToolsCommon/ApplicationLauncher.h"
-#include "AVIDLib_ToolsCommon/ApplicationCallbacks.h"
+#include "AVIDLib_ToolsCommon/BaseApplication.h"
 
 #include "GLFW/glfw3.h"
 #include "bgfx/bgfx.h"
 #include "bgfx_imgui/bgfx_imgui.h"
 
-class App : public ALT_Common::ApplicationCallbacks
+class App : public ALT_Common::BaseApplication
 {
 public:
 	virtual ~App() = default;
@@ -17,45 +17,65 @@ public:
 		initState.windowTitle = "GLFW + BGFX";
 	}
 
-	InitResult OnWindowCreated(GLFWwindow*, const WindowCreationState& state) override
+	InitResult OnWindowCreated(GLFWwindow* window, const WindowCreationState& state) override
 	{
+		const InitResult result = BaseApplication::OnWindowCreated(window, state);
+
+		if ( result != InitResult::Successful )
+		{
+			return result;
+		}
+
 		BGFX_ImGui::imguiCreate(18.0f * state.contentScale);
 		return InitResult::Successful;
 	}
 
-	void OnWindowAboutToBeDestroyed(GLFWwindow*) override
+	void OnWindowAboutToBeDestroyed(GLFWwindow* window) override
 	{
 		BGFX_ImGui::imguiDestroy();
+		BaseApplication::OnWindowAboutToBeDestroyed(window);
 	}
 
-	void OnWindowResized(GLFWwindow*, size_t width, size_t height) override
+	void OnWindowResized(GLFWwindow* window, size_t width, size_t height) override
 	{
+		BaseApplication::OnWindowResized(window, width, height);
 		bgfx::setViewRect(0, 0, 0, static_cast<uint16_t>(width), static_cast<uint16_t>(height));
 	}
 
-	void OnCursorMoved(GLFWwindow*, int32_t mouseX, int32_t mouseY) override
+	void OnCursorMoved(GLFWwindow* window, int32_t mouseX, int32_t mouseY) override
 	{
+		BaseApplication::OnCursorMoved(window, mouseX, mouseY);
 		m_LastMouseX = mouseX;
 		m_LastMouseY = mouseY;
 	}
 
-	void OnMouseButtons(GLFWwindow*, uint32_t buttons) override
+	void OnMouseButtons(GLFWwindow* window, uint32_t buttons) override
 	{
+		BaseApplication::OnMouseButtons(window, buttons);
 		m_LastMouseButtons = buttons;
 	}
 
-	void OnMouseScroll(GLFWwindow*, float yDelta) override
+	void OnMouseScroll(GLFWwindow* window, float yDelta) override
 	{
+		BaseApplication::OnMouseScroll(window, yDelta);
 		m_MouseScrollDelta += yDelta;
 	}
 
-	void OnChar(GLFWwindow*, unsigned int key) override
+	void OnChar(GLFWwindow* window, unsigned int key) override
 	{
+		BaseApplication::OnChar(window, key);
 		m_LastInputChar = static_cast<unsigned int>(key);
 	}
 
 	FrameResult OnWindowNewFrame(GLFWwindow* window) override
 	{
+		const FrameResult result = BaseApplication::OnWindowNewFrame(window);
+
+		if ( result != FrameResult::NoAction )
+		{
+			return result;
+		}
+
 		int fbWidth = 0;
 		int fbHeight = 0;
 		glfwGetFramebufferSize(window, &fbWidth, &fbHeight);

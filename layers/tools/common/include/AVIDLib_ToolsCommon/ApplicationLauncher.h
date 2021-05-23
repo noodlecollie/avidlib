@@ -1,7 +1,7 @@
 #ifndef AVIDLIB_TOOLS_COMMON_APPLICATIONLAUNCHER_H
 #define AVIDLIB_TOOLS_COMMON_APPLICATIONLAUNCHER_H
 
-#include "AVIDLib_ToolsCommon/ApplicationCallbacks.h"
+#include "AVIDLib_ToolsCommon/IApplicationCallbacks.h"
 
 namespace ALT_Common
 {
@@ -16,7 +16,7 @@ namespace ALT_Common
 		ExitCustomInitStateFailed = -4
 	};
 
-	int RunApplication(int argc, char** argv, ApplicationCallbacks* application);
+	int RunApplication(int argc, char** argv, IApplicationCallbacks* application);
 }
 
 #endif // AVIDLIB_TOOLS_COMMON_APPLICATIONLAUNCHER_H

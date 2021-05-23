@@ -26,7 +26,7 @@ namespace bx
 
 namespace BGFX_ImGui
 {
-	void imguiCreate(float _fontSize = 18.0f, bx::AllocatorI* _allocator = NULL);
+	void imguiCreate(float _fontSize = 18.0f);
 	void imguiDestroy();
 
 	void imguiBeginFrame(int32_t _mx,

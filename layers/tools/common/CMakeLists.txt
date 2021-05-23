@@ -1,12 +1,13 @@
 set(PUBLIC_HEADERS_ALL
-	include/${TARGETNAME_TOOLS_COMMON}/ApplicationCallbacks.h
 	include/${TARGETNAME_TOOLS_COMMON}/ApplicationLauncher.h
+	include/${TARGETNAME_TOOLS_COMMON}/BaseApplication.h
+	include/${TARGETNAME_TOOLS_COMMON}/IApplicationCallbacks.h
 	include/${TARGETNAME_TOOLS_COMMON}/WinSysHelpers.h
 )
 
 set(SOURCES_GENERAL
-	src/ApplicationCallbacks.cpp
 	src/ApplicationLauncher.cpp
+	src/BaseApplication.cpp
 )
 
 set(SOURCES_X11

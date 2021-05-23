@@ -9,7 +9,7 @@
 namespace ALT_Common
 {
 	static std::mutex ApplicationMutex;
-	static ApplicationCallbacks* Application = nullptr;
+	static IApplicationCallbacks* Application = nullptr;
 
 	static inline void MakeSafeSize(int& size)
 	{
@@ -70,7 +70,7 @@ namespace ALT_Common
 
 	static GLFWwindow* InitialiseApplicationWindow(float contentScale)
 	{
-		ApplicationCallbacks::InitialState initState;
+		IApplicationCallbacks::InitialState initState;
 		Application->OnGetInitialState(initState);
 
 		const int32_t winWidth = static_cast<int32_t>(initState.windowWidth * contentScale);
@@ -179,7 +179,7 @@ namespace ALT_Common
 				break;
 			}
 
-			ApplicationCallbacks::WindowCreationState createState;
+			IApplicationCallbacks::WindowCreationState createState;
 			createState.contentScale = ContentScaleForMonitor(glfwGetPrimaryMonitor());
 			createState.glslVersion = SetUpOpenGL();
 
@@ -194,7 +194,7 @@ namespace ALT_Common
 
 			AttachWindowCallbacks(window);
 
-			if ( Application->OnWindowCreated(window, createState) != ApplicationCallbacks::InitResult::Successful )
+			if ( Application->OnWindowCreated(window, createState) != IApplicationCallbacks::InitResult::Successful )
 			{
 				std::cerr << "Failed to perform custom initialisation after window creation!" << std::endl;
 				exit = ExitCustomInitStateFailed;
@@ -207,7 +207,7 @@ namespace ALT_Common
 			{
 				glfwPollEvents();
 
-				if ( Application->OnWindowNewFrame(window) == ApplicationCallbacks::FrameResult::CloseWindow )
+				if ( Application->OnWindowNewFrame(window) == IApplicationCallbacks::FrameResult::CloseWindow )
 				{
 					break;
 				}
@@ -243,7 +243,7 @@ namespace ALT_Common
 		return exit;
 	}
 
-	int RunApplication(int argc, char** argv, ApplicationCallbacks* application)
+	int RunApplication(int argc, char** argv, IApplicationCallbacks* application)
 	{
 		if ( argc < 1 || !argv )
 		{

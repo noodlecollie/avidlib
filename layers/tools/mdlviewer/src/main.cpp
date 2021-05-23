@@ -1,27 +1,64 @@
-#include "AVIDLib_ToolsCommon/SimpleApplication.h"
+#include "AVIDLib_ToolsCommon/ApplicationLauncher.h"
+#include "AVIDLib_ToolsCommon/ApplicationCallbacks.h"
 
-class App : public ALT_Common::SimpleApplication
+#include "GLFW/glfw3.h"
+#include "bgfx/bgfx.h"
+#include "bgfx_imgui/bgfx_imgui.h"
+
+class App : public ALT_Common::ApplicationCallbacks
 {
 public:
 	virtual ~App() = default;
 
-protected:
-	void OnCreated() override
+	void OnGetInitialState(InitialState& initState) override
 	{
-		bgfx::setDebug(BGFX_DEBUG_TEXT /*| BGFX_DEBUG_STATS*/);
+		initState.windowWidth = 1280;
+		initState.windowHeight = 720;
+		initState.windowTitle = "GLFW + BGFX";
 	}
 
-	bool OnPoll() override
+	InitResult OnWindowCreated(GLFWwindow*, const WindowCreationState& state) override
 	{
-		static size_t counter = 0;
+		BGFX_ImGui::imguiCreate(18.0f * state.contentScale);
+		return InitResult::Successful;
+	}
 
-		glfwPollEvents();
+	void OnWindowAboutToBeDestroyed(GLFWwindow*) override
+	{
+		BGFX_ImGui::imguiDestroy();
+	}
 
-		size_t width = 0;
-		size_t height = 0;
-		FrameBufferDimensions(width, height);
-
+	void OnWindowResized(GLFWwindow*, size_t width, size_t height) override
+	{
 		bgfx::setViewRect(0, 0, 0, static_cast<uint16_t>(width), static_cast<uint16_t>(height));
+	}
+
+	void OnCursorMoved(GLFWwindow*, int32_t mouseX, int32_t mouseY) override
+	{
+		m_LastMouseX = mouseX;
+		m_LastMouseY = mouseY;
+	}
+
+	void OnMouseButtons(GLFWwindow*, uint32_t buttons) override
+	{
+		m_LastMouseButtons = buttons;
+	}
+
+	void OnMouseScroll(GLFWwindow*, float yDelta) override
+	{
+		m_MouseScrollDelta += yDelta;
+	}
+
+	void OnChar(GLFWwindow*, unsigned int key) override
+	{
+		m_LastInputChar = static_cast<unsigned int>(key);
+	}
+
+	FrameResult OnWindowNewFrame(GLFWwindow* window) override
+	{
+		int fbWidth = 0;
+		int fbHeight = 0;
+		glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
 
 		// Clear the view rect
 		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
@@ -29,39 +66,34 @@ protected:
 		// Set empty primitive on screen
 		bgfx::touch(0);
 
-		bgfx::dbgTextClear();
-		bgfx::dbgTextPrintf(0, 1, 0x0f, "Frame: %lu", counter++);
+		BGFX_ImGui::imguiBeginFrame(m_LastMouseX,
+									m_LastMouseY,
+									m_LastMouseButtons,
+									m_MouseScrollDelta,
+									static_cast<uint16_t>(fbWidth),
+									static_cast<uint16_t>(fbHeight),
+									m_LastInputChar);
+		m_LastInputChar = -1;
+		m_MouseScrollDelta = 0.0;
+
+		ImGui::ShowDemoWindow();
+		BGFX_ImGui::imguiEndFrame();
 
 		bgfx::frame();
 
-		return true;
+		return FrameResult::NoAction;
 	}
+
+private:
+	int32_t m_LastMouseX = 0.0f;
+	int32_t m_LastMouseY = 0.0f;
+	uint32_t m_LastMouseButtons = 0;
+	float m_MouseScrollDelta = 0.0;
+	int m_LastInputChar = -1;
 };
 
 int main(int argc, char** argv)
 {
-	using namespace ALT_Common;
-
-	SimpleApplication::InitArgs args;
-
-	args.argc = argc;
-	args.argv = argv;
-	args.windowWidth = 1280;
-	args.windowHeight = 720;
-	args.windowTitle = "GLFW + BGFX";
-
 	App app;
-
-	if ( !app.Create(args) )
-	{
-		return 1;
-	}
-
-	while ( app.Poll() )
-	{
-		// Don't quit yet.
-	}
-
-	app.Destroy();
-	return 0;
+	return ALT_Common::RunApplication(argc, argv, &app);
 }

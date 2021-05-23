@@ -1,10 +1,12 @@
 set(PUBLIC_HEADERS_ALL
+	include/${TARGETNAME_TOOLS_COMMON}/ApplicationCallbacks.h
+	include/${TARGETNAME_TOOLS_COMMON}/ApplicationLauncher.h
 	include/${TARGETNAME_TOOLS_COMMON}/WinSysHelpers.h
-	include/${TARGETNAME_TOOLS_COMMON}/SimpleApplication.h
 )
 
 set(SOURCES_GENERAL
-	src/SimpleApplication.cpp
+	src/ApplicationCallbacks.cpp
+	src/ApplicationLauncher.cpp
 )
 
 set(SOURCES_X11
@@ -27,6 +29,5 @@ if(BUILD_TOOLS)
 
 	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE glfw)
 	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE bgfx)
-else()
-	message(WARNING "Not building MDL Viewer as BUILD_TOOLS was not set.")
+	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE ${TARGETNAME_THIRDPARTY_IMGUI})
 endif()

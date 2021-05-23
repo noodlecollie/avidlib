@@ -36,6 +36,10 @@ namespace ALT_Common
 	{
 	}
 
+	void ApplicationCallbacks::OnChar(GLFWwindow*, unsigned int)
+	{
+	}
+
 	void ApplicationCallbacks::OnWindowAboutToBeDestroyed(GLFWwindow*)
 	{
 	}

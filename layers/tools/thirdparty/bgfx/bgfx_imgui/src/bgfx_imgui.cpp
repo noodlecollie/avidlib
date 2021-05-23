@@ -394,9 +394,23 @@ namespace BGFX_ImGui
 		s_ctx.destroy();
 	}
 
-	void imguiBeginFrame(int32_t _mx, int32_t _my, uint8_t _button, float _scrollDelta, uint16_t _width, uint16_t _height, int _inputChar, bgfx::ViewId _viewId)
+	void imguiBeginFrame(int32_t _mx,
+						 int32_t _my,
+						 uint8_t _button,
+						 float _scrollDelta,
+						 uint16_t _width,
+						 uint16_t _height,
+						 int _inputChar,
+						 bgfx::ViewId _viewId)
 	{
-		s_ctx.beginFrame(_mx, _my, _button, _scrollDelta, _width, _height, _inputChar, _viewId);
+		s_ctx.beginFrame(_mx,
+						 _my,
+						 _button,
+						 _scrollDelta,
+						 _width,
+						 _height,
+						 _inputChar,
+						 _viewId);
 	}
 
 	void imguiEndFrame()

@@ -146,6 +146,11 @@ namespace ALT_Common
 		{
 			Application->OnMouseScroll(window, static_cast<float>(yDelta));
 		});
+
+		glfwSetCharCallback(window, [](GLFWwindow* window, unsigned int key)
+		{
+			Application->OnChar(window, key);
+		});
 	}
 
 	static void DetachWindowCallbacks(GLFWwindow* window)

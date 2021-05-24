@@ -132,6 +132,8 @@ public:
 		io.MouseDown[2] = (m_MouseButtonsPressed & (1 << ImGuiMouseButton_Middle)) != 0;
 		io.MouseWheel = m_ScrollDelta.y;
 
+		m_ScrollDelta = ImVec2{};
+
 		ImGui::NewFrame();
 	}
 

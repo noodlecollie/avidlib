@@ -13,17 +13,17 @@ namespace ALT_Common
 
 		// If subclasses override these functions, they should always call through to the
 		// base implementation as well!
-		virtual void OnArguments(int argc, char** argv) override;
-		virtual void OnGetInitialState(InitialState& state) override;
-		virtual InitResult OnWindowCreated(GLFWwindow* window, const WindowCreationState& state) override;
-		virtual FrameResult OnWindowNewFrame(GLFWwindow* window) override;
-		virtual void OnWindowResized(GLFWwindow* window, size_t width, size_t height, size_t fbWidth, size_t fbHeight) override;
-		virtual void OnCursorMoved(GLFWwindow* window, int32_t mouseX, int32_t mouseY) override;
-		virtual void OnMouseButtons(GLFWwindow* window, uint32_t buttons) override;
-		virtual void OnMouseScroll(GLFWwindow* window, float yDelta) override;
-		virtual void OnChar(GLFWwindow* window, unsigned int key) override;
-		virtual void OnWindowAboutToBeDestroyed(GLFWwindow* window) override;
-		virtual int OnGetExitCode() override;
+		void OnArguments(int argc, char** argv) override;
+		void OnGetInitialState(InitialState& state) override;
+		InitResult OnWindowCreated(GLFWwindow* window, const WindowCreationState& state) override;
+		FrameResult OnWindowNewFrame(GLFWwindow* window) override;
+		void OnWindowResized(GLFWwindow* window, size_t width, size_t height, size_t fbWidth, size_t fbHeight) override;
+		void OnCursorMoved(GLFWwindow* window, int32_t mouseX, int32_t mouseY) override;
+		void OnMouseButtons(GLFWwindow* window, uint32_t buttons) override;
+		void OnMouseScroll(GLFWwindow* window, float yDelta) override;
+		void OnChar(GLFWwindow* window, unsigned int key) override;
+		void OnWindowAboutToBeDestroyed(GLFWwindow* window) override;
+		int OnGetExitCode() override;
 
 	protected:
 		BGFXImGuiAdapter m_Adapter;

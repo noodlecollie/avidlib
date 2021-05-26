@@ -46,7 +46,8 @@ namespace ALT_Common
 		virtual void OnCursorMoved(GLFWwindow* window, int32_t mouseX, int32_t mouseY) = 0;
 		virtual void OnMouseButtons(GLFWwindow* window, uint32_t buttons) = 0;
 		virtual void OnMouseScroll(GLFWwindow* window, float yDelta) = 0;
-		virtual void OnChar(GLFWwindow* window, unsigned int key) = 0;
+		virtual void OnChar(GLFWwindow* window, unsigned int character) = 0;
+		virtual void OnKey(GLFWwindow* window, unsigned int key, bool pressed) = 0;
 		virtual void OnWindowAboutToBeDestroyed(GLFWwindow* window) = 0;
 		virtual int OnGetExitCode() = 0;
 	};

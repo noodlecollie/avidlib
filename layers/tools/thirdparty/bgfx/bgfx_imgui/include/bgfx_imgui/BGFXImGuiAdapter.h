@@ -15,6 +15,9 @@ public:
 	void BeginFrame();
 	void EndFrame();
 
+	// Must only be called after creation:
+	void SetKeyMapping(ImGuiKey_ imguiKey, int externalKey);
+
 	ImVec2 DisplaySize() const;
 	void SetDisplaySize(const ImVec2& size);
 
@@ -32,6 +35,7 @@ public:
 	void SetScrollDelta(const ImVec2& delta);
 
 	void SetInputChar(unsigned int input);
+	void SetKeyState(int key, bool pressed);
 
 private:
 	class Impl;

@@ -69,6 +69,12 @@ static void memFree(void* _ptr, void* _userData)
 	BX_FREE(&DefaultAllocator, _ptr);
 }
 
+template<typename T, size_t SIZE>
+static constexpr size_t ArraySize(T (&)[SIZE])
+{
+	return SIZE;
+}
+
 class BGFXImGuiAdapter::Impl
 {
 public:
@@ -119,6 +125,19 @@ public:
 			m_InputChar = -1;
 		}
 
+		if ( m_KeyState != 0 )
+		{
+			const bool isPressed = m_KeyState > 0;
+			const int keyCode = m_KeyState < 0 ? -m_KeyState : m_KeyState;
+
+			if ( keyCode < static_cast<int>(ArraySize(io.KeysDown)) )
+			{
+				io.KeysDown[keyCode] = isPressed;
+			}
+
+			m_KeyState = 0;
+		}
+
 		const int64_t now = bx::getHPCounter();
 		const int64_t frameTime = now - m_LastFrameTimestamp;
 		m_LastFrameTimestamp = now;
@@ -131,6 +150,8 @@ public:
 		io.MouseDown[1] = (m_MouseButtonsPressed & (1 << ImGuiMouseButton_Right)) != 0;
 		io.MouseDown[2] = (m_MouseButtonsPressed & (1 << ImGuiMouseButton_Middle)) != 0;
 		io.MouseWheel = m_ScrollDelta.y;
+
+		m_ScrollDelta = ImVec2{0, 0};
 
 		ImGui::NewFrame();
 	}
@@ -148,6 +169,7 @@ public:
 	uint32_t m_MouseButtonsPressed = 0;
 	ImVec2 m_ScrollDelta;
 	int m_InputChar = -1;
+	int m_KeyState = 0;
 	int64_t m_LastFrameTimestamp = 0;
 
 private:
@@ -443,6 +465,16 @@ void BGFXImGuiAdapter::EndFrame()
 	GetImpl().EndFrame();
 }
 
+void BGFXImGuiAdapter::SetKeyMapping(ImGuiKey_ imguiKey, int externalKey)
+{
+	ImGuiIO& io = ImGui::GetIO();
+
+	if ( imguiKey < ImGuiKey_COUNT && externalKey >= 0 && externalKey < static_cast<int>(ArraySize(io.KeysDown)) )
+	{
+		io.KeyMap[imguiKey] = externalKey;
+	}
+}
+
 ImVec2 BGFXImGuiAdapter::DisplaySize() const
 {
 	return GetImpl().m_DisplaySize;
@@ -507,5 +539,18 @@ void BGFXImGuiAdapter::SetScrollDelta(const ImVec2& delta)
 
 void BGFXImGuiAdapter::SetInputChar(unsigned int input)
 {
-	GetImpl().m_InputChar = static_cast<int>(input);
+	const int inputSigned = static_cast<int>(input);
+
+	if ( inputSigned >= 0 )
+	{
+		GetImpl().m_InputChar = inputSigned;
+	}
+}
+
+void BGFXImGuiAdapter::SetKeyState(int key, bool pressed)
+{
+	if ( key > 0 )
+	{
+		GetImpl().m_KeyState = pressed ? key : -key;
+	}
 }

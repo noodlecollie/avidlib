@@ -2,9 +2,6 @@
 #include "GLFW/glfw3.h"
 #include "bgfx/bgfx.h"
 
-// REMOVE ME
-#include <iostream>
-
 namespace ALT_Common
 {
 	void BaseApplication::OnArguments(int, char**)
@@ -23,6 +20,29 @@ namespace ALT_Common
 
 		const ImVec2 fbSize{static_cast<float>(fbWidth), static_cast<float>(fbHeight)};
 		m_Adapter.Create(18.0f * state.contentScale);
+
+		m_Adapter.SetKeyMapping(ImGuiKey_Tab, GLFW_KEY_TAB);
+		m_Adapter.SetKeyMapping(ImGuiKey_LeftArrow, GLFW_KEY_LEFT);
+		m_Adapter.SetKeyMapping(ImGuiKey_RightArrow, GLFW_KEY_RIGHT);
+		m_Adapter.SetKeyMapping(ImGuiKey_UpArrow, GLFW_KEY_UP);
+		m_Adapter.SetKeyMapping(ImGuiKey_DownArrow, GLFW_KEY_DOWN);
+		m_Adapter.SetKeyMapping(ImGuiKey_PageUp, GLFW_KEY_PAGE_UP);
+		m_Adapter.SetKeyMapping(ImGuiKey_PageDown, GLFW_KEY_PAGE_DOWN);
+		m_Adapter.SetKeyMapping(ImGuiKey_Home, GLFW_KEY_HOME);
+		m_Adapter.SetKeyMapping(ImGuiKey_End, GLFW_KEY_END);
+		m_Adapter.SetKeyMapping(ImGuiKey_Insert, GLFW_KEY_INSERT);
+		m_Adapter.SetKeyMapping(ImGuiKey_Delete, GLFW_KEY_DELETE);
+		m_Adapter.SetKeyMapping(ImGuiKey_Backspace, GLFW_KEY_BACKSPACE);
+		m_Adapter.SetKeyMapping(ImGuiKey_Space, GLFW_KEY_SPACE);
+		m_Adapter.SetKeyMapping(ImGuiKey_Enter, GLFW_KEY_ENTER);
+		m_Adapter.SetKeyMapping(ImGuiKey_Escape, GLFW_KEY_ESCAPE);
+		m_Adapter.SetKeyMapping(ImGuiKey_KeyPadEnter, GLFW_KEY_KP_ENTER);
+		m_Adapter.SetKeyMapping(ImGuiKey_A, GLFW_KEY_A);
+		m_Adapter.SetKeyMapping(ImGuiKey_C, GLFW_KEY_C);
+		m_Adapter.SetKeyMapping(ImGuiKey_V, GLFW_KEY_V);
+		m_Adapter.SetKeyMapping(ImGuiKey_X, GLFW_KEY_X);
+		m_Adapter.SetKeyMapping(ImGuiKey_Y, GLFW_KEY_Y);
+		m_Adapter.SetKeyMapping(ImGuiKey_Z, GLFW_KEY_Z);
 
 		return IApplicationCallbacks::InitResult::Successful;
 	}
@@ -57,9 +77,14 @@ namespace ALT_Common
 		m_Adapter.SetScrollDelta(scrollDelta);
 	}
 
-	void BaseApplication::OnChar(GLFWwindow*, unsigned int key)
+	void BaseApplication::OnChar(GLFWwindow*, unsigned int character)
 	{
-		m_Adapter.SetInputChar(key);
+		m_Adapter.SetInputChar(character);
+	}
+
+	void BaseApplication::OnKey(GLFWwindow*, unsigned int key, bool pressed)
+	{
+		m_Adapter.SetKeyState(key, pressed);
 	}
 
 	void BaseApplication::OnWindowAboutToBeDestroyed(GLFWwindow*)

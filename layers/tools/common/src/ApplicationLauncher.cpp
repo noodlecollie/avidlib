@@ -174,9 +174,14 @@ namespace ALT_Common
 			Application->OnMouseScroll(window, static_cast<float>(yDelta));
 		});
 
-		glfwSetCharCallback(window, [](GLFWwindow* window, unsigned int key)
+		glfwSetCharCallback(window, [](GLFWwindow* window, unsigned int character)
 		{
-			Application->OnChar(window, key);
+			Application->OnChar(window, character);
+		});
+
+		glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int, int action, int)
+		{
+			Application->OnKey(window, static_cast<unsigned int>(key), action == GLFW_PRESS);
 		});
 	}
 

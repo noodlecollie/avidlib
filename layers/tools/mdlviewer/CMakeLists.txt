@@ -5,10 +5,6 @@ set(SOURCES
 	src/main.cpp
 )
 
-set(FONTS
-	${RESOURCES_DIR}/fonts/UbuntuMono/UbuntuMono-R.ttf
-)
-
 if(TOOLS_ALL OR TOOLS_MDLVIEWER)
 	if(BUILD_TOOLS)
 		add_executable(${TARGETNAME_MDLVIEWER} ${SOURCES})
@@ -25,8 +21,6 @@ if(TOOLS_ALL OR TOOLS_MDLVIEWER)
 			LIBRARY DESTINATION ${TARGETNAME_MDLVIEWER}
 			RUNTIME DESTINATION ${TARGETNAME_MDLVIEWER}
 		)
-
-		install(FILES ${FONTS} DESTINATION ${TARGETNAME_MDLVIEWER}/resources/fonts)
 	else()
 		message(WARNING "Not building MDL Viewer as BUILD_TOOLS was not set.")
 	endif()

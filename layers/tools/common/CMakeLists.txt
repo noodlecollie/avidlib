@@ -29,7 +29,5 @@ if(BUILD_TOOLS)
 	target_include_directories(${TARGETNAME_TOOLS_COMMON} PRIVATE src)
 
 	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE glfw)
-	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE bgfx)
 	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE ${TARGETNAME_THIRDPARTY_IMGUI})
-	target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE ${TARGETNAME_THIRDPARTY_BGFX_IMGUI})
 endif()

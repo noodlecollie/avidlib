@@ -5,6 +5,7 @@ set(SOURCES
 	src/sokol/sokolApp.cpp
 	src/sokol/sokolGFX.cpp
 	src/sokol/sokolGlue.cpp
+	src/sokol/sokolImGUI.cpp
 	src/main.cpp
 )
 
@@ -22,6 +23,7 @@ if(TOOLS_ALL OR TOOLS_MDLVIEWER)
 		target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE glfw)
 		target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE ${TARGETNAME_THIRDPARTY_GL3W})
 		target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE ${TARGETNAME_THIRDPARTY_SOKOL})
+		target_link_libraries(${TARGETNAME_MDLVIEWER} PRIVATE ${TARGETNAME_TOOLS_COMMON})
 
 		if(NOT MSVC)
 			target_compile_options(${TARGETNAME_MDLVIEWER} PRIVATE -pthread)

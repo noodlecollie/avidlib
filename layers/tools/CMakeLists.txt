@@ -6,7 +6,4 @@ if(BUILD_TOOLS)
 	add_subdirectory(thirdparty)
 endif()
 
-set(TARGETNAME_TOOLS_COMMON AVIDLib_ToolsCommon)
-
-add_subdirectory(common)
 add_subdirectory(mdlviewer)

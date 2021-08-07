@@ -1,47 +1,66 @@
-#include "AVIDLib_ToolsCommon/ApplicationLauncher.h"
-#include "AVIDLib_ToolsCommon/BaseApplication.h"
+#include <iostream>
+#include <cstring>
 
-#include "bgfx/bgfx.h"
+#include "sokol/sokol_app.h"
+#include "sokol/sokol_gfx.h"
+#include "sokol/sokol_glue.h"
 
-class App : public ALT_Common::BaseApplication
+static void Init()
 {
-public:
-	virtual ~App() = default;
+	sg_desc desc;
+	memset(&desc, 0, sizeof(desc));
 
-	void OnGetInitialState(InitialState& initState) override
-	{
-		initState.windowWidth = 1280;
-		initState.windowHeight = 720;
-		initState.windowTitle = "GLFW + BGFX";
-	}
+	desc.buffer_pool_size = 128;
+	desc.image_pool_size = 128;
+	desc.shader_pool_size = 32;
+	desc.pipeline_pool_size = 64;
+	desc.pass_pool_size = 16;
+	desc.context_pool_size = 16;
+	desc.sampler_cache_size = 64;
+	desc.uniform_buffer_size = 4 * 1024 * 1024;
+	desc.staging_buffer_size = 4 * 1024 * 1024;
 
-	FrameResult OnWindowNewFrame(GLFWwindow* window) override
-	{
-		const FrameResult result = BaseApplication::OnWindowNewFrame(window);
+	desc.context = sapp_sgcontext();
 
-		if ( result != FrameResult::NoAction )
-		{
-			return result;
-		}
+	sg_setup(desc);
+}
 
-		// Clear the view rect
-		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
-
-		// Set empty primitive on screen
-		bgfx::touch(0);
-
-		m_Adapter.BeginFrame();
-		ImGui::ShowDemoWindow();
-		m_Adapter.EndFrame();
-
-		bgfx::frame();
-
-		return FrameResult::NoAction;
-	}
-};
-
-int main(int argc, char** argv)
+static void Frame()
 {
-	App app;
-	return ALT_Common::RunApplication(argc, argv, &app);
+	sg_pass_action action;
+	memset(&action, 0, sizeof(action));
+
+	action.colors[0].action = SG_ACTION_CLEAR;
+	action.colors[0].value.r = 1.0f;
+	action.colors[0].value.g = 0.0f;
+	action.colors[0].value.b = 0.0f;
+	action.colors[0].value.a = 1.0f;
+
+	sg_begin_default_pass(&action, sapp_width(), sapp_height());
+	sg_end_pass();
+	sg_commit();
+}
+
+static void Cleanup()
+{
+	sg_shutdown();
+}
+
+static void Event(const sapp_event*)
+{
+}
+
+sapp_desc sokol_main(int, char**)
+{
+	sapp_desc desc;
+	memset(&desc, 0, sizeof(desc));
+
+	desc.init_cb = &Init;
+	desc.frame_cb = &Frame;
+	desc.cleanup_cb = &Cleanup;
+	desc.event_cb = &Event;
+	desc.width = 640;
+	desc.height = 480;
+
+	return desc;
 }

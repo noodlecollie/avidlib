@@ -3,12 +3,14 @@ set(PUBLIC_HEADERS_ALL
 )
 
 if(WIN32)
-	# TODO: Add Win32 sources here
+	set(SOURCES_LINUX
+		src/DPI_Windows.cpp
+	)
+	set(SOURCES_ALL ${SOURCES_LINUX})
 elseif(UNIX)
 	set(SOURCES_LINUX
 		src/DPI_Linux.cpp
 	)
-
 	set(SOURCES_ALL ${SOURCES_LINUX})
 endif()
 
@@ -23,7 +25,11 @@ if(BUILD_TOOLS)
 	target_include_directories(${TARGETNAME_TOOLS_COMMON} PUBLIC include)
 	target_include_directories(${TARGETNAME_TOOLS_COMMON} PRIVATE src)
 
-	if(UNIX)
+	if(WIN32)
+		target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE
+			Shcore
+		)
+	elseif(UNIX)
 		target_link_libraries(${TARGETNAME_TOOLS_COMMON} PRIVATE
 			${X11_LIBRARIES}
 			${X11_Xrandr_LIB}

@@ -43,7 +43,7 @@ void ALQM_Mat3x4_To4x4ColMajor(const ALQM_Mat3x4* m, ALQM_Scalar* outData, ALP_S
 			if ( rowIndex == 3 )
 			{
 				// We're indexing an element in the final row.
-				outData[outLength] = outLength == 15 ? 1 : 0;
+				outData[outLength] = outLength == 15 ? 1.0f : 0.0f;
 			}
 			else
 			{
@@ -75,7 +75,7 @@ void ALQM_Mat3x4_To4x4RowMajor(const ALQM_Mat3x4* m, ALQM_Scalar* outData, ALP_S
 				// After the line above, outLength will have been decremented,
 				// making it a 0-based index.
 
-				outData[ALQM_MAT3X4_CELLS + outLength] = outLength == 3 ? 1 : 0;
+				outData[ALQM_MAT3X4_CELLS + outLength] = outLength == 3 ? 1.0f : 0.0f;
 			}
 		}
 	}

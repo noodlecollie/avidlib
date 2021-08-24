@@ -16,6 +16,8 @@
 static float HorizontalDPI = 1.0f;
 static float VerticalDPI = 1.0f;
 
+static bool ExitRequested = false;
+
 static void Init()
 {
 	{
@@ -51,21 +53,36 @@ static void Init()
 	}
 }
 
+static void DrawMainMenu()
+{
+	if ( ImGui::BeginMainMenuBar() )
+	{
+		if ( ImGui::BeginMenu("File") )
+		{
+			ImGui::MenuItem("Exit", nullptr, &ExitRequested);
+
+			ImGui::EndMenu();
+		}
+
+		ImGui::EndMainMenuBar();
+	}
+}
+
 static void Frame()
 {
 	sg_pass_action action;
 	memset(&action, 0, sizeof(action));
 
 	action.colors[0].action = SG_ACTION_CLEAR;
-	action.colors[0].value.r = 1.0f;
-	action.colors[0].value.g = 0.0f;
-	action.colors[0].value.b = 0.0f;
+	action.colors[0].value.r = 0.91f;
+	action.colors[0].value.g = 0.99f;
+	action.colors[0].value.b = 1.0f;
 	action.colors[0].value.a = 1.0f;
 
 	sg_begin_default_pass(&action, sapp_width(), sapp_height());
 	simgui_new_frame(sapp_width(), sapp_height(), 1.0f/60.0f);
 
-	ImGui::ShowDemoWindow();
+	DrawMainMenu();
 
 	simgui_render();
 	sg_end_pass();
@@ -81,12 +98,17 @@ static void Cleanup()
 static void Event(const sapp_event* event)
 {
 	simgui_handle_event(event);
+
+	if ( ExitRequested )
+	{
+		sapp_request_quit();
+		ExitRequested = false;
+	}
 }
 
 sapp_desc sokol_main(int, char**)
 {
 	ALT_Common::GetDPIScale(HorizontalDPI, VerticalDPI);
-	std::cout << "DPI: " << HorizontalDPI << ", " << VerticalDPI << std::endl;
 
 	sapp_desc desc;
 	memset(&desc, 0, sizeof(desc));
@@ -98,6 +120,7 @@ sapp_desc sokol_main(int, char**)
 	desc.width = 640;
 	desc.height = 480;
 	desc.high_dpi = HorizontalDPI > 1.0f || VerticalDPI > 1.0f;
+	desc.win32_console_attach = true;
 
 	return desc;
 }

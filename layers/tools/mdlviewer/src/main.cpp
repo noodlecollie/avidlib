@@ -10,11 +10,14 @@
 #include "sokol/sokol_gfx.h"
 #include "sokol/sokol_glue.h"
 #include "sokol/util/sokol_imgui.h"
+#include "sokol/util/sokol_gfx_imgui.h"
 
 #include "AVIDLib_ToolsCommon/DPI.h"
 
-static float HorizontalDPI = 1.0f;
-static float VerticalDPI = 1.0f;
+static constexpr size_t WINDOW_DEFAULT_WIDTH = 800;
+static constexpr size_t WINDOW_DEFAULT_HEIGHT = 600;
+
+static sg_imgui_t ImGUIPersistence;
 
 static bool ExitRequested = false;
 
@@ -47,19 +50,33 @@ static void Init()
 		desc.color_format = SG_PIXELFORMAT_RGBA8;
 		desc.depth_format = SG_PIXELFORMAT_DEPTH_STENCIL;
 		desc.sample_count = 1;
-		desc.dpi_scale = std::max(HorizontalDPI, VerticalDPI);
+		desc.dpi_scale = sapp_dpi_scale();
 
 		simgui_setup(desc);
 	}
+
+	sg_imgui_init(&ImGUIPersistence);
 }
 
-static void DrawMainMenu()
+static void DrawMainMenuBar()
 {
 	if ( ImGui::BeginMainMenuBar() )
 	{
 		if ( ImGui::BeginMenu("File") )
 		{
 			ImGui::MenuItem("Exit", nullptr, &ExitRequested);
+
+			ImGui::EndMenu();
+		}
+
+		if ( ImGui::BeginMenu("GFX Debug") )
+		{
+			ImGui::MenuItem("Buffers", nullptr, &ImGUIPersistence.buffers.open);
+			ImGui::MenuItem("Images", nullptr, &ImGUIPersistence.images.open);
+			ImGui::MenuItem("Shaders", nullptr, &ImGUIPersistence.shaders.open);
+			ImGui::MenuItem("Pipelines", nullptr, &ImGUIPersistence.pipelines.open);
+			ImGui::MenuItem("Passes", nullptr, &ImGUIPersistence.passes.open);
+			ImGui::MenuItem("Calls", nullptr, &ImGUIPersistence.capture.open);
 
 			ImGui::EndMenu();
 		}
@@ -74,15 +91,17 @@ static void Frame()
 	memset(&action, 0, sizeof(action));
 
 	action.colors[0].action = SG_ACTION_CLEAR;
-	action.colors[0].value.r = 0.91f;
-	action.colors[0].value.g = 0.99f;
-	action.colors[0].value.b = 1.0f;
+	action.colors[0].value.r = 200.0f / 255.0f;
+	action.colors[0].value.g = 235.0f / 255.0f;
+	action.colors[0].value.b = 250.0f / 255.0f;
 	action.colors[0].value.a = 1.0f;
 
 	sg_begin_default_pass(&action, sapp_width(), sapp_height());
 	simgui_new_frame(sapp_width(), sapp_height(), 1.0f/60.0f);
 
-	DrawMainMenu();
+	DrawMainMenuBar();
+
+	sg_imgui_draw(&ImGUIPersistence);
 
 	simgui_render();
 	sg_end_pass();
@@ -108,7 +127,8 @@ static void Event(const sapp_event* event)
 
 sapp_desc sokol_main(int, char**)
 {
-	ALT_Common::GetDPIScale(HorizontalDPI, VerticalDPI);
+	float dpi = 1.0f;
+	ALT_Common::GetDPIScale(&dpi, nullptr);
 
 	sapp_desc desc;
 	memset(&desc, 0, sizeof(desc));
@@ -117,9 +137,8 @@ sapp_desc sokol_main(int, char**)
 	desc.frame_cb = &Frame;
 	desc.cleanup_cb = &Cleanup;
 	desc.event_cb = &Event;
-	desc.width = 640;
-	desc.height = 480;
-	desc.high_dpi = HorizontalDPI > 1.0f || VerticalDPI > 1.0f;
+	desc.width = WINDOW_DEFAULT_WIDTH * dpi;
+	desc.height = WINDOW_DEFAULT_HEIGHT * dpi;
 	desc.win32_console_attach = true;
 
 	return desc;

@@ -4,6 +4,7 @@ set(TOOLS_MDLVIEWER "NO" CACHE BOOL "If set, builds the MDLViewer tool.")
 set(SOURCES
 	src/sokol/sokolApp.cpp
 	src/sokol/sokolGFX.cpp
+	src/sokol/sokolGFXImGUI.cpp
 	src/sokol/sokolGlue.cpp
 	src/sokol/sokolImGUI.cpp
 	src/main.cpp

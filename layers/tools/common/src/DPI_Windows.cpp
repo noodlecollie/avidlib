@@ -26,10 +26,17 @@ namespace ALT_Common
 		return TRUE;
 	}
 
-	void GetDPIScale(float& xScale, float& yScale, int screen)
+	void GetDPIScale(float* xScale, float* yScale, int screen)
 	{
-		xScale = 1.0f;
-		yScale = 1.0f;
+		if ( xScale )
+		{
+			*xScale = 1.0f;
+		}
+
+		if ( yScale )
+		{
+			*yScale = 1.0f;
+		}
 
 		sEnumInfo info;
 		info.iIndex = screen;
@@ -46,8 +53,15 @@ namespace ALT_Common
 
 		if ( GetDpiForMonitor(info.hMonitor, MDT_DEFAULT, &dpiX, &dpiY) == S_OK )
 		{
-			xScale = static_cast<float>(dpiX) / 96.0f;
-			yScale = static_cast<float>(dpiY) / 96.0f;
+			if ( xScale )
+			{
+				*xScale = static_cast<float>(dpiX) / 96.0f;
+			}
+
+			if ( yScale )
+			{
+				*yScale = static_cast<float>(dpiY) / 96.0f;
+			}
 		}
 	}
 }

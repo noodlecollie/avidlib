@@ -13,6 +13,7 @@ project(AVIDLib)
 
 # Target names are defined here, so that targets can refer to one another easily.
 set(TARGETNAME_THIRDPARTY_IMGUI ThirdParty_ImGui)
+set(TARGETNAME_THIRDPARTY_IMGUIFILEDIALOG ThirdParty_ImGuiFileDialog)
 set(TARGETNAME_THIRDPARTY_GL3W ThirdParty_gl3w)
 set(TARGETNAME_THIRDPARTY_SOKOL ThirdParty_sokol)
 set(TARGETNAME_PLAT AVIDLib_Plat)

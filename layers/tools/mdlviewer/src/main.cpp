@@ -13,13 +13,16 @@
 #include "sokol/util/sokol_gfx_imgui.h"
 
 #include "AVIDLib_ToolsCommon/DPI.h"
+#include "ImGuiFileDialog.h"
 
 static constexpr size_t WINDOW_DEFAULT_WIDTH = 800;
 static constexpr size_t WINDOW_DEFAULT_HEIGHT = 600;
+static constexpr const char* const KEY_OPEN_MDL_FILE = "OpenMDLFile";
 
 static sg_imgui_t ImGUIPersistence;
 
 static bool ExitRequested = false;
+static bool OpenFileRequested = false;
 
 static void Init()
 {
@@ -64,6 +67,7 @@ static void DrawMainMenuBar()
 	{
 		if ( ImGui::BeginMenu("File") )
 		{
+			ImGui::MenuItem("Open", nullptr, &OpenFileRequested);
 			ImGui::MenuItem("Exit", nullptr, &ExitRequested);
 
 			ImGui::EndMenu();
@@ -85,6 +89,19 @@ static void DrawMainMenuBar()
 	}
 }
 
+static void DrawOpenFileDialogue()
+{
+	if ( ImGuiFileDialog::Instance()->Display(KEY_OPEN_MDL_FILE, 32, ImVec2(0, 200)) )
+	{
+		if ( ImGuiFileDialog::Instance()->IsOk() )
+		{
+			// TODO: Do something with path.
+		}
+
+		ImGuiFileDialog::Instance()->Close();
+	}
+}
+
 static void Frame()
 {
 	sg_pass_action action;
@@ -100,6 +117,7 @@ static void Frame()
 	simgui_new_frame(sapp_width(), sapp_height(), 1.0f/60.0f);
 
 	DrawMainMenuBar();
+	DrawOpenFileDialogue();
 
 	sg_imgui_draw(&ImGUIPersistence);
 
@@ -122,6 +140,16 @@ static void Event(const sapp_event* event)
 	{
 		sapp_request_quit();
 		ExitRequested = false;
+	}
+
+	if ( OpenFileRequested )
+	{
+		static constexpr ImGuiWindowFlags FLAGS =
+			ImGuiFileDialogFlags_DontShowHiddenFiles |
+			ImGuiFileDialogFlags_DisableCreateDirectoryButton;
+
+		ImGuiFileDialog::Instance()->OpenDialog(KEY_OPEN_MDL_FILE, "Choose MDL File", ".mdl", ".", 1, nullptr, FLAGS);
+		OpenFileRequested = false;
 	}
 }
 

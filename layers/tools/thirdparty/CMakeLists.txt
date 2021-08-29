@@ -1,4 +1,5 @@
 add_subdirectory(imgui)
+add_subdirectory(ImGuiFileDialog)
 add_subdirectory(glfw)
 add_subdirectory(gl3w)
 add_subdirectory(sokol)

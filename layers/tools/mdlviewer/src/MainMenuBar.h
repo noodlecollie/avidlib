@@ -1,0 +1,10 @@
+#ifndef AVIDLIB_TOOLS_MDLVIEWER_MAINMENUBAR_H
+#define AVIDLIB_TOOLS_MDLVIEWER_MAINMENUBAR_H
+
+namespace MainMenuBar
+{
+	void Draw();
+	void Poll();
+}
+
+#endif // AVIDLIB_TOOLS_MDLVIEWER_STATE_H

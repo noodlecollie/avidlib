@@ -2,12 +2,14 @@ set(TARGETNAME_MDLVIEWER MDLViewer)
 set(TOOLS_MDLVIEWER "NO" CACHE BOOL "If set, builds the MDLViewer tool.")
 
 set(SOURCES
-	src/sokol/sokolApp.cpp
-	src/sokol/sokolGFX.cpp
-	src/sokol/sokolGFXImGUI.cpp
-	src/sokol/sokolGlue.cpp
-	src/sokol/sokolImGUI.cpp
-	src/main.cpp
+	src/Sokol/SokolApp.cpp
+	src/Sokol/SokolGFX.cpp
+	src/Sokol/SokolGFXImGUI.cpp
+	src/Sokol/SokolGlue.cpp
+	src/Sokol/SokolImGUI.cpp
+	src/Main.cpp
+	src/MainMenuBar.cpp
+	src/OpenMDLFileDialogue.cpp
 )
 
 if(TOOLS_ALL OR TOOLS_MDLVIEWER)

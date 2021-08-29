@@ -41,6 +41,7 @@ jobs:
           -DCONTAINERS_ALL=YES \
           -DBUILD_TOOLS=YES \
           -DTOOLS_ALL=YES \
+          -DIO_ALL=YES \
           ..
 
     - name: Build

@@ -9,7 +9,7 @@ namespace ALT_Common
 	{
 		static constexpr size_t WIDTH_4K = 3840;
 		static constexpr size_t HEIGHT_4K = 2160;
-		static constexpr size_t MIN_DIM_4K = std::min(WIDTH_4K, HEIGHT_4K);
+		static const size_t MIN_DIM_4K = std::min(WIDTH_4K, HEIGHT_4K);
 
 		if ( xScale )
 		{

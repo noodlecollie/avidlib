@@ -1,26 +1,29 @@
 #include "OpenMDLFileDialogue.h"
 #include "ImGuiFileDialog.h"
+#include "MDLLoader.h"
 
 namespace OpenMDLFileDialogue
 {
 	static constexpr const char* const KEY_OPEN_MDL_FILE = "OpenMDLFile";
 
+	static bool DialogueActive = false;
+
 	void Draw()
 	{
-		if ( ImGuiFileDialog::Instance()->Display(KEY_OPEN_MDL_FILE, 32, ImVec2(0, 200)) )
-		{
-			if ( ImGuiFileDialog::Instance()->IsOk() )
-			{
-				// TODO: Do something with path.
-			}
-
-			ImGuiFileDialog::Instance()->Close();
-		}
+		DialogueActive = ImGuiFileDialog::Instance()->Display(KEY_OPEN_MDL_FILE, 32, ImVec2(0, 200));
 	}
 
 	void Poll()
 	{
-		// TODO
+		if ( DialogueActive )
+		{
+			if ( ImGuiFileDialog::Instance()->IsOk() )
+			{
+				MDLLoader::SetMDLPath(ImGuiFileDialog::Instance()->GetFilePathName());
+			}
+
+			ImGuiFileDialog::Instance()->Close();
+		}
 	}
 
 	void Open()

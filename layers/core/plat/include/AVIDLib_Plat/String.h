@@ -6,10 +6,6 @@
 #ifndef AVIDLIB_PLAT_STRING_H
 #define AVIDLIB_PLAT_STRING_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * For now, we just use platform headers.
  * If we get to a point in future where we need to swap this out
@@ -21,6 +17,10 @@ extern "C" {
 #include "AVIDLib_Plat/Int.h"
 #include "AVIDLib_Plat/Bool.h"
 #include "AVIDLib_Plat/VariadicArgs.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
  * Function: ALP_VSPrintF

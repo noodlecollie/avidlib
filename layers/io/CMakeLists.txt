@@ -11,6 +11,7 @@ set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_IO}/LibExport.h
 	include/${TARGETNAME_IO}/ReadContext.h
 	include/${TARGETNAME_IO}/ReaderErrors.h
+	include/${TARGETNAME_IO}/UnitSupport.h
 )
 
 set(SOURCES_GENERAL
@@ -19,6 +20,7 @@ set(SOURCES_GENERAL
 	src/ReaderErrors.c
 	src/Validation.h
 	src/Validation.c
+	src/UnitSupport.c
 )
 
 set(PUBLIC_HEADERS_SELECTED
@@ -27,8 +29,11 @@ set(PUBLIC_HEADERS_SELECTED
 set(SOURCES_SELECTED
 )
 
+set(PUBLIC_DEFS_SELECTED
+)
+
 set(IO_ALL "NO" CACHE BOOL "Includes all different IO readers and writers in IO library. Useful for validating that these all compile (eg. in CI).")
-init_unit_mdlv10(PUBLIC_HEADERS_SELECTED SOURCES_SELECTED IO_ALL)
+init_unit_mdlv10(PUBLIC_HEADERS_SELECTED SOURCES_SELECTED PUBLIC_DEFS_SELECTED IO_ALL)
 
 set(numSources 0)
 list(LENGTH SOURCES_SELECTED numSources)
@@ -39,14 +44,25 @@ if(numSources EQUAL 0)
 endif()
 
 if(BUILD_SHARED_LIBS)
-	add_library(${TARGETNAME_IO} SHARED ${PUBLIC_HEADERS_GENERAL} ${PUBLIC_HEADERS_SELECTED} ${SOURCES_GENERAL} ${SOURCES_SELECTED})
+	add_library(${TARGETNAME_IO} SHARED
+		${PUBLIC_HEADERS_GENERAL}
+		${PUBLIC_HEADERS_SELECTED}
+		${SOURCES_GENERAL}
+		${SOURCES_SELECTED}
+	)
 else()
-	add_library(${TARGETNAME_IO} STATIC ${PUBLIC_HEADERS_GENERAL} ${PUBLIC_HEADERS_SELECTED} ${SOURCES_GENERAL} ${SOURCES_SELECTED})
+	add_library(${TARGETNAME_IO} STATIC
+		${PUBLIC_HEADERS_GENERAL}
+		${PUBLIC_HEADERS_SELECTED}
+		${SOURCES_GENERAL}
+		${SOURCES_SELECTED}
+	)
 endif()
 
 target_link_libraries(${TARGETNAME_IO} PUBLIC ${TARGETNAME_PLAT})
 target_link_libraries(${TARGETNAME_IO} PUBLIC ${TARGETNAME_CONTAINERS})
 target_link_libraries(${TARGETNAME_IO} PRIVATE ${TARGETNAME_INTERNAL_UTIL})
+target_compile_definitions(${TARGETNAME_IO} PUBLIC ${PUBLIC_DEFS_SELECTED})
 
 target_include_directories(${TARGETNAME_IO} PUBLIC
 	include
@@ -63,4 +79,4 @@ install(TARGETS ${TARGETNAME_IO}
 )
 
 install(FILES ${PUBLIC_HEADERS_GENERAL} DESTINATION ${TARGETNAME_IO}/include/${TARGETNAME_IO})
-install_unit_mdlv10()
+install_unit_mdlv10(CONTAINERS_ALL)

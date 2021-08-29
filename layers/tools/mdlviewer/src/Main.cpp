@@ -9,6 +9,9 @@
 #include "OpenMDLFileDialogue.h"
 #include "Sokol/SokolGFXImGUI.h"
 
+#include "AVIDLib_Containers/UnitSupport.h"
+#include "AVIDLib_IO/UnitSupport.h"
+
 static constexpr size_t WINDOW_DEFAULT_WIDTH = 800;
 static constexpr size_t WINDOW_DEFAULT_HEIGHT = 600;
 
@@ -87,8 +90,41 @@ static void Event(const sapp_event* event)
 	OpenMDLFileDialogue::Poll();
 }
 
+static void PrintSupport()
+{
+	std::cout << "Container support:" << std::endl;
+
+	const ALP_Bool* containerSupport = ALC_SupportedUnits();
+
+	for ( size_t index = 0; index < ALC_UNIT_ID__COUNT; ++index )
+	{
+		std::cout
+			<< "  "
+			<< ALC_UnitName((ALC_UnitID)index)
+			<< ": "
+			<< (containerSupport[index] ? "true" : "false")
+			<< std::endl;
+	}
+
+	std::cout << "IO support:" << std::endl;
+
+	const ALP_Bool* ioSupport = ALIO_SupportedUnits();
+
+	for ( size_t index = 0; index < ALIO_UNIT_ID__COUNT; ++index )
+	{
+		std::cout
+			<< "  "
+			<< ALIO_UnitName((ALIO_UnitID)index)
+			<< ": "
+			<< (ioSupport[index] ? "true" : "false")
+			<< std::endl;
+	}
+}
+
 sapp_desc sokol_main(int, char**)
 {
+	PrintSupport();
+
 	float dpi = 1.0f;
 	ALT_Common::GetDPIScale(&dpi, nullptr);
 

@@ -10,7 +10,7 @@ namespace OpenMDLFileDialogue
 
 	void Draw()
 	{
-		DialogueActive = ImGuiFileDialog::Instance()->Display(KEY_OPEN_MDL_FILE, 32, ImVec2(0, 200));
+		DialogueActive = ImGuiFileDialog::Instance()->Display(KEY_OPEN_MDL_FILE, ImGuiWindowFlags_NoCollapse, ImVec2(0, 200));
 	}
 
 	void Poll()

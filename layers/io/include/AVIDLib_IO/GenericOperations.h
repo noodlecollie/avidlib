@@ -10,6 +10,10 @@
 #include "AVIDLib_IO/UnitSupport.h"
 #include "AVIDLib_IO/ReadContext.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Function: ALIO_UnitForFile
  *
@@ -28,5 +32,9 @@
  * <ALIO_UNIT_ID__INVALID> if no unit is available to read this file.
  */
 ALIO_UnitID ALIO_UnitForFile(ALIO_ReadContext* context);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // AVIDLIB_IO_GENERICOPERATIONS_H

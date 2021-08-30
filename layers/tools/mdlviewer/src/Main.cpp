@@ -8,6 +8,7 @@
 #include "MainMenuBar.h"
 #include "OpenMDLFileDialogue.h"
 #include "Sokol/SokolGFXImGUI.h"
+#include "MDLLoader.h"
 
 #include "AVIDLib_Containers/UnitSupport.h"
 #include "AVIDLib_IO/UnitSupport.h"
@@ -52,8 +53,23 @@ static void Init()
 	SokolGFXImGUI::Init();
 }
 
+static void Poll()
+{
+	MainMenuBar::Poll();
+	OpenMDLFileDialogue::Poll();
+	MDLLoader::Poll();
+}
+
+static void Draw()
+{
+	MainMenuBar::Draw();
+	OpenMDLFileDialogue::Draw();
+}
+
 static void Frame()
 {
+	Poll();
+
 	sg_pass_action action;
 	memset(&action, 0, sizeof(action));
 
@@ -66,9 +82,7 @@ static void Frame()
 	sg_begin_default_pass(&action, sapp_width(), sapp_height());
 	simgui_new_frame(sapp_width(), sapp_height(), 1.0f/60.0f);
 
-	MainMenuBar::Draw();
-	OpenMDLFileDialogue::Draw();
-
+	Draw();
 	SokolGFXImGUI::Draw();
 
 	simgui_render();
@@ -78,6 +92,7 @@ static void Frame()
 
 static void Cleanup()
 {
+	SokolGFXImGUI::Cleanup();
 	simgui_shutdown();
 	sg_shutdown();
 }
@@ -85,9 +100,6 @@ static void Cleanup()
 static void Event(const sapp_event* event)
 {
 	simgui_handle_event(event);
-
-	MainMenuBar::Poll();
-	OpenMDLFileDialogue::Poll();
 }
 
 static void PrintSupport()

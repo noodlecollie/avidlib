@@ -23,4 +23,9 @@ namespace SokolGFXImGUI
 	{
 		sg_imgui_draw(&InternalPersistence);
 	}
+
+	void Cleanup()
+	{
+		sg_imgui_discard(&InternalPersistence);
+	}
 }

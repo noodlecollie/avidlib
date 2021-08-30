@@ -21,6 +21,7 @@ namespace MainMenuBar
 				ImGui::EndMenu();
 			}
 
+#ifdef SOKOL_TRACE_HOOKS
 			if ( ImGui::BeginMenu("GFX Debug") )
 			{
 				ImGui::MenuItem("Buffers", nullptr, &SokolGFXImGUI::GetPersistence()->buffers.open);
@@ -32,6 +33,7 @@ namespace MainMenuBar
 
 				ImGui::EndMenu();
 			}
+#endif // SOKOL_TRACE_HOOKS
 
 			ImGui::EndMainMenuBar();
 		}

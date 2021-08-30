@@ -9,6 +9,7 @@ namespace SokolGFXImGUI
 
 	void Init();
 	void Draw();
+	void Cleanup();
 }
 
 #endif // AVIDLIB_TOOLS_MDLVIEWER_SOKOLGFXIMGUI_H

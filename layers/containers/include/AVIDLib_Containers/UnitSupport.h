@@ -28,12 +28,15 @@ extern "C" {
 /**
  * Enum: ALC_UnitID
  * ALC_UNIT_MDLV10 - Version 10 MDL container unit.
+ * ALC_UNIT_ID__COUNT   - Total number of IDs. Do not use.
+ * ALC_UNIT_ID__INVALID - Invalid unit ID. Do not use.
  */
 typedef enum _ALC_UnitID
 {
 	ALC_UNIT_ID_LIST
 
-	ALC_UNIT_ID__COUNT
+	ALC_UNIT_ID__COUNT,
+	ALC_UNIT_ID__INVALID = -1
 } ALC_UnitID;
 
 #undef ALC_LIST_ITEM

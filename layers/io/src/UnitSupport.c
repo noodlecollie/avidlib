@@ -9,10 +9,13 @@ const ALP_Char* ALIO_UnitName(ALIO_UnitID id)
 	};
 #undef ALIO_LIST_ITEM
 
-	const ALP_Size index = (ALP_Size)id;
+	if ( id == ALIO_UNIT_ID__INVALID )
+	{
+		return "INVALID";
+	}
 
-	return index < ALIO_UNIT_ID__COUNT
-		? UNIT_NAMES[index]
+	return (ALP_Size)id < ALIO_UNIT_ID__COUNT
+		? UNIT_NAMES[(ALP_Size)id]
 		: "UNKNOWN";
 }
 

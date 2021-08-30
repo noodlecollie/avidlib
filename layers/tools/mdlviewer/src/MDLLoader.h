@@ -6,6 +6,7 @@
 namespace MDLLoader
 {
 	void SetMDLPath(const std::string& path);
+	void Poll();
 }
 
 #endif // AVIDLIB_TOOLS_MDLVIEWER_MDLLOADER_H

@@ -5,6 +5,9 @@
 namespace OpenMDLFileDialogue
 {
 	static constexpr const char* const KEY_OPEN_MDL_FILE = "OpenMDLFile";
+	static constexpr ImGuiWindowFlags FLAGS =
+		ImGuiFileDialogFlags_DontShowHiddenFiles |
+		ImGuiFileDialogFlags_DisableCreateDirectoryButton;
 
 	static bool DialogueActive = false;
 
@@ -28,10 +31,7 @@ namespace OpenMDLFileDialogue
 
 	void Open()
 	{
-		static constexpr ImGuiWindowFlags FLAGS =
-				ImGuiFileDialogFlags_DontShowHiddenFiles |
-				ImGuiFileDialogFlags_DisableCreateDirectoryButton;
-
+		ImGuiFileDialog::Instance()->SetExtentionInfos(".mdl", ImVec4(143.0f / 255.0f, 234.0f / 255.0f, 187.0f / 255.0f, 1.0f));
 		ImGuiFileDialog::Instance()->OpenDialog(KEY_OPEN_MDL_FILE, "Choose MDL File", ".mdl", ".", 1, nullptr, FLAGS);
 	}
 }

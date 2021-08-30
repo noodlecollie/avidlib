@@ -142,6 +142,12 @@
  */
 #define ALIO_MDLV10_MOUTH_CONTROLLER_CHANNEL 4
 
+/**
+ * Enum: ALIO_MDLv10_FileType
+ * ALIO_MDLV10_FILE_INVALID            - Not a valid v10 MDL file.
+ * ALIO_MDLV10_FILE_GENERAL            - General v10 MDL file containing all different types of components.
+ * ALIO_MDLV10_FILE_SEQUENCE_CONTAINER - v10 MDL file containing only animation sequences.
+ */
 typedef enum _ALIO_MDLv10_FileType
 {
 	ALIO_MDLV10_FILE_INVALID = 0,

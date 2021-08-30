@@ -29,7 +29,7 @@ static inline ALP_Bool VFormatInternal(ALU_StringBuilder* builder, ALP_Char* res
 	const ALP_Size remainingSpace = builder->size - (cursor - builder->buffer);
 	ALP_Int32 result = ALP_VSPrintF(cursor, remainingSpace, format, args);
 
-	ALP_Bool writtenSuccessfully = false;
+	ALP_Bool writtenSuccessfully = ALP_FALSE;
 
 	if ( result < 1 )
 	{
@@ -44,7 +44,7 @@ static inline ALP_Bool VFormatInternal(ALU_StringBuilder* builder, ALP_Char* res
 		}
 		else
 		{
-			writtenSuccessfully = true;
+			writtenSuccessfully = ALP_TRUE;
 		}
 
 		builder->cursor = cursor + result;
@@ -291,7 +291,7 @@ ALP_Bool ALU_StringBuilder_EndsWith(const ALU_StringBuilder* builder, const ALP_
 
 		if ( StrLen(builder) < suffixLength )
 		{
-			return false;
+			return ALP_FALSE;
 		}
 
 		return ALP_StrEqual(builder->cursor - suffixLength, suffix);

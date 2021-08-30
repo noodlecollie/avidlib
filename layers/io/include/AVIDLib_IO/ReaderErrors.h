@@ -24,20 +24,25 @@ extern "C" {
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_INTERNAL, "An unexpected internal error occurred when reading.") \
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_EMPTY_INPUT, "No input data was provided.") \
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_EMPTY_OUTPUT, "No output container was provided.") \
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_INSUFFICIENT_DATA, "Not enough input data was provided.") \
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_UNKNOWN_MAGIC, "The type of the input file could not be determined.") \
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_UNSUPPORTED_VERSION, "The version of the input file was not supported.") \
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_INVALID_STRUCTURE, "The internal structure of the input file was not valid.")
 
 #define ALIO_LIST_ITEM(value, description) value,
 
 /**
  * Enum: ALIO_ReaderError
- * ALIO_READER_ERROR_NONE              - Reading was successful.
- * ALIO_READER_ERROR_UNIMPLEMENTED     - The requested operation was not implemented.
- * ALIO_READER_ERROR_INTERNAL          - An unexpected internal error occurred when reading.
- * ALIO_READER_ERROR_EMPTY_INPUT       - No input data was provided.
- * ALIO_READER_ERROR_EMPTY_OUTPUT      - No output container was provided.
- * ALIO_READER_ERROR_UNKNOWN_MAGIC     - The type of the input file could not be determined.
- * ALIO_READER_ERROR_INVALID_STRUCTURE - The internal structure of the input file was not valid.
+ * ALIO_READER_ERROR_NONE                - Reading was successful.
+ * ALIO_READER_ERROR_UNIMPLEMENTED       - The requested operation was not implemented.
+ * ALIO_READER_ERROR_INTERNAL            - An unexpected internal error occurred when reading.
+ * ALIO_READER_ERROR_EMPTY_INPUT         - No input data was provided.
+ * ALIO_READER_ERROR_EMPTY_OUTPUT        - No output container was provided.
+ * ALIO_READER_ERROR_INSUFFICIENT_DATA   - Not enough input data was provided.
+ * ALIO_READER_ERROR_UNKNOWN_MAGIC       - The type of the input file could not be determined.
+ * ALIO_READER_ERROR_UNSUPPORTED_VERSION - The version of the input file was not supported.
+ * ALIO_READER_ERROR_INVALID_STRUCTURE   - The internal structure of the input file was not valid.
+ * ALIO_READER_ERROR__COUNT              - Total number of errors. Do not use.
  */
 typedef enum _ALIO_ReaderError
 {

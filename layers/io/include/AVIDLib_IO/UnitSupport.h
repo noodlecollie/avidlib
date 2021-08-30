@@ -27,13 +27,16 @@ extern "C" {
 
 /**
  * Enum: ALIO_UnitID
- * ALIO_UNIT_MDLV10 - Version 10 MDL IO unit.
+ * ALIO_UNIT_MDLV10      - Version 10 MDL IO unit.
+ * ALIO_UNIT_ID__COUNT   - Total number of IDs. Do not use.
+ * ALIO_UNIT_ID__INVALID - Invalid unit ID. Do not use.
  */
 typedef enum _ALIO_UnitID
 {
 	ALIO_UNIT_ID_LIST
 
-	ALIO_UNIT_ID__COUNT
+	ALIO_UNIT_ID__COUNT,
+	ALIO_UNIT_ID__INVALID = -1
 } ALIO_UnitID;
 
 #undef ALIO_LIST_ITEM

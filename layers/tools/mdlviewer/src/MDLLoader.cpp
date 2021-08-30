@@ -18,7 +18,7 @@ namespace MDLLoader
 		if ( !inFile )
 		{
 			std::cerr << "Could not open file: " << Path << std::endl;
-			return false
+			return false;
 		}
 
 		fseek(inFile, 0, SEEK_END);

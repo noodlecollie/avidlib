@@ -8,6 +8,7 @@ include(unit_mdlv10)
 create_export_header(${TARGETNAME_IO})
 
 set(PUBLIC_HEADERS_GENERAL
+	include/${TARGETNAME_IO}/GenericOperations.h
 	include/${TARGETNAME_IO}/LibExport.h
 	include/${TARGETNAME_IO}/ReadContext.h
 	include/${TARGETNAME_IO}/ReaderErrors.h
@@ -16,11 +17,13 @@ set(PUBLIC_HEADERS_GENERAL
 
 set(SOURCES_GENERAL
 	src/FormatCommon/FileElementHelpers.h
+	src/GenericOperations.c
 	src/ReadContext.c
 	src/ReaderErrors.c
+	src/UnitSupport.c
+	src/UnitSupportDefs.h
 	src/Validation.h
 	src/Validation.c
-	src/UnitSupport.c
 )
 
 set(PUBLIC_HEADERS_SELECTED
@@ -79,4 +82,4 @@ install(TARGETS ${TARGETNAME_IO}
 )
 
 install(FILES ${PUBLIC_HEADERS_GENERAL} DESTINATION ${TARGETNAME_IO}/include/${TARGETNAME_IO})
-install_unit_mdlv10(CONTAINERS_ALL)
+install_unit_mdlv10(IO_ALL)

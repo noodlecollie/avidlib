@@ -1,0 +1,13 @@
+#ifndef AVIDLIB_IO_UNITSUPPORTDEFS_H
+#define AVIDLIB_IO_UNITSUPPORTDEFS_H
+
+#include "AVIDLib_Plat/Ptr.h"
+
+#if IO_MDLV10_AVAILABLE != 0
+#include "AVIDLib_IO/MDLv10/Reader/Reader.h"
+#define IO_MDLV10_IDENTIFY_FUNC ALIO_MDLv10_Identify
+#else
+#define IO_MDLV10_IDENTIFY_FUNC ALP_NULL
+#endif
+
+#endif // AVIDLIB_IO_UNITSUPPORTDEFS_H

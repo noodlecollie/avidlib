@@ -11,28 +11,40 @@ namespace MDLLoader
 	static std::string Path;
 	static bool HasNewPath = false;
 
-	static void LoadMDL(std::vector<ALP_Byte>& data)
+	static bool LoadMDL(std::vector<ALP_Byte>& data)
 	{
 		FILE* inFile = fopen(Path.c_str(), "rb");
 
 		if ( !inFile )
 		{
 			std::cerr << "Could not open file: " << Path << std::endl;
-			return;
+			return false
 		}
 
 		fseek(inFile, 0, SEEK_END);
 		data.resize(ftell(inFile));
 		fseek(inFile, 0, SEEK_SET);
 
-		fread(data.data(), 1, data.size(), inFile);
+		bool success = fread(data.data(), 1, data.size(), inFile) == data.size();
+
+		if ( !success )
+		{
+			std::cerr << "Failed to read data from file: " << Path << std::endl;
+		}
+
 		fclose(inFile);
+
+		return success;
 	}
 
 	static void LoadMDL()
 	{
 		std::vector<ALP_Byte> fileData;
-		LoadMDL(fileData);
+
+		if ( !LoadMDL(fileData) )
+		{
+			return;
+		}
 
 		if ( fileData.empty() )
 		{

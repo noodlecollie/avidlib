@@ -10,6 +10,16 @@
 #include "AVIDLib_Plat/String.h"
 #include "MDLv10/ValidationHelpers.h"
 
+static inline ALP_Bool EnoughDataToReadHeader(ALIO_ReadContext* context)
+{
+	return ALIO_ReadContext_IsValid(context) && context->inputLength >= sizeof(ALIO_MDLv10_Header);
+}
+
+static inline ALP_UInt32 GetFileVersion(ALIO_ReadContext* context)
+{
+	return ((const ALIO_MDLv10_Header*)context->inputData)->version;
+}
+
 static ALIO_MDLv10_FileType DetermineFileType(ALIO_ReadContext* context)
 {
 	const ALIO_MDLv10_Header* header = (const ALIO_MDLv10_Header*)context->inputData;
@@ -73,6 +83,18 @@ static void ReadGeneralFile(ALIO_ReadContext* context, ALC_MDLv10_Model* outMode
 	PopulateFileElements(header, outModel);
 }
 
+ALP_Bool ALIO_MDLv10_Identify(ALIO_ReadContext* context)
+{
+	if ( ALU_SANITY_VALID(context) )
+	{
+		return EnoughDataToReadHeader(context) &&
+		       DetermineFileType(context) != ALIO_MDLV10_FILE_INVALID &&
+		       GetFileVersion(context) == ALIO_MDLV10_FILE_VERSION;
+	}
+
+	return ALP_FALSE;
+}
+
 ALP_Bool ALIO_MDLv10_Read(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel)
 {
 	if ( ALU_SANITY_VALID(context) )
@@ -91,6 +113,12 @@ ALP_Bool ALIO_MDLv10_Read(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel)
 				break;
 			}
 
+			if ( !EnoughDataToReadHeader(context) )
+			{
+				ALIO_ReadContext_SetError(context, ALIO_READER_ERROR_INSUFFICIENT_DATA, ALP_NULL);
+				break;
+			}
+
 			const ALIO_MDLv10_FileType fileType = DetermineFileType(context);
 
 			if ( fileType == ALIO_MDLV10_FILE_INVALID )
@@ -103,6 +131,19 @@ ALP_Bool ALIO_MDLv10_Read(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel)
 			{
 				// TODO: Not supported yet.
 				ALIO_ReadContext_SetError(context, ALIO_READER_ERROR_UNIMPLEMENTED, "Non-general files are not yet supported.");
+				break;
+			}
+
+			const ALP_UInt32 fileVersion = GetFileVersion(context);
+
+			if ( fileVersion != ALIO_MDLV10_FILE_VERSION )
+			{
+				ALIO_ReadContext_SetErrorFormat(context,
+				                                ALIO_READER_ERROR_UNSUPPORTED_VERSION,
+				                                "Expected version %u but got version %u.",
+				                                ALIO_MDLV10_FILE_VERSION,
+				                                fileVersion);
+
 				break;
 			}
 

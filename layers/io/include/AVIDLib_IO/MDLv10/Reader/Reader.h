@@ -16,6 +16,24 @@ extern "C" {
 #endif
 
 /**
+ * Function: ALIO_MDLv10_Identify
+ *
+ * Given a read context, identifies whether the provided data
+ * represents a v10 MDL file.
+ *
+ * Parameters:
+ *
+ * readContext - Contextual data for this read operation.
+ *
+ * Returns:
+ *
+ * True if the provided input data represents a v10 MDL file,
+ * or false otherwise. The error state on the read context is
+ * not modified.
+ */
+API_AVIDLIB_IO ALP_Bool ALIO_MDLv10_Identify(ALIO_ReadContext* context);
+
+/**
  * Function: ALIO_MDLv10_Read
  *
  * Given a read context, interprets the input data as a v10 MDL file and

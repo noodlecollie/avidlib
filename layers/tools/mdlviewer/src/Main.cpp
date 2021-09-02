@@ -92,6 +92,7 @@ static void Frame()
 
 static void Cleanup()
 {
+	MDLLoader::Cleanup();
 	SokolGFXImGUI::Cleanup();
 	simgui_shutdown();
 	sg_shutdown();

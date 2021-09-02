@@ -41,6 +41,11 @@ ALIO_ReaderError ALIO_ReadContext_GetReaderError(const ALIO_ReadContext* context
 							 ALIO_READER_ERROR_INTERNAL);
 }
 
+const ALP_Char* ALIO_ReadContext_GetReaderErrorString(const ALIO_ReadContext* context)
+{
+	return ALIO_ReaderError_Description(ALIO_ReadContext_GetReaderError(context));
+}
+
 const ALP_Char* ALIO_ReadContext_GetErrorDetails(const ALIO_ReadContext* context)
 {
 	return ALU_TSANITY_VALID(context,

@@ -28,10 +28,9 @@ extern "C" {
  * Returns:
  *
  * True if the provided input data represents a v10 MDL file,
- * or false otherwise. The error state on the read context is
- * not modified.
+ * or false otherwise.
  */
-API_AVIDLIB_IO ALP_Bool ALIO_MDLv10_Identify(ALIO_ReadContext* context);
+API_AVIDLIB_IO ALP_Bool ALIO_MDLv10_Identify(const ALIO_ReadContext* context);
 
 /**
  * Function: ALIO_MDLv10_Read

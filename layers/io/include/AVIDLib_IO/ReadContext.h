@@ -121,6 +121,24 @@ API_AVIDLIB_IO ALP_Bool ALIO_ReadContext_IsValid(const ALIO_ReadContext* context
 API_AVIDLIB_IO ALIO_ReaderError ALIO_ReadContext_GetReaderError(const ALIO_ReadContext* context);
 
 /**
+ * Function: ALIO_ReadContext_GetReaderErrorString
+ *
+ * Returns a string describing the error set on the read context.
+ *
+ * This is equivalent to calling <ALIO_ReaderError_Description>
+ * on the result of <ALIO_ReadContext_GetReaderError>.
+ *
+ * Parameters:
+ *
+ * context - Context from which to return the error string.
+ *
+ * Returns:
+ *
+ * String representation of the reader error set on the context.
+ */
+API_AVIDLIB_IO const ALP_Char* ALIO_ReadContext_GetReaderErrorString(const ALIO_ReadContext* context);
+
+/**
  * Function: ALIO_ReadContext_GetErrorDetails
  *
  * Returns a string containing details about the error

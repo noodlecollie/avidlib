@@ -10,17 +10,17 @@
 #include "AVIDLib_Plat/String.h"
 #include "MDLv10/ValidationHelpers.h"
 
-static inline ALP_Bool EnoughDataToReadHeader(ALIO_ReadContext* context)
+static inline ALP_Bool EnoughDataToReadHeader(const ALIO_ReadContext* context)
 {
 	return ALIO_ReadContext_IsValid(context) && context->inputLength >= sizeof(ALIO_MDLv10_Header);
 }
 
-static inline ALP_UInt32 GetFileVersion(ALIO_ReadContext* context)
+static inline ALP_UInt32 GetFileVersion(const ALIO_ReadContext* context)
 {
 	return ((const ALIO_MDLv10_Header*)context->inputData)->version;
 }
 
-static ALIO_MDLv10_FileType DetermineFileType(ALIO_ReadContext* context)
+static ALIO_MDLv10_FileType DetermineFileType(const ALIO_ReadContext* context)
 {
 	const ALIO_MDLv10_Header* header = (const ALIO_MDLv10_Header*)context->inputData;
 
@@ -83,7 +83,7 @@ static void ReadGeneralFile(ALIO_ReadContext* context, ALC_MDLv10_Model* outMode
 	PopulateFileElements(header, outModel);
 }
 
-ALP_Bool ALIO_MDLv10_Identify(ALIO_ReadContext* context)
+ALP_Bool ALIO_MDLv10_Identify(const ALIO_ReadContext* context)
 {
 	if ( ALU_SANITY_VALID(context) )
 	{

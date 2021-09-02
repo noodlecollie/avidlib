@@ -1,7 +1,7 @@
 #include "AVIDLib_IO/GenericOperations.h"
 #include "UnitSupportDefs.h"
 
-typedef ALP_Bool (*IdentifyFunc)(ALIO_ReadContext*);
+typedef ALP_Bool (*IdentifyFunc)(const ALIO_ReadContext*);
 
 typedef struct _GenericOperationsRecord
 {
@@ -22,7 +22,7 @@ static const GenericOperationsRecord GENERIC_OPERATIONS_TABLE[] =
 };
 #undef ALIO_LIST_ITEM
 
-ALIO_UnitID ALIO_UnitForFile(ALIO_ReadContext* context)
+ALIO_UnitID ALIO_UnitForFile(const ALIO_ReadContext* context)
 {
 	for ( const GenericOperationsRecord* record = GENERIC_OPERATIONS_TABLE; record->unitID != ALIO_UNIT_ID__INVALID; ++record )
 	{

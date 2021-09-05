@@ -20,9 +20,9 @@ ALQM_Vec3* ALQM_Vec3_Zero(ALQM_Vec3* vOut)
 {
 	if ( ALU_SANITY_VALID(vOut) )
 	{
-		vOut->v[ALQM_VECX] = 0;
-		vOut->v[ALQM_VECY] = 0;
-		vOut->v[ALQM_VECZ] = 0;
+		vOut->v[ALQM_VEC3X] = 0;
+		vOut->v[ALQM_VEC3Y] = 0;
+		vOut->v[ALQM_VEC3Z] = 0;
 	}
 
 	return vOut;
@@ -32,9 +32,9 @@ ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOut)
 {
 	if ( ALU_SANITY_VALID(vIn && vOut) && vIn != vOut )
 	{
-		vOut->v[ALQM_VECX] = vIn->v[ALQM_VECX];
-		vOut->v[ALQM_VECY] = vIn->v[ALQM_VECY];
-		vOut->v[ALQM_VECZ] = vIn->v[ALQM_VECZ];
+		vOut->v[ALQM_VEC3X] = vIn->v[ALQM_VEC3X];
+		vOut->v[ALQM_VEC3Y] = vIn->v[ALQM_VEC3Y];
+		vOut->v[ALQM_VEC3Z] = vIn->v[ALQM_VEC3Z];
 	}
 
 	return vOut;
@@ -44,9 +44,9 @@ ALQM_Vec3* ALQM_Vec3_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, A
 {
 	if ( ALU_SANITY_VALID(values && count >= 3 && vOut) )
 	{
-		vOut->v[ALQM_VECX] = values[0];
-		vOut->v[ALQM_VECY] = values[1];
-		vOut->v[ALQM_VECZ] = values[2];
+		vOut->v[ALQM_VEC3X] = values[0];
+		vOut->v[ALQM_VEC3Y] = values[1];
+		vOut->v[ALQM_VEC3Z] = values[2];
 	}
 
 	return vOut;
@@ -56,9 +56,9 @@ ALQM_Vec3* ALQM_Vec3_Add(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3
 {
 	if ( ALU_SANITY_VALID(vLHS && vRHS && vOut) )
 	{
-		vOut->v[ALQM_VECX] = vLHS->v[ALQM_VECX] + vRHS->v[ALQM_VECX];
-		vOut->v[ALQM_VECY] = vLHS->v[ALQM_VECY] + vRHS->v[ALQM_VECY];
-		vOut->v[ALQM_VECZ] = vLHS->v[ALQM_VECZ] + vRHS->v[ALQM_VECZ];
+		vOut->v[ALQM_VEC3X] = vLHS->v[ALQM_VEC3X] + vRHS->v[ALQM_VEC3X];
+		vOut->v[ALQM_VEC3Y] = vLHS->v[ALQM_VEC3Y] + vRHS->v[ALQM_VEC3Y];
+		vOut->v[ALQM_VEC3Z] = vLHS->v[ALQM_VEC3Z] + vRHS->v[ALQM_VEC3Z];
 	}
 
 	return vOut;
@@ -68,9 +68,9 @@ ALQM_Vec3* ALQM_Vec3_Subtract(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM
 {
 	if ( ALU_SANITY_VALID(vLHS && vRHS && vOut) )
 	{
-		vOut->v[ALQM_VECX] = vLHS->v[ALQM_VECX] - vRHS->v[ALQM_VECX];
-		vOut->v[ALQM_VECY] = vLHS->v[ALQM_VECY] - vRHS->v[ALQM_VECY];
-		vOut->v[ALQM_VECZ] = vLHS->v[ALQM_VECZ] - vRHS->v[ALQM_VECZ];
+		vOut->v[ALQM_VEC3X] = vLHS->v[ALQM_VEC3X] - vRHS->v[ALQM_VEC3X];
+		vOut->v[ALQM_VEC3Y] = vLHS->v[ALQM_VEC3Y] - vRHS->v[ALQM_VEC3Y];
+		vOut->v[ALQM_VEC3Z] = vLHS->v[ALQM_VEC3Z] - vRHS->v[ALQM_VEC3Z];
 	}
 
 	return vOut;
@@ -80,9 +80,9 @@ ALQM_Vec3* ALQM_Vec3_CrossProduct(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, 
 {
 	if ( ALU_SANITY_VALID(vLHS && vRHS && vOut) )
 	{
-		vOut->v[ALQM_VECX] = (vLHS->v[ALQM_VECY] * vRHS->v[ALQM_VECZ]) - (vLHS->v[ALQM_VECZ] * vRHS->v[ALQM_VECY]);
-		vOut->v[ALQM_VECY] = (vLHS->v[ALQM_VECZ] * vRHS->v[ALQM_VECX]) - (vLHS->v[ALQM_VECX] * vRHS->v[ALQM_VECZ]);
-		vOut->v[ALQM_VECZ] = (vLHS->v[ALQM_VECX] * vRHS->v[ALQM_VECY]) - (vLHS->v[ALQM_VECY] * vRHS->v[ALQM_VECX]);
+		vOut->v[ALQM_VEC3X] = (vLHS->v[ALQM_VEC3Y] * vRHS->v[ALQM_VEC3Z]) - (vLHS->v[ALQM_VEC3Z] * vRHS->v[ALQM_VEC3Y]);
+		vOut->v[ALQM_VEC3Y] = (vLHS->v[ALQM_VEC3Z] * vRHS->v[ALQM_VEC3X]) - (vLHS->v[ALQM_VEC3X] * vRHS->v[ALQM_VEC3Z]);
+		vOut->v[ALQM_VEC3Z] = (vLHS->v[ALQM_VEC3X] * vRHS->v[ALQM_VEC3Y]) - (vLHS->v[ALQM_VEC3Y] * vRHS->v[ALQM_VEC3X]);
 	}
 
 	return vOut;
@@ -92,9 +92,9 @@ ALQM_Vec3* ALQM_Vec3_MultiplyAdd(const ALQM_Vec3* vIn, ALQM_Scalar scale, const 
 {
 	if ( ALU_SANITY_VALID(vIn && vScaledAdd && vOut) )
 	{
-		vOut->v[ALQM_VECX] = vIn->v[ALQM_VECX] + (scale * vScaledAdd->v[ALQM_VECX]);
-		vOut->v[ALQM_VECY] = vIn->v[ALQM_VECY] + (scale * vScaledAdd->v[ALQM_VECY]);
-		vOut->v[ALQM_VECZ] = vIn->v[ALQM_VECZ] + (scale * vScaledAdd->v[ALQM_VECZ]);
+		vOut->v[ALQM_VEC3X] = vIn->v[ALQM_VEC3X] + (scale * vScaledAdd->v[ALQM_VEC3X]);
+		vOut->v[ALQM_VEC3Y] = vIn->v[ALQM_VEC3Y] + (scale * vScaledAdd->v[ALQM_VEC3Y]);
+		vOut->v[ALQM_VEC3Z] = vIn->v[ALQM_VEC3Z] + (scale * vScaledAdd->v[ALQM_VEC3Z]);
 	}
 
 	return vOut;
@@ -124,9 +124,9 @@ ALQM_Vec3* ALQM_Vec3_Scale(const ALQM_Vec3* vIn, ALQM_Scalar scale, ALQM_Vec3* v
 {
 	if ( ALU_SANITY_VALID(vIn && vOut) )
 	{
-		vOut->v[ALQM_VECX] = vIn->v[ALQM_VECX] * scale;
-		vOut->v[ALQM_VECY] = vIn->v[ALQM_VECY] * scale;
-		vOut->v[ALQM_VECZ] = vIn->v[ALQM_VECZ] * scale;
+		vOut->v[ALQM_VEC3X] = vIn->v[ALQM_VEC3X] * scale;
+		vOut->v[ALQM_VEC3Y] = vIn->v[ALQM_VEC3Y] * scale;
+		vOut->v[ALQM_VEC3Z] = vIn->v[ALQM_VEC3Z] * scale;
 	}
 
 	return vOut;
@@ -135,27 +135,27 @@ ALQM_Vec3* ALQM_Vec3_Scale(const ALQM_Vec3* vIn, ALQM_Scalar scale, ALQM_Vec3* v
 ALQM_Scalar ALQM_Vec3_DotProduct(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS)
 {
 	return ALU_TSANITY_VALID(vLHS && vRHS,
-							 (vLHS->v[ALQM_VECX] * vRHS->v[ALQM_VECX]) +
-							 (vLHS->v[ALQM_VECY] * vRHS->v[ALQM_VECY]) +
-							 (vLHS->v[ALQM_VECZ] * vRHS->v[ALQM_VECZ]),
+							 (vLHS->v[ALQM_VEC3X] * vRHS->v[ALQM_VEC3X]) +
+							 (vLHS->v[ALQM_VEC3Y] * vRHS->v[ALQM_VEC3Y]) +
+							 (vLHS->v[ALQM_VEC3Z] * vRHS->v[ALQM_VEC3Z]),
 							 0);
 }
 
 ALP_Bool ALQM_Vec3_ExactlyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS)
 {
 	return ALU_TSANITY_VALID(vLHS && vRHS,
-							 ALQM_ScalarsExactlyEqual(vLHS->v[ALQM_VECX], vRHS->v[ALQM_VECX]) &&
-							 ALQM_ScalarsExactlyEqual(vLHS->v[ALQM_VECY], vRHS->v[ALQM_VECY]) &&
-							 ALQM_ScalarsExactlyEqual(vLHS->v[ALQM_VECZ], vRHS->v[ALQM_VECZ]),
+							 ALQM_ScalarsExactlyEqual(vLHS->v[ALQM_VEC3X], vRHS->v[ALQM_VEC3X]) &&
+							 ALQM_ScalarsExactlyEqual(vLHS->v[ALQM_VEC3Y], vRHS->v[ALQM_VEC3Y]) &&
+							 ALQM_ScalarsExactlyEqual(vLHS->v[ALQM_VEC3Z], vRHS->v[ALQM_VEC3Z]),
 							 ALP_FALSE);
 }
 
 ALP_Bool ALQM_Vec3_ApproximatelyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS)
 {
 	return ALU_TSANITY_VALID(vLHS && vRHS,
-							 ALQM_ScalarsApproximatelyEqual(vLHS->v[ALQM_VECX], vRHS->v[ALQM_VECX]) &&
-							 ALQM_ScalarsApproximatelyEqual(vLHS->v[ALQM_VECY], vRHS->v[ALQM_VECY]) &&
-							 ALQM_ScalarsApproximatelyEqual(vLHS->v[ALQM_VECZ], vRHS->v[ALQM_VECZ]),
+							 ALQM_ScalarsApproximatelyEqual(vLHS->v[ALQM_VEC3X], vRHS->v[ALQM_VEC3X]) &&
+							 ALQM_ScalarsApproximatelyEqual(vLHS->v[ALQM_VEC3Y], vRHS->v[ALQM_VEC3Y]) &&
+							 ALQM_ScalarsApproximatelyEqual(vLHS->v[ALQM_VEC3Z], vRHS->v[ALQM_VEC3Z]),
 							 ALP_FALSE);
 }
 
@@ -199,15 +199,15 @@ ALQM_Scalar ALQM_Vec3_NormaliseAndGetLength(const ALQM_Vec3* vIn, ALQM_Vec3* vOu
 		{
 			const ALQM_Scalar invLength = 1.0f / length;
 
-			vOut->v[ALQM_VECX] = vIn->v[ALQM_VECX] * invLength;
-			vOut->v[ALQM_VECY] = vIn->v[ALQM_VECY] * invLength;
-			vOut->v[ALQM_VECZ] = vIn->v[ALQM_VECZ] * invLength;
+			vOut->v[ALQM_VEC3X] = vIn->v[ALQM_VEC3X] * invLength;
+			vOut->v[ALQM_VEC3Y] = vIn->v[ALQM_VEC3Y] * invLength;
+			vOut->v[ALQM_VEC3Z] = vIn->v[ALQM_VEC3Z] * invLength;
 		}
 		else
 		{
-			vOut->v[ALQM_VECX] = 0;
-			vOut->v[ALQM_VECY] = 0;
-			vOut->v[ALQM_VECZ] = 0;
+			vOut->v[ALQM_VEC3X] = 0;
+			vOut->v[ALQM_VEC3Y] = 0;
+			vOut->v[ALQM_VEC3Z] = 0;
 		}
 	}
 

@@ -11,6 +11,7 @@ set(PUBLIC_HEADERS_GENERAL
 	include/${TARGETNAME_QMATH}/Quat.h
 	include/${TARGETNAME_QMATH}/Types.h
 	include/${TARGETNAME_QMATH}/Vec3.h
+	include/${TARGETNAME_QMATH}/Vec4.h
 )
 
 set(PUBLIC_HEADERS_ALL
@@ -24,6 +25,7 @@ set(SOURCES_ALL
 	src/Math.c
 	src/Quat.c
 	src/Vec3.c
+	src/Vec4.c
 )
 
 if(BUILD_SHARED_LIBS)

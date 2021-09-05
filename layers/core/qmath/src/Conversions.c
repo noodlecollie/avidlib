@@ -30,23 +30,23 @@ void ALQM_EulerAngleRadToVec3Basis(const ALQM_EulerAngle* inAngleRad, ALQM_Vec3*
 
 		if ( outVecFwd )
 		{
-			outVecFwd->v[ALQM_VECX] = cosPitch * cosYaw;
-			outVecFwd->v[ALQM_VECY] = cosPitch * sinYaw;
-			outVecFwd->v[ALQM_VECZ] = -sinPitch;
+			outVecFwd->v[ALQM_VEC3X] = cosPitch * cosYaw;
+			outVecFwd->v[ALQM_VEC3Y] = cosPitch * sinYaw;
+			outVecFwd->v[ALQM_VEC3Z] = -sinPitch;
 		}
 
 		if ( outVecRight )
 		{
-			outVecRight->v[ALQM_VECX] = (-1 * sinRoll * sinPitch * cosYaw) + (-1 * cosRoll * -sinYaw);
-			outVecRight->v[ALQM_VECY] = (-1 * sinRoll * sinPitch * sinYaw) + (-1 * cosRoll * cosYaw);
-			outVecRight->v[ALQM_VECZ] = -1 * sinRoll * cosPitch;
+			outVecRight->v[ALQM_VEC3X] = (-1 * sinRoll * sinPitch * cosYaw) + (-1 * cosRoll * -sinYaw);
+			outVecRight->v[ALQM_VEC3Y] = (-1 * sinRoll * sinPitch * sinYaw) + (-1 * cosRoll * cosYaw);
+			outVecRight->v[ALQM_VEC3Z] = -1 * sinRoll * cosPitch;
 		}
 
 		if ( outVecUp )
 		{
-			outVecUp->v[ALQM_VECX] = (cosRoll * sinPitch * cosYaw) + (-sinRoll * -sinYaw);
-			outVecUp->v[ALQM_VECY] = (cosRoll * sinPitch * sinYaw) + (-sinRoll * cosYaw);
-			outVecUp->v[ALQM_VECZ] = cosRoll * cosPitch;
+			outVecUp->v[ALQM_VEC3X] = (cosRoll * sinPitch * cosYaw) + (-sinRoll * -sinYaw);
+			outVecUp->v[ALQM_VEC3Y] = (cosRoll * sinPitch * sinYaw) + (-sinRoll * cosYaw);
+			outVecUp->v[ALQM_VEC3Z] = cosRoll * cosPitch;
 		}
 	}
 }
@@ -58,22 +58,22 @@ ALQM_EulerAngle* ALQM_Vec3ToEulerAngleRad(const ALQM_Vec3* inVecFwd, ALQM_EulerA
 		ALQM_Scalar pitch = 0;
 		ALQM_Scalar yaw = 0;
 
-		if ( ALQM_ScalarApproximatelyZero(inVecFwd->v[ALQM_VECY]) && ALQM_ScalarApproximatelyZero(inVecFwd->v[ALQM_VECX]) )
+		if ( ALQM_ScalarApproximatelyZero(inVecFwd->v[ALQM_VEC3Y]) && ALQM_ScalarApproximatelyZero(inVecFwd->v[ALQM_VEC3X]) )
 		{
 			yaw = 0;
-			pitch = inVecFwd->v[ALQM_VECZ] > 0 ? 270.0f : 90.0f;
+			pitch = inVecFwd->v[ALQM_VEC3Z] > 0 ? 270.0f : 90.0f;
 		}
 		else
 		{
-			yaw = ALQM_ATan2Rad(inVecFwd->v[ALQM_VECY], inVecFwd->v[ALQM_VECX]);
+			yaw = ALQM_ATan2Rad(inVecFwd->v[ALQM_VEC3Y], inVecFwd->v[ALQM_VEC3X]);
 
 			if ( yaw < 0 )
 			{
 				yaw += 360;
 			}
 
-			const ALQM_Scalar tmp = ALQM_Sqrt((inVecFwd->v[ALQM_VECX] * inVecFwd->v[ALQM_VECX]) + (inVecFwd->v[ALQM_VECY] * inVecFwd->v[ALQM_VECY]));
-			pitch = ALQM_ATan2Rad(-inVecFwd->v[ALQM_VECZ], tmp);
+			const ALQM_Scalar tmp = ALQM_Sqrt((inVecFwd->v[ALQM_VEC3X] * inVecFwd->v[ALQM_VEC3X]) + (inVecFwd->v[ALQM_VEC3Y] * inVecFwd->v[ALQM_VEC3Y]));
+			pitch = ALQM_ATan2Rad(-inVecFwd->v[ALQM_VEC3Z], tmp);
 
 			if ( pitch < 0 )
 			{
@@ -144,9 +144,9 @@ ALQM_Mat3x4* ALQM_Vec3AndQuatToMat3x4(const ALQM_Vec3* inTranslation, const ALQM
 		outMat->v[1][2] = (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATZ]) - (2 * inQuat->v[ALQM_QUATW] * inQuat->v[ALQM_QUATX]);
 		outMat->v[2][2] = 1 - (2 * inQuat->v[ALQM_QUATX] * inQuat->v[ALQM_QUATX]) - (2 * inQuat->v[ALQM_QUATY] * inQuat->v[ALQM_QUATY]);
 
-		outMat->v[0][3] = inTranslation->v[ALQM_VECX];
-		outMat->v[1][3] = inTranslation->v[ALQM_VECY];
-		outMat->v[2][3] = inTranslation->v[ALQM_VECZ];
+		outMat->v[0][3] = inTranslation->v[ALQM_VEC3X];
+		outMat->v[1][3] = inTranslation->v[ALQM_VEC3Y];
+		outMat->v[2][3] = inTranslation->v[ALQM_VEC3Z];
 	}
 
 	return outMat;

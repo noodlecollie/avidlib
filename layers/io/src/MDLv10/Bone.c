@@ -77,20 +77,20 @@ void ALIO_MDLv10_Bone_ToContainerElement(const ALIO_MDLv10_Bone* inBone,
 			}
 		}
 
-		outBone->defaultPosition.v[ALQM_VECX] = inBone->values[0];
-		outBone->defaultPosition.v[ALQM_VECY] = inBone->values[1];
-		outBone->defaultPosition.v[ALQM_VECZ] = inBone->values[2];
+		outBone->defaultPosition.v[ALQM_VEC3X] = inBone->values[0];
+		outBone->defaultPosition.v[ALQM_VEC3Y] = inBone->values[1];
+		outBone->defaultPosition.v[ALQM_VEC3Z] = inBone->values[2];
 
-		outBone->defaultRotation.v[ALQM_VECX] = inBone->values[3];
-		outBone->defaultRotation.v[ALQM_VECY] = inBone->values[4];
-		outBone->defaultRotation.v[ALQM_VECZ] = inBone->values[5];
+		outBone->defaultRotation.v[ALQM_VEC3X] = inBone->values[3];
+		outBone->defaultRotation.v[ALQM_VEC3Y] = inBone->values[4];
+		outBone->defaultRotation.v[ALQM_VEC3Z] = inBone->values[5];
 
-		outBone->positionScale.v[ALQM_VECX] = inBone->scales[0];
-		outBone->positionScale.v[ALQM_VECY] = inBone->scales[1];
-		outBone->positionScale.v[ALQM_VECZ] = inBone->scales[2];
+		outBone->positionScale.v[ALQM_VEC3X] = inBone->scales[0];
+		outBone->positionScale.v[ALQM_VEC3Y] = inBone->scales[1];
+		outBone->positionScale.v[ALQM_VEC3Z] = inBone->scales[2];
 
-		outBone->rotationScale.v[ALQM_VECX] = inBone->scales[3];
-		outBone->rotationScale.v[ALQM_VECY] = inBone->scales[4];
-		outBone->rotationScale.v[ALQM_VECZ] = inBone->scales[5];
+		outBone->rotationScale.v[ALQM_VEC3X] = inBone->scales[3];
+		outBone->rotationScale.v[ALQM_VEC3Y] = inBone->scales[4];
+		outBone->rotationScale.v[ALQM_VEC3Z] = inBone->scales[5];
 	}
 }

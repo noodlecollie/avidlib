@@ -1,10 +1,10 @@
 /**
- * About: Vec3.h
- * This file defines a 3D geometric vector.
+ * About: Vec4.h
+ * This file defines a 4D geometric vector.
  */
 
-#ifndef AVIDLIB_QMATH_VEC3_H
-#define AVIDLIB_QMATH_VEC3_H
+#ifndef AVIDLIB_QMATH_VEC4_H
+#define AVIDLIB_QMATH_VEC4_H
 
 #include "AVIDLib_Plat/Bool.h"
 #include "AVIDLib_QMath/LibExport.h"
@@ -16,42 +16,44 @@ extern "C" {
 #endif
 
 /**
- * Struct: ALQM_Vec3
- * Defines a geometric point in 3D space.
+ * Struct: ALQM_Vec4
+ * Defines a geometric point in 4D space.
  *
- * See <Vec3.h> for documentation on functions.
+ * See <Vec4.h> for documentation on functions.
  */
-typedef struct _ALQM_Vec3
+typedef struct _ALQM_Vec4
 {
 	/**
 	 * Variable: v
-	 * Contains X, Y, and Z components of the vector.
+	 * Contains X, Y, Z, and W components of the vector.
 	 */
-	ALQM_Scalar v[3];
-} ALQM_Vec3;
+	ALQM_Scalar v[4];
+} ALQM_Vec4;
 
 /**
  * Section: Constants
  */
 
 /**
- * Variable: ALQM_Vec3_Origin
- * Zero vector representing a point at the 3D origin.
+ * Variable: ALQM_Vec4_Origin
+ * Zero vector representing a point at the 4D origin.
  */
-API_AVIDLIB_QMATH extern const ALQM_Vec3 ALQM_Vec3_Origin;
+API_AVIDLIB_QMATH extern const ALQM_Vec4 ALQM_Vec4_Origin;
 
 /**
- * Enum: ALQM_Vec3Axis
- * ALQM_VEC3X - X component of an <ALQM_Vec3>.
- * ALQM_VEC3Y - Y component of an <ALQM_Vec3>.
- * ALQM_VEC3Z - Z component of an <ALQM_Vec3>.
+ * Enum: ALQM_Vec4Axis
+ * ALQM_VEC4X - X component of an <ALQM_Vec4>.
+ * ALQM_VEC4Y - Y component of an <ALQM_Vec4>.
+ * ALQM_VEC4Z - Z component of an <ALQM_Vec4>.
+ * ALQM_VEC4W - W component of an <ALQM_Vec4>.
  */
-typedef enum _ALQM_Vec3Axis
+typedef enum _ALQM_Vec4Axis
 {
-	ALQM_VEC3X = 0,
-	ALQM_VEC3Y = 1,
-	ALQM_VEC3Z = 2
-} ALQM_Vec3Axis;
+	ALQM_VEC4X = 0,
+	ALQM_VEC4Y = 1,
+	ALQM_VEC4Z = 2,
+	ALQM_VEC4W = 3
+} ALQM_Vec4Axis;
 
 /**
  * Section: Operator Functions
@@ -74,10 +76,10 @@ typedef enum _ALQM_Vec3Axis
  */
 
 /**
- * Function: ALQM_Vec3_Data
+ * Function: ALQM_Vec4_Data
  *
  * Returns a mutable pointer to the beginning of the vector's data.
- * There are 3 components.
+ * There are 4 components.
  *
  * Parameters:
  *
@@ -87,13 +89,13 @@ typedef enum _ALQM_Vec3Axis
  *
  * Mutable pointer to the vector's data.
  */
-API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Vec3_Data(ALQM_Vec3* v);
+API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Vec4_Data(ALQM_Vec4* v);
 
 /**
- * Function: ALQM_Vec3_CData
+ * Function: ALQM_Vec4_CData
  *
  * Returns a const pointer to the beginning of the vector's data.
- * There are 3 components.
+ * There are 4 components.
  *
  * Parameters:
  *
@@ -103,7 +105,7 @@ API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Vec3_Data(ALQM_Vec3* v);
  *
  * Const pointer to the vector's data.
  */
-API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Vec3_CData(const ALQM_Vec3* v);
+API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Vec4_CData(const ALQM_Vec4* v);
 
 /**
  * Group: Chainable Modifier Functions
@@ -113,7 +115,7 @@ API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Vec3_CData(const ALQM_Vec3* v);
  */
 
 /**
- * Function: ALQM_Vec3_Zero
+ * Function: ALQM_Vec4_Zero
  *
  * Sets all components of the vector to zero.
  *
@@ -125,10 +127,10 @@ API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Vec3_CData(const ALQM_Vec3* v);
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Zero(ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Vec4_Zero(ALQM_Vec4* vOut);
 
 /**
- * Function: ALQM_Vec3_Copy
+ * Function: ALQM_Vec4_Copy
  *
  * Copies the values from vIn to vOut.
  *
@@ -141,14 +143,14 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Zero(ALQM_Vec3* vOut);
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Vec4_Copy(const ALQM_Vec4* vIn, ALQM_Vec4* vOut);
 
 /**
- * Function: ALQM_Vec3_SetValuesArray
+ * Function: ALQM_Vec4_SetValuesArray
  *
  * Sets values in the vector using a raw ALQM_Scalar array.
- * The count must be at least 3. Data is expected to be specified
- * in XYZ order.
+ * The count must be at least 4. Data is expected to be specified
+ * in XYZW order.
  *
  * Parameters:
  *
@@ -160,10 +162,10 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Copy(const ALQM_Vec3* vIn, ALQM_Vec3* vOu
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Vec4_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Vec4* vOut);
 
 /**
- * Function: ALQM_Vec3_Add
+ * Function: ALQM_Vec4_Add
  *
  * Adds two vectors together.
  *
@@ -177,10 +179,10 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_SetValuesArray(const ALQM_Scalar* values,
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Add(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Vec4_Add(const ALQM_Vec4* vLHS, const ALQM_Vec4* vRHS, ALQM_Vec4* vOut);
 
 /**
- * Function: ALQM_Vec3_Subtract
+ * Function: ALQM_Vec4_Subtract
  *
  * Subtracts one vector from another.
  *
@@ -194,28 +196,10 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Add(const ALQM_Vec3* vLHS, const ALQM_Vec
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Subtract(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Vec4_Subtract(const ALQM_Vec4* vLHS, const ALQM_Vec4* vRHS, ALQM_Vec4* vOut);
 
 /**
- * Function: ALQM_Vec3_CrossProduct
- *
- * Calculates the cross product (sometimes called the vector product) of two vectors.
- * The resulting vector will be perpendicular to the two inputs.
- *
- * Parameters:
- *
- * vLHS - Left hand side of the operation.
- * vRHS - Right hand side of the operation.
- * vOut - Vector in which to store the result.
- *
- * Returns:
- *
- * vOut.
- */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_CrossProduct(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS, ALQM_Vec3* vOut);
-
-/**
- * Function: ALQM_Vec3_MultiplyAdd
+ * Function: ALQM_Vec4_MultiplyAdd
  *
  * Takes a vector vScaleAdd, scales its values uniformly, and adds these to the values in vIn.
  * The result is stored in vOut.
@@ -231,10 +215,10 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_CrossProduct(const ALQM_Vec3* vLHS, const
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_MultiplyAdd(const ALQM_Vec3* vIn, ALQM_Scalar scale, const ALQM_Vec3* vScaledAdd, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Vec4_MultiplyAdd(const ALQM_Vec4* vIn, ALQM_Scalar scale, const ALQM_Vec4* vScaledAdd, ALQM_Vec4* vOut);
 
 /**
- * Function: ALQM_Vec3_Normalise
+ * Function: ALQM_Vec4_Normalise
  *
  * Normalises a vector to unit length.
  *
@@ -247,10 +231,10 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_MultiplyAdd(const ALQM_Vec3* vIn, ALQM_Sc
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Normalise(const ALQM_Vec3* vIn, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Vec4_Normalise(const ALQM_Vec4* vIn, ALQM_Vec4* vOut);
 
 /**
- * Function: ALQM_Vec3_Negate
+ * Function: ALQM_Vec4_Negate
  *
  * Negates a vector, multiplying all its components by -1.
  *
@@ -263,10 +247,10 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Normalise(const ALQM_Vec3* vIn, ALQM_Vec3
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Negate(const ALQM_Vec3* vIn, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Vec4_Negate(const ALQM_Vec4* vIn, ALQM_Vec4* vOut);
 
 /**
- * Function: ALQM_Vec3_Scale
+ * Function: ALQM_Vec4_Scale
  *
  * Uniformly scales all components in a vector.
  *
@@ -279,7 +263,7 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Negate(const ALQM_Vec3* vIn, ALQM_Vec3* v
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Scale(const ALQM_Vec3* vIn, ALQM_Scalar scale, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Vec4_Scale(const ALQM_Vec4* vIn, ALQM_Scalar scale, ALQM_Vec4* vOut);
 
 /**
  * Group: Non-Chainable Modifier Functions
@@ -287,7 +271,7 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Scale(const ALQM_Vec3* vIn, ALQM_Scalar s
  */
 
 /**
- * Function: ALQM_Vec3_NormaliseAndGetLength
+ * Function: ALQM_Vec4_NormaliseAndGetLength
  *
  * Normalises the input vector, and returns its original length before normalisation.
  *
@@ -300,7 +284,7 @@ API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Vec3_Scale(const ALQM_Vec3* vIn, ALQM_Scalar s
  *
  * The length of vIn before it was normalised.
  */
-API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_NormaliseAndGetLength(const ALQM_Vec3* vIn, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec4_NormaliseAndGetLength(const ALQM_Vec4* vIn, ALQM_Vec4* vOut);
 
 /**
  * Group: Constant Functions
@@ -308,7 +292,7 @@ API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_NormaliseAndGetLength(const ALQM_Vec3* v
  */
 
 /**
- * Function: ALQM_Vec3_DotProduct
+ * Function: ALQM_Vec4_DotProduct
  *
  * Calculates the dot product (sometimes called the scalar product) of two vectors.
  *
@@ -321,15 +305,15 @@ API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_NormaliseAndGetLength(const ALQM_Vec3* v
  *
  * Result of the dot product calculation.
  */
-API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_DotProduct(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS);
+API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec4_DotProduct(const ALQM_Vec4* vLHS, const ALQM_Vec4* vRHS);
 
 /**
- * Function: ALQM_Vec3_ExactlyEqual
+ * Function: ALQM_Vec4_ExactlyEqual
  *
  * Returns whether two vectors are exactly equal.
  *
  * Note that exactly comparing floating point values is usually a bad idea.
- * In most cases you should use <ALQM_Vec3_ApproximatelyEqual>.
+ * In most cases you should use <ALQM_Vec4_ApproximatelyEqual>.
  *
  * Parameters:
  *
@@ -340,10 +324,10 @@ API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_DotProduct(const ALQM_Vec3* vLHS, const 
  *
  * True if the vectors are exactly equal, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ExactlyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Vec4_ExactlyEqual(const ALQM_Vec4* vLHS, const ALQM_Vec4* vRHS);
 
 /**
- * Function: ALQM_Vec3_ApproximatelyEqual
+ * Function: ALQM_Vec4_ApproximatelyEqual
  *
  * Returns whether two vectors are approximately equal.
  *
@@ -358,15 +342,15 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ExactlyEqual(const ALQM_Vec3* vLHS, const A
  *
  * True if the vectors are approximately equal, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ApproximatelyEqual(const ALQM_Vec3* vLHS, const ALQM_Vec3* vRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Vec4_ApproximatelyEqual(const ALQM_Vec4* vLHS, const ALQM_Vec4* vRHS);
 
 /**
- * Function: ALQM_Vec3_ExactlyZero
+ * Function: ALQM_Vec4_ExactlyZero
  *
  * Returns whether all the vector's components are exactly zero.
  *
  * Note that exactly comparing floating point values is usually a bad idea.
- * In most cases you should use <ALQM_Vec3_ApproximatelyZero>.
+ * In most cases you should use <ALQM_Vec4_ApproximatelyZero>.
  *
  * Parameters:
  *
@@ -376,10 +360,10 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ApproximatelyEqual(const ALQM_Vec3* vLHS, c
  *
  * True if all the vector's components are exactly zero, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ExactlyZero(const ALQM_Vec3* v);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Vec4_ExactlyZero(const ALQM_Vec4* v);
 
 /**
- * Function: ALQM_Vec3_ApproximatelyZero
+ * Function: ALQM_Vec4_ApproximatelyZero
  *
  * Returns whether all the vector's components are approximately zero.
  *
@@ -391,10 +375,10 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ExactlyZero(const ALQM_Vec3* v);
  *
  * True if all the vector's components are approximately zero, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ApproximatelyZero(const ALQM_Vec3* v);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Vec4_ApproximatelyZero(const ALQM_Vec4* v);
 
 /**
- * Function: ALQM_Vec3_Length
+ * Function: ALQM_Vec4_Length
  *
  * Returns the length of the vector.
  *
@@ -406,10 +390,10 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Vec3_ApproximatelyZero(const ALQM_Vec3* v);
  *
  * Length of the input vector.
  */
-API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_Length(const ALQM_Vec3* v);
+API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec4_Length(const ALQM_Vec4* v);
 
 /**
- * Function: ALQM_Vec3_LengthSquared
+ * Function: ALQM_Vec4_LengthSquared
  *
  * Returns the square of the length of the vector. This can be used as
  * an optimisation in the case where the exact length is not required,
@@ -423,10 +407,10 @@ API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_Length(const ALQM_Vec3* v);
  *
  * Square of length of the vector.
  */
-API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec3_LengthSquared(const ALQM_Vec3* v);
+API_AVIDLIB_QMATH ALQM_Scalar ALQM_Vec4_LengthSquared(const ALQM_Vec4* v);
 
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
-#endif // AVIDLIB_QMATH_VEC3_H
+#endif // AVIDLIB_QMATH_VEC4_H

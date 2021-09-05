@@ -242,9 +242,9 @@ ALQM_Mat3x4* ALQM_Mat3x4_SetTranslation(const ALQM_Mat3x4* mIn, const ALQM_Vec3*
 {
 	if ( ALU_SANITY_VALID(mIn && vTranslation && mOut) )
 	{
-		mOut->v[0][3] = vTranslation->v[ALQM_VECX];
-		mOut->v[1][3] = vTranslation->v[ALQM_VECY];
-		mOut->v[2][3] = vTranslation->v[ALQM_VECZ];
+		mOut->v[0][3] = vTranslation->v[ALQM_VEC3X];
+		mOut->v[1][3] = vTranslation->v[ALQM_VEC3Y];
+		mOut->v[2][3] = vTranslation->v[ALQM_VEC3Z];
 	}
 
 	return mOut;
@@ -254,9 +254,9 @@ ALQM_Vec3* ALQM_Mat3x4_GetTranslation(const ALQM_Mat3x4* mIn, ALQM_Vec3* vOut)
 {
 	if ( ALU_SANITY_VALID(mIn && vOut) )
 	{
-		vOut->v[ALQM_VECX] = mIn->v[0][3];
-		vOut->v[ALQM_VECY] = mIn->v[1][3];
-		vOut->v[ALQM_VECZ] = mIn->v[2][3];
+		vOut->v[ALQM_VEC3X] = mIn->v[0][3];
+		vOut->v[ALQM_VEC3Y] = mIn->v[1][3];
+		vOut->v[ALQM_VEC3Z] = mIn->v[2][3];
 	}
 
 	return vOut;

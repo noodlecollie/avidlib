@@ -11,6 +11,7 @@
 #include "AVIDLib_Plat/Int.h"
 #include "AVIDLib_Plat/Bool.h"
 #include "AVIDLib_QMath/Vec3.h"
+#include "AVIDLib_QMath/Vec4.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -466,7 +467,7 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat4x4_ApproximatelyIdentity(const ALQM_Mat4x4* 
 /**
  * Function: ALQM_Mat4x4_GetTranslation
  *
- * Returns the translation component (the final column) of the matrix.
+ * Returns the translation component of the matrix.
  *
  * Parameters:
  *
@@ -477,7 +478,7 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat4x4_ApproximatelyIdentity(const ALQM_Mat4x4* 
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Mat4x4_GetTranslation(const ALQM_Mat4x4* mIn, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Mat4x4_GetTranslation(const ALQM_Mat4x4* mIn, ALQM_Vec3* vOut);
 
 #ifdef __cplusplus
 } // extern "C"

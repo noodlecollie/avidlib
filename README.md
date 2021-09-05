@@ -42,3 +42,7 @@ AVID will follow a layered architecture, described below. The most basic layers 
 ## Anything else?
 
 AVID will support trans rights because it can, and because transgender developers and content creators contribute a significant amount to the game modding communities I'm a part of. In this rough old world we call meatspace, they deserve to be recognised.
+
+## Documentation
+
+Documentation is generated using [Natural Docs](https://www.naturaldocs.org).

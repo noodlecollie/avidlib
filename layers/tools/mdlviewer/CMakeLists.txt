@@ -10,6 +10,7 @@ set(SOURCES
 	src/Main.cpp
 	src/MainMenuBar.cpp
 	src/MDLLoader.cpp
+	src/MDLRenderer.cpp
 	src/OpenMDLFileDialogue.cpp
 )
 

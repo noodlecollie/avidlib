@@ -9,6 +9,7 @@
 #include "OpenMDLFileDialogue.h"
 #include "Sokol/SokolGFXImGUI.h"
 #include "MDLLoader.h"
+#include "MDLRenderer.h"
 
 #include "AVIDLib_Containers/UnitSupport.h"
 #include "AVIDLib_IO/UnitSupport.h"
@@ -51,6 +52,7 @@ static void Init()
 	}
 
 	SokolGFXImGUI::Init();
+	MDLRenderer::Init();
 }
 
 static void Poll()
@@ -60,7 +62,7 @@ static void Poll()
 	MDLLoader::Poll();
 }
 
-static void Draw()
+static void DrawImGUI()
 {
 	MainMenuBar::Draw();
 	OpenMDLFileDialogue::Draw();
@@ -80,9 +82,11 @@ static void Frame()
 	action.colors[0].value.a = 1.0f;
 
 	sg_begin_default_pass(&action, sapp_width(), sapp_height());
-	simgui_new_frame(sapp_width(), sapp_height(), 1.0f/60.0f);
 
-	Draw();
+	MDLRenderer::Draw();
+
+	simgui_new_frame(sapp_width(), sapp_height(), 1.0f/60.0f);
+	DrawImGUI();
 	SokolGFXImGUI::Draw();
 
 	simgui_render();
@@ -92,6 +96,7 @@ static void Frame()
 
 static void Cleanup()
 {
+	MDLRenderer::Cleanup();
 	MDLLoader::Cleanup();
 	SokolGFXImGUI::Cleanup();
 	simgui_shutdown();

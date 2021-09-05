@@ -1,10 +1,10 @@
 /**
- * About: Mat3x4.h
+ * About: Mat4x4.h
  * This file defines a matrix with 3 rows and 4 columns.
  */
 
-#ifndef AVIDLIB_QMATH_MAT3X4_H
-#define AVIDLIB_QMATH_MAT3X4_H
+#ifndef AVIDLIB_QMATH_MAT4X4_H
+#define AVIDLIB_QMATH_MAT4X4_H
 
 #include "AVIDLib_QMath/LibExport.h"
 #include "AVIDLib_QMath/Types.h"
@@ -18,38 +18,32 @@ extern "C" {
 
 /**
  * Constants: Matrix Dimensions
- * ALQM_MAT3X4_ROWS  - Number of rows in the matrix (3).
- * ALQM_MAT3X4_COLS  - Number of columns in the matrix (4).
- * ALQM_MAT3X4_CELLS - Number of cells in the matrix (12).
+ * ALQM_MAT4X4_ROWS  - Number of rows in the matrix (4).
+ * ALQM_MAT4X4_COLS  - Number of columns in the matrix (4).
+ * ALQM_MAT4X4_CELLS - Number of cells in the matrix (12).
  */
-#define ALQM_MAT3X4_ROWS 3
-#define ALQM_MAT3X4_COLS 4
-#define ALQM_MAT3X4_CELLS (ALQM_MAT3X4_ROWS * ALQM_MAT3X4_COLS)
+#define ALQM_MAT4X4_ROWS 4
+#define ALQM_MAT4X4_COLS 4
+#define ALQM_MAT4X4_CELLS (ALQM_MAT4X4_ROWS * ALQM_MAT4X4_COLS)
 
 /**
- * Struct: ALQM_Mat3x4
- * This type defines a matrix with 3 rows and 4 columns.
- *
- * Operations performed using this matrix are equivalent to performing
- * the same operations with a 4x4 matrix where the final row is
- * [0, 0, 0, 1]. Since this final row is implicit and does not change
- * based on the supported 3x4 matrix operations, it simply does not
- * form part of the <ALQM_Mat3x4> type.
+ * Struct: ALQM_Mat4x4
+ * This type defines a matrix with 4 rows and 4 columns.
  *
  * The matrix's values are specified in a two-dimensional array.
  * It obeys the following rules when iterating sequentially over
  * the memory:
  *
  * ======= C =======
- * const ALQM_Scalar* values = (const ALQM_Scalar*)mat3x4->v;
- * // values[0] == mat3x4->v[0][0]
- * // values[1] == mat3x4->v[0][1]
- * // values[2] == mat3x4->v[0][2]
- * // values[3] == mat3x4->v[0][3]
- * // values[4] == mat3x4->v[1][0]
- * // values[5] == mat3x4->v[1][1]
- * // values[6] == mat3x4->v[1][2]
- * // values[7] == mat3x4->v[1][3]
+ * const ALQM_Scalar* values = (const ALQM_Scalar*)mat4x4->v;
+ * // values[0] == mat4x4->v[0][0]
+ * // values[1] == mat4x4->v[0][1]
+ * // values[2] == mat4x4->v[0][2]
+ * // values[3] == mat4x4->v[0][3]
+ * // values[4] == mat4x4->v[1][0]
+ * // values[5] == mat4x4->v[1][1]
+ * // values[6] == mat4x4->v[1][2]
+ * // values[7] == mat4x4->v[1][3]
  * // ...
  * =================
  *
@@ -58,34 +52,35 @@ extern "C" {
  * > 2D Indices    1D Indices
  * > 00 01 02 03   0  1  2  3
  * > 10 11 12 13   4  5  6  7
- * > 20 21 22 23   8  9 10 11
+ * > 20 21 22 23   8  9  10 11
+ * > 30 31 32 33   12 13 14 15
  *
  * Cells (0,0) to (2,2) contain rotation values, and cells
  * (0,3) to (2,3) contain translation values.
  *
- * See <Mat3x4.h> for documentation on functions.
+ * See <Mat4x4.h> for documentation on functions.
  */
-typedef struct _ALQM_Mat3x4
+typedef struct _ALQM_Mat4x4
 {
 	/**
 	 * Variable: v
 	 * Two-dimensional array which holds the matrix values.
 	 */
-	ALQM_Scalar v[ALQM_MAT3X4_ROWS][ALQM_MAT3X4_COLS];
-} ALQM_Mat3x4;
+	ALQM_Scalar v[ALQM_MAT4X4_ROWS][ALQM_MAT4X4_COLS];
+} ALQM_Mat4x4;
 
 /**
  * Section: Constants
  */
 
 /**
- * Variable: ALQM_Mat3x4_Identity
+ * Variable: ALQM_Mat4x4_Identity
  * Matrix representing an identity transformation.
  * This transformation is defined such that transforming any
  * vector or matrix by the identity leaves the vector or matrix
  * unchanged.
  */
-API_AVIDLIB_QMATH extern const ALQM_Mat3x4 ALQM_Mat3x4_Identity;
+API_AVIDLIB_QMATH extern const ALQM_Mat4x4 ALQM_Mat4x4_Identity;
 
 /**
  * Section: Operator Functions
@@ -108,10 +103,10 @@ API_AVIDLIB_QMATH extern const ALQM_Mat3x4 ALQM_Mat3x4_Identity;
  */
 
 /**
- * Function: ALQM_Mat3x4_Data
+ * Function: ALQM_Mat4x4_Data
  *
  * Returns a mutable pointer to the beginning of the matrix's data.
- * There are <ALQM_MAT3X4_CELLS> components, and the data is in
+ * There are <ALQM_MAT4X4_CELLS> components, and the data is in
  * row-major order.
  *
  * Parameters:
@@ -122,13 +117,13 @@ API_AVIDLIB_QMATH extern const ALQM_Mat3x4 ALQM_Mat3x4_Identity;
  *
  * Mutable pointer to the matrix's data.
  */
-API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Mat3x4_Data(ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Mat4x4_Data(ALQM_Mat4x4* m);
 
 /**
- * Function: ALQM_Mat3x4_CData
+ * Function: ALQM_Mat4x4_CData
  *
  * Returns a const pointer to the beginning of the matrix's data.
- * There are <ALQM_MAT3X4_CELLS> components, and the data is in
+ * There are <ALQM_MAT4X4_CELLS> components, and the data is in
  * row-major order.
  *
  * Parameters:
@@ -139,19 +134,15 @@ API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Mat3x4_Data(ALQM_Mat3x4* m);
  *
  * Const pointer to the matrix's data.
  */
-API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat4x4_CData(const ALQM_Mat4x4* m);
 
 /**
- * Function: ALQM_Mat3x4_To4x4ColMajor
+ * Function: ALQM_Mat4x4_ToColMajor
  *
  * Given an array of scalar values, copies the values of the specified
  * matrix to this array. The output array is assumed to represent a
  * 4x4 matrix in column-major order.
  *
- * This function is intended to be useful for external applications
- * which use 4x4 matrices, rather than 3x4 matrices. The final row
- * of the 4x4 matrix will be set to [0, 0, 0, 1].
- *
  * If the length of the output array is less than the required number
  * of elements (16), as many elements as will fit will be copied to
  * the output array. If the length of the output array is greate than
@@ -164,38 +155,13 @@ API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat3x4_CData(const ALQM_Mat3x4* m);
  * outData   - Array to hold the copied values.
  * outLength - Size of the array in elements (not in bytes).
  */
-API_AVIDLIB_QMATH void ALQM_Mat3x4_To4x4ColMajor(const ALQM_Mat3x4* m, ALQM_Scalar* outData, ALP_Size outLength);
+API_AVIDLIB_QMATH void ALQM_Mat4x4_ToColMajor(const ALQM_Mat4x4* m, ALQM_Scalar* outData, ALP_Size outLength);
 
 /**
- * Function: ALQM_Mat3x4_To4x4RowMajor
- *
- * Given an array of scalar values, copies the values of the specified
- * matrix to this array. The output array is assumed to represent a
- * 4x4 matrix in row-major order.
- *
- * This function is intended to be useful for external applications
- * which use 4x4 matrices, rather than 3x4 matrices. The final row
- * of the 4x4 matrix will be set to [0, 0, 0, 1].
- *
- * If the length of the output array is less than the required number
- * of elements (16), as many elements as will fit will be copied to
- * the output array. If the length of the output array is greate than
- * required, any other elements in the output array will be left
- * undefined.
- *
- * Parameters:
- *
- * m         - Matrix whose data should be copied.
- * outData   - Array to hold the copied values.
- * outLength - Size of the array in elements (not in bytes).
- */
-API_AVIDLIB_QMATH void ALQM_Mat3x4_To4x4RowMajor(const ALQM_Mat3x4* m, ALQM_Scalar* outData, ALP_Size outLength);
-
-/**
- * Function: ALQM_Mat3x4_Row
+ * Function: ALQM_Mat4x4_Row
  *
  * Returns a mutable pointer to the beginning of the specified row of the matrix.
- * There are <ALQM_MAT3X4_COLS> components.
+ * There are <ALQM_MAT4X4_COLS> components.
  *
  * Parameters:
  *
@@ -206,13 +172,13 @@ API_AVIDLIB_QMATH void ALQM_Mat3x4_To4x4RowMajor(const ALQM_Mat3x4* m, ALQM_Scal
  *
  * Mutable pointer to row data.
  */
-API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Mat3x4_Row(ALQM_Mat3x4* m, ALP_Size row);
+API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Mat4x4_Row(ALQM_Mat4x4* m, ALP_Size row);
 
 /**
- * Function: ALQM_Mat3x4_CRow
+ * Function: ALQM_Mat4x4_CRow
  *
  * Returns a const pointer to the beginning of the specified row of the matrix.
- * There are <ALQM_MAT3X4_COLS> components.
+ * There are <ALQM_MAT4X4_COLS> components.
  *
  * Parameters:
  *
@@ -223,7 +189,7 @@ API_AVIDLIB_QMATH ALQM_Scalar* ALQM_Mat3x4_Row(ALQM_Mat3x4* m, ALP_Size row);
  *
  * Const pointer to row data.
  */
-API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat3x4_CRow(const ALQM_Mat3x4* m, ALP_Size row);
+API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat4x4_CRow(const ALQM_Mat4x4* m, ALP_Size row);
 
 /**
  * Group: Chainable Modifier Functions
@@ -233,7 +199,7 @@ API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat3x4_CRow(const ALQM_Mat3x4* m, ALP_
  */
 
 /**
- * Function: ALQM_Mat3x4_SetIdentity
+ * Function: ALQM_Mat4x4_SetIdentity
  *
  * Sets the given matrix to the identity, where rotation is set to 0,
  * scale is set to 1, and translation is set to 0.
@@ -246,10 +212,10 @@ API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat3x4_CRow(const ALQM_Mat3x4* m, ALP_
  *
  * mOut.
  */
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat4x4* ALQM_Mat4x4_SetIdentity(ALQM_Mat4x4* mOut);
 
 /**
- * Function: ALQM_Mat3x4_Zero
+ * Function: ALQM_Mat4x4_Zero
  *
  * Sets every component in the given matrix to zero.
  *
@@ -261,10 +227,10 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetIdentity(ALQM_Mat3x4* mOut);
  *
  * mOut.
  */
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Zero(ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat4x4* ALQM_Mat4x4_Zero(ALQM_Mat4x4* mOut);
 
 /**
- * Function: ALQM_Matrix3x4_Copy
+ * Function: ALQM_Matrix4x4_Copy
  *
  * Copies the values from mIn to mOut.
  *
@@ -277,13 +243,13 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Zero(ALQM_Mat3x4* mOut);
  *
  * mOut.
  */
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat4x4* ALQM_Mat4x4_Copy(const ALQM_Mat4x4* mIn, ALQM_Mat4x4* mOut);
 
 /**
- * Function: ALQM_Mat3x4_SetValuesArray
+ * Function: ALQM_Mat4x4_SetValuesArray
  *
  * Sets values in the matrix using a raw ALQM_Scalar array.
- * The count must be at least <ALQM_MAT3X4_CELLS>. Data is
+ * The count must be at least <ALQM_MAT4X4_CELLS>. Data is
  * expected to be laid out in row-major order.
  *
  * Parameters:
@@ -296,15 +262,12 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Copy(const ALQM_Mat3x4* mIn, ALQM_Mat
  *
  * mOut.
  */
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat4x4* ALQM_Mat4x4_SetValuesArray(const ALQM_Scalar* values, ALP_Size count, ALQM_Mat4x4* mOut);
 
 /**
- * Function: ALQM_Mat3x4_Concat
+ * Function: ALQM_Mat4x4_Concat
  *
  * Concatenates two matrices by multiplying them together.
- *
- * Concatenation is conducted by treating both input matrices as if
- * they were 4x4 matrices with a final row of [0, 0, 0, 1].
  *
  * Parameters:
  *
@@ -316,10 +279,26 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetValuesArray(const ALQM_Scalar* val
  *
  * mOut.
  */
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat4x4* ALQM_Mat4x4_Concat(const ALQM_Mat4x4* mLHS, const ALQM_Mat4x4* mRHS, ALQM_Mat4x4* mOut);
 
 /**
- * Function: ALQM_Mat3x4_TransposeRot
+ * Function: ALQM_Mat4x4_Transpose
+ *
+ * Transposes the entire matrix.
+ *
+ * Parameters:
+ *
+ * mIn  - Matrix to transpose.
+ * mOut - Matrix in which to store the result.
+ *
+ * Returns:
+ *
+ * mOut.
+ */
+API_AVIDLIB_QMATH ALQM_Mat4x4* ALQM_Mat4x4_Transpose(const ALQM_Mat4x4* mIn, ALQM_Mat4x4* mOut);
+
+/**
+ * Function: ALQM_Mat4x4_TransposeRot
  *
  * Transposes the rotational part of the matrix only.
  *
@@ -332,12 +311,14 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_Concat(const ALQM_Mat3x4* mLHS, const
  *
  * mOut.
  */
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_TransposeRot(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat4x4* ALQM_Mat4x4_TransposeRot(const ALQM_Mat4x4* mIn, ALQM_Mat4x4* mOut);
 
 /**
- * Function: ALQM_Mat3x4_InvertSimple
+ * Function: ALQM_Mat4x4_InvertSimple
  *
- * Calculates a simple inversion of the provided matrix.
+ * Calculates a simple inversion of the provided matrix. This just inverts the transform
+ * of the upper left 3x3 region and inverts the 3D translation vector - other cells are
+ * not modified.
  *
  * The matrix's scale is assumed to be uniform in all axes. The resulting inverted matrix,
  * set on mOut, holds the inverse of the transformation provided by mIn. In other words,
@@ -355,10 +336,10 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_TransposeRot(const ALQM_Mat3x4* mIn, 
  *
  * mOut.
  */
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_InvertSimple(const ALQM_Mat3x4* mIn, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat4x4* ALQM_Mat4x4_InvertSimple(const ALQM_Mat4x4* mIn, ALQM_Mat4x4* mOut);
 
 /**
- * Function: ALQM_Mat3x4_SetTranslation
+ * Function: ALQM_Mat4x4_SetTranslation
  *
  * Sets the matrix's translation component (the final column).
  *
@@ -372,7 +353,7 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_InvertSimple(const ALQM_Mat3x4* mIn, 
  *
  * mOut.
  */
-API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetTranslation(const ALQM_Mat3x4* mIn, const ALQM_Vec3* vTranslation, ALQM_Mat3x4* mOut);
+API_AVIDLIB_QMATH ALQM_Mat4x4* ALQM_Mat4x4_SetTranslation(const ALQM_Mat4x4* mIn, const ALQM_Vec3* vTranslation, ALQM_Mat4x4* mOut);
 
 /**
  * Group: Constant Functions
@@ -380,12 +361,12 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetTranslation(const ALQM_Mat3x4* mIn
  */
 
 /**
- * Function: ALQM_Mat3x4_ExactlyEqual
+ * Function: ALQM_Mat4x4_ExactlyEqual
  *
  * Returns whether two matrices are exactly equal.
  *
  * Note that exactly comparing floating point values is usually a bad idea.
- * In most cases you should use <ALQM_Mat3x4_ApproximatelyEqual>.
+ * In most cases you should use <ALQM_Mat4x4_ApproximatelyEqual>.
  *
  * Parameters:
  *
@@ -396,10 +377,10 @@ API_AVIDLIB_QMATH ALQM_Mat3x4* ALQM_Mat3x4_SetTranslation(const ALQM_Mat3x4* mIn
  *
  * True if the matrices are exactly equal, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat4x4_ExactlyEqual(const ALQM_Mat4x4* mLHS, const ALQM_Mat4x4* mRHS);
 
 /**
- * Function: ALQM_Mat3x4_ApproximatelyEqual
+ * Function: ALQM_Mat4x4_ApproximatelyEqual
  *
  * Returns whether two matrices are approximately equal.
  *
@@ -414,15 +395,15 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyEqual(const ALQM_Mat3x4* mLHS, con
  *
  * True if the matrices are approximately equal, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyEqual(const ALQM_Mat3x4* mLHS, const ALQM_Mat3x4* mRHS);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat4x4_ApproximatelyEqual(const ALQM_Mat4x4* mLHS, const ALQM_Mat4x4* mRHS);
 
 /**
- * Function: ALQM_Mat3x4_ExactlyZero
+ * Function: ALQM_Mat4x4_ExactlyZero
  *
  * Returns whether all the matrix's components are exactly zero.
  *
  * Note that exactly comparing floating point values is usually a bad idea.
- * In most cases you should use <ALQM_Mat3x4_ApproximatelyZero>.
+ * In most cases you should use <ALQM_Mat4x4_ApproximatelyZero>.
  *
  * Parameters:
  *
@@ -432,10 +413,10 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyEqual(const ALQM_Mat3x4* mLH
  *
  * True if all the matrix's components are exactly zero, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyZero(const ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat4x4_ExactlyZero(const ALQM_Mat4x4* m);
 
 /**
- * Function: ALQM_Mat3x4_ApproximatelyZero
+ * Function: ALQM_Mat4x4_ApproximatelyZero
  *
  * Returns whether all the matrix's components are approximately zero.
  *
@@ -447,15 +428,15 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyZero(const ALQM_Mat3x4* m);
  *
  * True if all the Matrix's components are approximately zero, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyZero(const ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat4x4_ApproximatelyZero(const ALQM_Mat4x4* m);
 
 /**
- * Function: ALQM_Mat3x4_ExactlyZero
+ * Function: ALQM_Mat4x4_ExactlyZero
  *
  * Returns whether the matrix exactly matches the identity matrix.
  *
  * Note that exactly comparing floating point values is usually a bad idea.
- * In most cases you should use <ALQM_Mat3x4_ApproximatelyIdentity>.
+ * In most cases you should use <ALQM_Mat4x4_ApproximatelyIdentity>.
  *
  * Parameters:
  *
@@ -465,10 +446,10 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyZero(const ALQM_Mat3x4* m);
  *
  * True if all the matrix's components exactly match the identity matrix, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyIdentity(const ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat4x4_ExactlyIdentity(const ALQM_Mat4x4* m);
 
 /**
- * Function: ALQM_Mat3x4_ApproximatelyIdentity
+ * Function: ALQM_Mat4x4_ApproximatelyIdentity
  *
  * Returns whether the matrix approximately matches the identity matrix.
  *
@@ -480,10 +461,10 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ExactlyIdentity(const ALQM_Mat3x4* m);
  *
  * True if all the matrix's components approximately match the identity matrix, or false otherwise.
  */
-API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyIdentity(const ALQM_Mat3x4* m);
+API_AVIDLIB_QMATH ALP_Bool ALQM_Mat4x4_ApproximatelyIdentity(const ALQM_Mat4x4* m);
 
 /**
- * Function: ALQM_Mat3x4_GetTranslation
+ * Function: ALQM_Mat4x4_GetTranslation
  *
  * Returns the translation component (the final column) of the matrix.
  *
@@ -496,10 +477,10 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyIdentity(const ALQM_Mat3x4* 
  *
  * vOut.
  */
-API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Mat3x4_GetTranslation(const ALQM_Mat3x4* mIn, ALQM_Vec3* vOut);
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Mat4x4_GetTranslation(const ALQM_Mat4x4* mIn, ALQM_Vec3* vOut);
 
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
-#endif // AVIDLIB_QMATH_MAT3X4_H
+#endif // AVIDLIB_QMATH_MAT4X4_H

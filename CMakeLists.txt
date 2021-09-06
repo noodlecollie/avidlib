@@ -66,3 +66,4 @@ else()
 endif()
 
 add_subdirectory(layers)
+add_subdirectory(tests)

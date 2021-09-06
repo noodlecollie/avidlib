@@ -43,22 +43,22 @@ Title: AVIDLib
 # Source Code
 # ------------------------------------------------------------------------
 
-Source Folder: ..\layers\core\plat\include\AVIDLib_Plat
+Source Folder: ../layers/core/plat/include/AVIDLib_Plat
    Name: Platform Library
 
-Source Folder 2: ..\layers\core\qmath\include\AVIDLib_QMath
+Source Folder 2: ../layers/core/qmath/include/AVIDLib_QMath
    Name: Quake Math Library
 
-Source Folder 3: ..\layers\containers\include\AVIDLib_Containers
+Source Folder 3: ../layers/containers/include/AVIDLib_Containers
    Name: Asset Container Library
 
-Source Folder 4: ..\layers\io\include\AVIDLib_IO
+Source Folder 4: ../layers/io/include/AVIDLib_IO
    Name: Asset I/O Library
 
-Source Folder 5: ..\layers\io\src\FormatCommon
+Source Folder 5: ../layers/io/src/FormatCommon
    Name: Common Format Types
 
-Source Folder 6: ..\layers\io\src\MDLv10
+Source Folder 6: ../layers/io/src/MDLv10
    Name: MDLv10 Format Description
 
 
@@ -123,7 +123,7 @@ Source Folder 6: ..\layers\io\src\MDLv10
 # Generated Documentation
 # ------------------------------------------------------------------------
 
-HTML Output Folder: ..\build\docs
+HTML Output Folder: ../build/docs
 
 
 # This is where you specify what kind of documentation you want Natural Docs

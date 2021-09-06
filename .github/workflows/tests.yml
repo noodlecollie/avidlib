@@ -34,6 +34,7 @@ jobs:
         cd build
         cmake \
           -DCMAKE_BUILD_TYPE=${{matrix.config}} \
+          -DCMAKE_INSTALL_PREFIX=install \
           -DBUILD_SHARED_LIBS=NO \
           -DCONTAINERS_ALL=YES \
           -DBUILD_TOOLS=YES \

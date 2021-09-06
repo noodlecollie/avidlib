@@ -11,6 +11,7 @@
 #include "AVIDLib_Plat/Int.h"
 #include "AVIDLib_Plat/Bool.h"
 #include "AVIDLib_QMath/Vec3.h"
+#include "AVIDLib_QMath/Vec4.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -497,6 +498,64 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat3x4_ApproximatelyIdentity(const ALQM_Mat3x4* 
  * vOut.
  */
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Mat3x4_GetTranslation(const ALQM_Mat3x4* mIn, ALQM_Vec3* vOut);
+
+/**
+ * Function: ALQM_Mat3x4_GetRowVec4
+ *
+ * Returns the specified row as a 4D vector.
+ *
+ * If the row index is not in range, the output vector is not modified.
+ *
+ * Parameters:
+ *
+ * mIn  - Matrix whose row should be returned.
+ * row  - Index of the row to be returned. Should be less than <ALQM_MAT3X4_ROWS>.
+ * vOut - Output vector in which to store the result.
+ *
+ * Returns:
+ *
+ * vOut.
+ */
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Mat3x4_GetRowVec4(const ALQM_Mat3x4* mIn, ALP_Size row, ALQM_Vec4* vOut);
+
+/**
+ * Function: ALQM_Mat3x4_GetColVec3
+ *
+ * Returns the specified column as a 3D vector.
+ *
+ * If the column index is not in range, the output vector is not modified.
+ *
+ * Parameters:
+ *
+ * mIn  - Matrix whose column should be returned.
+ * col  - Index of the column to be returned. Should be less than <ALQM_MAT3X4_COLS>.
+ * vOut - Output vector in which to store the result.
+ *
+ * Returns:
+ *
+ * vOut.
+ */
+API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Mat3x4_GetColVec3(const ALQM_Mat3x4* mIn, ALP_Size col, ALQM_Vec3* vOut);
+
+/**
+ * Function: ALQM_Mat3x4_GetColVec4
+ *
+ * Returns the specified column as a 4D vector. The final element of the vector
+ * is 0 if the column index is 0, 1, or 2, or 1 if the column index is 3.
+ *
+ * If the column index is not in range, the output vector is not modified.
+ *
+ * Parameters:
+ *
+ * mIn  - Matrix whose column should be returned.
+ * col  - Index of the column to be returned. Should be less than <ALQM_MAT3X4_COLS>.
+ * vOut - Output vector in which to store the result.
+ *
+ * Returns:
+ *
+ * vOut.
+ */
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Mat3x4_GetColVec4(const ALQM_Mat3x4* mIn, ALP_Size col, ALQM_Vec4* vOut);
 
 #ifdef __cplusplus
 } // extern "C"

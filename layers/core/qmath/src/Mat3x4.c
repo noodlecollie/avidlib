@@ -363,3 +363,41 @@ ALP_Bool ALQM_Mat3x4_ApproximatelyIdentity(const ALQM_Mat3x4* m)
 
 	return ALP_FALSE;
 }
+
+ALQM_Vec4* ALQM_Mat3x4_GetRowVec4(const ALQM_Mat3x4* mIn, ALP_Size row, ALQM_Vec4* vOut)
+{
+	if ( ALU_SANITY_VALID(mIn) && ALU_SANITY_VALID(vOut) && row < ALQM_MAT3X4_ROWS )
+	{
+		vOut->v[ALQM_VEC4X] = mIn->v[row][0];
+		vOut->v[ALQM_VEC4Y] = mIn->v[row][1];
+		vOut->v[ALQM_VEC4Z] = mIn->v[row][2];
+		vOut->v[ALQM_VEC4W] = mIn->v[row][3];
+	}
+
+	return vOut;
+}
+
+ALQM_Vec3* ALQM_Mat3x4_GetColVec3(const ALQM_Mat3x4* mIn, ALP_Size col, ALQM_Vec3* vOut)
+{
+	if ( ALU_SANITY_VALID(mIn) && ALU_SANITY_VALID(vOut) && col < ALQM_MAT3X4_COLS )
+	{
+		vOut->v[ALQM_VEC3X] = mIn->v[0][col];
+		vOut->v[ALQM_VEC3Y] = mIn->v[1][col];
+		vOut->v[ALQM_VEC3Z] = mIn->v[2][col];
+	}
+
+	return vOut;
+}
+
+ALQM_Vec4* ALQM_Mat3x4_GetColVec4(const ALQM_Mat3x4* mIn, ALP_Size col, ALQM_Vec4* vOut)
+{
+	if ( ALU_SANITY_VALID(mIn) && ALU_SANITY_VALID(vOut) && col < ALQM_MAT3X4_COLS )
+	{
+		vOut->v[ALQM_VEC4X] = mIn->v[0][col];
+		vOut->v[ALQM_VEC4Y] = mIn->v[1][col];
+		vOut->v[ALQM_VEC4Z] = mIn->v[2][col];
+		vOut->v[ALQM_VEC4W] = col == 3 ? 1.0f : 0.0f;
+	}
+
+	return vOut;
+}

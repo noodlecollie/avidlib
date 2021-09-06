@@ -480,6 +480,45 @@ API_AVIDLIB_QMATH ALP_Bool ALQM_Mat4x4_ApproximatelyIdentity(const ALQM_Mat4x4* 
  */
 API_AVIDLIB_QMATH ALQM_Vec3* ALQM_Mat4x4_GetTranslation(const ALQM_Mat4x4* mIn, ALQM_Vec3* vOut);
 
+/**
+ * Function: ALQM_Mat4x4_GetRowVec4
+ *
+ * Returns the specified row as a 4D vector.
+ *
+ * If the row index is not in range, the output vector is not modified.
+ *
+ * Parameters:
+ *
+ * mIn  - Matrix whose row should be returned.
+ * row  - Index of the row to be returned. Should be less than <ALQM_MAT4X4_ROWS>.
+ * vOut - Output vector in which to store the result.
+ *
+ * Returns:
+ *
+ * vOut.
+ */
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Mat4x4_GetRowVec4(const ALQM_Mat4x4* mIn, ALP_Size row, ALQM_Vec4* vOut);
+
+
+/**
+ * Function: ALQM_Mat4x4_GetColVec4
+ *
+ * Returns the specified column as a 4D vector.
+ *
+ * If the column index is not in range, the output vector is not modified.
+ *
+ * Parameters:
+ *
+ * mIn  - Matrix whose column should be returned.
+ * col  - Index of the column to be returned. Should be less than <ALQM_MAT4X4_COLS>.
+ * vOut - Output vector in which to store the result.
+ *
+ * Returns:
+ *
+ * vOut.
+ */
+API_AVIDLIB_QMATH ALQM_Vec4* ALQM_Mat4x4_GetColVec4(const ALQM_Mat4x4* mIn, ALP_Size col, ALQM_Vec4* vOut);
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

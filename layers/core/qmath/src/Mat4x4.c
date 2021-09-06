@@ -358,3 +358,29 @@ ALP_Bool ALQM_Mat4x4_ApproximatelyIdentity(const ALQM_Mat4x4* m)
 
 	return ALP_FALSE;
 }
+
+ALQM_Vec4* ALQM_Mat4x4_GetRowVec4(const ALQM_Mat4x4* mIn, ALP_Size row, ALQM_Vec4* vOut)
+{
+	if ( ALU_SANITY_VALID(mIn) && ALU_SANITY_VALID(vOut) && row < ALQM_MAT4X4_ROWS )
+	{
+		vOut->v[ALQM_VEC4X] = mIn->v[row][0];
+		vOut->v[ALQM_VEC4Y] = mIn->v[row][1];
+		vOut->v[ALQM_VEC4Z] = mIn->v[row][2];
+		vOut->v[ALQM_VEC4W] = mIn->v[row][3];
+	}
+
+	return vOut;
+}
+
+ALQM_Vec4* ALQM_Mat4x4_GetColVec4(const ALQM_Mat4x4* mIn, ALP_Size col, ALQM_Vec4* vOut)
+{
+	if ( ALU_SANITY_VALID(mIn) && ALU_SANITY_VALID(vOut) && col < ALQM_MAT4X4_COLS )
+	{
+		vOut->v[ALQM_VEC4X] = mIn->v[0][col];
+		vOut->v[ALQM_VEC4Y] = mIn->v[1][col];
+		vOut->v[ALQM_VEC4Z] = mIn->v[2][col];
+		vOut->v[ALQM_VEC4W] = mIn->v[3][col];
+	}
+
+	return vOut;
+}

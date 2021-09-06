@@ -50,4 +50,4 @@ jobs:
         cmake --build . --config ${{matrix.config}} --target install
 
     - name: Run tests
-      run: build/install/tests/placeholder_test
+      run: build/install/tests/placeholder_test/placeholder_test

@@ -1,0 +1,52 @@
+name: tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-tests:
+    name: Build and run tests on Ubuntu Latest
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        config: [ "Debug", "Release" ]
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: "recursive"
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev mesa-common-dev
+
+    - name: Create build dir
+      run: |
+        mkdir build
+
+    - name: Configure (config = ${{matrix.config}})
+      run: |
+        cd build
+        cmake \
+          -DCMAKE_BUILD_TYPE=${{matrix.config}} \
+          -DBUILD_SHARED_LIBS=NO \
+          -DCONTAINERS_ALL=YES \
+          -DBUILD_TOOLS=YES \
+          -DBUILD_TESTS=YES \
+          -DTOOLS_ALL=YES \
+          -DIO_ALL=YES \
+          ..
+
+    - name: Build
+      run: |
+        cd build
+        cmake --build . --config ${{matrix.config}}
+        cmake --build . --config ${{matrix.config}} --target install
+
+    - name: Run tests
+      run: build/install/tests/placeholder_test

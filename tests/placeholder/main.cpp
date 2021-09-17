@@ -5,6 +5,7 @@
 
 int main()
 {
+	// TODO: Proper tests
 	rc::check("double reversal yields the original value",
 		[](const std::vector<int> &l0)
 		{

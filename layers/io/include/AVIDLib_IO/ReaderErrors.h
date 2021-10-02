@@ -27,7 +27,8 @@ extern "C" {
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_INSUFFICIENT_DATA, "Not enough input data was provided.") \
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_UNKNOWN_MAGIC, "The type of the input file could not be determined.") \
 	ALIO_LIST_ITEM(ALIO_READER_ERROR_UNSUPPORTED_VERSION, "The version of the input file was not supported.") \
-	ALIO_LIST_ITEM(ALIO_READER_ERROR_INVALID_STRUCTURE, "The internal structure of the input file was not valid.")
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_INVALID_STRUCTURE, "The internal structure of the input file was not valid.") \
+	ALIO_LIST_ITEM(ALIO_READER_ERROR_INSUFFICIENT_MEMORY, "Failed to allocate required memory for operation.")
 
 #define ALIO_LIST_ITEM(value, description) value,
 
@@ -42,6 +43,7 @@ extern "C" {
  * ALIO_READER_ERROR_UNKNOWN_MAGIC       - The type of the input file could not be determined.
  * ALIO_READER_ERROR_UNSUPPORTED_VERSION - The version of the input file was not supported.
  * ALIO_READER_ERROR_INVALID_STRUCTURE   - The internal structure of the input file was not valid.
+ * ALIO_READER_ERROR_INSUFFICIENT_MEMORY - Failed to allocate required memory for operation.
  * ALIO_READER_ERROR__COUNT              - Total number of errors. Do not use.
  */
 typedef enum _ALIO_ReaderError

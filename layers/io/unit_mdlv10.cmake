@@ -8,6 +8,8 @@ set(SOURCES_MDLV10
 	src/MDLv10/Bone.c
 	src/MDLv10/BoneController.h
 	src/MDLv10/BoneController.c
+	src/MDLv10/GenericUnitInterface_MDLv10.h
+	src/MDLv10/GenericUnitInterface_MDLv10.c
 	src/MDLv10/Header.h
 	src/MDLv10/IODefinitions.h
 	src/MDLv10/ValidationHelpers.h

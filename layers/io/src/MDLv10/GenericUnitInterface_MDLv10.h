@@ -1,0 +1,8 @@
+#ifndef AVIDLIB_IO_MDLV10_GENERICUNITINTERFACE_H
+#define AVIDLIB_IO_MDLV10_GENERICUNITINTERFACE_H
+
+#include "GenericUnitInterface.h"
+
+extern const ALIO_GenericUnitInterface ALIO_MDLv10_GenericUnitInterface;
+
+#endif // AVIDLIB_IO_MDLV10_GENERICUNITINTERFACE_H

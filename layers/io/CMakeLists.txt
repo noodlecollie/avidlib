@@ -18,6 +18,7 @@ set(PUBLIC_HEADERS_GENERAL
 set(SOURCES_GENERAL
 	src/FormatCommon/FileElementHelpers.h
 	src/GenericOperations.c
+	src/GenericUnitInterface.h
 	src/ReadContext.c
 	src/ReaderErrors.c
 	src/UnitSupport.c

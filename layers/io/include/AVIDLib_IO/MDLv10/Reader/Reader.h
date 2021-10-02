@@ -46,7 +46,7 @@ API_AVIDLIB_IO ALP_Bool ALIO_MDLv10_Identify(const ALIO_ReadContext* context);
  *
  * Returns:
  *
- * True if the result of the read was ALIO_READER_ERROR_NONE,
+ * True if the result of the read was <ALIO_READER_ERROR_NONE>,
  * or false if some read error occurred. The actual error code,
  * along with any other error details, is set on the context.
  */

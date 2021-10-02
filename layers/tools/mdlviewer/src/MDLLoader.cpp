@@ -5,24 +5,21 @@
 #include "MDLLoader.h"
 #include "AVIDLib_IO/GenericOperations.h"
 #include "AVIDLib_IO/ReadContext.h"
-
-// TODO: We need a more generic method than this
-#include "AVIDLib_IO/MDLv10/Reader/Reader.h"
-#include "AVIDLib_Containers/MDLv10/Model.h"
+#include "AVIDLib_IO/GenericOperations.h"
 
 namespace MDLLoader
 {
 	static std::string Path;
 	static bool HasNewPath = false;
-	static ALC_MDLv10_Model* Model = nullptr;
+	static ALIO_GenericContainer* Container = nullptr;
 
-	static void DestroyModel()
+	static void DestroyContainer()
 	{
-		if ( Model )
+		if ( Container )
 		{
-			ALC_MDLv10_Model_Deinit(Model);
-			free(Model);
-			Model = nullptr;
+			ALIO_GenericContainer_Deinit(Container);
+			free(Container);
+			Container = nullptr;
 		}
 	}
 
@@ -54,13 +51,15 @@ namespace MDLLoader
 
 	static bool ReadMDL(ALIO_ReadContext* context)
 	{
-		DestroyModel();
+		DestroyContainer();
 
-		Model = (ALC_MDLv10_Model*)malloc(sizeof(*Model));
+		Container = (ALIO_GenericContainer*)malloc(sizeof(*Container));
+		ALIO_GenericContainer_Init(Container);
 
-		if ( ALIO_MDLv10_Read(context, Model) )
+		if ( ALIO_GenericRead(context, ALIO_UNIT_ID__INVALID, Container) )
 		{
 			std::cout << "Read " << Path << " successfully." << std::endl;
+			std::cout << "Model format inferred: " << ALIO_UnitName(Container->unit) << std::endl;
 			return true;
 		}
 		else
@@ -102,13 +101,7 @@ namespace MDLLoader
 		ALIO_ReadContext context;
 		ALIO_ReadContext_Prepare(&context, fileData.data(), fileData.size());
 
-		ALIO_UnitID unitID = ALIO_UnitForFile(&context);
-		std::cout << "Unit ID for " << Path << ": " << ALIO_UnitName(unitID) << std::endl;
-
-		if ( unitID == ALIO_UNIT_MDLV10 )
-		{
-			ReadMDL(&context);
-		}
+		ReadMDL(&context);
 	}
 
 	void SetMDLPath(const std::string& path)
@@ -128,6 +121,6 @@ namespace MDLLoader
 
 	void Cleanup()
 	{
-		DestroyModel();
+		DestroyContainer();
 	}
 }

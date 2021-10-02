@@ -72,7 +72,7 @@ static ALP_Bool GenericDeinit(ALIO_GenericContainer* container)
 	}
 
 	// If the number of bytes specified is 0, there must be no data.
-	if ( container->containerSizeBytes < 1 || container->container )
+	if ( container->containerSizeBytes < 1 && container->container )
 	{
 		return ALP_FALSE;
 	}

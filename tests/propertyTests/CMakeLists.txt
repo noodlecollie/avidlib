@@ -1,5 +1,9 @@
 set(TARGETNAME_PROPERTY_TESTS PropertyTests)
-add_executable(${TARGETNAME_PROPERTY_TESTS} main.cpp)
+
+add_executable(${TARGETNAME_PROPERTY_TESTS}
+	Main.cpp
+)
+
 target_include_directories(${TARGETNAME_PROPERTY_TESTS} PRIVATE .)
 target_link_libraries(${TARGETNAME_PROPERTY_TESTS} rapidcheck)
 

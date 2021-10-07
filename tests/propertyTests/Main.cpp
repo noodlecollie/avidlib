@@ -1,7 +1,6 @@
-#include <rapidcheck.h>
-
 #include <vector>
 #include <algorithm>
+#include "rapidcheck.h"
 
 int main()
 {

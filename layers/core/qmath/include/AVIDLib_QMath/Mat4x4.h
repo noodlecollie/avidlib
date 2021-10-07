@@ -140,7 +140,7 @@ API_AVIDLIB_QMATH const ALQM_Scalar* ALQM_Mat4x4_CData(const ALQM_Mat4x4* m);
 /**
  * Function: ALQM_Mat4x4_ToColMajor
  *
- * Given an array of scalar values, copies the values of the specified
+ * Given an output array of scalars, copies the values of the specified
  * matrix to this array. The output array is assumed to represent a
  * 4x4 matrix in column-major order.
  *

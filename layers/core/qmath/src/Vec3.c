@@ -4,7 +4,7 @@
 #include "AVIDLib_Internal_Util/Check.h"
 #include "AVIDLib_Internal_Util/Util.h"
 
-const ALQM_Vec3 ALQM_Vec3_Origin = {{ 0, 0, 0 }};
+API_AVIDLIB_QMATH const ALQM_Vec3 ALQM_Vec3_Origin = {{ 0, 0, 0 }};
 
 ALQM_Scalar* ALQM_Vec3_Data(ALQM_Vec3* v)
 {

@@ -5,7 +5,7 @@
 #include "AVIDLib_QMath/Math.h"
 #include "AVIDLib_Internal_Util/Util.h"
 
-const ALQM_Mat4x4 ALQM_Mat4x4_Identity =
+API_AVIDLIB_QMATH const ALQM_Mat4x4 ALQM_Mat4x4_Identity =
 {
 	{
 		{ 1, 0, 0, 0 },

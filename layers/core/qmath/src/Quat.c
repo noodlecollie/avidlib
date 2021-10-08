@@ -3,7 +3,7 @@
 #include "AVIDLib_Internal_Util/Check.h"
 #include "AVIDLib_QMath/Math.h"
 
-const ALQM_Quat ALQM_Quat_Identity = {{ 0, 0, 0, 1 }};
+API_AVIDLIB_QMATH const ALQM_Quat ALQM_Quat_Identity = {{ 0, 0, 0, 1 }};
 
 ALQM_Scalar* ALQM_Quat_Data(ALQM_Quat* q)
 {

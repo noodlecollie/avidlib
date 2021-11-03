@@ -31,6 +31,19 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(BUILD_SHARED_LIBS "YES" CACHE BOOL "If set, builds shared libraries; otherwise, builds static libraries.")
 
+# "Master switches" for forcing all code to be built.
+# These are useful for things like CI and automated tests.
+set(CONTAINERS_ALL "NO" CACHE BOOL "Includes all different container types in containers library. Useful for validating that these all compile (eg. in CI).")
+set(IO_ALL "NO" CACHE BOOL "Includes all different IO readers and writers in IO library. Useful for validating that these all compile (eg. in CI).")
+set(BUILD_TESTS "NO" CACHE BOOL "If set, enables building tests.")
+
+if(BUILD_TESTS)
+	# If tests are being built, ensure that all code we might want to test is also built.
+	message(STATUS "Building all layers as tests are enabled.")
+	set(CONTAINERS_ALL "YES")
+	set(IO_ALL "YES")
+endif()
+
 # Store Git hash in VCS_COMMIT_ID
 execute_process(
 	COMMAND "${GIT_EXECUTABLE}" describe --always HEAD

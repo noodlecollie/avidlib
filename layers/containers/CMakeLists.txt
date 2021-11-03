@@ -25,7 +25,6 @@ set(SOURCES_SELECTED
 set(PUBLIC_DEFS_SELECTED
 )
 
-set(CONTAINERS_ALL "NO" CACHE BOOL "Includes all different container types in containers library. Useful for validating that these all compile (eg. in CI).")
 init_unit_mdlv10(PUBLIC_HEADERS_SELECTED SOURCES_SELECTED PUBLIC_DEFS_SELECTED CONTAINERS_ALL)
 
 set(numSources 0)

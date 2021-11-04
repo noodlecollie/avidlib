@@ -51,6 +51,8 @@ else()
 	)
 endif()
 
+add_export_defs(${TARGETNAME_CONTAINERS})
+
 target_link_libraries(${TARGETNAME_CONTAINERS} PUBLIC ${TARGETNAME_PLAT})
 target_link_libraries(${TARGETNAME_CONTAINERS} PUBLIC ${TARGETNAME_QMATH})
 target_link_libraries(${TARGETNAME_CONTAINERS} PRIVATE ${TARGETNAME_INTERNAL_UTIL})

@@ -36,6 +36,8 @@ else()
 	add_library(${TARGETNAME_QMATH} STATIC ${PUBLIC_HEADERS_ALL} ${SOURCES_ALL})
 endif()
 
+add_export_defs(${TARGETNAME_QMATH})
+
 target_link_libraries(${TARGETNAME_QMATH} PUBLIC ${TARGETNAME_PLAT})
 target_link_libraries(${TARGETNAME_QMATH} PRIVATE ${TARGETNAME_INTERNAL_UTIL})
 

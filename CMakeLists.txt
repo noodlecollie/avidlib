@@ -60,9 +60,6 @@ set_property(GLOBAL APPEND
 	"${CMAKE_SOURCE_DIR}/.git/index"
 )
 
-# This is defined when building the libraries, and should not be defined when using them.
-# This will allow switching between __declspec(import) and __declspec(export) on Windows.
-add_compile_definitions(__AVIDLIB_PRODUCER)
 add_compile_definitions("GIT_COMMIT_HASH=\"${VCS_COMMIT_ID}\"")
 
 # Turn up warning levels as high as is feasible, and treat warnings as errors.

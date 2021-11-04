@@ -1,11 +1,10 @@
 function(create_export_header moduleName)
 	set(moduleNameUpper "")
+	string(TOUPPER ${moduleName} moduleNameUpper)
 
 	set(sharedLibStatement
 		"// Platform is not Windows, so no __declspec is required."
 	)
-
-	string(TOUPPER ${moduleName} moduleNameUpper)
 
 	if(WIN32)
 		if(BUILD_SHARED_LIBS)
@@ -31,15 +30,15 @@ function(create_export_header moduleName)
 		"\n"
 		"#if defined(AVIDLIB_IS_SHARED_BUILD) && (defined(WIN32) || defined(WIN64))\n"
 		"\n"
-		"#if defined(__AVIDLIB_PRODUCER)\n"
+		"#if defined(${moduleNameUpper}_PRODUCER)\n"
 		"// This build is producing a library for another application to use.\n"
 		"// Mark symbols as being exported.\n"
 		"#define API_${moduleNameUpper} __declspec(dllexport)\n"
-		"#else // defined(__AVIDLIB_PRODUCER)\n"
+		"#else // defined(${moduleNameUpper}_PRODUCER)\n"
 		"// This library is being used by some application.\n"
 		"// Mark symbols as being imported.\n"
 		"#define API_${moduleNameUpper} __declspec(dllimport)\n"
-		"#endif // defined(__AVIDLIB_PRODUCER)\n"
+		"#endif // defined(${moduleNameUpper}_PRODUCER)\n"
 		"\n"
 		"#else // defined(AVIDLIB_IS_SHARED_BUILD) && (defined(WIN32) || defined(WIN64))\n"
 		"\n"
@@ -50,4 +49,10 @@ function(create_export_header moduleName)
 		"#endif // defined(AVIDLIB_IS_SHARED_BUILD) && (defined(WIN32) || defined(WIN64))\n"
 		"#endif // ${moduleNameUpper}_LIBEXPORT_H\n"
 	)
+endfunction()
+
+function(add_export_defs moduleName)
+	set(moduleNameUpper "")
+	string(TOUPPER ${moduleName} moduleNameUpper)
+	target_compile_definitions(${moduleName} PRIVATE "${moduleNameUpper}_PRODUCER")
 endfunction()

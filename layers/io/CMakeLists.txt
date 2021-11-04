@@ -62,6 +62,8 @@ else()
 	)
 endif()
 
+add_export_defs(${TARGETNAME_IO})
+
 target_link_libraries(${TARGETNAME_IO} PUBLIC ${TARGETNAME_PLAT})
 target_link_libraries(${TARGETNAME_IO} PUBLIC ${TARGETNAME_CONTAINERS})
 target_link_libraries(${TARGETNAME_IO} PRIVATE ${TARGETNAME_INTERNAL_UTIL})

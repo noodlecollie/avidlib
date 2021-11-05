@@ -6,7 +6,7 @@
 	url = https://github.com/ocornut/imgui
 [submodule "layers/tools/thirdparty/sokol/sokol"]
 	path = layers/tools/thirdparty/sokol/sokol
-	url = git@github.com:floooh/sokol.git
+	url = https://github.com/floooh/sokol.git
 [submodule "tests/frameworks/catch2/catch2"]
 	path = tests/frameworks/catch2/catch2
-	url = git@github.com:catchorg/Catch2.git
+	url = https://github.com/catchorg/Catch2.git

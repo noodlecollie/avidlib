@@ -1,49 +1,43 @@
-#include <limits>
-#include <cstdint>
-#include <random>
 #include "catch2/catch.hpp"
 #include "AVIDLib_QMath/Mat4x4.h"
 
-inline void CreateRandomMatrix(ALQM_Mat4x4& matrix,
-                               ALQM_Scalar minVal = static_cast<ALQM_Scalar>(std::numeric_limits<int16_t>::min()),
-                               ALQM_Scalar maxVal = static_cast<ALQM_Scalar>(std::numeric_limits<int16_t>::min()))
+inline void RequireValuesAreEqual(const ALQM_Mat4x4& lhs, const ALQM_Mat4x4& rhs)
 {
-	static std::random_device rd;
-	static std::mt19937 engine(rd());
+	REQUIRE(lhs.v[0][0] == rhs.v[0][0]);
+	REQUIRE(lhs.v[0][1] == rhs.v[0][1]);
+	REQUIRE(lhs.v[0][2] == rhs.v[0][2]);
+	REQUIRE(lhs.v[0][3] == rhs.v[0][3]);
 
-	std::uniform_real_distribution<ALQM_Scalar> dist(minVal, maxVal);
+	REQUIRE(lhs.v[1][0] == rhs.v[1][0]);
+	REQUIRE(lhs.v[1][1] == rhs.v[1][1]);
+	REQUIRE(lhs.v[1][2] == rhs.v[1][2]);
+	REQUIRE(lhs.v[1][3] == rhs.v[1][3]);
 
-	for ( size_t row = 0; row < ALQM_MAT4X4_ROWS; ++row )
-	{
-		for ( size_t column = 0; column < ALQM_MAT4X4_COLS; ++column )
-		{
-			matrix.v[row][column] = dist(engine);
-		}
-	}
+	REQUIRE(lhs.v[2][0] == rhs.v[2][0]);
+	REQUIRE(lhs.v[2][1] == rhs.v[2][1]);
+	REQUIRE(lhs.v[2][2] == rhs.v[2][2]);
+	REQUIRE(lhs.v[2][3] == rhs.v[2][3]);
+
+	REQUIRE(lhs.v[3][0] == rhs.v[3][0]);
+	REQUIRE(lhs.v[3][1] == rhs.v[3][1]);
+	REQUIRE(lhs.v[3][2] == rhs.v[3][2]);
+	REQUIRE(lhs.v[3][3] == rhs.v[3][3]);
 }
 
-inline bool ValuesAreEqual(const ALQM_Mat4x4& lhs, const ALQM_Mat4x4& rhs)
+SCENARIO("Multiplying a matrix by the identity should produce the original matrix", "[mat4x4]")
 {
-	for ( size_t row = 0; row < ALQM_MAT4X4_ROWS; ++row )
+	GIVEN("A matrix initialised to arbitrary values")
 	{
-		for ( size_t column = 0; column < ALQM_MAT4X4_COLS; ++column )
+		ALQM_Scalar values[16] =
 		{
-			if ( lhs.v[row][column] != rhs.v[row][column] )
-			{
-				return false;
-			}
-		}
-	}
+			1.0f,     2.0f,      3.0f,          4.0f,
+			1.5f,     46334.0f,  -2387.344f,    325.34f,
+			0.0f,     1.0f,      -387873483.0f, -345.9789987f,
+			123.456f, -987.654f, 23.0f,         457.4f
+		};
 
-	return true;
-}
-
-SCENARIO("Multiplying any matrix by the identity should produce the original matrix", "[mat4x4]")
-{
-	GIVEN("A matrix initialised to random values")
-	{
 		ALQM_Mat4x4 matrix;
-		CreateRandomMatrix(matrix);
+		ALQM_Mat4x4_SetValuesArray(values, 16, &matrix);
 
 		WHEN("The matrix is pre-multiplied by the identity")
 		{
@@ -52,7 +46,7 @@ SCENARIO("Multiplying any matrix by the identity should produce the original mat
 
 			THEN("The resulting matrix values should be identical")
 			{
-				REQUIRE(ValuesAreEqual(matrix, output));
+				RequireValuesAreEqual(matrix, output);
 			}
 		}
 
@@ -63,7 +57,7 @@ SCENARIO("Multiplying any matrix by the identity should produce the original mat
 
 			THEN("The resulting matrix values should be identical")
 			{
-				REQUIRE(ValuesAreEqual(matrix, output));
+				RequireValuesAreEqual(matrix, output);
 			}
 		}
 	}

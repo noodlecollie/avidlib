@@ -1,7 +1,8 @@
 # AVIDLib
 Library for interacting with assets from Valve and iD Tech games.
 
-![CI Status](https://github.com/x6herbius/avidlib/actions/workflows/continuous-integration.yml/badge.svg)
+![CI Status](https://github.com/noodlecollie/avidlib/actions/workflows/continuous-integration.yml/badge.svg)
+![Test Status](https://github.com/noodlecollie/avidlib/actions/workflows/tests.yml/badge.svg)
 
 ## What is AVID?
 

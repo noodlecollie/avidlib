@@ -36,6 +36,11 @@ static ALIO_MDLv10_FileType DetermineFileType(const ALIO_ReadContext* context)
 			return ALIO_MDLV10_FILE_SEQUENCE_CONTAINER;
 		}
 
+		case ALIO_MDLV10_AFTERBURNER_IDENT:
+		{
+			return ALIO_MDLV10_FILE_AFTERBURNER;
+		}
+
 		default:
 		{
 			return ALIO_MDLV10_FILE_INVALID;
@@ -67,7 +72,7 @@ static void PopulateFileElements(const ALIO_MDLv10_Header* header, ALC_MDLv10_Mo
 {
 	// TODO: Make this data-driven?
 	// TODO: Add more chunks as we code them up.
-	PopulateBones((const ALIO_MDLv10_Bone*)(((const ALP_Byte*)header) + header->bones.offset), outModel);
+	PopulateBones((const ALIO_MDLv10_Bone*)ALIO_CHUNK_OFFSET(header, bones), outModel);
 }
 
 static void ReadGeneralFile(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel)
@@ -127,10 +132,10 @@ ALP_Bool ALIO_MDLv10_Read(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel)
 				break;
 			}
 
-			if ( fileType != ALIO_MDLV10_FILE_GENERAL )
+			if ( fileType == ALIO_MDLV10_FILE_SEQUENCE_CONTAINER )
 			{
 				// TODO: Not supported yet.
-				ALIO_ReadContext_SetError(context, ALIO_READER_ERROR_UNIMPLEMENTED, "Non-general files are not yet supported.");
+				ALIO_ReadContext_SetError(context, ALIO_READER_ERROR_UNIMPLEMENTED, "Sequence container files are not yet supported.");
 				break;
 			}
 

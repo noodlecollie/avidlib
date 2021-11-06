@@ -33,6 +33,15 @@
 #define ALIO_MDLV10_SEQFILE_IDENT ((ALP_UInt32)('I' | ('D' << 8) | ('S' << 16) | ('Q' << 24)))
 
 /**
+ * Constant: ALIO_MDLV10_AFTERBURNER_IDENT
+ * "Magic number" for an MDLv10 general-purpose model file with
+ * Afterburner extensions.
+ *
+ * This is a little-endian concatenation of the characters "AFTB".
+ */
+#define ALIO_MDLV10_AFTERBURNER_IDENT ((ALP_UInt32)('A' | ('F' << 8) | ('T' << 16) | ('B' << 24)))
+
+/**
  * Constant: ALIO_MDLV10_MODEL_NAME_LENGTH
  * Defines the maximum length of the internal name of the model.
  */
@@ -152,7 +161,8 @@ typedef enum _ALIO_MDLv10_FileType
 {
 	ALIO_MDLV10_FILE_INVALID = 0,
 	ALIO_MDLV10_FILE_GENERAL,
-	ALIO_MDLV10_FILE_SEQUENCE_CONTAINER
+	ALIO_MDLV10_FILE_SEQUENCE_CONTAINER,
+	ALIO_MDLV10_FILE_AFTERBURNER
 } ALIO_MDLv10_FileType;
 
 #endif // AVIDLIB_IO_MDLV10_DEFINITIONS_H

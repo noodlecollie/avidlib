@@ -60,6 +60,8 @@ typedef struct _ALIO_BBox
 	ALIO_RawVec3 max;
 } ALIO_BBox;
 
+#define ALIO_CHUNK_OFFSET(headerPtr, chunkName) (((const ALP_Byte*)(headerPtr)) + (headerPtr)->chunkName.offset)
+
 #pragma pack(pop)
 
 #endif // AVIDLIB_IO_FILEELEMENTHELPERS_H

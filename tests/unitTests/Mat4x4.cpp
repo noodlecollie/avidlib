@@ -24,6 +24,7 @@ inline void RequireValuesAreEqual(const ALQM_Mat4x4& lhs, const ALQM_Mat4x4& rhs
 	REQUIRE(lhs.v[3][3] == rhs.v[3][3]);
 }
 
+// TODO: More tests
 SCENARIO("Multiplying a matrix by the identity should produce the original matrix", "[mat4x4]")
 {
 	GIVEN("A matrix initialised to arbitrary values")

@@ -36,18 +36,16 @@ jobs:
           -DCMAKE_BUILD_TYPE=${{matrix.config}} \
           -DCMAKE_INSTALL_PREFIX=install \
           -DBUILD_SHARED_LIBS=NO \
-          -DCONTAINERS_ALL=YES \
-          -DBUILD_TOOLS=YES \
-          -DBUILD_TESTS=YES \
-          -DTOOLS_ALL=YES \
-          -DIO_ALL=YES \
+          -DBUILD_TESTS=YES
           ..
 
     - name: Build
       run: |
         cd build
-        cmake --build . --config ${{matrix.config}}
         cmake --build . --config ${{matrix.config}} --target install
 
-    - name: Run tests
-      run: build/install/tests/placeholder_test/placeholder_test
+    - name: Run property tests
+      run: build/install/tests/PropertyTests/PropertyTests
+
+    - name: Run unit tests
+      run: build/install/tests/UnitTests/UnitTests

@@ -4,7 +4,6 @@ include(win32_export)
 
 # Units in this layer:
 include(unit_mdlv10)
-include(unit_abmdlv10)
 
 create_export_header(${TARGETNAME_CONTAINERS})
 
@@ -27,7 +26,6 @@ set(PUBLIC_DEFS_SELECTED
 )
 
 init_unit_mdlv10(PUBLIC_HEADERS_SELECTED SOURCES_SELECTED PUBLIC_DEFS_SELECTED CONTAINERS_ALL)
-init_unit_abmdlv10(PUBLIC_HEADERS_SELECTED SOURCES_SELECTED PUBLIC_DEFS_SELECTED CONTAINERS_ALL)
 
 set(numSources 0)
 list(LENGTH SOURCES_SELECTED numSources)
@@ -76,4 +74,3 @@ install(TARGETS ${TARGETNAME_CONTAINERS}
 
 install(FILES ${PUBLIC_HEADERS_GENERAL} DESTINATION ${TARGETNAME_CONTAINERS}/include/${TARGETNAME_CONTAINERS})
 install_unit_mdlv10(CONTAINERS_ALL)
-install_unit_abmdlv10(CONTAINERS_ALL)

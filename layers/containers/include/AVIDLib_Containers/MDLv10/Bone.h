@@ -33,6 +33,8 @@ typedef struct _ALC_MDLv10_Bone
 	/**
 	 * Variable: name
 	 * Name of this bone. Should be unique within the model.
+	 * Maximum number of characters, including the string terminator,
+	 * is <ALC_MDLV10_BONE_NAME_LENGTH>.
 	 */
 	ALP_Char name[ALC_MDLV10_BONE_NAME_LENGTH];
 
@@ -45,6 +47,7 @@ typedef struct _ALC_MDLv10_Bone
 	/**
 	 * Variable: refControllers
 	 * Controllers for each motion type, or null for no controller.
+	 * There are <ALC_MDLV10_NUM_MOTION_TYPES> total possible controllers.
 	 */
 	struct _ALC_MDLv10_BoneController* refControllers[ALC_MDLV10_NUM_MOTION_TYPES];
 

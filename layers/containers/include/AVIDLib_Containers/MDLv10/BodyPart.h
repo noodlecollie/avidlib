@@ -1,5 +1,5 @@
 /**
- * About: BosyPart.h
+ * About: BodyPart.h
  * Defines an MDLv10 body part.
  */
 
@@ -49,12 +49,14 @@ typedef struct _ALC_MDLv10_BodyPart
 	/**
 	 * Variable: name
 	 * Name of this body part. Should be unique within the model.
+	 * Maximum number of characters, including the string terminator,
+	 * is <ALC_MDLV10_BODYPART_NAME_LENGTH>.
 	 */
 	ALP_Char name[ALC_MDLV10_BODYPART_NAME_LENGTH];
 
 	/**
 	 * Variable: numSubmodels
-	 * Number of submodels referenced by this body part.
+	 * Number of <submodels> referenced by this body part.
 	 */
 	ALP_Size numSubmodels;
 

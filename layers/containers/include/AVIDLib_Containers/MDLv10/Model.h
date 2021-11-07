@@ -58,37 +58,40 @@ typedef struct _ALC_MDLv10_Model
 
 	/**
 	 * Variable: numBones
-	 * Number of bones in this model.
+	 * Number of <bones> in this model.
 	 */
 	ALP_Size numBones;
 
 	/**
 	 * Variable: bones
-	 * Array of bones for this model.
+	 * Array of bones for this model,
+	 * of length <numBones>.
 	 */
 	ALC_MDLv10_Bone* bones;
 
 	/**
 	 * Variable: numBoneControllers
-	 * Number of bone controllers in this model.
+	 * Number of <boneControllers> in this model.
 	 */
 	ALP_Size numBoneControllers;
 
 	/**
 	 * Variable: boneControllers
-	 * Array of bone controllers for this model.
+	 * Array of bone controllers for this model,
+	 * of length <numBoneControllers>.
 	 */
 	ALC_MDLv10_BoneController* boneControllers;
 
 	/**
 	 * Variable: numBodyParts
-	 * Number of body parts in this model.
+	 * Number of <bodyParts> in this model.
 	 */
 	ALP_Size numBodyParts;
 
 	/**
 	 * Variable: bodyParts
-	 * Array of body parts in this model.
+	 * Array of body parts in this model,
+	 * of length <numBodyParts>.
 	 */
 	ALC_MDLv10_BodyPart* bodyParts;
 } ALC_MDLv10_Model;

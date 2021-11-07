@@ -59,7 +59,7 @@ Source Folder 5: ../layers/io/src/FormatCommon
    Name: Common Format Types
 
 Source Folder 6: ../layers/io/src/MDLv10
-   Name: MDLv10 Format Description
+   Name: File Format: MDL v10
 
 
 # This is where you specify what files and folders Natural Docs should be

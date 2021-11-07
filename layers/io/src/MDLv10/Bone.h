@@ -1,6 +1,6 @@
 /**
  * About: Bone.h
- * Defines an MDLv10 file bone.
+ * Defines an MDLv10 bone.
  */
 
 #ifndef AVIDLIB_IO_MDLV10_BONE_H

@@ -1,6 +1,6 @@
 /**
  * About: BoneController.h
- * Defines an MDLv10 file bone controller.
+ * Defines an MDLv10 bone controller.
  */
 
 #ifndef AVIDLIB_IO_MDLV10_BONECONTROLLER_H

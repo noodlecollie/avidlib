@@ -7,6 +7,7 @@
 #define AVIDLIB_CONTAINERS_MDLV10_BODYPART_H
 
 #include "AVIDLib_Containers/LibExport.h"
+#include "AVIDLib_Containers/MDLv10/ContainerDefinitions.h"
 #include "AVIDLib_Plat/Int.h"
 
 #ifdef __cplusplus

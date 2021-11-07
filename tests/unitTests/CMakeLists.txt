@@ -10,7 +10,9 @@ target_link_libraries(${TARGETNAME_UNIT_TESTS} Catch2)
 target_link_libraries(${TARGETNAME_UNIT_TESTS} ${TARGETNAME_QMATH})
 
 # We allow floating-point comparisons here because they're needed in some cases.
-target_compile_options(${TARGETNAME_UNIT_TESTS} PRIVATE "-Wno-float-equal")
+if(NOT MSVC)
+	target_compile_options(${TARGETNAME_UNIT_TESTS} PRIVATE "-Wno-float-equal")
+endif()
 
 install(TARGETS ${TARGETNAME_UNIT_TESTS}
 	ARCHIVE DESTINATION tests/${TARGETNAME_UNIT_TESTS}

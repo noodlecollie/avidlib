@@ -8,13 +8,12 @@
 
 #include "AVIDLib_Containers/LibExport.h"
 #include "AVIDLib_Containers/MDLv10/ContainerDefinitions.h"
+#include "AVIDLib_Containers/MDLv10/Submodel.h"
 #include "AVIDLib_Plat/Int.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-struct _ALC_MDLv10_Submodel;
 
 /**
  * Struct: ALC_MDLv10_BodyPart
@@ -65,7 +64,7 @@ typedef struct _ALC_MDLv10_BodyPart
 	 * Array of submodels owned by this body part,
 	 * of length <numSubmodels>.
 	 */
-	struct _ALC_MDLv10_Submodel** submodels;
+	ALC_MDLv10_Submodel** submodels;
 } ALC_MDLv10_BodyPart;
 
 /**
@@ -107,6 +106,46 @@ API_AVIDLIB_CONTAINERS ALC_MDLv10_BodyPart* ALC_MDLv10_BodyPart_Init(ALC_MDLv10_
  * bodyPart - Body part to deinitialise.
  */
 API_AVIDLIB_CONTAINERS void ALC_MDLv10_BodyPart_Deinit(ALC_MDLv10_BodyPart* bodyPart);
+
+/**
+ * Group: Submodels
+ */
+
+/**
+ * Function: ALC_MDLv10_BodyPart_AllocateSubmodels
+ *
+ * Allocates and default-initialises a list of <ALC_MDLv10_Submodel> items in the body part.
+ * If any list of submodels already exists, all submodels are deinitialised, and the list
+ * is deallocated, before a new list is allocated.
+ *
+ * If numSubmodels is zero, any existing list is deallocated as above, but no new list
+ * is allocated. The submodels list within the body part will be set to null, and null will
+ * be returned.
+ *
+ * Parameters:
+ *
+ * bodyPart     - Body part within which to allocate the list of submodels.
+ * numSubmodels - Number of submodels to allocate space for in the list.
+ *
+ * Returns:
+ *
+ * A pointer to the newly allocated list, or null if numSubmodels was zero.
+ */
+API_AVIDLIB_CONTAINERS ALC_MDLv10_Submodel* ALC_MDLv10_BodyPart_AllocateSubmodels(ALC_MDLv10_BodyPart* bodyPart, ALP_Size numSubmodels);
+
+/**
+ * Function: ALC_MDLv10_BodyPart_FreeSubmodels
+ *
+ * Frees any existing allocated submodels list in the body part. As part of the process,
+ * all submodels are deinitialised.
+ *
+ * If no submodels list exists in the body part, this function does nothing.
+ *
+ * Parameters:
+ *
+ * bodyPart - Body part containing the list of submodels.
+ */
+API_AVIDLIB_CONTAINERS void ALC_MDLv10_BodyPart_FreeSubmodels(ALC_MDLv10_BodyPart* bodyPart);
 
 #ifdef __cplusplus
 } // extern "C"

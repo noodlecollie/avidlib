@@ -6,10 +6,13 @@ set(HEADERS_MDLV10
 )
 
 set(SOURCES_MDLV10
+	src/MDLv10/Internal/BodyPart_Internal.h
+	src/MDLv10/Internal/BodyPart_Internal.c
 	src/MDLv10/Internal/Bone_Internal.h
 	src/MDLv10/Internal/Bone_Internal.c
 	src/MDLv10/Internal/BoneController_Internal.h
 	src/MDLv10/Internal/BoneController_Internal.c
+	src/MDLv10/BodyPart.c
 	src/MDLv10/Bone.c
 	src/MDLv10/BoneController.c
 	src/MDLv10/Model.c

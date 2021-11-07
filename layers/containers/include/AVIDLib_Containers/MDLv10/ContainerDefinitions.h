@@ -17,10 +17,16 @@ extern "C" {
 #define ALC_MDLV10_MODEL_NAME_LENGTH 64
 
 /**
- * Constant: ALC_MDLV10_ELEMENT_NAME_LENGTH
- * Defines the maximum length of the internal name of any model components (eg. bones).
+ * Constant: ALC_MDLV10_BONE_NAME_LENGTH
+ * Defines the maximum length of the name of a bone in the model.
  */
-#define ALC_MDLV10_ELEMENT_NAME_LENGTH 32
+#define ALC_MDLV10_BONE_NAME_LENGTH 32
+
+/**
+ * Constant: ALC_MDLV10_BODYPART_NAME_LENGTH
+ * Defines the maximum length of the name of a body part in the model.
+ */
+#define ALC_MDLV10_BODYPART_NAME_LENGTH 64
 
 /**
  * Constant: ALC_MDLV10_NUM_MOTION_TYPES

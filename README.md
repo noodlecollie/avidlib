@@ -44,6 +44,15 @@ AVID will follow a layered architecture, described below. The most basic layers 
 
 AVID will support trans rights because it can, and because transgender developers and content creators contribute a significant amount to the game modding communities I'm a part of. In this rough old world we call meatspace, they deserve to be recognised.
 
+## Dependencies
+
+When building tools on Linux, the following dependencies will need to be installed (the example command below is for Ubuntu):
+
+``` bash
+# X11 libraries and OpenGL
+$ sudo apt install libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev mesa-common-dev
+```
+
 ## Documentation
 
 Documentation is generated using [Natural Docs](https://www.naturaldocs.org).

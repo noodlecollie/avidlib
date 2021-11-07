@@ -13,6 +13,7 @@
 #include "AVIDLib_QMath/BBox.h"
 #include "AVIDLib_Containers/MDLv10/Bone.h"
 #include "AVIDLib_Containers/MDLv10/BoneController.h"
+#include "AVIDLib_Containers/MDLv10/BodyPart.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -78,6 +79,18 @@ typedef struct _ALC_MDLv10_Model
 	 * Array of bone controllers for this model.
 	 */
 	ALC_MDLv10_BoneController* boneControllers;
+
+	/**
+	 * Variable: numBodyParts
+	 * Number of body parts in this model.
+	 */
+	ALP_Size numBodyParts;
+
+	/**
+	 * Variable: bodyParts
+	 * Array of body parts in this model.
+	 */
+	ALC_MDLv10_BodyPart* bodyParts;
 } ALC_MDLv10_Model;
 
 /**
@@ -213,6 +226,46 @@ API_AVIDLIB_CONTAINERS ALC_MDLv10_BoneController* ALC_MDLv10_Model_AllocateBoneC
  * model - Model containing the list of bone controllers.
  */
 API_AVIDLIB_CONTAINERS void ALC_MDLv10_Model_FreeBoneControllers(ALC_MDLv10_Model* model);
+
+/**
+ * Group: Body Parts
+ */
+
+/**
+ * Function: ALC_MDLv10_Model_AllocateBodyParts
+ *
+ * Allocates and default-initialises a list of <ALC_MDLv10_BodyPart> items in the model.
+ * If any list of body parts already exists, all body parts are deinitialised, and the list
+ * is deallocated, before a new list is allocated.
+ *
+ * If numBodyParts is zero, any existing list is deallocated as above, but no new list
+ * is allocated. The body parts list within the model will be set to null, and null will
+ * be returned.
+ *
+ * Parameters:
+ *
+ * model        - Model within which to allocate the list of body parts.
+ * numBodyParts - Number of body parts to allocate space for in the list.
+ *
+ * Returns:
+ *
+ * A pointer to the newly allocated list, or null if numBodyParts was zero.
+ */
+API_AVIDLIB_CONTAINERS ALC_MDLv10_BodyPart* ALC_MDLv10_Model_AllocateBodyParts(ALC_MDLv10_Model* model, ALP_Size numBodyParts);
+
+/**
+ * Function: ALC_MDLv10_Model_FreeBodyParts
+ *
+ * Frees any existing allocated body parts list in the model. As part of the process,
+ * all body parts are deinitialised.
+ *
+ * If no body parts list exists in the model, this function does nothing.
+ *
+ * Parameters:
+ *
+ * model - Model containing the list of body parts.
+ */
+API_AVIDLIB_CONTAINERS void ALC_MDLv10_Model_FreeBodyParts(ALC_MDLv10_Model* model);
 
 #ifdef __cplusplus
 } // extern "C"

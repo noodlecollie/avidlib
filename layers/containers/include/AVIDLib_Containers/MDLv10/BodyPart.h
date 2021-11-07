@@ -7,10 +7,13 @@
 #define AVIDLIB_CONTAINERS_MDLV10_BODYPART_H
 
 #include "AVIDLib_Containers/LibExport.h"
+#include "AVIDLib_Plat/Int.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+struct _ALC_MDLv10_Submodel;
 
 /**
  * Struct: ALC_MDLv10_BodyPart
@@ -42,9 +45,65 @@ extern "C" {
  */
 typedef struct _ALC_MDLv10_BodyPart
 {
-	// TODO: contents
-	int dummy;
+	/**
+	 * Variable: name
+	 * Name of this body part. Should be unique within the model.
+	 */
+	ALP_Char name[ALC_MDLV10_BODYPART_NAME_LENGTH];
+
+	/**
+	 * Variable: numSubmodels
+	 * Number of submodels referenced by this body part.
+	 */
+	ALP_Size numSubmodels;
+
+	/**
+	 * Variable: submodels
+	 * Array of submodels owned by this body part,
+	 * of length <numSubmodels>.
+	 */
+	struct _ALC_MDLv10_Submodel** submodels;
 } ALC_MDLv10_BodyPart;
+
+/**
+ * Function: ALC_MDLv10_BodyPart_Init
+ *
+ * Initialises a body part from uninitialised memory.
+ *
+ * This function should always be paired with a later call to <ALC_MDLv10_BodyPart_Deinit>,
+ * to clean up any internal data held by the body part.
+ *
+ * *Do not* call this function on a body part which has already been initialised,
+ * or undefined behaviour will result.
+ *
+ * Parameters:
+ *
+ * bodyPart - Body part to initialise.
+ *
+ * Returns:
+ *
+ * Input body part.
+ */
+API_AVIDLIB_CONTAINERS ALC_MDLv10_BodyPart* ALC_MDLv10_BodyPart_Init(ALC_MDLv10_BodyPart* bodyPart);
+
+/**
+ * Function: ALC_MDLv10_BodyPart_Deinit
+ *
+ * Deinitialises a previously initialised body part.
+ *
+ * This function should *always* be paired with a previous call to <ALC_MDLv10_BodyPart_Init>,
+ * to clean up any internal data held by the body part.
+ *
+ * After the call, the body part should not be reused without being initialised again.
+ *
+ * If the passed body part was not previously initialised using <ALC_MDLv10_BodyPart_Init>,
+ * undefined behaviour will result.
+ *
+ * Parameters:
+ *
+ * bodyPart - Body part to deinitialise.
+ */
+API_AVIDLIB_CONTAINERS void ALC_MDLv10_BodyPart_Deinit(ALC_MDLv10_BodyPart* bodyPart);
 
 #ifdef __cplusplus
 } // extern "C"

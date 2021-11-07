@@ -34,7 +34,7 @@ typedef struct _ALC_MDLv10_Bone
 	 * Variable: name
 	 * Name of this bone. Should be unique within the model.
 	 */
-	ALP_Char name[ALC_MDLV10_ELEMENT_NAME_LENGTH];
+	ALP_Char name[ALC_MDLV10_BONE_NAME_LENGTH];
 
 	/**
 	 * Variable: refParentBone

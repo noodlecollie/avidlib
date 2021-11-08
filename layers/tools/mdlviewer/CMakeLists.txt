@@ -7,6 +7,7 @@ set(SOURCES
 	src/Sokol/SokolGFXImGUI.cpp
 	src/Sokol/SokolGlue.cpp
 	src/Sokol/SokolImGUI.cpp
+	src/InfoDisplay.cpp
 	src/Main.cpp
 	src/MainMenuBar.cpp
 	src/MDLLoader.cpp

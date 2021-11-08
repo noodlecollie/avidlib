@@ -104,6 +104,11 @@ namespace MDLLoader
 		ReadMDL(&context);
 	}
 
+	std::string GetMDLPath()
+	{
+		return Path;
+	}
+
 	void SetMDLPath(const std::string& path)
 	{
 		Path = path;
@@ -122,5 +127,20 @@ namespace MDLLoader
 	void Cleanup()
 	{
 		DestroyContainer();
+	}
+
+	ALIO_GenericContainer* GetGenericIOContainer()
+	{
+		return Container;
+	}
+
+	ALP_Opaque* GetUnderlyingContainer(ALIO_UnitID id)
+	{
+		if ( Container && Container->unit == id )
+		{
+			return Container->container;
+		}
+
+		return nullptr;
 	}
 }

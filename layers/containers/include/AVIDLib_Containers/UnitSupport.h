@@ -21,7 +21,7 @@ extern "C" {
  * See <ALC_UnitID> and <ALC_UnitName>.
  */
 #define ALC_UNIT_ID_LIST \
-	ALC_LIST_ITEM(ALC_UNIT_MDLV10 = 0, "Half Life MDLv10 Container", CONTAINERS_MDLV10_AVAILABLE)
+	ALC_LIST_ITEM(ALC_UNIT_MDLV10 = 0, "MDLv10 Container", CONTAINERS_MDLV10_AVAILABLE)
 
 #define ALC_LIST_ITEM(value, name, supported) value,
 

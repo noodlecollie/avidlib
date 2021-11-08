@@ -1,6 +1,7 @@
 #include "imgui.h"
 #include "MainMenuBar.h"
 #include "OpenMDLFileDialogue.h"
+#include "InfoDisplay.h"
 #include "Sokol/SokolHeaders.h"
 #include "Sokol/SokolGFXImGUI.h"
 
@@ -17,6 +18,13 @@ namespace MainMenuBar
 			{
 				ImGui::MenuItem("Open", nullptr, &OpenFileRequested);
 				ImGui::MenuItem("Exit", nullptr, &ExitRequested);
+
+				ImGui::EndMenu();
+			}
+
+			if ( ImGui::BeginMenu("View") )
+			{
+				ImGui::MenuItem("MDL Info", nullptr, &InfoDisplay::Visible);
 
 				ImGui::EndMenu();
 			}

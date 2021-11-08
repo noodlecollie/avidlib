@@ -10,6 +10,7 @@
 #include "Sokol/SokolGFXImGUI.h"
 #include "MDLLoader.h"
 #include "MDLRenderer.h"
+#include "InfoDisplay.h"
 
 #include "AVIDLib_Containers/UnitSupport.h"
 #include "AVIDLib_IO/UnitSupport.h"
@@ -60,11 +61,13 @@ static void Poll()
 	MainMenuBar::Poll();
 	OpenMDLFileDialogue::Poll();
 	MDLLoader::Poll();
+	InfoDisplay::Poll();
 }
 
 static void DrawImGUI()
 {
 	MainMenuBar::Draw();
+	InfoDisplay::Draw();
 	OpenMDLFileDialogue::Draw();
 }
 

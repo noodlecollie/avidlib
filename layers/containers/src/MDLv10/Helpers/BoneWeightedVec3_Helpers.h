@@ -1,6 +1,6 @@
 #ifndef AVIDLIB_CONTAINERS_MDLV10_BONEWEIGHTEDVEC3_INTERNAL_H
 #define AVIDLIB_CONTAINERS_MDLV10_BONEWEIGHTEDVEC3_INTERNAL_H
 
-void BoneWeightedVec3Internal_GenericInit(void* vec, void* data);
+void BoneWeightedVec3Helpers_GenericInit(void* vec, void* data);
 
 #endif // AVIDLIB_CONTAINERS_MDLV10_BONEWEIGHTEDVEC3_INTERNAL_H

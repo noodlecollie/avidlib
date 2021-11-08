@@ -4,7 +4,7 @@
 #include "AVIDLib_Internal_Util/Util.h"
 #include "AVIDLib_Plat/Ptr.h"
 #include "AVIDLib_Internal_Util/ItemInitialisation.h"
-#include "Internal/BoneWeightedVec3_Internal.h"
+#include "MDLv10/Helpers/BoneWeightedVec3_Helpers.h"
 
 ALC_MDLv10_Submodel* ALC_MDLv10_Submodel_Init(ALC_MDLv10_Submodel* submodel)
 {
@@ -36,7 +36,7 @@ ALC_MDLv10_BoneWeightedVec3* ALC_MDLv10_BodyPart_AllocateVertices(ALC_MDLv10_Sub
 			&submodel->numVertices,
 			numVertices,
 			sizeof(*submodel->vertices),
-			&BoneWeightedVec3Internal_GenericInit,
+			&BoneWeightedVec3Helpers_GenericInit,
 			ALP_NULL,
 			ALP_NULL,
 			ALP_NULL);
@@ -64,7 +64,7 @@ ALC_MDLv10_BoneWeightedVec3* ALC_MDLv10_BodyPart_AllocateNormals(ALC_MDLv10_Subm
 			&submodel->numNormals,
 			numNormals,
 			sizeof(*submodel->normals),
-			&BoneWeightedVec3Internal_GenericInit,
+			&BoneWeightedVec3Helpers_GenericInit,
 			ALP_NULL,
 			ALP_NULL,
 			ALP_NULL);

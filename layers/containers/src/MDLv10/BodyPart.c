@@ -4,7 +4,7 @@
 #include "AVIDLib_Internal_Util/Memory.h"
 #include "AVIDLib_Internal_Util/ItemInitialisation.h"
 #include "AVIDLib_Plat/Ptr.h"
-#include "Internal/Submodel_Internal.h"
+#include "MDLv10/Helpers/Submodel_Helpers.h"
 
 ALC_MDLv10_BodyPart* ALC_MDLv10_BodyPart_Init(ALC_MDLv10_BodyPart* bodyPart)
 {
@@ -35,9 +35,9 @@ ALC_MDLv10_Submodel* ALC_MDLv10_BodyPart_AllocateSubmodels(ALC_MDLv10_BodyPart* 
 			&bodyPart->numSubmodels,
 			numSubmodels,
 			sizeof(*bodyPart->submodels),
-			&SubmodelInternal_GenericInit,
+			&SubmodelHelpers_GenericInit,
 			ALP_NULL,
-			&SubmodelInternal_GenericDeinit,
+			&SubmodelHelpers_GenericDeinit,
 			ALP_NULL);
 	}
 

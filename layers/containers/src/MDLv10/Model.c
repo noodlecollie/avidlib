@@ -3,9 +3,9 @@
 #include "AVIDLib_Internal_Util/Memory.h"
 #include "AVIDLib_Internal_Util/ItemInitialisation.h"
 #include "AVIDLib_Plat/Ptr.h"
-#include "MDLv10/Internal/Bone_Internal.h"
-#include "MDLv10/Internal/BoneController_Internal.h"
-#include "MDLv10/Internal/BodyPart_Internal.h"
+#include "MDLv10/Helpers/Bone_Helpers.h"
+#include "MDLv10/Helpers/BoneController_Helpers.h"
+#include "MDLv10/Helpers/BodyPart_Helpers.h"
 
 ALC_MDLv10_Model* ALC_MDLv10_Model_Init(ALC_MDLv10_Model* model)
 {
@@ -38,9 +38,9 @@ ALC_MDLv10_Bone* ALC_MDLv10_Model_AllocateBones(ALC_MDLv10_Model* model, ALP_Siz
 			&model->numBones,
 			numBones,
 			sizeof(*model->bones),
-			&BoneInternal_GenericInit,
+			&BoneHelpers_GenericInit,
 			ALP_NULL,
-			&BoneInternal_GenericDeinit,
+			&BoneHelpers_GenericDeinit,
 			ALP_NULL);
 	}
 
@@ -66,9 +66,9 @@ ALC_MDLv10_BoneController* ALC_MDLv10_Model_AllocateBoneControllers(ALC_MDLv10_M
 			&model->numBoneControllers,
 			numBoneControllers,
 			sizeof(*model->boneControllers),
-			&BoneControllerInternal_GenericInit,
+			&BoneControllerHelpers_GenericInit,
 			ALP_NULL,
-			&BoneControllerInternal_GenericDeinit,
+			&BoneControllerHelpers_GenericDeinit,
 			ALP_NULL);
 	}
 
@@ -94,9 +94,9 @@ ALC_MDLv10_BodyPart* ALC_MDLv10_Model_AllocateBodyParts(ALC_MDLv10_Model* model,
 			&model->numBodyParts,
 			numBodyParts,
 			sizeof(*model->bodyParts),
-			&BodyPartInternal_GenericInit,
+			&BodyPartHelpers_GenericInit,
 			ALP_NULL,
-			&BodyPartInternal_GenericDeinit,
+			&BodyPartHelpers_GenericDeinit,
 			ALP_NULL);
 	}
 

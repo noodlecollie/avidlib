@@ -9,16 +9,16 @@ set(HEADERS_MDLV10
 )
 
 set(SOURCES_MDLV10
-	src/MDLv10/Internal/BodyPart_Internal.h
-	src/MDLv10/Internal/BodyPart_Internal.c
-	src/MDLv10/Internal/Bone_Internal.h
-	src/MDLv10/Internal/Bone_Internal.c
-	src/MDLv10/Internal/BoneController_Internal.h
-	src/MDLv10/Internal/BoneController_Internal.c
-	src/MDLv10/Internal/BoneWeightedVec3_Internal.h
-	src/MDLv10/Internal/BoneWeightedVec3_Internal.c
-	src/MDLv10/Internal/Submodel_Internal.h
-	src/MDLv10/Internal/Submodel_Internal.c
+	src/MDLv10/Helpers/BodyPart_Helpers.h
+	src/MDLv10/Helpers/BodyPart_Helpers.c
+	src/MDLv10/Helpers/Bone_Helpers.h
+	src/MDLv10/Helpers/Bone_Helpers.c
+	src/MDLv10/Helpers/BoneController_Helpers.h
+	src/MDLv10/Helpers/BoneController_Helpers.c
+	src/MDLv10/Helpers/BoneWeightedVec3_Helpers.h
+	src/MDLv10/Helpers/BoneWeightedVec3_Helpers.c
+	src/MDLv10/Helpers/Submodel_Helpers.h
+	src/MDLv10/Helpers/Submodel_Helpers.c
 	src/MDLv10/BodyPart.c
 	src/MDLv10/Bone.c
 	src/MDLv10/BoneController.c

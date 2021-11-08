@@ -8,6 +8,7 @@
 
 #include "AVIDLib_Containers/LibExport.h"
 #include "AVIDLib_Containers/MDLv10/ContainerDefinitions.h"
+#include "AVIDLib_Containers/MDLv10/BoneWeightedVec3.h"
 #include "AVIDLib_Plat/Int.h"
 
 #ifdef __cplusplus
@@ -16,8 +17,6 @@ extern "C" {
 
 // TODO: Include these headers once they exist.
 struct _ALC_MDLv10_Mesh;
-struct _ALC_MDLv10_Vertex;
-struct _ALC_MDLv10_Normal;
 
 /**
  * Struct: ALC_MDLv10_Submodel
@@ -67,7 +66,7 @@ typedef struct _ALC_MDLv10_Submodel
 	 * Array of vertices owned by this submodel,
 	 * of length <numVertices>.
 	 */
-	struct _ALC_MDLv10_Vertex* vertices;
+	ALC_MDLv10_BoneWeightedVec3* vertices;
 
 	/**
 	 * Variable: numNormals
@@ -80,7 +79,7 @@ typedef struct _ALC_MDLv10_Submodel
 	 * Array of normals owned by this submodel,
 	 * of length <numNormals>.
 	 */
-	struct _ALC_MDLv10_Normal* normals;
+	ALC_MDLv10_BoneWeightedVec3* normals;
 } ALC_MDLv10_Submodel;
 
 /**
@@ -122,6 +121,82 @@ API_AVIDLIB_CONTAINERS ALC_MDLv10_Submodel* ALC_MDLv10_Submodel_Init(ALC_MDLv10_
  * submodel - Submodel to deinitialise.
  */
 API_AVIDLIB_CONTAINERS void ALC_MDLv10_Submodel_Deinit(ALC_MDLv10_Submodel* submodel);
+
+/**
+ * Group: Vertices
+ */
+
+/**
+ * Function: ALC_MDLv10_BodyPart_AllocateVertices
+ *
+ * Allocates and default-initialises a list of <ALC_MDLv10_BoneWeightedVec3> vertices in the submodel.
+ * If any list of vertices already exists, the list is deallocated before a new list is allocated.
+ *
+ * If numVertices is zero, any existing list is deallocated as above, but no new list
+ * is allocated. The vertices list within the submodel will be set to null, and null will
+ * be returned.
+ *
+ * Parameters:
+ *
+ * submodel    - Submodel within which to allocate the list of vertices.
+ * numVertices - Number of vertices to allocate space for in the list.
+ *
+ * Returns:
+ *
+ * A pointer to the newly allocated list, or null if numVertices was zero.
+ */
+API_AVIDLIB_CONTAINERS ALC_MDLv10_BoneWeightedVec3* ALC_MDLv10_BodyPart_AllocateVertices(ALC_MDLv10_Submodel* submodel, ALP_Size numVertices);
+
+/**
+ * Function: ALC_MDLv10_BodyPart_FreeVertices
+ *
+ * Frees any existing allocated vertices list in the submodel.
+ *
+ * If no vertices list exists in the submodel, this function does nothing.
+ *
+ * Parameters:
+ *
+ * submodel - Submodel containing the list of vertices.
+ */
+API_AVIDLIB_CONTAINERS void ALC_MDLv10_BodyPart_FreeVertices(ALC_MDLv10_Submodel* submodel);
+
+/**
+ * Group: Normals
+ */
+
+/**
+ * Function: ALC_MDLv10_BodyPart_AllocateNormals
+ *
+ * Allocates and default-initialises a list of <ALC_MDLv10_BoneWeightedVec3> normals in the submodel.
+ * If any list of normals already exists, the list is deallocated before a new list is allocated.
+ *
+ * If numNormals is zero, any existing list is deallocated as above, but no new list
+ * is allocated. The normals list within the submodel will be set to null, and null will
+ * be returned.
+ *
+ * Parameters:
+ *
+ * submodel   - Submodel within which to allocate the list of vertices.
+ * numNormals - Number of normals to allocate space for in the list.
+ *
+ * Returns:
+ *
+ * A pointer to the newly allocated list, or null if numNormals was zero.
+ */
+API_AVIDLIB_CONTAINERS ALC_MDLv10_BoneWeightedVec3* ALC_MDLv10_BodyPart_AllocateNormals(ALC_MDLv10_Submodel* submodel, ALP_Size numNormals);
+
+/**
+ * Function: ALC_MDLv10_BodyPart_FreeNormals
+ *
+ * Frees any existing allocated normals list in the submodel.
+ *
+ * If no normals list exists in the submodel, this function does nothing.
+ *
+ * Parameters:
+ *
+ * submodel - Submodel containing the list of normals.
+ */
+API_AVIDLIB_CONTAINERS void ALC_MDLv10_BodyPart_FreeNormals(ALC_MDLv10_Submodel* submodel);
 
 #ifdef __cplusplus
 } // extern "C"

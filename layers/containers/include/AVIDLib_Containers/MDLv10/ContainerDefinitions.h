@@ -64,6 +64,17 @@ extern "C" {
  */
 #define ALC_MDLV10_MOUTH_CONTROLLER_CHANNEL 4
 
+/**
+ * Group: Bones and Weights
+ */
+
+/**
+ * Constant: ALC_MDLV10_MAX_VERT_BONE_WEIGHTS
+ * Defines the maximum number of bones that can influence the position
+ * of a vertex or normal.
+ */
+#define ALC_MDLV10_MAX_VERT_BONE_WEIGHTS 4
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

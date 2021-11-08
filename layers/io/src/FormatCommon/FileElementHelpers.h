@@ -60,7 +60,7 @@ typedef struct _ALIO_BBox
 	ALIO_RawVec3 max;
 } ALIO_BBox;
 
-#define ALIO_CHUNK_OFFSET(headerPtr, chunkName) (((const ALP_Byte*)(headerPtr)) + (headerPtr)->chunkName.offset)
+#define ALIO_CHUNK_CDATA(headerPtr, chunkName) ((const void*)(((const ALP_Byte*)(headerPtr)) + (headerPtr)->chunkName.offset))
 
 #pragma pack(pop)
 

@@ -11,6 +11,7 @@ namespace InfoDisplay
 {
 	struct Info
 	{
+		std::string name;
 		uint32_t numBones = 0;
 		uint32_t numBoneControllers = 0;
 		uint32_t numBodyParts = 0;
@@ -29,6 +30,7 @@ namespace InfoDisplay
 			return;
 		}
 
+		CachedMDLInfo.name = model->name;
 		CachedMDLInfo.numBones = model->numBones;
 		CachedMDLInfo.numBoneControllers = model->numBoneControllers;
 		CachedMDLInfo.numBodyParts = model->numBodyParts;
@@ -40,6 +42,7 @@ namespace InfoDisplay
 		{
 			if ( ImGui::Begin("MDL Info", &InfoDisplay::Visible) )
 			{
+				ImGui::Text("Internal name: %s", CachedMDLInfo.name.c_str());
 				ImGui::Text("Bones: %u", CachedMDLInfo.numBones);
 				ImGui::Text("Bone controllers: %u", CachedMDLInfo.numBoneControllers);
 				ImGui::Text("Body parts: %u", CachedMDLInfo.numBodyParts);
@@ -57,6 +60,8 @@ namespace InfoDisplay
 		{
 			std::cout << "Updating info display for newly loaded model." << std::endl;
 
+			// For now, we just assume that the model is v10.
+			// If this is not the case, null will be returned.
 			UpdateMDLInfo(static_cast<ALC_MDLv10_Model*>(MDLLoader::GetUnderlyingContainer(ALIO_UNIT_MDLV10)));
 			LastMDLPath = mdlPath;
 		}

@@ -2,10 +2,12 @@
 #include "MDLv10/IODefinitions.h"
 #include "MDLv10/Header.h"
 #include "MDLv10/Bone.h"
+#include "MDLv10/BoneController.h"
 #include "AVIDLib_Internal_Util/Util.h"
 #include "AVIDLib_Internal_Util/Check.h"
 #include "AVIDLib_Plat/Bool.h"
 #include "AVIDLib_Plat/Ptr.h"
+#include "AVIDLib_Plat/String.h"
 #include "Validation.h"
 #include "AVIDLib_Plat/String.h"
 #include "MDLv10/ValidationHelpers.h"
@@ -56,6 +58,14 @@ static void PopulateBones(const ALIO_MDLv10_Bone* inBones, ALC_MDLv10_Model* out
 	}
 }
 
+static void PopulateBoneControllers(const ALIO_MDLv10_BoneController* inControllers, ALC_MDLv10_Model* outModel)
+{
+	for ( ALP_Size index = 0; index < outModel->numBoneControllers; ++index )
+	{
+		ALIO_MDLv10_BoneController_ToContainerElement(&inControllers[index], &outModel->boneControllers[index], outModel);
+	}
+}
+
 static ALP_Bool ValidateGeneralFile(ALIO_ReadContext* context)
 {
 	return ALIO_MDLv10_ValidateAllChunks(context) && ALIO_MDLv10_ValidateAllItems(context);
@@ -63,16 +73,14 @@ static ALP_Bool ValidateGeneralFile(ALIO_ReadContext* context)
 
 static void AllocateFileElements(const ALIO_MDLv10_Header* header, ALC_MDLv10_Model* outModel)
 {
-	// TODO: Make this data-driven?
-	// TODO: Add more chunks as we code them up.
 	ALC_MDLv10_Model_AllocateBones(outModel, header->bones.count);
+	ALC_MDLv10_Model_AllocateBoneControllers(outModel, header->boneControllers.count);
 }
 
 static void PopulateFileElements(const ALIO_MDLv10_Header* header, ALC_MDLv10_Model* outModel)
 {
-	// TODO: Make this data-driven?
-	// TODO: Add more chunks as we code them up.
-	PopulateBones((const ALIO_MDLv10_Bone*)ALIO_CHUNK_OFFSET(header, bones), outModel);
+	PopulateBones((const ALIO_MDLv10_Bone*)ALIO_CHUNK_CDATA(header, bones), outModel);
+	PopulateBoneControllers((const ALIO_MDLv10_BoneController*)ALIO_CHUNK_CDATA(header, boneControllers), outModel);
 }
 
 static void ReadGeneralFile(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel)
@@ -83,6 +91,8 @@ static void ReadGeneralFile(ALIO_ReadContext* context, ALC_MDLv10_Model* outMode
 	{
 		return;
 	}
+
+	ALP_StrCpy(outModel->name, sizeof(outModel->name), header->name);
 
 	AllocateFileElements(header, outModel);
 	PopulateFileElements(header, outModel);

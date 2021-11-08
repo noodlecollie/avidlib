@@ -26,7 +26,8 @@ typedef struct _ALIO_MDLv10_VDesc_FileChunk
 
 static const ALIO_MDLv10_VDesc_FileChunk ALIO_MDLV10_VDESC_CHUNKS[] =
 {
-	{ ALP_OFFSETOF(ALIO_MDLv10_Header, bones), "Bones", sizeof(ALIO_MDLv10_Bone), &ALIO_MDLv10_Bone_ValidateGeneric }
+	{ ALP_OFFSETOF(ALIO_MDLv10_Header, bones), "Bones", sizeof(ALIO_MDLv10_Bone), &ALIO_MDLv10_Bone_ValidateGeneric },
+	{ ALP_OFFSETOF(ALIO_MDLv10_Header, boneControllers), "Bone Controllers", sizeof(ALIO_MDLv10_BoneController), &ALIO_MDLv10_BoneController_ValidateGeneric }
 };
 
 static inline ALP_Bool ALIO_MDLv10_ValidateAllChunks(ALIO_ReadContext* context)

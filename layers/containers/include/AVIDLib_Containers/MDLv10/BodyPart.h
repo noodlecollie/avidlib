@@ -55,7 +55,7 @@ typedef struct _ALC_MDLv10_BodyPart
 
 	/**
 	 * Variable: numSubmodels
-	 * Number of <submodels> referenced by this body part.
+	 * Number of <submodels> owned by this body part.
 	 */
 	ALP_Size numSubmodels;
 
@@ -64,7 +64,7 @@ typedef struct _ALC_MDLv10_BodyPart
 	 * Array of submodels owned by this body part,
 	 * of length <numSubmodels>.
 	 */
-	ALC_MDLv10_Submodel** submodels;
+	ALC_MDLv10_Submodel* submodels;
 } ALC_MDLv10_BodyPart;
 
 /**

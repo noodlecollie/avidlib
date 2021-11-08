@@ -55,4 +55,8 @@ $ sudo apt install libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi
 
 ## Documentation
 
-Documentation is generated using [Natural Docs](https://www.naturaldocs.org).
+Documentation is generated using [Natural Docs](https://www.naturaldocs.org). To build the documentation:
+
+* On Windows, install NaturalDocs and make sure it is visible on the system path, then run `NaturalDocs.exe <path to repo>\docs`.
+* On Linux, copy the NaturalDocs binaries to a `.naturaldocs` directory in the root of the repo, and then run `docs/makedocs.sh`.
+  * Note that [Mono must be installed](http://www.mono-project.com/download) for NaturalDocs to run on Linux.

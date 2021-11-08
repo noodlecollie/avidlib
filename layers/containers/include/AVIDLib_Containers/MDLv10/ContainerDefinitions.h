@@ -11,6 +11,10 @@ extern "C" {
 #endif
 
 /**
+ * Group: Max name lengths
+ */
+
+/**
  * Constant: ALC_MDLV10_MODEL_NAME_LENGTH
  * Defines the maximum length of the internal name of the model.
  */
@@ -18,15 +22,25 @@ extern "C" {
 
 /**
  * Constant: ALC_MDLV10_BONE_NAME_LENGTH
- * Defines the maximum length of the name of a bone in the model.
+ * Defines the maximum length of the name of a bone within the model.
  */
 #define ALC_MDLV10_BONE_NAME_LENGTH 32
 
 /**
  * Constant: ALC_MDLV10_BODYPART_NAME_LENGTH
- * Defines the maximum length of the name of a body part in the model.
+ * Defines the maximum length of the name of a body part within the model.
  */
 #define ALC_MDLV10_BODYPART_NAME_LENGTH 64
+
+/**
+ * Constant: ALC_MDLV10_SUBMODEL_NAME_LENGTH
+ * Defines the maximum length of the name of a submodel within the model.
+ */
+#define ALC_MDLV10_SUBMODEL_NAME_LENGTH 64
+
+/**
+ * Group: Movement
+ */
 
 /**
  * Constant: ALC_MDLV10_NUM_MOTION_TYPES

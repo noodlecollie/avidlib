@@ -47,6 +47,8 @@ typedef struct _ALIO_MDLv10_Header
 	/**
 	 * Variable: name
 	 * Internal model name. This may be different from the model's file name.
+	 * Maximum number of characters, including the string terminator,
+	 * is <ALIO_MDLV10_MODEL_NAME_LENGTH>.
 	 */
 	ALP_Char name[ALIO_MDLV10_MODEL_NAME_LENGTH];
 

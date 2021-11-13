@@ -64,17 +64,19 @@ typedef struct _ALIO_MDLv10_BoneController
 #pragma pack(pop)
 
 ALP_Bool ALIO_MDLv10_BoneController_Validate(const struct _ALIO_MDLv10_Header* header,
-											 const ALIO_MDLv10_BoneController* boneController,
-											 ALP_Char* errorString,
-											 ALP_Size errorStringSize);
+                                             ALP_Size fileSize,
+                                             const ALIO_MDLv10_BoneController* boneController,
+                                             ALP_Char* errorString,
+                                             ALP_Size errorStringSize);
 
 ALP_Bool ALIO_MDLv10_BoneController_ValidateGeneric(const struct _ALIO_MDLv10_Header* header,
-													const void* boneController,
-													ALP_Char* errorString,
-													ALP_Size errorStringSize);
+                                                    ALP_Size fileSize,
+                                                    const void* boneController,
+                                                    ALP_Char* errorString,
+                                                    ALP_Size errorStringSize);
 
 void ALIO_MDLv10_BoneController_ToContainerElement(const ALIO_MDLv10_BoneController* inController,
-												   struct _ALC_MDLv10_BoneController* outController,
-												   struct _ALC_MDLv10_Model* outModel);
+                                                   struct _ALC_MDLv10_BoneController* outController,
+                                                   struct _ALC_MDLv10_Model* outModel);
 
 #endif // AVIDLIB_IO_MDLV10_BONECONTROLLER_H

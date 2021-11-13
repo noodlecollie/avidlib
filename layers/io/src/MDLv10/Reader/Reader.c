@@ -66,6 +66,14 @@ static void PopulateBoneControllers(const ALIO_MDLv10_BoneController* inControll
 	}
 }
 
+static void PopulateBodyParts(const ALIO_MDLv10_BodyPart* inBodyParts, ALC_MDLv10_Model* outModel)
+{
+	for ( ALP_Size index = 0; index < outModel->numBodyParts; ++index )
+	{
+		ALIO_MDLv10_BodyPart_ToContainerElement(&inBodyParts[index], &outModel->bodyParts[index], outModel);
+	}
+}
+
 static ALP_Bool ValidateGeneralFile(ALIO_ReadContext* context)
 {
 	return ALIO_MDLv10_ValidateAllChunks(context) && ALIO_MDLv10_ValidateAllItems(context);
@@ -75,12 +83,14 @@ static void AllocateFileElements(const ALIO_MDLv10_Header* header, ALC_MDLv10_Mo
 {
 	ALC_MDLv10_Model_AllocateBones(outModel, header->bones.count);
 	ALC_MDLv10_Model_AllocateBoneControllers(outModel, header->boneControllers.count);
+	ALC_MDLv10_Model_AllocateBodyParts(outModel, header->bodyParts.count);
 }
 
 static void PopulateFileElements(const ALIO_MDLv10_Header* header, ALC_MDLv10_Model* outModel)
 {
 	PopulateBones((const ALIO_MDLv10_Bone*)ALIO_CHUNK_CDATA(header, bones), outModel);
 	PopulateBoneControllers((const ALIO_MDLv10_BoneController*)ALIO_CHUNK_CDATA(header, boneControllers), outModel);
+	PopulateBodyParts((const ALIO_MDLv10_BodyPart*)ALIO_CHUNK_CDATA(header, bodyParts), outModel);
 }
 
 static void ReadGeneralFile(ALIO_ReadContext* context, ALC_MDLv10_Model* outModel)

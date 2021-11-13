@@ -9,12 +9,14 @@
 #include "FormatCommon/FileElementHelpers.h"
 #include "MDLv10/Header.h"
 #include "MDLv10/Bone.h"
+#include "MDLv10/BodyPart.h"
 #include "Validation.h"
 
 typedef ALP_Bool (*ALIO_MDLv10_ItemValidationFunc)(const struct _ALIO_MDLv10_Header* header,
-												   const void* element,
-												   ALP_Char* errorString,
-												   ALP_Size errorStringSize);
+                                                   ALP_Size fileSize,
+                                                   const void* element,
+                                                   ALP_Char* errorString,
+                                                   ALP_Size errorStringSize);
 
 typedef struct _ALIO_MDLv10_VDesc_FileChunk
 {
@@ -27,7 +29,8 @@ typedef struct _ALIO_MDLv10_VDesc_FileChunk
 static const ALIO_MDLv10_VDesc_FileChunk ALIO_MDLV10_VDESC_CHUNKS[] =
 {
 	{ ALP_OFFSETOF(ALIO_MDLv10_Header, bones), "Bones", sizeof(ALIO_MDLv10_Bone), &ALIO_MDLv10_Bone_ValidateGeneric },
-	{ ALP_OFFSETOF(ALIO_MDLv10_Header, boneControllers), "Bone Controllers", sizeof(ALIO_MDLv10_BoneController), &ALIO_MDLv10_BoneController_ValidateGeneric }
+	{ ALP_OFFSETOF(ALIO_MDLv10_Header, boneControllers), "Bone Controllers", sizeof(ALIO_MDLv10_BoneController), &ALIO_MDLv10_BoneController_ValidateGeneric },
+	{ ALP_OFFSETOF(ALIO_MDLv10_Header, bodyParts), "Body Parts", sizeof(ALIO_MDLv10_BodyPart), &ALIO_MDLv10_BodyPart_ValidateGeneric },
 };
 
 static inline ALP_Bool ALIO_MDLv10_ValidateAllChunks(ALIO_ReadContext* context)
@@ -79,9 +82,10 @@ static inline ALP_Bool ALIO_MDLv10_ValidateAllItems(ALIO_ReadContext* context)
 				const ALP_Size itemOffset = cop->offset + (vDesc->itemSize * itemIndex);
 
 				if ( !(*vDesc->validationFunc)((const ALIO_MDLv10_Header*)context->inputData,
-											   (const void*)(context->inputData + itemOffset),
-											   errorString,
-											   sizeof(errorString)) )
+				                               context->inputLength,
+				                               (const void*)(context->inputData + itemOffset),
+				                               errorString,
+				                               sizeof(errorString)) )
 				{
 					ALIO_ReadContext_SetErrorFormat(context,
 													ALIO_READER_ERROR_INVALID_STRUCTURE,

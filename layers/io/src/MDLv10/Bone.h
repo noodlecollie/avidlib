@@ -26,8 +26,10 @@ typedef struct _ALIO_MDLv10_Bone
 	/**
 	 * Variable: name
 	 * Name of the bone. Should be unique within the model.
+	 * Maximum number of characters, including the string terminator,
+	 * is <ALIO_MDLV10_BONE_NAME_LENGTH>.
 	 */
-	ALP_Char name[ALIO_MDLV10_ELEMENT_NAME_LENGTH];
+	ALP_Char name[ALIO_MDLV10_BONE_NAME_LENGTH];
 
 	/**
 	 * Variable: parentBoneIndex
@@ -81,17 +83,19 @@ typedef struct _ALIO_MDLv10_Bone
 #pragma pack(pop)
 
 ALP_Bool ALIO_MDLv10_Bone_Validate(const struct _ALIO_MDLv10_Header* header,
-								   const ALIO_MDLv10_Bone* bone,
-								   ALP_Char* errorString,
-								   ALP_Size errorStringSize);
+                                   ALP_Size fileSize,
+                                   const ALIO_MDLv10_Bone* bone,
+                                   ALP_Char* errorString,
+                                   ALP_Size errorStringSize);
 
 ALP_Bool ALIO_MDLv10_Bone_ValidateGeneric(const struct _ALIO_MDLv10_Header* header,
-										  const void* bone,
-										  ALP_Char* errorString,
-										  ALP_Size errorStringSize);
+                                          ALP_Size fileSize,
+                                          const void* bone,
+                                          ALP_Char* errorString,
+                                          ALP_Size errorStringSize);
 
 void ALIO_MDLv10_Bone_ToContainerElement(const ALIO_MDLv10_Bone* inBone,
-										 struct _ALC_MDLv10_Bone* outBone,
-										 struct _ALC_MDLv10_Model* outModel);
+                                         struct _ALC_MDLv10_Bone* outBone,
+                                         struct _ALC_MDLv10_Model* outModel);
 
 #endif // AVIDLIB_IO_MDLV10_BONE_H

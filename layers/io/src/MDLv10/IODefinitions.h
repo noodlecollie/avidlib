@@ -48,10 +48,16 @@
 #define ALIO_MDLV10_MODEL_NAME_LENGTH 64
 
 /**
- * Constant: ALIO_MDLV10_ELEMENT_NAME_LENGTH
- * Defines the maximum length of the internal name of any model components (eg. bones).
+ * Constant: ALC_MDLV10_BONE_NAME_LENGTH
+ * Defines the maximum length of the name of a bone within the model.
  */
-#define ALIO_MDLV10_ELEMENT_NAME_LENGTH 32
+#define ALIO_MDLV10_BONE_NAME_LENGTH 32
+
+/**
+ * Constant: ALC_MDLV10_BONE_NAME_LENGTH
+ * Defines the maximum length of the name of a body part within the model.
+ */
+#define ALIO_MDLV10_BODYPART_NAME_LENGTH 64
 
 /**
  * Constant: ALIO_MDLV10_NUM_MOTION_TYPES

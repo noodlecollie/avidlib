@@ -1,5 +1,6 @@
 #include "MDLv10/Bone.h"
 #include "AVIDLib_Internal_Util/Check.h"
+#include "AVIDLib_Internal_Util/Util.h"
 #include "AVIDLib_Plat/String.h"
 #include "AVIDLib_Plat/Ptr.h"
 #include "AVIDLib_Plat/Memory.h"
@@ -9,10 +10,13 @@
 #include "MDLv10/Header.h"
 
 ALP_Bool ALIO_MDLv10_Bone_Validate(const struct _ALIO_MDLv10_Header* header,
-								   const ALIO_MDLv10_Bone* bone,
-								   ALP_Char* errorString,
-								   ALP_Size errorStringSize)
+                                   ALP_Size fileSize,
+                                   const ALIO_MDLv10_Bone* bone,
+                                   ALP_Char* errorString,
+                                   ALP_Size errorStringSize)
 {
+	ALU_UNUSED(fileSize);
+
 	if ( ALU_SANITY_VALID(header && bone && errorString && errorStringSize > 0) )
 	{
 		if ( bone->parentBoneIndex >= 0 && (ALP_UInt32)bone->parentBoneIndex >= header->bones.count )
@@ -37,19 +41,21 @@ ALP_Bool ALIO_MDLv10_Bone_Validate(const struct _ALIO_MDLv10_Header* header,
 }
 
 ALP_Bool ALIO_MDLv10_Bone_ValidateGeneric(const struct _ALIO_MDLv10_Header* header,
-										  const void* bone,
-										  ALP_Char* errorString,
-										  ALP_Size errorStringSize)
+                                          ALP_Size fileSize,
+                                          const void* bone,
+                                          ALP_Char* errorString,
+                                          ALP_Size errorStringSize)
 {
 	return ALIO_MDLv10_Bone_Validate(header,
-									 (const ALIO_MDLv10_Bone*)bone,
-									 errorString,
-									 errorStringSize);
+	                                 fileSize,
+	                                 (const ALIO_MDLv10_Bone*)bone,
+	                                 errorString,
+	                                 errorStringSize);
 }
 
 void ALIO_MDLv10_Bone_ToContainerElement(const ALIO_MDLv10_Bone* inBone,
-										 struct _ALC_MDLv10_Bone* outBone,
-										 struct _ALC_MDLv10_Model* outModel)
+                                         struct _ALC_MDLv10_Bone* outBone,
+                                         struct _ALC_MDLv10_Model* outModel)
 {
 	if ( ALU_SANITY_VALID(inBone && outBone && outModel) )
 	{

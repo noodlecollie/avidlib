@@ -4,6 +4,8 @@ set(HEADERS_MDLV10
 
 set(SOURCES_MDLV10
 	src/MDLv10/Reader/Reader.c
+	src/MDLv10/BodyPart.h
+	src/MDLv10/BodyPart.c
 	src/MDLv10/Bone.h
 	src/MDLv10/Bone.c
 	src/MDLv10/BoneController.h

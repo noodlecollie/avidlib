@@ -12,9 +12,9 @@ namespace InfoDisplay
 	struct Info
 	{
 		std::string name;
-		uint32_t numBones = 0;
-		uint32_t numBoneControllers = 0;
-		uint32_t numBodyParts = 0;
+		ALP_Size numBones = 0;
+		ALP_Size numBoneControllers = 0;
+		ALP_Size numBodyParts = 0;
 	};
 
 	bool Visible = false;

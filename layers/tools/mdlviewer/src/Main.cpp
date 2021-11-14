@@ -156,8 +156,8 @@ sapp_desc sokol_main(int, char**)
 	desc.frame_cb = &Frame;
 	desc.cleanup_cb = &Cleanup;
 	desc.event_cb = &Event;
-	desc.width = WINDOW_DEFAULT_WIDTH * dpi;
-	desc.height = WINDOW_DEFAULT_HEIGHT * dpi;
+	desc.width = static_cast<int>(static_cast<float>(WINDOW_DEFAULT_WIDTH) * dpi);
+	desc.height = static_cast<int>(static_cast<float>(WINDOW_DEFAULT_HEIGHT) * dpi);
 	desc.win32_console_attach = true;
 
 	return desc;

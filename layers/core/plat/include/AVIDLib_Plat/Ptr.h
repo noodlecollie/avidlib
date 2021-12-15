@@ -29,10 +29,10 @@ typedef intptr_t ALP_IntPtr;
 typedef ptrdiff_t ALP_PtrDiff;
 
 /**
- * Type: ALP_Opaque
- * AVIDLib opaque type, eg. for pointers to arbitrary data.
+ * Type: ALP_OpaquePtr
+ * AVIDLib opaque pointer type, eg. for pointers to arbitrary data.
  */
-typedef void ALP_Opaque;
+typedef void* ALP_OpaquePtr;
 
 /**
  * Constant: ALP_NULL

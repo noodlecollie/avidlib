@@ -13,7 +13,7 @@ namespace MDLLoader
 	void Cleanup();
 
 	ALIO_GenericContainer* GetGenericIOContainer();
-	ALP_Opaque* GetUnderlyingContainer(ALIO_UnitID id);
+	ALP_OpaquePtr GetUnderlyingContainer(ALIO_UnitID id);
 }
 
 #endif // AVIDLIB_TOOLS_MDLVIEWER_MDLLOADER_H

@@ -134,7 +134,7 @@ namespace MDLLoader
 		return Container;
 	}
 
-	ALP_Opaque* GetUnderlyingContainer(ALIO_UnitID id)
+	ALP_OpaquePtr GetUnderlyingContainer(ALIO_UnitID id)
 	{
 		if ( Container && Container->unit == id )
 		{

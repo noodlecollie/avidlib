@@ -33,7 +33,7 @@ typedef struct _ALIO_GenericContainer
 	 * be cast to the container type corresponding
 	 * to the unit.
 	 */
-	ALP_Opaque* container;
+	ALP_OpaquePtr container;
 
 	/**
 	 * Variable: containerSizeBytes

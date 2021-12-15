@@ -11,9 +11,9 @@ typedef struct _ALIO_GenericUnitInterface
 	ALP_Size (*containerSizeInBytes)(void);
 	ALP_Bool (*identify)(const ALIO_ReadContext* context);
 
-	void (*genericInit)(ALP_Opaque* container);
-	void (*genericDeinit)(ALP_Opaque* container);
-	ALP_Bool (*genericRead)(ALIO_ReadContext* context, ALP_Opaque* container);
+	void (*genericInit)(ALP_OpaquePtr container);
+	void (*genericDeinit)(ALP_OpaquePtr container);
+	ALP_Bool (*genericRead)(ALIO_ReadContext* context, ALP_OpaquePtr container);
 } ALIO_GenericUnitInterface;
 
 #endif // AVIDLIB_IO_GENERICUNITINTERFACE_H

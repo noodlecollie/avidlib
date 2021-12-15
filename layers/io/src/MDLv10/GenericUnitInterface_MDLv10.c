@@ -9,17 +9,17 @@ static ALP_Size ContainerSizeInBytes(void)
 	return sizeof(ALC_MDLv10_Model);
 }
 
-static void GenericInit(ALP_Opaque* container)
+static void GenericInit(ALP_OpaquePtr container)
 {
 	ALC_MDLv10_Model_Init((ALC_MDLv10_Model*)container);
 }
 
-static void GenericDeinit(ALP_Opaque* container)
+static void GenericDeinit(ALP_OpaquePtr container)
 {
 	ALC_MDLv10_Model_Deinit((ALC_MDLv10_Model*)container);
 }
 
-static ALP_Bool GenericRead(ALIO_ReadContext* context, ALP_Opaque* container)
+static ALP_Bool GenericRead(ALIO_ReadContext* context, ALP_OpaquePtr container)
 {
 	return ALIO_MDLv10_Read(context, (ALC_MDLv10_Model*)container);
 }

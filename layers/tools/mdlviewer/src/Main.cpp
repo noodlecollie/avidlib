@@ -11,6 +11,7 @@
 #include "MDLLoader.h"
 #include "MDLRenderer.h"
 #include "InfoDisplay.h"
+#include "TestFramebufferRenderer.h"
 
 #include "AVIDLib_Containers/UnitSupport.h"
 #include "AVIDLib_IO/UnitSupport.h"
@@ -53,7 +54,8 @@ static void Init()
 	}
 
 	SokolGFXImGUI::Init();
-	MDLRenderer::Init();
+	// MDLRenderer::Init();
+	TestFramebufferRenderer::Init();
 }
 
 static void Poll()
@@ -84,9 +86,11 @@ static void Frame()
 	action.colors[0].value.b = 250.0f / 255.0f;
 	action.colors[0].value.a = 1.0f;
 
+	TestFramebufferRenderer::Draw();
+
 	sg_begin_default_pass(&action, sapp_width(), sapp_height());
 
-	MDLRenderer::Draw();
+	// MDLRenderer::Draw();
 
 	simgui_new_frame(sapp_width(), sapp_height(), 1.0f/60.0f);
 	DrawImGUI();
@@ -99,7 +103,8 @@ static void Frame()
 
 static void Cleanup()
 {
-	MDLRenderer::Cleanup();
+	// MDLRenderer::Cleanup();
+	TestFramebufferRenderer::Cleanup();
 	MDLLoader::Cleanup();
 	SokolGFXImGUI::Cleanup();
 	simgui_shutdown();

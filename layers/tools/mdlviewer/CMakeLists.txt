@@ -13,6 +13,7 @@ set(SOURCES
 	src/MDLLoader.cpp
 	src/MDLRenderer.cpp
 	src/OpenMDLFileDialogue.cpp
+	src/TestFramebufferRenderer.cpp
 )
 
 if(TOOLS_ALL OR TOOLS_MDLVIEWER)
